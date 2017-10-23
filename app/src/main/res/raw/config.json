@@ -1,0 +1,44 @@
+{
+  "Hekr": {
+    "AppId": "01808478427"
+  },
+  "Social": {
+    "Weibo": {
+      "AppId": "",
+      "AppKey": "",
+      "AppSecurit": ""
+    },
+    "QQ": {
+      "AppId": "",
+      "AppKey": "",
+      "AppSecurit": ""
+    },
+    "Weixin": {
+      "AppId": "",
+      "AppKey": "",
+      "AppSecurit": ""
+    },
+    "Facebook": {
+      "AppId": "",
+      "AppKey": "",
+      "AppSecurit": ""
+    },
+    "Google": {
+      "AppId": "",
+      "AppKey": "",
+      "AppSecurit": ""
+    },
+    "Twitter": {
+      "AppId": "",
+      "AppKey": "",
+      "AppSecurit": ""
+    }
+  },
+  "push": {
+    "AppId": "",
+    "AppKey": "",
+    "AppSecurit": ""
+  }
+}
+
+
