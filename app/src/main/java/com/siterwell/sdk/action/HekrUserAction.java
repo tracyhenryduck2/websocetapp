@@ -43,11 +43,9 @@ import com.siterwell.sdk.event.WsSwitchEvent;
 import com.siterwell.sdk.service.HekrCoreService;
 import com.siterwell.sdk.util.BaseHttpUtil;
 import com.siterwell.sdk.util.ConstantsUtil;
-import com.siterwell.sdk.util.DevicesCacheUtil;
 import com.siterwell.sdk.util.HekrCodeUtil;
 import com.siterwell.sdk.util.HekrCommonUtil;
 import com.siterwell.sdk.util.HekrHttpUtil;
-import com.siterwell.sdk.util.HekrSDK;
 import com.siterwell.sdk.util.SpCache;
 import com.siterwell.siterapp.R;
 
@@ -109,7 +107,6 @@ public class HekrUserAction {
     private String refresh_TOKEN = null;
     private String userId = null;
     private static volatile HekrUserAction instance = null;
-    private static String pid;
 
 
     public static HekrUserAction getInstance(Context context) {
@@ -130,22 +127,10 @@ public class HekrUserAction {
         //初始化的时候先读取token
         JWT_TOKEN = SpCache.getString(ConstantsUtil.JWT_TOKEN, "");
         refresh_TOKEN = SpCache.getString(ConstantsUtil.REFRESH_TOKEN, "");
-        String sp_pid = SpCache.getString(ConstantsUtil.HEKR_PID, HekrSDK.pid);
-        if (TextUtils.isEmpty(sp_pid)) {
-            if (HekrSDK.isHekrInited) {
-                throw new NullPointerException(ConstantsUtil.ERROR_PID);
-            } else {
-                throw new NullPointerException(ConstantsUtil.SDK_INIT_ERROR);
-            }
-        } else {
-            pid = sp_pid;
-        }
         userId = TokenToUid();
         Log.i(TAG,"userId+++++++++++++++++++++++++++++++++++"+userId);
-        //读取到pid后再启动service
         context.startService(new Intent(mContext.get(), HekrCoreService.class));
         //判断是线上还是测试环境
-        ConstantsUtil.setDebugSite(PreferenceManager.getDefaultSharedPreferences(context).getBoolean("debug_site", false));
     }
 
     /**
@@ -240,7 +225,6 @@ public class HekrUserAction {
         String url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, ConstantsUtil.UrlUtil.UAA_GET_CODE_URL).toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("phoneNumber", phoneNumber);
-        maps.put("pid", pid);
         maps.put("token", token);
         maps.put("type", registerType);
         url = HekrCommonUtil.getUrl(url, maps);
@@ -313,7 +297,6 @@ public class HekrUserAction {
                 break;
         }*/
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("pid", pid);
         jsonObject.put("password", password);
         jsonObject.put("phoneNumber", phoneNumber);
         jsonObject.put("token", token);
@@ -340,7 +323,6 @@ public class HekrUserAction {
      */
     public void registerByEmail(String email, String password, final HekrUser.RegisterListener registerListener) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("pid", pid);
         jsonObject.put("password", password);
         jsonObject.put("email", email);
         String url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, ConstantsUtil.UrlUtil.UAA_REGISTER_URL, "email").toString();
@@ -372,14 +354,13 @@ public class HekrUserAction {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("username", userName);
         jsonObject.put("password", passWord);
-        jsonObject.put("pid", pid);
         jsonObject.put("clientType", "Android");
         String url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, ConstantsUtil.UrlUtil.UAA_LOGIN_URL).toString();
         BaseHttpUtil.postData(mContext.get(), url, jsonObject.toString(), new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 JWTBean jwtBean = JSON.parseObject(new String(bytes), JWTBean.class);
-                UserBean userBean = new UserBean(pid, userName, passWord, jwtBean.getAccessToken(), jwtBean.getRefreshToken());
+                UserBean userBean = new UserBean(userName, passWord, jwtBean.getAccessToken(), jwtBean.getRefreshToken());
                 //把相关的用户信息保存下来
                 setUserCache(userBean);
                 //执行登录
@@ -432,7 +413,6 @@ public class HekrUserAction {
     private void _resetPwd(String phoneNumber, String verifyCode, String token, String password, final HekrUser.ResetPwdListener resetPwdListener) {
         String type = TextUtils.isEmpty(phoneNumber) ? "security" : "phone";
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("pid", pid);
         jsonObject.put("password", password);
         if (!TextUtils.isEmpty(phoneNumber)) {
             jsonObject.put("phoneNumber", phoneNumber);
@@ -469,7 +449,6 @@ public class HekrUserAction {
      */
     public void changePassword(String newPassword, String oldPassword, final HekrUser.ChangePwdListener changePwdListener) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("pid", pid);
         jsonObject.put("newPassword", newPassword);
         jsonObject.put("oldPassword", oldPassword);
         CharSequence url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, ConstantsUtil.UrlUtil.UAA_CHANGR_PWD_URL);
@@ -499,7 +478,6 @@ public class HekrUserAction {
      */
     public void changePhoneNumber(String token, String verifyCode, String phoneNumber, final HekrUser.ChangePhoneNumberListener changePhoneNumberListener) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("pid", pid);
         jsonObject.put("token", token);
         jsonObject.put("verifyCode", verifyCode);
         jsonObject.put("phoneNumber", phoneNumber);
@@ -524,7 +502,7 @@ public class HekrUserAction {
      * @param sendResetPasswordEmailListener 回调接口
      */
     public void sendResetPwdEmail(String email, final HekrUser.SendResetPwdEmailListener sendResetPasswordEmailListener) {
-        String url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "sendResetPasswordEmail?email=", HekrCommonUtil.getEmail(email), "&pid=", pid).toString();
+        String url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "sendResetPasswordEmail?email=", HekrCommonUtil.getEmail(email)).toString();
         BaseHttpUtil.getData(mContext.get(), url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -546,7 +524,7 @@ public class HekrUserAction {
      * @param reSendVerifiedEmail 回调接口
      */
     public void reSendVerifiedEmail(@NotNull String email, final HekrUser.ReSendVerifiedEmailListener reSendVerifiedEmail) {
-        String url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "resendVerifiedEmail?email=", HekrCommonUtil.getEmail(email), "&pid=", pid).toString();
+        String url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "resendVerifiedEmail?email=", HekrCommonUtil.getEmail(email)).toString();
         BaseHttpUtil.getData(mContext.get(), url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -571,7 +549,7 @@ public class HekrUserAction {
      */
     public void sendChangeEmailStep1Email(@NotNull String email, final HekrUser.SendChangeEmailListener sendChangeEmailListener) {
         //http://uaa.openapi.hekr.me/sendChangeEmailStep1Email?email=test@hekr.me&pid=01698862200
-        CharSequence url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, ConstantsUtil.UrlUtil.UAA_SEND_CHANGE_EMAIL, HekrCommonUtil.getEmail(email), "&pid=", pid);
+        CharSequence url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, ConstantsUtil.UrlUtil.UAA_SEND_CHANGE_EMAIL, HekrCommonUtil.getEmail(email));
         getHekrData(url, new GetHekrDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -656,7 +634,7 @@ public class HekrUserAction {
             default:
                 break;
         }
-        String url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "MOAuth?type=", auth_type, "&pid=", pid, "&clientType=ANDROID&certificate=", certificate).toString();
+        String url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "MOAuth?type=", auth_type, "&clientType=ANDROID&certificate=", certificate).toString();
         BaseHttpUtil.getData(mContext.get(), url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -666,7 +644,7 @@ public class HekrUserAction {
                     moAuthListener.mOAuthSuccess(moAuthBean);
                 } else {
                     JWTBean jwtBean = JSONObject.parseObject(new String(bytes), JWTBean.class);
-                    UserBean userBean = new UserBean(pid, "", "", jwtBean.getAccessToken(), jwtBean.getRefreshToken());
+                    UserBean userBean = new UserBean("", "", jwtBean.getAccessToken(), jwtBean.getRefreshToken());
                     if (isOAuthLogin) {
                         //把相关的用户信息保存下来
                         setUserCache(userBean);
@@ -693,7 +671,7 @@ public class HekrUserAction {
      * @param bindOAuthListener 绑定接口。使用此接口之前必须登录！
      */
     public void bindOAuth(@NotNull String token, final HekrUser.BindOAuthListener bindOAuthListener) {
-        CharSequence url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "account/bind?token=", token, "&pid=", pid);
+        CharSequence url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "account/bind?token=", token);
         getHekrData(url, new GetHekrDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -737,7 +715,7 @@ public class HekrUserAction {
             default:
                 break;
         }
-        CharSequence url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "account/unbind?type=", auth_type, "&pid=", pid);
+        CharSequence url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "account/unbind?type=", auth_type);
         getHekrData(url, new GetHekrDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -759,12 +737,12 @@ public class HekrUserAction {
      * @param certificate 移动端OAuth之后返回的code
      */
     public void weChatMOAuth(String certificate, final HekrUser.LoginListener loginListener) {
-        CharSequence url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "weChatMOAuth?type=WECHAT&pid=", pid, "&clientType=Android&certificate=", certificate);
+        CharSequence url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "weChatMOAuth?type=WECHAT", "&clientType=Android&certificate=", certificate);
         BaseHttpUtil.getData(mContext.get(), url.toString(), new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 JWTBean jwtBean = JSON.parseObject(new String(bytes), JWTBean.class);
-                UserBean userBean = new UserBean(pid, "", "", jwtBean.getAccessToken(), jwtBean.getRefreshToken());
+                UserBean userBean = new UserBean("", "", jwtBean.getAccessToken(), jwtBean.getRefreshToken());
                 //把相关的用户信息保存下来
                 setUserCache(userBean);
                 //执行登录
@@ -811,12 +789,12 @@ public class HekrUserAction {
             default:
                 break;
         }
-        CharSequence url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "account/createUserAndBind?token=", token, "&pid=", pid, "&type=", auth_type, "&clientType=ANDROID");
+        CharSequence url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "account/createUserAndBind?token=", token, "&type=", auth_type, "&clientType=ANDROID");
         BaseHttpUtil.getData(mContext.get(), url.toString(), new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 JWTBean jwtBean = JSON.parseObject(new String(bytes), JWTBean.class);
-                UserBean userBean = new UserBean(pid, "", "", jwtBean.getAccessToken(), jwtBean.getRefreshToken());
+                UserBean userBean = new UserBean("", "", jwtBean.getAccessToken(), jwtBean.getRefreshToken());
                 //把相关的用户信息保存下来
                 setUserCache(userBean);
                 //执行登录
@@ -925,7 +903,6 @@ public class HekrUserAction {
         jsonObject.put("secondSecurityQues", secondSecurityQues);
         jsonObject.put("thirdSecurityQues", thirdSecurityQues);
         jsonObject.put("phoneNumber", phoneNumber);
-        jsonObject.put("pid", pid);
         CharSequence url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "sms/checkSecurityQuestion");
         BaseHttpUtil.postData(mContext.get(), url.toString(), jsonObject.toJSONString(), new AsyncHttpResponseHandler() {
             @Override
@@ -950,7 +927,7 @@ public class HekrUserAction {
      * @param is          回调
      */
     public void isSecurityAccount(@NotNull String phoneNumber, final HekrUser.IsSecurityAccountListener is) {
-        CharSequence url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "isSecurityAccount?phoneNumber=", phoneNumber, "&pid=", pid);
+        CharSequence url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_UAA_URL, "isSecurityAccount?phoneNumber=", phoneNumber);
         BaseHttpUtil.getData(mContext.get(), url.toString(), new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -2282,7 +2259,6 @@ public class HekrUserAction {
     private void getNewsByPid(String page, String size, final HekrUser.GetInfoListener getInfoListener) {
         String url = TextUtils.concat(ConstantsUtil.UrlUtil.BASE_CONSOLE_URL, "external/vc/getByPid").toString();
         HashMap<String, String> maps = new HashMap<>();
-        maps.put("pid", pid);
         maps.put("page", page);
         maps.put("size", size);
         url = HekrCommonUtil.getUrl(url, maps);
@@ -2400,7 +2376,6 @@ public class HekrUserAction {
             //把此token保存下来
             SpCache.putString(ConstantsUtil.JWT_TOKEN, userBean.getJWT_TOKEN());
             SpCache.putString(ConstantsUtil.HEKR_USER_NAME, userBean.getUsername());
-            SpCache.putString(ConstantsUtil.HEKR_PID, userBean.getPid());
             SpCache.putString(ConstantsUtil.REFRESH_TOKEN, userBean.getRefresh_token());
         } catch (Exception e) {
             e.printStackTrace();
@@ -2423,13 +2398,11 @@ public class HekrUserAction {
         EventBus.getDefault().post(new WsSwitchEvent(ConstantsUtil.EventCode.WS_SWITCH_EVENT_STATUS_DISCONNECT));
         //清除掉缓存
         //DataCleanManager.clearAllCache(mContext.get());
-        DevicesCacheUtil.deleteDeviceLists(mContext.get());
         String un_name = SpCache.getString("uname", "");
         SpCache.clear();
         SpCache.putString("uname", un_name);
         //清理掉后
         SpCache.putBoolean("pushTag", false);
-        SpCache.putString(ConstantsUtil.HEKR_PID, pid);
         SpCache.putString(ConstantsUtil.HEKR_PUSH_CLIENT_ID, Global.clientId);
         SpCache.putString(ConstantsUtil.HEKR_MI_PUSH_CLIENT_ID, Global.mRegId);
         SpCache.putString(ConstantsUtil.HEKR_HUA_WEI_PUSH_CLIENT_ID, Global.huaWeiToken);
@@ -2507,10 +2480,6 @@ public class HekrUserAction {
         String var = SpCache.getString("HEKR_USER_INFO", "");
         if (!TextUtils.isEmpty(var)) {
             profileBean = JSON.parseObject(var, ProfileBean.class);
-            if (TextUtils.isEmpty(profileBean.avatarUrl())) {
-                ProfileBean.AvatarUrl avatarUrl = new ProfileBean.AvatarUrl("");
-                profileBean.setAvatarUrl(avatarUrl);
-            }
         }
         return profileBean;
     }

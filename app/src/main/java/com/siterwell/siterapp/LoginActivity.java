@@ -25,6 +25,7 @@ import com.siterwell.sdk.action.HekrUser;
 import com.siterwell.sdk.action.HekrUserAction;
 import com.siterwell.sdk.bean.JWTBean;
 import com.siterwell.sdk.bean.MOAuthBean;
+import com.siterwell.sdk.bean.ProfileBean;
 import com.siterwell.sdk.util.HekrCodeUtil;
 
 import java.io.InvalidClassException;
@@ -91,7 +92,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void loginSuccess(String str) {
                             Log.i(TAG,"loginSuccess:"+str);
+                            hekrUserAction.getProfile(new HekrUser.GetProfileListener() {
+                                @Override
+                                public void getProfileSuccess(ProfileBean profileBean) {
+                                    Log.i(TAG,"loginSuccess:"+profileBean.toString());
+                                    progressDialog.dismiss();
+                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                    finish();
+                                }
 
+                                @Override
+                                public void getProfileFail(int errorCode) {
+                                    Log.i(TAG,"getProfileFail:"+errorCode);
+                                }
+                            });
                         }
 
                         @Override

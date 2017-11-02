@@ -67,7 +67,6 @@
             android:label="主页面"
             android:screenOrientation="portrait" />
         <service android:name="com.siterwell.sdk.service.HekrCoreService" />
-        <service android:name="com.siterwell.sdk.service.HekrViewDebugService" />
 
     </application>
 

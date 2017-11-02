@@ -49,9 +49,9 @@ public class HekrCommonUtil {
      */
     public static String getHEKRIMEI(Context context) {
         String str = TelephoneUtil.getIMEI(context);
-        String IMEI = TextUtils.concat(str, HekrSDK.pid, context.getPackageName()).toString();
+        String IMEI = TextUtils.concat(str, context.getPackageName()).toString();
         if (str == null || TextUtils.isEmpty(TelephoneUtil.getIMEI(context))) {
-            IMEI = TextUtils.concat(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID), HekrSDK.pid, context.getPackageName()).toString();
+            IMEI = TextUtils.concat(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID), context.getPackageName()).toString();
         }
         if (str == null &&
                 Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID) == null) {

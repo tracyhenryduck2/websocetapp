@@ -2,6 +2,9 @@ package com.siterwell.sdk.bean;
 
 import android.text.TextUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +27,7 @@ public class ProfileBean implements Serializable {
      * email : 2784451368@qq.com
      * age : 97
      */
-
+    private long id;
     private long birthday;
     private String firstName;
     private String lastName;
@@ -35,7 +38,8 @@ public class ProfileBean implements Serializable {
      * small : http://hekr-images.ufile.ucloud.com.cn/ufile-3615199020600000000000-1530d614e5e8a377c56de591a2f30b24.jpg
      */
 
-    private AvatarUrl avatarUrl;
+    private String small;
+    private String big;
     private String description;
     private String email;
     private String age;
@@ -43,6 +47,14 @@ public class ProfileBean implements Serializable {
 
     public ProfileBean() {
 
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public long getBirthday() {
@@ -93,15 +105,20 @@ public class ProfileBean implements Serializable {
         this.gender = gender;
     }
 
-    /**
-     * 如果没有上传过图片，该字段可能为空，请直接使用{@link #avatarUrl()}
-     */
-    public AvatarUrl getAvatarUrl() {
-        return avatarUrl;
+    public String getBig() {
+        return big;
     }
 
-    public void setAvatarUrl(AvatarUrl avatarUrl) {
-        this.avatarUrl = avatarUrl;
+    public void setBig(String big) {
+        this.big = big;
+    }
+
+    public String getSmall() {
+        return small;
+    }
+
+    public void setSmall(String small) {
+        this.small = small;
     }
 
     public String getDescription() {
@@ -139,44 +156,7 @@ public class ProfileBean implements Serializable {
         this.thirdAccount = thirdAccount;
     }
 
-    public static class AvatarUrl {
-        public AvatarUrl() {
-        }
 
-        private String small;
-        private String big;
-
-        public AvatarUrl(String small) {
-            this.small = small;
-        }
-
-        public String getBig() {
-            return big;
-        }
-
-        public void setBig(String big) {
-            this.big = big;
-        }
-
-        /**
-         * 如果没有上传过图片，该字段可能为空，请直接使用{@link #avatarUrl()}
-         */
-        public String getSmall() {
-            return small;
-        }
-
-        public void setSmall(String small) {
-            this.small = small;
-        }
-    }
-
-    public String avatarUrl() {
-        if (avatarUrl != null && !TextUtils.isEmpty(avatarUrl.getSmall())) {
-            return avatarUrl.getSmall();
-        } else {
-            return "";
-        }
-    }
 
     @Override
     public String toString() {
@@ -187,11 +167,63 @@ public class ProfileBean implements Serializable {
                 ", updateDate=" + getUpdateDate() +
                 ", phoneNumber='" + getPhoneNumber() + '\'' +
                 ", gender='" + getGender() + '\'' +
-                ", avatarUrl=" + avatarUrl() +
+                ", small=" + getSmall() +
+                ", big=" + getBig() +
                 ", description='" + getDescription() + '\'' +
                 ", email='" + getEmail() + '\'' +
                 ", age='" + getAge() + '\'' +
                 ", thirdAccount=" + getThirdAccount() +
                 '}';
     }
+
+
+    public ProfileBean from(String input) {
+        JSONObject object = null;
+        try {
+            object = new JSONObject(input);
+            if(object.has("id")) {
+                this.id = object.getLong("id");
+            }
+            if(object.has("birthday")) {
+                this.birthday = object.getLong("birthday");
+            }
+            if(object.has("firstName")) {
+                this.firstName = object.getString("firstName");
+            }
+            if(object.has("lastName")) {
+                this.lastName = object.getString("lastName");
+            }
+            if(object.has("updateDate")) {
+                this.updateDate = object.getLong("updateDate");
+            }
+            if(object.has("phoneNumber")) {
+                this.phoneNumber = object.getString("phoneNumber");
+            }
+            if(object.has("gender")) {
+                this.gender = object.getString("gender");
+            }
+            if(object.has("description")) {
+                this.description = object.getString("description");
+            }
+            if(object.has("email")) {
+                this.email = object.getString("email");
+            }
+            if(object.has("age")) {
+                this.age = object.getString("age");
+            }
+            if(object.has("small")) {
+                this.age = object.getString("small");
+            }
+            if(object.has("big")) {
+                this.age = object.getString("big");
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return this;
+    }
+
+
 }

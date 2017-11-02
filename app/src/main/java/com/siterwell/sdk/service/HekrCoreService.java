@@ -588,7 +588,7 @@ public class HekrCoreService extends Service implements WebSocket.ConnectionHand
             JSONObject params = new JSONObject();
             params.put("appTid", IMEI);
             params.put("reportAction", "appSend");
-            String logContent = TextUtils.concat("pid=", HekrSDK.pid, ",uid=", hekrUserAction.getUserId(), ",uuid=", IMEI, ",msgId=", sendMsgId, ",action=", "appSend", ",ts=", time + "").toString();
+            String logContent = TextUtils.concat("uid=", hekrUserAction.getUserId(), ",uuid=", IMEI, ",msgId=", sendMsgId, ",action=", "appSend", ",ts=", time + "").toString();
             if (!TextUtils.isEmpty(logContent)) {
                 params.put("logContent", logContent);
             }

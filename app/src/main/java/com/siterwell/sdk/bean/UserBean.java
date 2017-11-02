@@ -13,8 +13,6 @@ public class UserBean implements Serializable{
      * username : 13021298993
      * clientType : ANDROID
      */
-
-    private String pid;
     private String username;
     private String password;
     private String JWT_TOKEN;
@@ -29,13 +27,6 @@ public class UserBean implements Serializable{
         this.JWT_TOKEN = JWT_TOKEN;
     }
 
-    public String getPid() {
-        return pid;
-    }
-
-    public void setPid(String pid) {
-        this.pid = pid;
-    }
 
     public String getPassword() {
         return password;
@@ -75,8 +66,7 @@ public class UserBean implements Serializable{
     }
 
 
-    public UserBean(String pid, String username, String password, String JWT_TOKEN, String refresh_token) {
-        this.pid = pid;
+    public UserBean(String username, String password, String JWT_TOKEN, String refresh_token) {
         this.username = username;
         this.password = password;
         this.JWT_TOKEN = JWT_TOKEN;
@@ -86,8 +76,7 @@ public class UserBean implements Serializable{
     @Override
     public String toString() {
         return "UserBean{" +
-                "pid='" + pid + '\'' +
-                ", username='" + username + '\'' +
+                ",username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", JWT_TOKEN='" + JWT_TOKEN + '\'' +
                 ", refresh_token='" + refresh_token + '\'' +

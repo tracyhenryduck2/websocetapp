@@ -22,7 +22,6 @@ public class ConstantsUtil {
 
     public static final String JWT_TOKEN = "JWT_TOKEN";
     public static final String HEKR_USER_NAME = "HEKR_USER_NAME";
-    public static final String HEKR_PID = "HEKR_PID";
     public static final String REFRESH_TOKEN = "refresh_TOKEN";
     public static final String SDK_INIT_ERROR = "you show invoke HekrSDK.init() before you use it ";
     public static final String ERROR_PID = "Hekr AppId is error in Config.json";
@@ -43,7 +42,7 @@ public class ConstantsUtil {
         public static final String BASE_CONFIG_HElP_URL = "https://hekr.daikeapp.com/kb/articles/1672";
         public static final String BASE_CONFIG_HElP_URL_EN = "https://hekr.daikeapp.com/kb/articles/1688";
         public static String BASE_UAA_URL = "http://192.168.3.140:8086/point/";
-        public static String BASE_USER_URL = "https://user-openapi.hekr.me/";
+        public static String BASE_USER_URL = "http://192.168.3.140:8086/point/";
         public static String BASE_CONSOLE_URL = "https://console-openapi.hekr.me/";
         //public static String APP_WEBSOCKET_CONNECT_CLOUD_URL = "ws://asia.app.hekr.me:86";
         public static String APP_WEBSOCKET_CONNECT_CLOUD_URL = "ws://192.168.3.140:8086/point/phone";
@@ -64,7 +63,7 @@ public class ConstantsUtil {
         public static final String UAA_RESET_PWD_URL = "resetPassword?type=";
         public static final String UAA_CHANGR_PWD_URL = "changePassword";
         public static final String UAA_CHANGE_PHONE_URL = "changePhoneNumber";
-        public static final String UAA_REFRESH_TOKEN = "token/refresh";
+        public static final String UAA_REFRESH_TOKEN = "app/SiterAction!refreshToken.action";
         public static final String UAA_SEND_CHANGE_EMAIL = "sendChangeEmailStep1Email?email=";
         public static final String UAA_GROUP = "group";
 
@@ -73,7 +72,7 @@ public class ConstantsUtil {
          */
         public static final String BIND_DEVICE = "device";
         public static final String FOLDER = "folder";
-        public static final String PROFILE = "user/profile";
+        public static final String PROFILE = "app/SiterAction!profile.action";
         public static final String USER_FILE = "user/file";
 
         public static final String UAA_WEATHER = "weather/now?location=";
@@ -154,25 +153,6 @@ public class ConstantsUtil {
         public static final int WS_SWITCH_EVENT_STATUS_CONNECT = 2;
     }
 
-
-    /**
-     * 切换到测试环境
-     *
-     * @param debug 测试环境
-     */
-    public static void setDebugSite(boolean debug) {
-        if (debug) {
-            UrlUtil.BASE_UAA_URL = "http://test-uaa-openapi.hekr.me/";
-            UrlUtil.BASE_USER_URL = "http://test-user-openapi.hekr.me/";
-            UrlUtil.BASE_CONSOLE_URL = "http://test-console-openapi.hekr.me/";
-            UrlUtil.APP_WEBSOCKET_CONNECT_CLOUD_URL = "ws://test-asia-dev.hekr.me:86";
-        } else {
-            UrlUtil.BASE_UAA_URL = "http://192.168.3.140:8086/point/";
-            UrlUtil.BASE_USER_URL = "https://user-openapi.hekr.me/";
-            UrlUtil.BASE_CONSOLE_URL = "https://console-openapi.hekr.me/";
-            UrlUtil.APP_WEBSOCKET_CONNECT_CLOUD_URL = "ws://192.168.3.140:8086/point/phone";
-        }
-    }
 
 
 }
