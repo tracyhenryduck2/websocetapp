@@ -71,7 +71,6 @@ public class SychronizeService extends Service implements RefreshBatteryListener
     private int count = 0;
     private List<String> folderlist;
     private ECAlertDialog ecAlertDialog;
-    private HashSet<String> set = new HashSet<>();
     private DeviceDao deviceDao;
     private WifiTimerDao wifiTimerDao;
     @Nullable
@@ -167,11 +166,6 @@ public class SychronizeService extends Service implements RefreshBatteryListener
                     List<DeviceBean> datalistold =  deviceDao.findAllDeviceBeanByFolderId(ds);
 
 
-                    for(int i=0;i<deviceBeans.size();i++){
-
-                        set.add(deviceBeans.get(i).getDcInfo().getConnectHost());
-                    }
-
                     for(int i=0;i<datalistold.size();i++){
                         boolean flag = false;
                         for(DeviceBean deviceBean:deviceBeans){
@@ -215,10 +209,6 @@ public class SychronizeService extends Service implements RefreshBatteryListener
                     }else{
 
                         Log.i(TAG,"结束同步服务");
-                        if(set!=null && set.size()>0){
-                            Log.i(TAG,"一共有："+set.size());
-                            Hekr.getHekrClient().setHosts(set);
-                        }
                         DeviceDao deviceDao = new DeviceDao(SychronizeService.this);
                         List<DeviceBean> deviceBeanList = deviceDao.findAllDevice();
                         queryFolderDevices(deviceBeanList);
