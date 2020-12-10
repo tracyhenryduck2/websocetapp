@@ -1,0 +1,34 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation files('libs/jmdns-3.5.1.jar')
+    implementation files('libs/netty-all-4.1.9.Final.jar')
+    implementation files('libs/nv-websocket-client-2.2.jar')
+    testImplementation 'junit:junit:4.12'
+    api 'org.greenrobot:eventbus:3.0.0'
+    api 'org.jetbrains:annotations-java5:15.0'
+}

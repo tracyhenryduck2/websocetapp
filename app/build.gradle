@@ -11,10 +11,9 @@ android {
         }
     }
     compileSdkVersion 29
-    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.unijem.smokealarmer"
-        minSdkVersion 15
+        minSdkVersion 16
         versionCode 1090
         versionName "1.090"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -35,17 +34,17 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':mysdk')
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-    compile 'com.zhy:base-adapter:2.0.0'
-    compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'org.jetbrains:annotations-java5:15.0'
-    compile 'com.google.firebase:firebase-core:10.2.6'
-    compile 'com.google.firebase:firebase-messaging:10.2.6'
-    compile 'com.firebase:firebase-jobdispatcher:0.6.0'
-//    compile project(path: ':siterwell')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    implementation 'com.zhy:base-adapter:2.0.0'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'org.jetbrains:annotations-java5:15.0'
+    implementation 'com.google.firebase:firebase-core:10.2.6'
+    implementation 'com.google.firebase:firebase-messaging:10.2.6'
+    implementation 'com.firebase:firebase-jobdispatcher:0.6.0'
+    implementation project(path: ':siterwell')
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
 }
 apply plugin: 'com.google.gms.google-services'

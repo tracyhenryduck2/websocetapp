@@ -4,8 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="websocetapp/app" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/mysdk/mysdk.iml" filepath="$PROJECT_DIR$/.idea/modules/app/mysdk/mysdk.iml" group="demo/app/mysdk" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/siterwell/siterwell.iml" filepath="$PROJECT_DIR$/.idea/modules/siterwell/siterwell.iml" group="websocetapp/siterwell" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/websocetapp.iml" filepath="$PROJECT_DIR$/.idea/modules/websocetapp.iml" group="websocetapp" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mysdk/websocetapp-mysdk.iml" filepath="$PROJECT_DIR$/.idea/modules/mysdk/websocetapp-mysdk.iml" group="websocetapp/mysdk" />
     </modules>
   </component>
 </project>
