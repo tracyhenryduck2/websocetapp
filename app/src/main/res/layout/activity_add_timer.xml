@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/timer_mode">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/NormalPadding">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/please_choose_switch_time"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/SmallPadding"
+            android:background="@color/white"
+            android:orientation="horizontal">
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+            <com.siterwell.demo.wheelwidget.view.WheelView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/hour"
+                android:layout_weight="1"
+                android:background="@color/bg_timer"/>
+            <com.siterwell.demo.wheelwidget.view.WheelView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/min"
+                android:layout_weight="1"
+                android:background="@color/bg_timer"/>
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/mainGround"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/NormalPadding">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/please_choose_action"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/SmallPadding"
+            android:paddingBottom="@dimen/SmallPadding"
+            android:paddingLeft="100dp"
+            android:paddingRight="100dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+            <com.siterwell.demo.wheelwidget.view.WheelView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/action"
+                android:background="@color/bg_timer"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/mainGround"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/NormalPadding">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/please_choose_notice_or_notice"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/SmallPadding"
+            android:paddingBottom="@dimen/SmallPadding"
+            android:paddingLeft="100dp"
+            android:paddingRight="100dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+            <com.siterwell.demo.wheelwidget.view.WheelView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/notice"
+                android:background="@color/bg_timer"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/mainGround"
+            />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/NormalPadding">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/week"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:numColumns="7"
+            android:id="@+id/weeklist">
+        </GridView>
+    </LinearLayout>
+
+</LinearLayout>

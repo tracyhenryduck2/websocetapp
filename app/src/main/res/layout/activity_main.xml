@@ -1,17 +1,79 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.siterwell.demo.commonview.SlidingMenu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_menu"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.siterwell.siterapp.MainActivity">
+    xmlns:zhy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:scrollbars="none"
+    zhy:rightPadding="100dp" >
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+        android:layout_height="fill_parent"
+        android:orientation="horizontal"
+        android:background="@color/white">
+
+        <include layout="@layout/layout_menu" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/mainGround"
+            android:elevation="20dp"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/toolbar"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/toolbar_height"
+                android:background="@drawable/index_bar_bg">
+                <ImageView
+                    android:src="@drawable/caidan"
+                    android:id="@+id/left_img"
+                    android:clickable="true"
+                    android:layout_gravity="left"
+                    android:padding="@dimen/back_image_padding"
+                    android:layout_width="@dimen/back_image_width"
+                    android:layout_height="@dimen/back_image_height"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/back_image_marginLeft"/>
+
+
+
+
+
+                <ImageView
+                    android:layout_marginRight="@dimen/setting_marginRight"
+                    android:id="@+id/right_img"
+                    android:layout_gravity="right"
+                    android:clickable="true"
+                    android:src="@drawable/add"
+                    android:layout_width="@dimen/setting_width"
+                    android:layout_height="@dimen/setting_height"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@color/mainGround"
+                />
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/grid_swipe_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                    <com.siterwell.demo.commonview.EmRecylerView
+                        android:id="@+id/id_recyclerview"
+                        android:divider="#ffff0000"
+                        android:dividerHeight="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </android.support.v4.widget.SwipeRefreshLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</com.siterwell.demo.commonview.SlidingMenu>

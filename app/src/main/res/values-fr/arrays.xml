@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="folder_operation">
+        <item>Modifier le nom</item>
+        <item>Supprimer localtion</item>
+    </array>
+    <array name="device_operation">
+        <item>Modifier le nom</item>
+        <item>Dispositif de délier</item>
+        <item>Passer à autre localtion</item>
+    </array>
+    <string-array name="languages">
+        <item>中文</item>
+        <item>English</item>
+        <item>Deutsch</item>
+        <item>Français</item>
+    </string-array>
+    <string-array name="week">
+        <item>Lun</item>
+        <item>Mar</item>
+        <item>Mer</item>
+        <item>Jeu</item>
+        <item>Ven</item>
+        <item>Sam</item>
+        <item>Dim</item>
+    </string-array>
+    <string-array name="folder_name">
+        <item>Ma Maison</item>
+        <item>Guestbedroom</item>
+        <item>Cuisine</item>
+        <item>Masterbedroom</item>
+        <item>Salon</item>
+        <item>Stair</item>
+        <item>Lora</item>
+    </string-array>
+    <string-array name="more_setting">
+        <item>Historique</item>
+        <item>Le dispositif info</item>
+    </string-array>
+    <array name="question">
+        <item>Quelles sont les principales fonctions de siterlink?</item>
+        <item>Comment puis - je télécharger siterlink?</item>
+        <item>Comment configurer votre appareil utilisant le wifi?</item>
+        <item>Quelles sont les raisons possibles pour configurer une défaillance?</item>
+        <item>Comment utiliser les données mobiles network dispositif de télécommande?</item>
+        <item>Comment autoriser d’autres personnes à partager les droits de contrôle du dispositif?</item>
+    </array>
+    <array name="answer">
+        <item>vous avez acheté l’équipement siterlink maison intelligente et lié ppa, vous pouvez vous servir de votre appareil mobile de réseautage mondial, contrôle à distance.</item>
+        <item>vous pouvez télécharger le "siterlink" app d’apple app store ou appliquer un trésor, google joue la plate - forme.supportsandroid 4.0 système app actuellement et au - dessus, ou système de ios8.0 et au - dessus.</item>
+        <item>À l’heure actuelle, la plupart des appareils à domicile sont les appareils wifi, après la siterlink connexion: \n (1) matériel sera mis sous tension et botte, mets ton portable relié à la wifi \n (2) en conformité avec les spécifications du produit et la réduction du matériel, de l’équipement dans un État configurable, parce que la remise à zéro méthode de chaque dispositif n’est pas la même, veuillez consulter les instructions pour \n (3) ouvrir le ppa, et ajouter le groupe premièrement, cliquez à entrer dans le groupe, cliquez sur le bouton « + » dans le coin supérieur droit du dispositif liste, sélectionnez le réseau wifi equipment, app seront automatiquement lire le réseau actuel nom, entrée manuelle de mot de passe, cliquez sur « connecter », attend environ 20 ans pour voir l’ajout d’équipement réussie</item>
+        <item>(1) configurer l’échec d’un réseau, veuillez vérifier le wifi nom et mot de passe correct \n (2) ne trouvent pas de dispositif, veuillez vérifier si le dispositif est normal ou le wifi nom et mot de passe correct, puis retirer la batterie après une minute cliquez rejuger \n (3) pincode n’a pas eu de problème, s’il vous plaît vérifier l’environnement de réseau, puis retirer la batterie une minute après le clic rejuger \n (4) l’équipement par d’autres lié, selon la prompte contact ou nous contacter lié \n (5) d’appareils mobiles aux paquets échec, veuillez consulter le réseau, et enlever la batterie après une minute rejuger \n (6) veuillez vérifier si le dispositif courant \n (7) le téléphone mobile est normal wifi \n à la connexion au réseau (8) si le dispositif est dans la répartition État(qu’est - ce que l’État veuillez consulter le manuel de distribution dans le détail, le général est à manuellement détonateur de la clé dans la répartition État) \n (9) \na, le routeur sans fil seulement 2,4 g produits réseau, ne soutient pas la 5g, vérifier votre routeur n’est pas 2,4 g \nb réseau sans fil routeur signal, instabilité, cliquez de nouveau pour tenter de se connecter à \nc routeur configuration, fixé le nombre maximal des équipements et appareils d’accès, a atteint la limite supérieure de l’appareil; essayer de fermer un wifi et, wifi channel réaffectation de vide mot de passe plus de 32, ou l’utilisation de caractères spéciaux tels que les chinois \ne, ouvrir l’ap routeur isolée, incapable de recherche à l’appareil (succès succès n’ont pas reçu de réseauinformation) \nf, ouvrir le routeur de filtre filtre adresse mac, mac devraient être retirés de la liste des équipements du routeur, le routeur qui n’interdit pas d’équipement de réseaux \n</item>
+        <item>l’appareil wifi classe, quand tu utilise la liaison pour ajouter de l’équipement, de l’équipement et des téléphones portables, wifi dans le même environnement, lié avec 2g, 3g, 4g, contrôle à distance peuvent être obtenus</item>
+        <item>You can let your friends, family, and you log in using the same login name, so you can control the device at the same time, or you can use the APP share enabled feature</item>
+    </array>
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainGround">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:padding="5dp"
+        >
+
+
+
+        <Button
+            android:id="@+id/siterwell"
+            android:text="@string/siterwell"
+            style="@style/comon_btn_style"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="30dp"
+            android:layout_width="@dimen/ccp2btn_width"
+            android:layout_marginRight="40dp" />
+
+        <Button
+            android:id="@+id/other"
+            android:text="@string/other_brand"
+            style="@style/comon_btn_style"
+            android:layout_width="@dimen/ccp2btn_width"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="30dp" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_your_smoke"
+        android:layout_alignParentTop="true"
+        android:textSize="@dimen/LargTextSize"
+        android:layout_marginTop="@dimen/LargePadding"
+        android:gravity="center_horizontal"
+        android:id="@+id/dd"/>
+
+
+
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@mipmap/guide_2"
+        android:id="@+id/guide"
+        android:layout_below="@+id/dd"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>

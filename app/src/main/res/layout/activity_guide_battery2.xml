@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainGround">
+
+    <ImageView
+        android:layout_width="278dp"
+        android:layout_height="393dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/guide"/>
+
+    <TextView
+        android:text="@string/guide_note"
+        android:textSize="@dimen/NormalTextSize"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/guide"/>
+
+    <Button
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/conect"
+        android:text="@string/connect"
+        style="@style/comon_btn_style" />
+</RelativeLayout>

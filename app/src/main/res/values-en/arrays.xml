@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="folder_operation">
+        <item>Modify name</item>
+        <item>Delete location</item>
+    </array>
+    <array name="device_operation">
+        <item>Modify name</item>
+        <item>Unbind device</item>
+        <item>Move to other location</item>
+    </array>
+    <string-array name="languages">
+        <item>中文</item>
+        <item>English</item>
+        <item>Deutsch</item>
+        <item>Français</item>
+    </string-array>
+    <string-array name="week">
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+        <item>Sun</item>
+    </string-array>
+    <string-array name="folder_name">
+        <item>Hallway</item>
+        <item>Upstairs hallway</item>
+        <item>Master Bedroom</item>
+        <item>Living Room</item>
+        <item>Kitchen</item>
+        <item>Custom Location</item>
+        <item>Lora</item>
+    </string-array>
+    <string-array name="more_setting">
+        <item>History Log</item>
+        <item>Device Info</item>
+    </string-array>
+    <array name="question">
+        <item>What are the main functions of Unijem?</item>
+        <item>What are the possible reasons for battery connection failure?</item>
+        <item>How to use the mobile network data to access the app?</item>
+        <item>How do you authorize other people to share the device?</item>
+        <item>How long does the snooze function last for?</item>
+    </array>
+    <array name="answer">
+        <item>You have purchased a Unijem smart product and this app is used to control that product.</item>
+        <item>
+            1.Check the device power is on (make sure the tab has been removed)\n
+            2.Check that the mobile phone used is connected to the same WIFI\n
+            3.Check the router, the product only supports 2.4G wireless network, does not support the 5G.\n
+            4.Make sure the wireless network router is stable and configured to the maximum number of access foe devices,(if there is a limit on it)\n
+            5.If the limit has been reached try to close a WIFI device to free up a channel to configure.\n
+        </item>
+        <item>When you first add the Unijem smart battery both the battery and mobile phone need to be on the same WIFI network. After the connection has been set up successfully you can then access the app via mobile data.</item>
+        <item>You can let family members log in using the same login name so you can control the device at the same time or you can use the app share enabled feature.</item>
+        <item>The snooze function last for 10 minutes, after that the battery will be back to full operation</item>
+    </array>
+</resources>

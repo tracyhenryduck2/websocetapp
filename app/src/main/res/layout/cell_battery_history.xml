@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingBottom="@dimen/NormalPadding"
+    android:descendantFocusability="blocksDescendants"
+    android:background="@drawable/list_item_selector">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/NormalPadding"
+        android:paddingBottom="@dimen/NormalPadding"
+        android:orientation="horizontal">
+
+        <TextView
+            android:text="one"
+            android:gravity="left|center_vertical"
+            android:textAllCaps="false"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="@color/toast_text_content"
+            android:id="@+id/time"
+            android:layout_width="150dp"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/SmallestTextSize"/>
+
+   </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="@drawable/yellow"
+            android:id="@+id/pot"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"/>
+        <TextView
+            android:text="dsdsdsddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+            android:layout_centerVertical="true"
+            android:textAllCaps="false"
+            android:singleLine="false"
+            android:textColor="@color/toast_text_content"
+            android:layout_toRightOf="@id/pot"
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/NormalTextSize"/>
+        </RelativeLayout>
+</LinearLayout>

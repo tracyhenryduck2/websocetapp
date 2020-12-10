@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/weekName"
+        android:text="星期日"
+        android:textSize="@dimen/NormalTextSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+    <CheckBox
+        android:layout_weight="1"
+        android:id="@+id/checkboxo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/weekName"
+        android:checked="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textSize="@dimen/NormalTextSize"
+        />
+</RelativeLayout>

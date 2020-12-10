@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="transparent">#00000000</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="devices_online">#f56835</color>
+    <color name="devices_offline">#c8c8c8</color>
+    <color name="dialog_code">#116652</color>
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="tran_black">#80000000</color>
+    <color name="edit_color">#33a7ff</color>
+    <color name="mainGround">#f2f2f5</color>
+    <color name="text_normal">#ff5a7681</color>
+    <color name="text_folder">#ffb9b9b9</color>
+    <color name="text_desc">#ffbebbb4</color>
+    <color name="text_title">#ff5f5f5f</color>
+    <color name="text_color">#717171</color>
+    <color name="text_color_hint">#33a7ff</color>
+    <color name="text_content">#ffa19d94</color>
+    <color name="dialog_background">#fffbf6f2</color>
+    <color name="dialog_btn_press">#ffece5df</color>
+    <color name="dialog_btn_normal">#fffbf6f2</color>
+    <color name="dialog_item_press">#ffece5df</color>
+    <color name="bar_bg">#ffffffff</color>
+    <color name="list_devider_color">#fff2f2f2</color>
+    <color name="list_divider">#ffdadada</color>
+    <color name="navpage">#ffffffff</color>
+    <color name="toast_text_content">#ffa19d94</color>
+    <color name="greenblue">#00ffff</color>
+    <color name="green">#ff1aef24</color>
+    <color name="red">#ffff0000</color>
+    <color name="tu_yellow">#fff2c614</color>
+    <color name="yellow">#d1ce00</color>
+    <color name="near_black">#1e1e1e</color>
+    <color name="bg_timer">#f7f7f8</color>
+    <color name="item_not">#a3a3a3</color>
+    <color name="item_is_sel">#33a7ff</color>
+    <color name="select_icon_button_color">#000000</color>
 </resources>

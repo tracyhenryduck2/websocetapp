@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="@color/white"
+       android:orientation="horizontal"
+       android:layout_marginTop="10dp"
+       android:paddingTop="@dimen/NormalPadding"
+       android:paddingBottom="@dimen/NormalPadding">
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:paddingLeft="100dp"
+          android:paddingRight="100dp"
+          android:gravity="center_horizontal">
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textColor="@color/near_black"
+             android:textSize="@dimen/NormalTextSize"
+             android:text="@string/count_down_time"
+             android:layout_marginBottom="20dp"/>
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal">
+            <com.siterwell.demo.wheelwidget.view.WheelView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_timer"
+                android:id="@+id/countdown_hour"/>
+            <com.siterwell.demo.wheelwidget.view.WheelView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_timer"
+                android:id="@+id/countdown_min"/>
+         </LinearLayout>
+
+      </LinearLayout>
+   </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="@color/white"
+       android:orientation="vertical"
+       android:layout_marginTop="10dp"
+       android:gravity="center_vertical">
+      <com.siterwell.demo.commonview.SettingItem
+          android:id="@+id/action"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:item_accessoryType = "switchbutton"
+          app:item_showDivider="true"
+          app:item_detailText=""
+          app:item_titleText="@string/count_down_action" />
+      <com.siterwell.demo.commonview.SettingItem
+          android:id="@+id/notice"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:item_accessoryType = "switchbutton"
+          app:item_showDivider="true"
+          app:item_detailText=""
+          app:item_titleText="@string/count_down_notice" />
+
+   </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_marginTop="20dp">
+      <Button
+          android:layout_gravity="center"
+          android:id="@+id/start"
+          android:text="@string/start"
+          style="@style/comon_btn_style"
+          android:layout_marginTop="0dp"
+          android:layout_weight="1"
+          android:layout_marginLeft="15dp"
+          android:layout_marginRight="15dp"/>
+      <Button
+          android:layout_gravity="center"
+          android:id="@+id/stop"
+          android:text="@string/stop"
+          style="@style/comon_btn_style_white_bg"
+          android:layout_marginTop="0dp"
+          android:layout_weight="1"
+          android:layout_marginLeft="15dp"
+          android:layout_marginRight="15dp"/>
+   </LinearLayout>
+</LinearLayout>

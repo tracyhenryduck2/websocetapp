@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="folder_operation">
+        <item>MODIFICAR NOMBRE</item>
+        <item>ELIMINAR LA LOCALIZACIÓN</item>
+    </array>
+    <array name="device_operation">
+        <item>MODIFICAR NOMBRE</item>
+        <item>DISPOSITIVO UNBIND</item>
+        <item>MUDARSE A OTRA LOCALIDAD</item>
+    </array>
+    <string-array name="languages">
+        <item>中文</item>
+        <item>English</item>
+        <item>Deutsch</item>
+        <item>Français</item>
+        <item>Español</item>
+    </string-array>
+    <string-array name="week">
+        <item>Lun</item>
+        <item>Mar</item>
+        <item>Mie</item>
+        <item>Jue</item>
+        <item>Vie</item>
+        <item>Sab</item>
+        <item>Sol</item>
+    </string-array>
+    <string-array name="folder_name">
+        <item>Pasillo</item>
+        <item>Pasillo de arriba</item>
+        <item>Cuarto de huéspedes</item>
+        <item>Recamara principal</item>
+        <item>Cocina</item>
+        <item>Ubicación personalizada</item>
+        <item>Lora</item>
+    </string-array>
+    <string-array name="more_setting">
+        <item>Registro de historial</item>
+        <item>Información del dispositivo</item>
+    </string-array>
+    <array name="question">
+        <item>øCu·les son las principales funciones de Unijem?</item>
+        <item>øCu·les son los posibles motivos de la falla de la conexiÛn de la baterÌa?</item>
+        <item>øCÛmo usar los datos de la red mÛvil para acceder a la aplicaciÛn?</item>
+        <item>øCÛmo autorizas a otras personas a compartir el dispositivo?</item>
+        <item>øCu·nto dura la funciÛn de snooze?</item>
+    </array>
+    <array name="answer">
+        <item>Has comprado un producto inteligente Unijem y esta aplicaciÛn se usa para controlar ese producto.</item>
+        <item>1.Verifique que el dispositivo estÈ encendido (aseg˙rese de que la pestaÒa se haya eliminado)\n
+            2.Verifique que el telÈfono mÛvil utilizado estÈ conectado a la misma WIFI \n
+            3.Verifique el enrutador, el producto solo es compatible con la red inal·mbrica 2.4G, no es compatible con el 5G.\n
+            4. Aseg˙rese de que el enrutador de la red inal·mbrica sea estable y estÈ configurado para la cantidad m·xima de acceso a los dispositivos enemigos (si hay un lÌmite)\n
+            5.Si se ha alcanzado el lÌmite, intente cerrar un dispositivo WIFI para liberar un canal para configurar.\n
+        </item>
+        <item>Cuando agregue por primera vez la baterÌa inteligente de Unijem, tanto la baterÌa como el telÈfono mÛvil deben estar en la misma red WIFI. DespuÈs de que la conexiÛn se haya configurado correctamente, puede acceder a la aplicaciÛn a travÈs de datos mÛviles.</item>
+        <item>Puede permitir que los miembros de la familia inicien sesiÛn con el mismo nombre de inicio de sesiÛn para que pueda controlar el dispositivo al mismo tiempo o puede usar la funciÛn habilitada para compartir aplicaciones.
+        </item>
+        <item>La funciÛn de repeticiÛn dura 10 minutos, despuÈs de eso la baterÌa volver· a funcionar por completo</item>
+    </array>
+</resources>

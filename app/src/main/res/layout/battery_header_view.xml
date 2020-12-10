@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/znjj_bg" />
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="@dimen/back_image_width"
+            android:layout_height="@dimen/back_image_height"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:src="@mipmap/batteryback" />
+
+        <ImageView
+            android:id="@+id/more"
+            android:layout_width="@dimen/more_button_width"
+            android:layout_height="@dimen/more_button_height"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:src="@mipmap/more_icon" />
+
+        <Button
+            android:id="@+id/btnConfirm"
+            style="@style/comon_btn_style"
+            android:layout_alignTop="@+id/back"
+            android:layout_centerHorizontal="true"
+            android:text="@string/silence" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/tran_black"
+            android:padding="@dimen/SmallPadding">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="24dp"
+                android:src="@drawable/s3"
+                android:id="@+id/signal"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/bat"
+                android:layout_toLeftOf="@id/signal"
+                android:layout_marginRight="20dp"
+                android:id="@+id/icon"/>
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:src="@drawable/q4"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/battery"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/signal"
+                android:layout_toEndOf="@+id/signal"
+                android:layout_marginStart="20dp" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:padding="@dimen/SmallPadding"
+            android:id="@+id/bt">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/CCPPreferenceTextLarge"
+                android:id="@+id/status"
+                android:text="设备异常"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:padding="@dimen/SmallPadding"
+            android:id="@+id/tishi">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/CCPPreferenceTextSmall"
+                android:text="@string/please_check_the_battery"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

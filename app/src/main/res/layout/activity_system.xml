@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/mainGround"
+    >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        >
+
+        <com.siterwell.demo.commonview.SettingItem
+            android:id="@+id/lan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:item_accessoryType = "arrow"
+            app:item_showDivider="true"
+            app:item_detailText="关闭"
+            app:item_titleText="@string/start_lan"
+            android:visibility="gone"/>
+
+        <com.siterwell.demo.commonview.SettingItem
+            android:id="@+id/cache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:item_accessoryType = "arrow"
+            app:item_showDivider="true"
+            app:item_detailText="2.12M"
+            app:item_titleText="@string/clearup_cache"
+            android:visibility="gone"/>
+        <com.siterwell.demo.commonview.SettingItem
+            android:id="@+id/answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:item_accessoryType = "arrow"
+            app:item_showDivider="true"
+            app:item_detailText=""
+            app:item_titleText="@string/you_ask_i_answer_new" />
+        <com.siterwell.demo.commonview.SettingItem
+            android:id="@+id/about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:item_accessoryType = "arrow"
+            app:item_showDivider="false"
+            app:item_detailText=""
+            app:item_titleText="@string/about" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

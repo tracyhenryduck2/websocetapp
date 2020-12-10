@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:padding="16dp">
+
+
+    <ImageView
+        android:id="@+id/img_icon"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:background="@color/devices_offline"
+        android:src="@mipmap/ic_launcher" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="72dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_dev_name"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="设备名称"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/tv_dev_cid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="类别名称"
+            android:textColor="#949494"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_online"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:text="在线"
+        android:textColor="#949494"
+        android:textSize="16sp" />
+
+
+</RelativeLayout>

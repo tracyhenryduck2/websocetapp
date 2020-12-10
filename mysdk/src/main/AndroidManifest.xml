@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="me.hekr.sdk">
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+
+    <application android:allowBackup="true"
+        android:supportsRtl="true">
+        <!-- websocket control service -->
+        <service android:name="me.hekr.sdk.service.HekrConnectionService"
+            android:exported="true"
+            android:label="HekrConnectionService"
+            />
+    </application>
+
+</manifest>

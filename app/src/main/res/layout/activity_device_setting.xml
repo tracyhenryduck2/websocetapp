@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgDeviceQRCode"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="30dp"
+        android:layout_gravity="center_horizontal"
+        />
+
+
+    <com.siterwell.demo.commonview.SettingItem
+        android:layout_width="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
+        app:item_accessoryType = "arrow"
+        app:item_showDivider="true"
+        app:item_titleText="@string/device_name"
+        android:id="@+id/device_name"/>
+
+    <com.siterwell.demo.commonview.SettingItem
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:item_accessoryType = "none"
+        app:item_showDivider="true"
+        app:item_titleText="@string/firmware_version"
+        android:id="@+id/firmware_ver"/>
+
+    <com.siterwell.demo.commonview.SettingItem
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:item_accessoryType = "none"
+        app:item_showDivider="true"
+        app:item_titleText="@string/device_id"
+        android:id="@+id/device_id"/>
+
+    <com.siterwell.demo.commonview.SettingItem
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:item_accessoryType = "none"
+        app:item_showDivider="false"
+        app:item_titleText="@string/bin_type"
+        android:id="@+id/bintype"/>
+</LinearLayout>

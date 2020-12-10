@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/comm_settting_item_selector"
+    android:baselineAligned="false"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/SmallListHeight"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/NormalPadding"
+    android:paddingRight="@dimen/NormalPadding" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left|center"
+            android:minHeight="@dimen/SmallListHeight"
+            android:paddingLeft="@dimen/SmallPadding"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@android:id/title"
+                style="@style/CCPFontPreferenceLarge"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:singleLine="true" />
+            <TextView
+                android:id="@+id/sub_title"
+                style="@style/CCPFontPreferenceLarge"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:textColor="@color/toast_text_content"
+                android:visibility="gone"
+                android:singleLine="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1.0"
+            android:layout_marginLeft="@dimen/NormalPadding"
+            android:gravity="right"
+            android:duplicateParentState="true" >
+            <TextView
+                android:id="@android:id/summary"
+                style="@style/CCPFontPreferenceSummary"
+                android:paddingBottom="@dimen/SmallPadding"
+                android:paddingRight="@dimen/SmallPadding"
+                android:paddingTop="@dimen/SmallPadding"
+                android:singleLine="true"
+                android:visibility="gone"
+                android:textColor="@color/toast_text_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/NormalPadding" />
+
+            <TextView
+                android:id="@+id/text_tv_one"
+                style="@style/UnreadCountTipsStyle"
+                android:text="@string/new_version"
+                android:visibility="gone" />
+            <ImageView
+                android:id="@+id/accessory_checked"
+                android:layout_width="10dp"
+                android:layout_height="15dp"
+                android:singleLine="true"
+                android:layout_gravity="center_vertical" />
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="56dp"
+                android:layout_height="26dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_checkbox"
+                android:button="@null"
+                android:checked="true"
+                android:visibility="gone"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/item_bottom_divider"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/list_divider" />
+
+</LinearLayout>

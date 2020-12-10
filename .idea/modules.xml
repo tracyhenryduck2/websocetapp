@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SiterApp.iml" filepath="$PROJECT_DIR$/SiterApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="websocetapp/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/mysdk/mysdk.iml" filepath="$PROJECT_DIR$/.idea/modules/app/mysdk/mysdk.iml" group="demo/app/mysdk" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/websocetapp.iml" filepath="$PROJECT_DIR$/.idea/modules/websocetapp.iml" group="websocetapp" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mysdk/websocetapp-mysdk.iml" filepath="$PROJECT_DIR$/.idea/modules/mysdk/websocetapp-mysdk.iml" group="websocetapp/mysdk" />
     </modules>
   </component>
 </project>

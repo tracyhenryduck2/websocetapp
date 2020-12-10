@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="folder_operation">
+        <item>修改名称</item>
+        <item>删除位置</item>
+    </array>
+    <array name="device_operation">
+        <item>修改名称</item>
+        <item>解除绑定</item>
+        <item>移动到其他位置</item>
+    </array>
+    <string-array name="languages">
+        <item>中文</item>
+        <item>English</item>
+        <item>Deutsch</item>
+        <item>Français</item>
+    </string-array>
+    <string-array name="week">
+        <item>一</item>
+        <item>二</item>
+        <item>三</item>
+        <item>四</item>
+        <item>五</item>
+        <item>六</item>
+        <item>日</item>
+    </string-array>
+    <string-array name="folder_name">
+        <item>我的家</item>
+        <item>客卧</item>
+        <item>厨房</item>
+        <item>主卧</item>
+        <item>客厅</item>
+        <item>楼梯</item>
+        <item>Lora</item>
+    </string-array>
+    <string-array name="more_setting">
+        <item>历史记录</item>
+        <item>设备信息</item>
+    </string-array>
+    <array name="question">
+        <item>SiterLink有哪些主要功能?</item>
+        <item>怎么下载SiterLink?</item>
+        <item>如何使用WIFI配置设备?</item>
+        <item>配置设备失败可能有哪些原因?</item>
+        <item>如何使用移动数据网络远程控制设备?</item>
+        <item>如何授权他人共享设备控制权限?</item>
+    </array>
+    <array name="answer">
+        <item>您购买了SiterLink智能家居设备，并绑定APP后就可以使用您的设备联网，实现手机全球远程操控。</item>
+        <item>您可以到苹果应用商店或者应用宝，Google Play平台搜索SiterLink下载安装，APP当前支持安卓4.0以上系统和IOS8.0以上</item>
+        <item>目前大部分家具类设备都是WIFI设备，登录SiterLink后：\n(1)将设备通电并开机，请把您的智能手机也连接到该WIFI\n(2)按照产品说明书复位设备，使设备处于可配置的状态，因每个设备的复位方法不一致，请自行查看说明书操作即可\n(3)打开APP先添加组，添加完以后点击进入组，在设备列表的右上角"+"按钮，选择WIFI配网添加设备，APP会自动读取当前的网络名，手动输入密码后，点击"连接"按钮，等待约20s后即可看到添加成功的设备。</item>
+        <item>(1)配网失败，请检查WIFI名称和密码是否正确\n(2)未查到设备，请检查设备是否正常或者WIFI名称和密码是否正确，然后取下电池一分钟后点击重试\n(3)PINCODE获取失败，请检查网络环境问题，然后取下电池一分钟后点击重试\n(4)设备被其他人绑定时，根据提示联系绑定人或者联系我们\n(5)移动设备到分组失败，请检查网络，并取下电池一分钟后重试\n(6)请检查设备是否通电开机\n(7)手机是否正常通过wifi连接外网\n(8)设备是否在配网状态(什么是可配网状态请查看说明书详细说明，一般是手动触发设备上的按键进入配网状态)\n(9)检查路由器相关\na、目前产品仅支持2.4G无线网络，暂不支持5G，要检查自己的路由器是不是2.4G的无线网络\nb、路由器信号不稳定，再次点击配置尝试连接\nc、路由器设置最大接入设备数，而接入的设备已达到上限；可尝试先关闭某个设备wifi功能空出通道重新配置\nd、wifi密码超过32位，或者使用了中文等特殊字符\ne、路由器开启AP隔离，无法搜索寻到设备(配网成功也收不到成功信息)\nf、路由器开启无线MAC地址过滤，应该先将设备移出路由器的MAC过滤列表，保证路由器没有禁止设备联网\n</item>
+        <item>wifi类设备在您初次使用绑定添加设备时，需要设备和手机在同一个WIFI环境下，绑定后使用2G,3G,4G均可实现远程控制</item>
+        <item>您可以让朋友家人和您使用同一个登录账号登录，这样就可以同时控制设备，也可以使用APP自带的"共享授权"功能</item>
+    </array>
+</resources>

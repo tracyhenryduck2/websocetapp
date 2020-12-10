@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="folder_operation">
+        <item>Namen ändern</item>
+        <item>Localtion löschen</item>
+    </array>
+    <array name="device_operation">
+        <item>Namen ändern</item>
+        <item>Zahlungsfähigkeit Gerät</item>
+        <item>Die umstellung auf andere localtion</item>
+    </array>
+    <string-array name="languages">
+        <item>中文</item>
+        <item>English</item>
+        <item>Deutsch</item>
+        <item>Français</item>
+        <item>Español</item>
+    </string-array>
+    <string-array name="week">
+        <item>Mon</item>
+        <item>Die</item>
+        <item>Mit</item>
+        <item>Don</item>
+        <item>Fre</item>
+        <item>Sam</item>
+        <item>Son</item>
+    </string-array>
+    <string-array name="folder_name">
+        <item>Mein Zuhause</item>
+        <item>Guestbedroom</item>
+        <item>Küche</item>
+        <item>Wohnzimmer</item>
+        <item>Salon</item>
+        <item>Treppe</item>
+        <item>Lora</item>
+    </string-array>
+    <string-array name="more_setting">
+        <item>Historische Informationen</item>
+        <item>Geräte der informations</item>
+    </string-array>
+    <array name="question">
+        <item>Was sind die wichtigsten aufgaben siterlink?</item>
+        <item>Wie kann ich siterlink herunterladen?</item>
+        <item>Wie konfigurieren sie ihr gerät mit wlan?</item>
+        <item>Was sind die möglichen gründe für die konfiguration eines gerät versagen?</item>
+        <item>Wie die mobilen datennetzwerk fernbedienung?</item>
+        <item>Wie willst du anderen menschen zu teilen, ermächtigen, device control rechte?</item>
+    </array>
+    <array name="answer">
+        <item>sie kaufte die siterlink smart home ausrüstung und banden - app können sie mit ihrem gerät vernetzung, mobile die fernbedienung.</item>
+        <item>sie suchen und herunterladen können, die "siterlink" - app von apple app store und google play - plattform gelten, schatz.app derzeit supportsandroid 4.0-systems und über, oder ios8.0 system vor.</item>
+        <item>derzeit sind die meisten der heim - geräte sind wlan - geräte nach dem siterlink login: \n (1) ausrüstung wird gekräftigt und stiefel, stellen sie bitte ihre smart - handy mit dem wifi \n (2) - in übereinstimmung mit den spezifikationen für produkte und verringerung der geräte in einem konfigurierbaren staat, weil das zurücksetzen. methode jedes gerät ist nicht die gleiche, lesen sie bitte die anleitung zur \n (3) öffnet die app, und fügen sie die gruppe zunächst in der gruppe klicken, klicken sie auf den "+" - button in der oberen rechten ecke des geräts auswählen die wifi - netzwerk ausrüstung, die app automatisch lesen sie aktuelle netzwerk namen, die manuelle eingabe passwort, klicken sie "connect" - taste, um zu sehen, sie warten auf 20 erfolgreiche geräte</item>
+        <item>(1) die config netzwerkausfall, überprüfen sie bitte die wlan - namen und kennwort korrekt \n (2) nicht finden. bitte überprüfen sie, ob das gerät ist normal - oder wlan - namen und kennwort korrekt sind, und entfernen sie die batterie nach einer minute auf retry \n (3) pincode nicht ein problem, bitte überprüfen sie die netzwerk - umgebung, und entfernen sie die batterie eine minute nach dem klick retry \n (4), von anderen verpflichtet, gemäß dem prompt an oder kontaktieren sie uns zwangsläufig \n (5), mobilen geräten paket scheitern, bitte überprüfen sie die netzwerk - und entfernen sie die batterie nach einer minute retry \n (6) bitte überprüfen sie, ob das gerät macht auf \n (7) handy ist normale wifi \n durch die netzwerkverbindung \n(8), ob das gerät ist die verteilung der staatlichen(was ist die verteilung der staatlichen finden auf die bedienungsanleitung genau die allgemeinen manuell auslösen, gerät der schlüssel in der verteilung der staatlichen) \n (9) \na, der scheck router unterstützt nur 2.4g wlan produkte im netz nicht für den 5g, überprüfen sie ihren router nicht 2.4g \nb wlan - netzwerk router signal instabilität, klicken sie erneut versuchen, eine verbindung zu der \nc - router - konfiguration, die maximale anzahl der geräte für den zugang zu den anlagen und erreichte die obergrenze; sie schließen ein gerät \nd, wifi - kanal vor leerem passwort mehr als 32, oder die verwendung von chinesischen sonderzeichen wie \ne, öffnen sie die ap - router isolation, unfähig zu suchen, um das gerät (netz erfolg haben erfolgreichinformationen) \nf, offenen wireless - router mac - adresse filter, mac - liste gestrichen werden, von der ausrüstung der router, den router verbietet nicht die netzwerkausrüstung \n</item>
+        <item>wlan - gerät, wenn sie zunächst mit dem verbindlichen hinzu, ausrüstung, brauchen sie die geräte und mobiltelefone in der gleichen wifi - umwelt, an der nach 2g, 3g, 4g, fernbedienung erreicht werden kann,</item>
+        <item>lassen sie ihre freunde, familie und sie sich mit der gleichen login - namen, so kann man das gerät zur gleichen zeit, oder sie können mit der app aktiviert - funktion an</item>
+    </array>
+</resources>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/comm_settting_item_selector"
+    android:baselineAligned="false"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/SmallListHeight"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/NormalPadding"
+    android:paddingRight="@dimen/NormalPadding" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left|center"
+            android:minHeight="@dimen/SmallListHeight"
+            android:paddingLeft="@dimen/SmallPadding"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="2016/01/02 14:26:23"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/time"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:text="设备报警"
+                android:id="@+id/type"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left|center"
+            android:minHeight="@dimen/SmallListHeight"
+            android:paddingLeft="@dimen/SmallPadding"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/NormalTextSize"
+                android:text=""
+                android:layout_alignParentLeft="true"
+                android:id="@+id/name"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/NormalTextSize"
+                android:text="报警"
+                android:id="@+id/status"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/item_bottom_divider"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/list_divider" />
+
+</LinearLayout>

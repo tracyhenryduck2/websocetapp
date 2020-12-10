@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.siterwell.demo.commonview.RefreshableView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/refr">
+            <LinearLayout
+                android:orientation="vertical" android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:background="@mipmap/znjj_bg"
+                    android:id="@+id/top">
+
+                    <ImageView
+                        android:layout_width="@dimen/back_image_width"
+                        android:layout_height="@dimen/back_image_height"
+                        android:background="@null"
+                        android:id="@+id/back"
+                        android:layout_alignParentLeft="true"
+                        android:src="@mipmap/batteryback"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="20dp"/>
+                    <ImageView
+                        android:layout_width="@dimen/more_button_width"
+                        android:layout_height="@dimen/more_button_height"
+                        android:background="@null"
+                        android:id="@+id/more"
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/more_icon"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/tran_black"
+                        android:padding="@dimen/SmallPadding"
+                        android:layout_alignParentBottom="true">
+                        <ImageView
+                            android:layout_width="@dimen/socket_mode_width"
+                            android:layout_height="@dimen/socket_mode_height"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/djsms_icon"
+                            android:id="@+id/current_mode"/>
+                        <ImageView
+                            android:layout_width="@dimen/socket_ico_width"
+                            android:layout_height="@dimen/socket_ico_height"
+                            android:src="@mipmap/cz_icon"
+                            android:layout_toLeftOf="@id/current_mode"
+                            android:layout_marginRight="20dp"
+                            android:id="@+id/icon"/>
+
+                        <ImageView
+                            android:layout_width="@dimen/socket_switch_width"
+                            android:layout_height="@dimen/socket_switch_height"
+                            android:src="@drawable/on_kg_icon"
+                            android:layout_toRightOf="@id/current_mode"
+                            android:layout_marginLeft="20dp"
+                            android:layout_centerVertical="true"
+                            android:id="@+id/kaiguan"/>
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/s3"
+                            android:layout_toLeftOf="@id/icon"
+                            android:layout_marginRight="10dp"
+                            android:layout_centerVertical="true"
+                            android:id="@+id/signal"/>
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:background="@color/white">
+                    <ImageView
+                        android:layout_width="220dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/in_hk_bg"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="20dp"/>
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/in_hk02_icon_2"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/timer_btn"/>
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/in_hk01_icon"
+                        android:layout_toLeftOf="@id/timer_btn"
+                        android:layout_alignTop="@id/timer_btn"
+                        android:layout_marginRight="70dp"
+                        android:gravity="center_vertical"
+                        android:id="@+id/circle_btn"/>
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/in_hk03_icon_2"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/timer_btn"
+                        android:layout_alignTop="@id/timer_btn"
+                        android:layout_marginLeft="70dp"
+                        android:id="@+id/countdown_btn"/>
+
+
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/SmallTextSize"
+                        android:text="@string/timer_mode"
+                        android:textColor="@color/black"
+                        android:gravity="center_horizontal"
+                        android:id="@+id/txt_timer"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="8dp" />
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/SmallTextSize"
+                        android:text="@string/circle_mode"
+                        android:textColor="@color/edit_color"
+                        android:layout_toLeftOf="@id/txt_timer"
+                        android:layout_alignTop="@id/txt_timer"
+                        android:id="@+id/txt_circle"
+                        android:gravity="center_horizontal"
+                        android:layout_marginRight="30dp"
+                        />
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/SmallTextSize"
+                        android:text="@string/countdown_mode"
+                        android:textColor="@color/black"
+                        android:layout_toRightOf="@id/txt_timer"
+                        android:layout_alignTop="@id/txt_timer"
+                        android:id="@+id/txt_countdown"
+                        android:gravity="center_horizontal"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="30dp"
+                        />
+
+                </RelativeLayout>
+                <android.support.v4.view.ViewPager
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:id="@+id/operation">
+                </android.support.v4.view.ViewPager>
+
+            </LinearLayout>
+</com.siterwell.demo.commonview.RefreshableView>
+
+
+
+
+
+</LinearLayout>

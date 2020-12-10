@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.siterwell.siterapp">
+    package="com.siterwell.demo">
 
     <uses-permission android:name="android.permission.VIBRATE" />
-
     <!-- 这个权限用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 这个权限用于进行获取网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- 这个权限用于进行wifi组播 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
@@ -17,7 +15,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <!-- 这个权限用于进行配网时阻止屏幕休眠 -->
@@ -29,22 +26,9 @@
     <!-- 写入扩展存储，向扩展卡写入数据，用于写入用户数据 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-
-    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
-    <uses-permission android:name="android.permission.RECORD_VIDEO" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <!-- 如果您想获得客户端crash的报告, 需要添加这个权限 -->
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-
-
-
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".MyApplication"
@@ -52,22 +36,208 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".LoginActivity">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        >
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher_alpha" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <activity
+            android:name="com.zbar.lib.ScanCaptureAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:label="主页面"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"
+            />
+        <activity
+            android:name=".RegisterActivity"
+            android:label="注册"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChooseLanguageActivity"
+            android:label="@string/language"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
-            android:name=".MainActivity"
-            android:label="主页面"
+            android:name=".InitActivity"
+            android:label="初始化"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".user.PersonalActivity"
+            android:label="个人设置"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".folder.DeviceListActivity"
+            android:label="设备列表"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".folder.guide.GuideBattery2Activty"
+            android:label="电池添加指导2"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".folder.guide.WaterSensor1Activity"
+            android:label="水感添加指导1"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".folder.guide.SocketGuide1Activity"
+            android:label="插座添加指导1"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".folder.configuration.ConfigurationActivity"
+            android:label="填写wifi密码"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".folder.configuration.EsptouchAnimationActivity"
+            android:label="wifi配置"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".folder.configuration.EsptouchSuccessActivity"
+            android:label="配网成功"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".folder.AddFolderActivity"
+            android:label="添加目录功能"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            />
+        <activity
+            android:name=".device.BatteryDetailActivity"
+            android:label="电池详情"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".device.SocketDetatilActivity"
+            android:label="插座详情"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".device.AddTimerActivity"
+            android:label="添加及编辑定时"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".folder.AddDeviceTypeActivity"
+            android:label="添加及编辑定时"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".ResetCodeActivity"
+            android:label="重置"
             android:screenOrientation="portrait" />
-        <service android:name="com.siterwell.sdk.service.HekrCoreService" />
+        <activity
+            android:name=".imagealumutils.PhotoAlumActivity"
+            android:label="图片选择器"
+            android:screenOrientation="portrait" />
+        <activity android:name=".SystemActivity"
+            android:label="系统设置"
+            android:screenOrientation="portrait" />
+        <activity android:name=".AlarmListActivity"
+            android:label="告警总列表"
+            android:screenOrientation="portrait" />
+        <activity android:name=".device.SocketHistoryActivity"
+            android:label="插座历史记录列表"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".QuestionActivity"
+            android:label="常见问题"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AboutActivity"
+            android:label="关于"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user.ChangePasswordActivity"
+            android:label="用户修改密码"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".device.DeviceSettingActivity"
+            android:label="设备设置"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".device.WaterSensorDetailActivity"
+            android:label="水感界面"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TestActivity"
+            android:label="测试"
+            android:screenOrientation="portrait" />
 
+        <!-- Sychronize data service -->
+        <service android:name=".SychronizeService"
+            android:enabled="true"
+            android:label="siterwell服务"
+            android:exported="true"/>
+
+        <service android:name=".BatteryNotificationService"/>
+        <service android:name=".SilenceOverNotificationService" />
+        <receiver android:name=".BroadCastForNotification"/>
+
+
+        <service
+            android:name=".updateapp.UpdateService"
+            android:exported="true"
+            android:label="UpdateService"></service>
+
+
+        <!-- [START firebase_service] -->
+        <service
+            android:name=".pushsevice.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <!-- [END firebase_service] -->
+        <!-- [START firebase_iid_service] -->
+        <service
+            android:name=".pushsevice.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <!-- [END firebase_iid_service] -->
+        <service android:name=".pushsevice.MyJobService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+            </intent-filter>
+        </service>
+
+        <service android:name="com.siterwell.sdk.common.SiterCoreService"
+            android:exported="true"
+            android:label="SiterCoreService"
+            />
+        <receiver
+            android:name="com.siterwell.sdk.common.SiterReceiver">
+            <intent-filter>
+                <action android:name="me.hekr.action.ws.data" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.siterwell.sdk.common.UDPreceiver">
+            <intent-filter>
+                <action android:name="com.siterwell.sdk.UDPMessage"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item android:drawable="@drawable/waterc1" android:duration="1000"></item>
+    <item android:drawable="@drawable/waterc2" android:duration="1000"></item>
+    <item android:drawable="@drawable/waterc3" android:duration="1000"></item>
+    <item android:drawable="@drawable/waterc4" android:duration="1000"></item>
+    <item android:drawable="@drawable/waterc5" android:duration="1000"></item>
+    <item android:drawable="@drawable/waterc6" android:duration="3000"></item>
+</animation-list>

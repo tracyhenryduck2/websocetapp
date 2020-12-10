@@ -2,4 +2,77 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="SmallestTextSize">12.0dip</dimen>
+    <dimen name="HintTextSize">10.0dip</dimen>
+    <dimen name="SmallestPadding">2.0dip</dimen>
+    <dimen name="LargePadding">20.0dip</dimen>
+    <dimen name="SmallListHeight">48.0dip</dimen>
+    <dimen name="NormalPadding">12.0dip</dimen>
+    <dimen name="SmallPadding">8.0dip</dimen>
+    <dimen name="NormalTextSize">16.0sp</dimen>
+    <dimen name="SmallTextSize">14.0sp</dimen>
+    <dimen name="LargTextSize">20.0sp</dimen>
+    <dimen name="BigPadding">24dp</dimen>
+    <dimen name="setting_font_size">18sp</dimen>
+    <dimen name="edit_font_size">16sp</dimen>
+    <dimen name="LargestTextSize">21sp</dimen>
+
+
+    <dimen name="toolbar_height">50dp</dimen>
+    <dimen name="top_edit_width">230dp</dimen>
+    <dimen name="back_image_width">35dp</dimen>
+    <dimen name="back_image_height">35dp</dimen>
+    <dimen name="back_image_padding">5dp</dimen>
+    <dimen name="back_image_marginLeft">15dp</dimen>
+    <dimen name="setting_marginRight">20dp</dimen>
+    <dimen name="setting_width">30dp</dimen>
+    <dimen name="setting_height">30dp</dimen>
+
+
+    <dimen name="menu_item_width">25dp</dimen>
+    <dimen name="menu_item_height">25dp</dimen>
+    <dimen name="folder_item_image_width">70dp</dimen>
+    <dimen name="folder_item_image_height">70dp</dimen>
+    <dimen name="folder_item_max_width">250dp</dimen>
+    <dimen name="person_touxiang_size">100dp</dimen>
+    <dimen name="person_margin_top">50dp</dimen>
+
+    <dimen name="his_item_height">55dp</dimen>
+    <dimen name="device_item_height">75dp</dimen>
+    <dimen name="modle_item_ico_width">50dp</dimen>
+    <dimen name="modle_item_ico_height">50dp</dimen>
+    <dimen name="modle_item_cellScenceImage_width">42dp</dimen>
+    <dimen name="modle_item_cellScenceImage_height">42dp</dimen>
+    <dimen name="modle_item_arrow_padding">15dp</dimen>
+    <dimen name="modle_item_arrow_width">25dp</dimen>
+    <dimen name="modle_item_arrow_height">25dp</dimen>
+    <dimen name="modle_item_arrow_marginTop">15dp</dimen>
+   <dimen name="battery_tip_test_height">40dp</dimen>
+
+    <dimen name="MinDialogWidth">320.0dip</dimen>
+    <dimen name="dialog_round_radius">4.0dip</dimen>
+    <dimen name="dialog_padding">15.0dip</dimen>
+    <dimen name="toast_view_content">15.0sp</dimen>
+    <dimen name="text_list_title">16.0sp</dimen>
+
+    <dimen name="login_edit_padding">10dp</dimen>
+    <dimen name="login_arrow_width">30dp</dimen>
+    <dimen name="login_arrow_height">20dp</dimen>
+
+    <dimen name="ccpbtn_width">180dp</dimen>
+    <dimen name="ccp2btn_width">130dp</dimen>
+    <dimen name="empty_margintop">180dp</dimen>
+    <dimen name="height_battery_header">200dp</dimen>
+    <dimen name="more_button_width">35dp</dimen>
+    <dimen name="more_button_height">35dp</dimen>
+    <dimen name="socket_mode_width">90dp</dimen>
+    <dimen name="socket_mode_height">20dp</dimen>
+    <dimen name="socket_ico_width">40dp</dimen>
+    <dimen name="socket_ico_height">40dp</dimen>
+    <dimen name="socket_switch_width">70dp</dimen>
+    <dimen name="socket_switch_height">25dp</dimen>
+    <dimen name="wheel_font_size">18sp</dimen>
+    <dimen name="bottom_text_size">13sp</dimen>
 </resources>
