@@ -24,7 +24,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
 import io.netty.channel.socket.nio.NioDatagramChannel;
 import io.netty.util.CharsetUtil;
-import me.siter.sdk.HekrSDK;
+import me.siter.sdk.SiterSDK;
 import me.siter.sdk.utils.LogUtil;
 
 /**
@@ -60,7 +60,7 @@ class BroadcastUdpConn implements IAsyncConn {
             LogUtil.d(TAG, "The BroadcastUdpConn is running, no need to restart");
             return;
         }
-        int perm = HekrSDK.getContext().checkCallingOrSelfPermission("android.permission.INTERNET");
+        int perm = SiterSDK.getContext().checkCallingOrSelfPermission("android.permission.INTERNET");
         boolean has_perssion = perm == PackageManager.PERMISSION_GRANTED;
         if (!has_perssion) {
             LogUtil.e(TAG, "Has no permission:android.permission.INTERNET");

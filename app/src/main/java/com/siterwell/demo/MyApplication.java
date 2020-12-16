@@ -1,10 +1,8 @@
 package com.siterwell.demo;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Process;
 import android.support.multidex.MultiDexApplication;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -13,9 +11,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.siterwell.demo.common.CrashHandler;
 import com.siterwell.sdk.common.SitewellSDK;
 
-import java.util.List;
-
-import me.siter.sdk.HekrSDK;
+import me.siter.sdk.SiterSDK;
 
 
 /**
@@ -31,8 +27,8 @@ public class MyApplication extends MultiDexApplication {
         super.onCreate();
         mApp = this;
         //初始化HekrSDK
-        HekrSDK.init(getApplicationContext(), R.raw.config);
-        HekrSDK.enableDebug(true);
+        SiterSDK.init(getApplicationContext(), R.raw.config);
+        SiterSDK.enableDebug(true);
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
                 .memoryCacheExtraOptions(80, 80)
                 .denyCacheImageMultipleSizesInMemory()

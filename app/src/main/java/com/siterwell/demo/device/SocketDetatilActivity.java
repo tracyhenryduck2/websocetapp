@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import me.siter.sdk.inter.HekrMsgCallback;
+import me.siter.sdk.inter.SiterMsgCallback;
 
 /**
  * Created by gc-0001 on 2017/6/13.
@@ -59,7 +59,7 @@ public class SocketDetatilActivity extends TopbarSuperActivity implements View.O
     private SocketDescBean socketDescBean;
     private String devid;
     private SocketCommand socketCommand;
-    private HekrMsgCallback dataReceiverListener;
+    private SiterMsgCallback dataReceiverListener;
     private UnitTools unitTools;
     private RefreshableView refreshableView;
     private ProgressDialog progressDialog;
@@ -84,7 +84,7 @@ public class SocketDetatilActivity extends TopbarSuperActivity implements View.O
         deviceDao = new DeviceDao(this);
         DeviceBean deviceBean = deviceDao.findDeviceBySid(devid);
         socketCommand = new SocketCommand(deviceBean,this);
-        dataReceiverListener = new HekrMsgCallback() {
+        dataReceiverListener = new SiterMsgCallback() {
             @Override
             public void onReceived(String msg) {
                 refreshableView.finishRefreshing();

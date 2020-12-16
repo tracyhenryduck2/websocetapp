@@ -1,7 +1,7 @@
 package me.siter.sdk;
 
 import me.siter.sdk.dispatcher.IMessageFilter;
-import me.siter.sdk.inter.HekrMsgCallback;
+import me.siter.sdk.inter.SiterMsgCallback;
 
 /**
  * Created by TracyHenry on 2020/12/16.
@@ -23,9 +23,9 @@ public interface IMessageRequest {
 
   IMessageFilter getFilter();
 
-  void setHekrMsgCallback(HekrMsgCallback callback);
+  void setHekrMsgCallback(SiterMsgCallback callback);
 
-  HekrMsgCallback getHekrMsgCallback();
+  SiterMsgCallback getHekrMsgCallback();
 
   String getHandler();
 

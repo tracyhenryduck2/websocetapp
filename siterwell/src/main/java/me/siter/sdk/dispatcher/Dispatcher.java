@@ -11,11 +11,11 @@ import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import me.siter.sdk.FilterType;
-import me.siter.sdk.HekrSDK;
+import me.siter.sdk.SiterSDK;
 import me.siter.sdk.IMessageRequest;
-import me.siter.sdk.inter.HekrDispatcherListener;
-import me.siter.sdk.inter.HekrMsgCallback;
-import me.siter.sdk.service.HekrConnectionService;
+import me.siter.sdk.inter.SiterDispatcherListener;
+import me.siter.sdk.inter.SiterMsgCallback;
+import me.siter.sdk.service.SiterConnectionService;
 import me.siter.sdk.service.IMsgObserver;
 import me.siter.sdk.service.ServiceBinder;
 import me.siter.sdk.service.ServiceMonitor;
@@ -40,7 +40,7 @@ public class Dispatcher extends IDispatcher implements IMsgObserver {
     private CopyOnWriteArrayList<FilterNet> mCallBackQueue;
     private Handler mTimerHandler;
     private boolean isStarted = false;
-    private CopyOnWriteArrayList<HekrDispatcherListener> mDispatcherListeners;
+    private CopyOnWriteArrayList<SiterDispatcherListener> mDispatcherListeners;
 
     public static Dispatcher getInstance() {
         if (instance == null) {
@@ -57,7 +57,7 @@ public class Dispatcher extends IDispatcher implements IMsgObserver {
         this.mDelivery = new CallbackDelivery();
         this.mCallBackQueue = new CopyOnWriteArrayList<>();
         this.mDispatcherListeners = new CopyOnWriteArrayList<>();
-        this.mTimerHandler = new Handler(HekrSDK.getContext().getMainLooper());
+        this.mTimerHandler = new Handler(SiterSDK.getContext().getMainLooper());
         ServiceMonitor.getInstance().registerMsgObserver(this);
     }
 
@@ -65,7 +65,7 @@ public class Dispatcher extends IDispatcher implements IMsgObserver {
     public void start() {
         isStarted = true;
         startTimer();
-        startDelivery(HekrSDK.getContext());
+        startDelivery(SiterSDK.getContext());
     }
 
     @Override
@@ -79,25 +79,25 @@ public class Dispatcher extends IDispatcher implements IMsgObserver {
     }
 
     @Override
-    public void addFilter(IMessageFilter filter, HekrMsgCallback callback, long expired) {
+    public void addFilter(IMessageFilter filter, SiterMsgCallback callback, long expired) {
         FilterNet filterNet = new FilterNet(filter, callback, expired);
         mCallBackQueue.add(filterNet);
     }
 
     @Override
-    public void addFilter(IMessageFilter filter, HekrMsgCallback callback) {
+    public void addFilter(IMessageFilter filter, SiterMsgCallback callback) {
         FilterNet filterNet = new FilterNet(filter, callback);
         mCallBackQueue.add(filterNet);
     }
 
     @Override
-    public void addFilter(String tag, IMessageFilter filter, HekrMsgCallback callback) {
+    public void addFilter(String tag, IMessageFilter filter, SiterMsgCallback callback) {
         FilterNet filterNet = new FilterNet(filter, callback);
         mCallBackQueue.add(filterNet);
     }
 
     @Override
-    public void addFilter(IMessageFilter filter, HekrMsgCallback callback, FilterType type, long expried) {
+    public void addFilter(IMessageFilter filter, SiterMsgCallback callback, FilterType type, long expried) {
         FilterNet filterNet = new FilterNet(filter, callback, type, expried);
         mCallBackQueue.add(filterNet);
     }
@@ -125,7 +125,7 @@ public class Dispatcher extends IDispatcher implements IMsgObserver {
     @Override
     public void onReceived(String message, String from) {
         if (!TextUtils.isEmpty(message)) {
-            for (HekrDispatcherListener listener : mDispatcherListeners) {
+            for (SiterDispatcherListener listener : mDispatcherListeners) {
                 mDelivery.postReceive(message, from, listener);
             }
         }
@@ -164,13 +164,13 @@ public class Dispatcher extends IDispatcher implements IMsgObserver {
 
     @Override
     public void enqueue(IMessageRequest request, FilterType type) {
-        HekrConnectionService service = ServiceBinder.getInstance().getService();
+        SiterConnectionService service = ServiceBinder.getInstance().getService();
         if (service != null) {
             FilterNet filterNet = new FilterNet(request.getFilter(), request.getHekrMsgCallback(), type);
             filterNet.setRequest(request);
             add(filterNet);
             if (!TextUtils.isEmpty(request.getMessage())) {
-                for (HekrDispatcherListener listener : mDispatcherListeners) {
+                for (SiterDispatcherListener listener : mDispatcherListeners) {
                     mDelivery.postSend(request.getMessage(), request.getHandler(), listener);
                 }
             }
@@ -184,13 +184,13 @@ public class Dispatcher extends IDispatcher implements IMsgObserver {
 
     @Override
     public void enqueue(IMessageRequest request, String ip, int port, FilterType type) {
-        HekrConnectionService service = ServiceBinder.getInstance().getService();
+        SiterConnectionService service = ServiceBinder.getInstance().getService();
         if (service != null) {
             FilterNet filterNet = new FilterNet(request.getFilter(), request.getHekrMsgCallback(), type);
             filterNet.setRequest(request);
             add(filterNet);
             if (!TextUtils.isEmpty(request.getMessage())) {
-                for (HekrDispatcherListener listener : mDispatcherListeners) {
+                for (SiterDispatcherListener listener : mDispatcherListeners) {
                     mDelivery.postSend(request.getMessage(), request.getHandler(), listener);
                 }
             }
@@ -204,13 +204,13 @@ public class Dispatcher extends IDispatcher implements IMsgObserver {
 
     @Override
     public void enqueue(IMessageRequest request, FilterType type, long expired) {
-        HekrConnectionService service = ServiceBinder.getInstance().getService();
+        SiterConnectionService service = ServiceBinder.getInstance().getService();
         if (service != null) {
             FilterNet filterNet = new FilterNet(request.getFilter(), request.getHekrMsgCallback(), type, expired);
             filterNet.setRequest(request);
             if (request.getChannel() == IMessageRequest.CHANNEL_CLOUD && service.cloudConnExist(request.getHandler())) {
                 if (!TextUtils.isEmpty(request.getMessage())) {
-                    for (HekrDispatcherListener listener : mDispatcherListeners) {
+                    for (SiterDispatcherListener listener : mDispatcherListeners) {
                         mDelivery.postSend(request.getMessage(), request.getHandler(), listener);
                     }
                 }
@@ -218,7 +218,7 @@ public class Dispatcher extends IDispatcher implements IMsgObserver {
                 add(filterNet);
             } else if (request.getChannel() == IMessageRequest.CHANNEL_DEVICE && service.deviceConnExist(request.getHandler())) {
                 if (!TextUtils.isEmpty(request.getMessage())) {
-                    for (HekrDispatcherListener listener : mDispatcherListeners) {
+                    for (SiterDispatcherListener listener : mDispatcherListeners) {
                         mDelivery.postSend(request.getMessage(), request.getHandler(), listener);
                     }
                 }
@@ -229,12 +229,12 @@ public class Dispatcher extends IDispatcher implements IMsgObserver {
     }
 
     @Override
-    public void addDispatcherListener(HekrDispatcherListener listener) {
+    public void addDispatcherListener(SiterDispatcherListener listener) {
         mDispatcherListeners.add(listener);
     }
 
     @Override
-    public void removeDispatcherListener(HekrDispatcherListener listener) {
+    public void removeDispatcherListener(SiterDispatcherListener listener) {
         mDispatcherListeners.remove(listener);
     }
 

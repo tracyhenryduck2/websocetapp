@@ -5,7 +5,7 @@ import me.siter.sdk.IMessageRequest;
 import me.siter.sdk.dispatcher.Dispatcher;
 import me.siter.sdk.service.ConnOptions;
 import me.siter.sdk.service.ConnStatusType;
-import me.siter.sdk.service.HekrConnectionService;
+import me.siter.sdk.service.SiterConnectionService;
 import me.siter.sdk.service.IConnObserver;
 import me.siter.sdk.service.ServiceBinder;
 import me.siter.sdk.service.ServiceMonitor;
@@ -56,7 +56,7 @@ public class CloudConnection implements IConnection, IConnObserver {
         if (isConnected) {
             disconnect();
         }
-        HekrConnectionService service = ServiceBinder.getInstance().getService();
+        SiterConnectionService service = ServiceBinder.getInstance().getService();
         if (service != null && service.cloudConnExist(mHandler)) {
             service.destroyCloudConn(mHandler);
         }
@@ -93,7 +93,7 @@ public class CloudConnection implements IConnection, IConnObserver {
 
     private synchronized void tryConnect() {
         LogUtil.d(TAG, "Connect the cloud...");
-        HekrConnectionService service = ServiceBinder.getInstance().getService();
+        SiterConnectionService service = ServiceBinder.getInstance().getService();
         if (service == null) {
             LogUtil.d(TAG, "Service has not been created, creating...");
             ServiceBinder.getInstance().addListener(new ServiceBinder.ConnectServiceListener() {
@@ -120,7 +120,7 @@ public class CloudConnection implements IConnection, IConnObserver {
     }
 
     private synchronized void tryDisconnect() {
-        HekrConnectionService service = ServiceBinder.getInstance().getService();
+        SiterConnectionService service = ServiceBinder.getInstance().getService();
         if (service != null && service.cloudConnExist(mHandler)) {
             service.disconnectCloud(mHandler);
         }
@@ -132,7 +132,7 @@ public class CloudConnection implements IConnection, IConnObserver {
         if (mConnOptions == null) {
             throw new IllegalStateException("You should bind the connection first");
         }
-        HekrConnectionService service = ServiceBinder.getInstance().getService();
+        SiterConnectionService service = ServiceBinder.getInstance().getService();
         mHandler = service.createCloudConn(mConnOptions);
         // 所有的连接都保持在service中，service外最好不要拿到连接的实例
         ServiceMonitor.getInstance().registerConnObserver(mHandler, this);

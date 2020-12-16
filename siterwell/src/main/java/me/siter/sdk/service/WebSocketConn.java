@@ -39,7 +39,7 @@ import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.CharsetUtil;
-import me.siter.sdk.HekrSDK;
+import me.siter.sdk.SiterSDK;
 import me.siter.sdk.utils.LogUtil;
 import me.siter.sdk.utils.NetworkUtil;
 
@@ -80,11 +80,11 @@ class WebSocketConn implements IAsyncConn {
             LogUtil.d(TAG, "The WebSocketConn is running, no need to restart");
             return;
         }
-        if (!NetworkUtil.isConnected(HekrSDK.getContext())) {
+        if (!NetworkUtil.isConnected(SiterSDK.getContext())) {
             ServiceMonitor.getInstance().notifyConnChanged(mHandler, ConnStatusType.CONN_STATUS_ERROR);
             return;
         }
-        int perm = HekrSDK.getContext().checkCallingOrSelfPermission("android.permission.INTERNET");
+        int perm = SiterSDK.getContext().checkCallingOrSelfPermission("android.permission.INTERNET");
         boolean has_perssion = perm == PackageManager.PERMISSION_GRANTED;
         if (!has_perssion) {
             ServiceMonitor.getInstance().notifyConnChanged(mHandler, ConnStatusType.CONN_STATUS_ERROR);

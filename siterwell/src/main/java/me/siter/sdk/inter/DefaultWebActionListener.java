@@ -5,7 +5,7 @@ package me.siter.sdk.inter;
  *  * Author: TracyHenry
  * Web的回调用，用于监听Web页面的动作。
  */
-public abstract class DefaultWebActionListener implements HekrWebActionListener {
+public abstract class DefaultWebActionListener implements SiterWebActionListener {
 
     /**
      * 可以在此添加加载动画

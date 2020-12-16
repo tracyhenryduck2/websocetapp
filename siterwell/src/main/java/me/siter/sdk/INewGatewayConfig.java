@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import me.siter.sdk.config.ConfigGatewayDevice;
-import me.siter.sdk.inter.HekrConfigGatewayCallback;
+import me.siter.sdk.inter.SiterConfigGatewayCallback;
 
 /**
  * Created by TracyHenry on 2020/12/16.
@@ -22,7 +22,7 @@ public interface INewGatewayConfig {
    * @param configParams 配网设置，需要传入ssid，password，pinCode这三个键值所对应的参数
    * @param callback     配网回调
    */
-  void startConfig(Context context, Map configParams, HekrConfigGatewayCallback callback);
+  void startConfig(Context context, Map configParams, SiterConfigGatewayCallback callback);
 
 
   /**

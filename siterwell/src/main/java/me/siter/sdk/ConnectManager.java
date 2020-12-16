@@ -50,7 +50,7 @@ class ConnectManager {
     private ConnectManager() {
         mReconnectables = new ConcurrentHashMap<>();
         mTags = new ConcurrentHashMap<>();
-        mHandler = new ReconnHandler(HekrSDK.getContext().getMainLooper());
+        mHandler = new ReconnHandler(SiterSDK.getContext().getMainLooper());
     }
 
     void start(String tag) {
@@ -127,7 +127,7 @@ class ConnectManager {
                  * 如果满足如下条件，需要延时判断
                  * 1.手机没有可用的连接
                  */
-                if (!NetworkUtil.isConnected(HekrSDK.getContext())) {
+                if (!NetworkUtil.isConnected(SiterSDK.getContext())) {
                     LogUtil.d(TAG, "Connectable: " + tag + ", Network is off, new delay:" + MIN_DELAY_TIME + "ms");
                     sendMessageToHandler(HANDLER_CHECK_NETWORK, tag, MIN_DELAY_TIME);
                     return;
@@ -154,7 +154,7 @@ class ConnectManager {
                     }
                 } else {
                     // 如果不是在wifi环境下还是继续重连(因为如下的判断不准确)
-                    if (NetworkUtil.getConnectedType(HekrSDK.getContext()) == NetType.WIFI) {
+                    if (NetworkUtil.getConnectedType(SiterSDK.getContext()) == NetType.WIFI) {
                         LogUtil.d(TAG, "Connectable: " + tag + ", Device connection is on wifi status");
                     } else {
                         LogUtil.d(TAG, "Connectable: " + tag + ", Device connection is not on wifi status");
@@ -176,7 +176,7 @@ class ConnectManager {
                 }
                 break;
             case HANDLER_CHECK_NETWORK:
-                if (!NetworkUtil.isConnected(HekrSDK.getContext())) {
+                if (!NetworkUtil.isConnected(SiterSDK.getContext())) {
                     LogUtil.d(TAG, "Connectable: " + tag + ", After 2s' waiting, Network is off still, then do nothing");
                 } else {
                     LogUtil.d(TAG, "Connectable: " + tag + ", After 2s' waiting, Network is on, then reconnect");
@@ -191,7 +191,7 @@ class ConnectManager {
     void add(final Connectable connectable, final String tag, final ConnType connType) {
         if (!mReconnectables.containsKey(tag)) {
             mReconnectables.put(tag, connectable);
-            NetType type = NetworkUtil.getConnectedType(HekrSDK.getContext());
+            NetType type = NetworkUtil.getConnectedType(SiterSDK.getContext());
             if ((connType == ConnType.CONN_CLOUD && (type == NetType.WIFI || type == NetType.MOBILE))
                     || (connType == ConnType.CONN_DEVICE && type == NetType.WIFI)) {
                 if (!mTags.containsKey(tag)) {
@@ -224,7 +224,7 @@ class ConnectManager {
             return MIN_DELAY_TIME;
         }
         long next;
-        if (NetworkUtil.getConnectedType(HekrSDK.getContext()) == NetType.WIFI) {
+        if (NetworkUtil.getConnectedType(SiterSDK.getContext()) == NetType.WIFI) {
             next = (long) (delay * EXP_GROWTH_WIFI);
         } else {
             next = (long) (delay * EXP_GROWTH_NOT_WIFI);

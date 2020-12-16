@@ -30,7 +30,7 @@
             </intent-filter>
         </receiver>
         <!-- websocket control service -->
-        <service android:name="me.siter.sdk.service.HekrConnectionService"
+        <service android:name="me.siter.sdk.service.SiterConnectionService"
             android:exported="true"
             android:label="HekrConnectionService"
             />

@@ -21,7 +21,7 @@ public class ServiceBinder {
 
     private static final String TAG = ServiceBinder.class.getCanonicalName();
 
-    private HekrConnectionService mService;
+    private SiterConnectionService mService;
     private CopyOnWriteArrayList<ConnectServiceListener> mListeners;
     private Context mContext;
 
@@ -43,7 +43,7 @@ public class ServiceBinder {
         mListeners = new CopyOnWriteArrayList<>();
     }
 
-    public HekrConnectionService getService() {
+    public SiterConnectionService getService() {
         return mService;
     }
 
@@ -95,7 +95,7 @@ public class ServiceBinder {
 
     private boolean bindService(Context context) {
         Intent intent = new Intent();
-        intent.setClass(context, HekrConnectionService.class);
+        intent.setClass(context, SiterConnectionService.class);
         return context.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
     }
 

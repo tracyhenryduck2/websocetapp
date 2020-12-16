@@ -15,7 +15,7 @@ import java.util.Locale;
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
 import cz.msebera.android.httpclient.message.BasicHeader;
-import me.siter.sdk.utils.HekrLanguageUtil;
+import me.siter.sdk.utils.LanguageUtil;
 
 import static com.loopj.android.http.AsyncHttpClient.HEADER_CONTENT_TYPE;
 
@@ -33,7 +33,7 @@ public class BaseHttpUtil {
     static {
         client.setTimeout(5 * 1000);
         client.setURLEncodingEnabled(false);
-        client.addHeader("Accept-Language", HekrLanguageUtil.toBcp47Language(Locale.getDefault()));
+        client.addHeader("Accept-Language", LanguageUtil.toBcp47Language(Locale.getDefault()));
     }
 
     public static AsyncHttpClient getClient() {

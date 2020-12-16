@@ -27,9 +27,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import me.siter.sdk.Hekr;
+import me.siter.sdk.Siter;
 import me.siter.sdk.dispatcher.IMessageFilter;
-import me.siter.sdk.inter.HekrMsgCallback;
+import me.siter.sdk.inter.SiterMsgCallback;
 
 /**
  * Created by TracyHenry on 2018/4/25.
@@ -111,7 +111,7 @@ public class SiterCoreService extends Service {
                     return true;
                 }
             };
-            Hekr.getHekrClient().receiveMessage(filter, new HekrMsgCallback() {
+            Siter.getSiterClient().receiveMessage(filter, new SiterMsgCallback() {
                 @Override
                 public void onReceived(String msg) {
                     // 收到消息

@@ -18,7 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import me.siter.sdk.utils.HekrLanguageUtil;
+import me.siter.sdk.utils.LanguageUtil;
 import me.siter.sdk.utils.HttpUtil;
 import me.siter.sdk.utils.LogUtil;
 
@@ -49,7 +49,7 @@ class URLClient {
             }
             // 添加语言环境
             if (!headers.containsKey("Accept-Language")) {
-                String language = HekrLanguageUtil.getAcceptLnaguage();
+                String language = LanguageUtil.getAcceptLnaguage();
                 if (!TextUtils.isEmpty(language)) {
                     connection.addRequestProperty("Accept-Language", language);
                 }

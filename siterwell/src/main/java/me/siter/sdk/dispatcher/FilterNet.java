@@ -2,7 +2,7 @@ package me.siter.sdk.dispatcher;
 
 import me.siter.sdk.FilterType;
 import me.siter.sdk.IMessageRequest;
-import me.siter.sdk.inter.HekrMsgCallback;
+import me.siter.sdk.inter.SiterMsgCallback;
 
 /**
  * Created by TracyHenry on 2020/12/16.
@@ -28,24 +28,24 @@ class FilterNet {
     private String mTag;
 
     private IMessageFilter mFilter;
-    private HekrMsgCallback mMsgCallback;
+    private SiterMsgCallback mMsgCallback;
 
     // 如果有的话，持有IMessageRequest的引用
     private IMessageRequest mRequest;
 
-    FilterNet(IMessageFilter filter, HekrMsgCallback callback) {
+    FilterNet(IMessageFilter filter, SiterMsgCallback callback) {
         this(filter, callback, FilterType.FILTER_PERMANANT, DEFAULT_EXPIRED_TIME);
     }
 
-    FilterNet(IMessageFilter filter, HekrMsgCallback callback, long expired) {
+    FilterNet(IMessageFilter filter, SiterMsgCallback callback, long expired) {
         this(filter, callback, FilterType.FILTER_TEMPARORY, expired);
     }
 
-    FilterNet(IMessageFilter filter, HekrMsgCallback callback, FilterType type) {
+    FilterNet(IMessageFilter filter, SiterMsgCallback callback, FilterType type) {
         this(filter, callback, type, DEFAULT_EXPIRED_TIME);
     }
 
-    FilterNet(IMessageFilter filter, HekrMsgCallback callback, FilterType type, long expired) {
+    FilterNet(IMessageFilter filter, SiterMsgCallback callback, FilterType type, long expired) {
         this.mFilter = filter;
         this.mMsgCallback = callback;
         this.mType = type;
@@ -57,7 +57,7 @@ class FilterNet {
         if (mRequest != null && mRequest.hasCanceled()) {
             return MATCH_CANCEL;
         }
-        HekrMsgCallback callback = mMsgCallback;
+        SiterMsgCallback callback = mMsgCallback;
         if (callback != null) {
             if (checkIsTimeout()) {
                 return MATCH_TIMEOUT;
@@ -80,7 +80,7 @@ class FilterNet {
         return false;
     }
 
-    public HekrMsgCallback getCallback() {
+    public SiterMsgCallback getCallback() {
         return mMsgCallback;
     }
 

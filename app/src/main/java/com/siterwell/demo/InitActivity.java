@@ -17,14 +17,11 @@ import com.siterwell.demo.common.ECPreferences;
 import com.siterwell.demo.commonview.loadingView.ZLoadingView;
 import com.siterwell.demo.commonview.loadingView.Z_TYPE;
 import com.siterwell.sdk.http.HekrUserAction;
-import com.siterwell.sdk.http.bean.UserBean;
 
 import java.io.InvalidClassException;
 
-import me.siter.sdk.Constants;
-import me.siter.sdk.Hekr;
-import me.siter.sdk.inter.HekrCallback;
-import me.siter.sdk.utils.CacheUtil;
+import me.siter.sdk.Siter;
+import me.siter.sdk.inter.SiterCallback;
 
 
 /**
@@ -64,7 +61,7 @@ private ZLoadingView zLoadingView;
     private void login(){
 
        Log.i(TAG,"自动登录");
-        Hekr.getHekrUser().login(getUsername(), getPassword(), new HekrCallback() {
+        Siter.getSiterUser().login(getUsername(), getPassword(), new SiterCallback() {
             @Override
             public void onSuccess() {
                 Log.i(TAG,"自动登录成功");

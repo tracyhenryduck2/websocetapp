@@ -5,7 +5,7 @@ import me.siter.sdk.IMessageRequest;
 import me.siter.sdk.dispatcher.Dispatcher;
 import me.siter.sdk.service.ConnOptions;
 import me.siter.sdk.service.ConnStatusType;
-import me.siter.sdk.service.HekrConnectionService;
+import me.siter.sdk.service.SiterConnectionService;
 import me.siter.sdk.service.IConnObserver;
 import me.siter.sdk.service.ServiceBinder;
 import me.siter.sdk.service.ServiceMonitor;
@@ -58,7 +58,7 @@ public class DeviceConnection implements IConnection, IConnObserver {
         if (isConnected) {
             disconnect();
         }
-        HekrConnectionService service = ServiceBinder.getInstance().getService();
+        SiterConnectionService service = ServiceBinder.getInstance().getService();
         if (service != null && service.deviceConnExist(mHandler)) {
             service.destroyDeviceConn(mHandler);
         }
@@ -94,7 +94,7 @@ public class DeviceConnection implements IConnection, IConnObserver {
     }
 
     private void tryConnect() {
-        HekrConnectionService service = ServiceBinder.getInstance().getService();
+        SiterConnectionService service = ServiceBinder.getInstance().getService();
         if (service == null) {
             ServiceBinder.getInstance().addListener(new ServiceBinder.ConnectServiceListener() {
                 @Override
@@ -115,7 +115,7 @@ public class DeviceConnection implements IConnection, IConnObserver {
     }
 
     private synchronized void tryDisconnect() {
-        HekrConnectionService service = ServiceBinder.getInstance().getService();
+        SiterConnectionService service = ServiceBinder.getInstance().getService();
         if (service != null && service.deviceConnExist(mHandler)) {
             service.disconnectDevice(mHandler);
         }
@@ -127,7 +127,7 @@ public class DeviceConnection implements IConnection, IConnObserver {
         if (mConnOptions == null) {
             throw new IllegalStateException("You should bind the connection first");
         }
-        HekrConnectionService service = ServiceBinder.getInstance().getService();
+        SiterConnectionService service = ServiceBinder.getInstance().getService();
         mHandler = service.createDeviceConn(mConnOptions);
         // 所有的连接都保持在service中，service外最好不要拿到连接的实例
         ServiceMonitor.getInstance().registerConnObserver(mHandler, this);

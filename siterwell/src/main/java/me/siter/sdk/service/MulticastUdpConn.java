@@ -15,7 +15,7 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
-import me.siter.sdk.HekrSDK;
+import me.siter.sdk.SiterSDK;
 import me.siter.sdk.utils.LogUtil;
 import me.siter.sdk.utils.NetworkUtil;
 
@@ -59,7 +59,7 @@ class MulticastUdpConn implements IAsyncConn {
             LogUtil.d(TAG, "The MulticastUdpConn is running, no need to restart");
             return;
         }
-        int perm = HekrSDK.getContext().checkCallingOrSelfPermission("android.permission.INTERNET");
+        int perm = SiterSDK.getContext().checkCallingOrSelfPermission("android.permission.INTERNET");
         boolean has_perssion = perm == PackageManager.PERMISSION_GRANTED;
         if (!has_perssion) {
             LogUtil.e(TAG, "Has no permission:android.permission.INTERNET");
@@ -149,7 +149,7 @@ class MulticastUdpConn implements IAsyncConn {
         public void run() {
             try {
                 while (!mStop && !isInterrupted()) {
-                    if (!NetworkUtil.isConnected(HekrSDK.getContext())) {
+                    if (!NetworkUtil.isConnected(SiterSDK.getContext())) {
                         LogUtil.e(TAG, "Has no net, delays for 1000ms");
                         Thread.sleep(1000);
                         continue;

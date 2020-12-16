@@ -5,14 +5,13 @@ import android.provider.Settings;
 
 import com.siterwell.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.http.bean.FirmwareBean;
-import com.siterwell.sdk.udp.SiterwellUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.util.TextUtils;
-import me.siter.sdk.Hekr;
-import me.siter.sdk.inter.HekrMsgCallback;
+import me.siter.sdk.Siter;
+import me.siter.sdk.inter.SiterMsgCallback;
 
 
 /**
@@ -33,9 +32,9 @@ public class UpgradeCommand {
 
     }
 
-    public void sendUpgradeCommand(HekrMsgCallback dataReceiverListener){
+    public void sendUpgradeCommand(SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Hekr.getHekrClient().sendMessage(getUpgradeInfo(),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(getUpgradeInfo(),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
         }
     }
 

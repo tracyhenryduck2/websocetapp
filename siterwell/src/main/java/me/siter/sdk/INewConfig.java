@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import me.siter.sdk.config.ConfigDevice;
-import me.siter.sdk.inter.HekrConfigCallback;
+import me.siter.sdk.inter.SiterConfigCallback;
 
 /**
  * Created by TracyHenry on 2020/12/16.
@@ -22,7 +22,7 @@ public interface INewConfig {
    * @param configParams 配网设置，需要传入ssid，password，pinCode这三个键值所对应的参数
    * @param callback     配网回调
    */
-  void startConfig(Context context, Map configParams, HekrConfigCallback callback);
+  void startConfig(Context context, Map configParams, SiterConfigCallback callback);
 
   /**
    * 开始SoftAP模式配网
@@ -31,7 +31,7 @@ public interface INewConfig {
    * @param configParams 配网设置，需要传入ssid，password，pinCode这三个键值所对应的参数
    * @param callback     配网回调
    */
-  void startSoftAPConfig(Context context, Map configParams, HekrConfigCallback callback);
+  void startSoftAPConfig(Context context, Map configParams, SiterConfigCallback callback);
 
   /**
    * 开始配网
@@ -41,7 +41,7 @@ public interface INewConfig {
    * @param token        登录成功后的token
    * @param callback     配网回调
    */
-  void startSoftAPConfig(Context context, Map configParams, String token, HekrConfigCallback callback);
+  void startSoftAPConfig(Context context, Map configParams, String token, SiterConfigCallback callback);
 
   /**
    * 在配网开始和结束中获取配网设备，在配网结束后设备将会被销毁，可以在{@link #stopConfig()}回调中获取

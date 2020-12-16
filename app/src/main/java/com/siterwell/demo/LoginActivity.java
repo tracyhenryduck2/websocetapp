@@ -9,12 +9,9 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -29,24 +26,12 @@ import com.siterwell.demo.commonview.CodeEdit;
 import com.siterwell.demo.commonview.ECAlertDialog;
 import com.siterwell.demo.commonview.ProgressDialog;
 import com.siterwell.demo.user.ClientUser;
-import com.siterwell.sdk.http.HekrUser;
 import com.siterwell.sdk.http.HekrUserAction;
-import com.siterwell.sdk.http.bean.UserBean;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.InvalidClassException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.InetSocketAddress;
-import java.net.Socket;
 
-import me.siter.sdk.Constants;
-import me.siter.sdk.Hekr;
-import me.siter.sdk.inter.HekrCallback;
-import me.siter.sdk.utils.CacheUtil;
+import me.siter.sdk.Siter;
+import me.siter.sdk.inter.SiterCallback;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -120,10 +105,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 final String pwd = et_pwd.getCodeEdit().getText().toString().trim();
                 progressDialog = new ProgressDialog(this);
                 progressDialog.show();
-                    Hekr.getHekrUser().login(username, pwd, new HekrCallback() {
+                    Siter.getSiterUser().login(username, pwd, new SiterCallback() {
                         @Override
                         public void onSuccess() {
-                            final String id =  Hekr.getHekrUser().getUserId();
+                            final String id =  Siter.getSiterUser().getUserId();
                             ClientUser user = new ClientUser();
                             user.setId(id);
                             CCPAppManager.setClientUser(user);

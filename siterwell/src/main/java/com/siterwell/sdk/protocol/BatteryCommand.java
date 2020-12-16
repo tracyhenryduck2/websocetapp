@@ -15,8 +15,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import cz.msebera.android.httpclient.util.TextUtils;
-import me.siter.sdk.Hekr;
-import me.siter.sdk.inter.HekrMsgCallback;
+import me.siter.sdk.Siter;
+import me.siter.sdk.inter.SiterMsgCallback;
 
 
 /**
@@ -42,9 +42,9 @@ public class BatteryCommand {
 
     }
 
-    public void sendCommand(int cmdid , HekrMsgCallback dataReceiverListener){
+    public void sendCommand(int cmdid , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Hekr.getHekrClient().sendMessage(getCommand2(cmdid),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(getCommand2(cmdid),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
         }
     }
 

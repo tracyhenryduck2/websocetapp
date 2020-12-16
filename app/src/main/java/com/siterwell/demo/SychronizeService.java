@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.app.Service;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Handler;
@@ -40,26 +39,17 @@ import com.siterwell.sdk.common.TokenTimeoutListener;
 import com.siterwell.sdk.common.WIFISocketListener;
 import com.siterwell.sdk.http.HekrUser;
 import com.siterwell.sdk.http.HekrUserAction;
-import com.siterwell.sdk.http.SiterConstantsUtil;
-import com.siterwell.sdk.http.bean.DcInfo;
 import com.siterwell.sdk.http.bean.DeviceBean;
-import com.siterwell.sdk.http.bean.UserBean;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
-import me.siter.sdk.Constants;
-import me.siter.sdk.Hekr;
-import me.siter.sdk.http.HekrRawCallback;
-import me.siter.sdk.utils.CacheUtil;
+import me.siter.sdk.Siter;
+import me.siter.sdk.http.SiterRawCallback;
 
 
 /**
@@ -440,7 +430,7 @@ public class SychronizeService extends Service implements RefreshBatteryListener
 
     @Override
     public void tokentimeout() {
-        Hekr.getHekrUser().refreshToken(new HekrRawCallback() {
+        Siter.getSiterUser().refreshToken(new SiterRawCallback() {
             @Override
             public void onSuccess(int httpCode, byte[] bytes) {
                 Log.i(TAG,"刷新accesstoken成功");

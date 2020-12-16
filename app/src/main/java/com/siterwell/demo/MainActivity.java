@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -37,7 +36,6 @@ import com.siterwell.demo.common.Config;
 import com.siterwell.demo.common.ECPreferenceSettings;
 import com.siterwell.demo.common.ECPreferences;
 import com.siterwell.demo.common.Errcode;
-import com.siterwell.demo.common.SystemUtil;
 import com.siterwell.demo.common.UnitTools;
 import com.siterwell.demo.commonview.ECAlertDialog;
 import com.siterwell.demo.commonview.ECListDialog;
@@ -51,13 +49,11 @@ import com.siterwell.demo.folder.bean.LocalFolderBean;
 import com.siterwell.demo.storage.DeviceDao;
 import com.siterwell.demo.storage.FolderDao;
 import com.siterwell.demo.storage.WifiTimerDao;
-import com.siterwell.demo.updateapp.UpdateAppAuto;
 import com.siterwell.demo.user.PersonalActivity;
 import com.siterwell.sdk.http.HekrUser;
 import com.siterwell.sdk.http.HekrUserAction;
 import com.siterwell.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.http.bean.FolderListBean;
-import com.siterwell.sdk.udp.NetWorkUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -68,9 +64,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.siter.sdk.Hekr;
-import me.siter.sdk.HekrSDK;
-import me.siter.sdk.inter.HekrCallback;
+import me.siter.sdk.Siter;
+import me.siter.sdk.inter.SiterCallback;
 import me.siter.sdk.utils.ErrorCodeUtil;
 
 
@@ -558,7 +553,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 case 2:
 
-                    Hekr.getHekrUser().logout(new HekrCallback() {
+                    Siter.getSiterUser().logout(new SiterCallback() {
                         @Override
                         public void onSuccess() {
                             hideProgressDialog();

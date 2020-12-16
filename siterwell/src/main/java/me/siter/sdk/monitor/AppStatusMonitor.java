@@ -11,7 +11,7 @@ import android.view.Display;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import me.siter.sdk.HekrSDK;
+import me.siter.sdk.SiterSDK;
 import me.siter.sdk.utils.LogUtil;
 
 /**
@@ -50,11 +50,11 @@ public class AppStatusMonitor {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_ON);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
-        HekrSDK.getContext().registerReceiver(mReceiver, filter);
+        SiterSDK.getContext().registerReceiver(mReceiver, filter);
     }
 
     public void stopMonitor() {
-        HekrSDK.getContext().unregisterReceiver(mReceiver);
+        SiterSDK.getContext().unregisterReceiver(mReceiver);
     }
 
     private class ScreenReceiver extends BroadcastReceiver {
@@ -76,14 +76,14 @@ public class AppStatusMonitor {
     private boolean getScreenState() {
         boolean isScreenOn = false;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            DisplayManager manager = (DisplayManager) HekrSDK.getContext().getSystemService(Context.DISPLAY_SERVICE);
+            DisplayManager manager = (DisplayManager) SiterSDK.getContext().getSystemService(Context.DISPLAY_SERVICE);
             for (Display display : manager.getDisplays()) {
                 if (display.getState() != Display.STATE_OFF) {
                     isScreenOn = true;
                 }
             }
         } else {
-            PowerManager manager = (PowerManager) HekrSDK.getContext()
+            PowerManager manager = (PowerManager) SiterSDK.getContext()
                     .getSystemService(Context.POWER_SERVICE);
             isScreenOn = manager.isScreenOn();
         }

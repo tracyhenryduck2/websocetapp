@@ -10,13 +10,13 @@ import android.os.Binder;
 
 class ConnectionBinder extends Binder {
 
-    private HekrConnectionService mHekrConnectionService;
+    private SiterConnectionService mSiterConnectionService;
 
-    ConnectionBinder(HekrConnectionService service) {
-        this.mHekrConnectionService = service;
+    ConnectionBinder(SiterConnectionService service) {
+        this.mSiterConnectionService = service;
     }
 
-    public HekrConnectionService getService() {
-        return mHekrConnectionService;
+    public SiterConnectionService getService() {
+        return mSiterConnectionService;
     }
 }

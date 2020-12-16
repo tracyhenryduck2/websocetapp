@@ -13,7 +13,7 @@ import android.text.TextUtils;
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
-import me.siter.sdk.HekrSDK;
+import me.siter.sdk.SiterSDK;
 
 /**
  * Created by TracyHenry on 2020/12/16.
@@ -63,7 +63,7 @@ public class AppIdUtil {
                 if (TextUtils.isEmpty(id)) {
                     id = getInstallId(context);
                 }
-                String result = TextUtils.concat(id, HekrSDK.getPid(), context.getPackageName()).toString();
+                String result = TextUtils.concat(id, SiterSDK.getPid(), context.getPackageName()).toString();
                 result = result.replace("-", "");
                 int len = result.length();
                 if (len > 64) {

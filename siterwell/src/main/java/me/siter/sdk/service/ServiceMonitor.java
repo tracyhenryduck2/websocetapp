@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import me.siter.sdk.HekrSDK;
+import me.siter.sdk.SiterSDK;
 
 /**
  * Created by TracyHenry on 2020/12/16.
@@ -38,7 +38,7 @@ public class ServiceMonitor {
     private ServiceMonitor() {
         mMsgObservers = new CopyOnWriteArrayList<>();
         mConnObservers = new ConcurrentHashMap<>();
-        mHandler = new Handler(HekrSDK.getContext().getMainLooper());
+        mHandler = new Handler(SiterSDK.getContext().getMainLooper());
     }
 
     public void registerMsgObserver(IMsgObserver observer) {

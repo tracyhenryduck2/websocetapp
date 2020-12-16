@@ -3,7 +3,6 @@ package com.siterwell.sdk.http;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Message;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
@@ -11,11 +10,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.litesuits.android.log.Log;
-import com.litesuits.common.assist.Base64;
 import com.litesuits.common.utils.MD5Util;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.siterwell.sdk.R;
 import com.siterwell.sdk.bean.BatteryBean;
 import com.siterwell.sdk.bean.DeviceType;
 import com.siterwell.sdk.bean.WaterSensorBean;
@@ -33,15 +30,12 @@ import com.siterwell.sdk.http.bean.FolderListBean;
 import com.siterwell.sdk.http.bean.Global;
 import com.siterwell.sdk.http.bean.GroupBean;
 import com.siterwell.sdk.http.bean.JWTBean;
-import com.siterwell.sdk.http.bean.MOAuthBean;
 import com.siterwell.sdk.http.bean.NewDeviceBean;
 import com.siterwell.sdk.http.bean.NewsBean;
-import com.siterwell.sdk.http.bean.OAuthBean;
 import com.siterwell.sdk.http.bean.OAuthListBean;
 import com.siterwell.sdk.http.bean.OAuthRequestBean;
 import com.siterwell.sdk.http.bean.ProfileBean;
 import com.siterwell.sdk.http.bean.RuleBean;
-import com.siterwell.sdk.http.bean.UserBean;
 import com.siterwell.sdk.http.bean.UserFileBean;
 import com.siterwell.sdk.http.bean.WeatherAirBean;
 import com.siterwell.sdk.http.bean.WeatherBeanResultsNow;
@@ -65,7 +59,7 @@ import java.util.Locale;
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.message.BasicHeader;
 import me.siter.sdk.Constants;
-import me.siter.sdk.HekrSDK;
+import me.siter.sdk.SiterSDK;
 import me.siter.sdk.utils.CacheUtil;
 import me.siter.sdk.utils.SpCache;
 
@@ -233,7 +227,7 @@ public class HekrUserAction {
         maps.put("phoneNumber", phoneNumber);
         maps.put("token", token);
         maps.put("type", registerType);
-        maps.put("pid", HekrSDK.getPid());
+        maps.put("pid", SiterSDK.getPid());
         url = HekrCommonUtil.getUrl(url, maps);
         BaseHttpUtil.getData(mContext.get(), url, new AsyncHttpResponseHandler() {
                     @Override
@@ -280,7 +274,7 @@ public class HekrUserAction {
         maps.put("email", email);
         maps.put("token", token);
         maps.put("type", registerType);
-        maps.put("pid", HekrSDK.getPid());
+        maps.put("pid", SiterSDK.getPid());
         url = HekrCommonUtil.getUrl(url, maps);
         BaseHttpUtil.getData(mContext.get(), url, new AsyncHttpResponseHandler() {
                     @Override
@@ -355,7 +349,7 @@ public class HekrUserAction {
         jsonObject.put("password", password);
         jsonObject.put("phoneNumber", phoneNumber);
         jsonObject.put("code", code);
-        jsonObject.put("pid", HekrSDK.getPid());
+        jsonObject.put("pid", SiterSDK.getPid());
         String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_REGISTER_URL, "phone").toString();
         BaseHttpUtil.postData(mContext.get(), url, jsonObject.toString(), new AsyncHttpResponseHandler() {
             @Override
@@ -382,7 +376,7 @@ public class HekrUserAction {
         jsonObject.put("password", password);
         jsonObject.put("email", email);
         jsonObject.put("code", code);
-        jsonObject.put("pid",HekrSDK.getPid());
+        jsonObject.put("pid", SiterSDK.getPid());
         String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_REGISTER_URL, "email_verify_code").toString();
         BaseHttpUtil.postData(mContext.get(), url, jsonObject.toString(), new AsyncHttpResponseHandler() {
                     @Override
@@ -441,7 +435,7 @@ public class HekrUserAction {
         if (!TextUtils.isEmpty(phoneNumber)) {
             jsonObject.put("phoneNumber", phoneNumber);
             jsonObject.put("verifyCode", verifyCode);
-            jsonObject.put("pid",HekrSDK.getPid());
+            jsonObject.put("pid", SiterSDK.getPid());
         } else if (!TextUtils.isEmpty(token)) {
             jsonObject.put("token", token);
         } else {
@@ -478,7 +472,7 @@ public class HekrUserAction {
         jsonObject.put("password", password);
             jsonObject.put("email", email);
             jsonObject.put("verifyCode", verifyCode);
-            jsonObject.put("pid",HekrSDK.getPid());
+            jsonObject.put("pid", SiterSDK.getPid());
         String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_RESET_PWD_URL, "email_verify_code").toString();
         BaseHttpUtil.postData(mContext.get(), url, jsonObject.toString(), new AsyncHttpResponseHandler() {
                     @Override
@@ -558,7 +552,7 @@ public class HekrUserAction {
      * @param sendResetPasswordEmailListener 回调接口
      */
     public void sendResetPwdEmail(String email, final HekrUser.SendResetPwdEmailListener sendResetPasswordEmailListener) {
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, "sendResetPasswordEmail?email=", HekrCommonUtil.getEmail(email),"&pid=",HekrSDK.getPid()).toString();
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, "sendResetPasswordEmail?email=", HekrCommonUtil.getEmail(email),"&pid=", SiterSDK.getPid()).toString();
         BaseHttpUtil.getData(mContext.get(), url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {

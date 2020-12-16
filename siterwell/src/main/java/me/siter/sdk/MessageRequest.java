@@ -1,7 +1,7 @@
 package me.siter.sdk;
 
 import me.siter.sdk.dispatcher.IMessageFilter;
-import me.siter.sdk.inter.HekrMsgCallback;
+import me.siter.sdk.inter.SiterMsgCallback;
 
 /**
  * Created by TracyHenry on 2020/12/16.
@@ -13,7 +13,7 @@ class MessageRequest implements IMessageRequest {
 
     private String mMessage;
     private IMessageFilter mFilter;
-    private HekrMsgCallback mCallback;
+    private SiterMsgCallback mCallback;
     private String mHandler;
     private int mChannel;
     private boolean mCanceled;
@@ -22,13 +22,13 @@ class MessageRequest implements IMessageRequest {
         this(message, null, null);
     }
 
-    MessageRequest(String message, IMessageFilter filter, HekrMsgCallback callback) {
+    MessageRequest(String message, IMessageFilter filter, SiterMsgCallback callback) {
         this.mMessage = message;
         this.mFilter = filter;
         this.mCallback = callback;
     }
 
-    MessageRequest(String message, IMessageFilter filter, HekrMsgCallback callback, int channel, String handler) {
+    MessageRequest(String message, IMessageFilter filter, SiterMsgCallback callback, int channel, String handler) {
         this.mMessage = message;
         this.mFilter = filter;
         this.mCallback = callback;
@@ -57,12 +57,12 @@ class MessageRequest implements IMessageRequest {
     }
 
     @Override
-    public void setHekrMsgCallback(HekrMsgCallback callback) {
+    public void setHekrMsgCallback(SiterMsgCallback callback) {
         mCallback = callback;
     }
 
     @Override
-    public HekrMsgCallback getHekrMsgCallback() {
+    public SiterMsgCallback getHekrMsgCallback() {
         return mCallback;
     }
 

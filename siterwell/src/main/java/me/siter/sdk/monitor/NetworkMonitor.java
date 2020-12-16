@@ -11,7 +11,7 @@ import android.os.Build;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import me.siter.sdk.HekrSDK;
+import me.siter.sdk.SiterSDK;
 import me.siter.sdk.utils.LogUtil;
 import me.siter.sdk.utils.NetworkUtil;
 
@@ -61,14 +61,14 @@ public class NetworkMonitor {
 //        } else {
         IntentFilter filter = new IntentFilter();
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        HekrSDK.getContext().registerReceiver(mReceiver, filter);
+        SiterSDK.getContext().registerReceiver(mReceiver, filter);
 //        }
     }
 
     public void stopMonitor() {
-        HekrSDK.getContext().unregisterReceiver(mReceiver);
+        SiterSDK.getContext().unregisterReceiver(mReceiver);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ConnectivityManager connectivityManager = (ConnectivityManager) HekrSDK.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            ConnectivityManager connectivityManager = (ConnectivityManager) SiterSDK.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
             connectivityManager.unregisterNetworkCallback(mNetworkCallback);
         }
     }

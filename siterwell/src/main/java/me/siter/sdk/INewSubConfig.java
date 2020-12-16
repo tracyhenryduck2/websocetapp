@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import me.siter.sdk.config.ConfigSubDevice;
-import me.siter.sdk.inter.HekrConfigSubCallback;
+import me.siter.sdk.inter.SiterConfigSubCallback;
 
 /**
  * Created by TracyHenry on 2020/12/16.
@@ -22,7 +22,7 @@ public interface INewSubConfig {
    * @param configParams 配网设置，需要传入ssid，password，pinCode这三个键值所对应的参数
    * @param callback     配网回调
    */
-  void startConfig(Context context, Map configParams, HekrConfigSubCallback callback);
+  void startConfig(Context context, Map configParams, SiterConfigSubCallback callback);
 
   /**
    * 在配网开始和结束中获取配网设备，在配网结束后设备将会被销毁，可以在{@link #stopConfig()}回调中获取

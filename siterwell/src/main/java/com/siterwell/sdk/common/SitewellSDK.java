@@ -5,11 +5,7 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.siterwell.sdk.R;
 import com.siterwell.sdk.bean.BatteryBean;
 import com.siterwell.sdk.bean.SocketBean;
 import com.siterwell.sdk.bean.WaterSensorBean;
@@ -17,28 +13,19 @@ import com.siterwell.sdk.bean.WifiTimerBean;
 import com.siterwell.sdk.event.UdpShakeHandsEvent;
 import com.siterwell.sdk.http.HekrUserAction;
 import com.siterwell.sdk.http.SiterConstantsUtil;
-import com.siterwell.sdk.http.bean.DcInfo;
-import com.siterwell.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.protocol.ResolveSocket;
-import com.siterwell.sdk.protocol.ResolveTimer;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import cz.msebera.android.httpclient.Header;
-import cz.msebera.android.httpclient.message.BasicHeader;
 import me.siter.sdk.Constants;
-import me.siter.sdk.Hekr;
-import me.siter.sdk.dispatcher.IMessageFilter;
-import me.siter.sdk.inter.HekrMsgCallback;
+import me.siter.sdk.Siter;
 
 
 /**
@@ -226,7 +213,7 @@ public class SitewellSDK {
             dataParams.put("On_Off",socketBean.getSocketstatus());
             params.put("data",dataParams);
             command.put("params",params);
-            Hekr.getHekrClient().sendMessage(command,null,socketBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(command,null,socketBean.getDcInfo().getConnectHost());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -256,7 +243,7 @@ public class SitewellSDK {
             dataParams.put("ID",socketBean.getSocketmodel());
             params.put("data",dataParams);
             command.put("params",params);
-            Hekr.getHekrClient().sendMessage(command,null,socketBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(command,null,socketBean.getDcInfo().getConnectHost());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -283,7 +270,7 @@ public class SitewellSDK {
             dataParams.put("Circle",code);
             params.put("data",dataParams);
             command.put("params",params);
-            Hekr.getHekrClient().sendMessage(command,null,socketBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(command,null,socketBean.getDcInfo().getConnectHost());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -311,7 +298,7 @@ public class SitewellSDK {
             dataParams.put("Count_down",code);
             params.put("data",dataParams);
             command.put("params",params);
-            Hekr.getHekrClient().sendMessage(command,null,socketBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(command,null,socketBean.getDcInfo().getConnectHost());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -340,7 +327,7 @@ public class SitewellSDK {
             dataParams.put("Timing",timer);
             params.put("data",dataParams);
             command.put("params",params);
-            Hekr.getHekrClient().sendMessage(command,null,connecthost);
+            Siter.getSiterClient().sendMessage(command,null,connecthost);
         } catch (JSONException e) {
             e.printStackTrace();
 
@@ -370,7 +357,7 @@ public class SitewellSDK {
             dataParams.put("ID",Integer.parseInt(wifiTimerBean.getTimerid()));
             params.put("data",dataParams);
             command.put("params",params);
-            Hekr.getHekrClient().sendMessage(command,null,connecthost);
+            Siter.getSiterClient().sendMessage(command,null,connecthost);
         } catch (JSONException e) {
             e.printStackTrace();
         }catch (Exception e){
@@ -393,7 +380,7 @@ public class SitewellSDK {
             dataParams.put("Data_Sync","0600000000");
             params.put("data",dataParams);
             command.put("params",params);
-            Hekr.getHekrClient().sendMessage(command,null,socketBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(command,null,socketBean.getDcInfo().getConnectHost());
         } catch (JSONException e) {
             e.printStackTrace();
         }

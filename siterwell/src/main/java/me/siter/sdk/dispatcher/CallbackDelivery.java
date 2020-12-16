@@ -3,8 +3,8 @@ package me.siter.sdk.dispatcher;
 import android.content.Context;
 import android.os.Handler;
 
-import me.siter.sdk.inter.HekrDispatcherListener;
-import me.siter.sdk.inter.HekrMsgCallback;
+import me.siter.sdk.inter.SiterDispatcherListener;
+import me.siter.sdk.inter.SiterMsgCallback;
 
 /**
  * Created by TracyHenry on 2020/12/16.
@@ -25,7 +25,7 @@ public class CallbackDelivery {
         mCallbackHanlder = null;
     }
 
-    void PostSuccess(final String message, final HekrMsgCallback callback) {
+    void PostSuccess(final String message, final SiterMsgCallback callback) {
         if (mCallbackHanlder == null) {
             return;
         }
@@ -39,7 +39,7 @@ public class CallbackDelivery {
         });
     }
 
-    void postTimeout(final HekrMsgCallback callback) {
+    void postTimeout(final SiterMsgCallback callback) {
         if (mCallbackHanlder == null) {
             return;
         }
@@ -53,7 +53,7 @@ public class CallbackDelivery {
         });
     }
 
-    void postError(final int errorCode, final String errorMsg, final HekrMsgCallback callback) {
+    void postError(final int errorCode, final String errorMsg, final SiterMsgCallback callback) {
         if (mCallbackHanlder == null) {
             return;
         }
@@ -68,7 +68,7 @@ public class CallbackDelivery {
         });
     }
 
-    void postSend(final String message, final String to, final HekrDispatcherListener listener) {
+    void postSend(final String message, final String to, final SiterDispatcherListener listener) {
         if (mCallbackHanlder == null) {
             return;
         }
@@ -82,7 +82,7 @@ public class CallbackDelivery {
         });
     }
 
-    void postReceive(final String message, final String from, final HekrDispatcherListener listener) {
+    void postReceive(final String message, final String from, final SiterDispatcherListener listener) {
         if (mCallbackHanlder == null) {
             return;
         }

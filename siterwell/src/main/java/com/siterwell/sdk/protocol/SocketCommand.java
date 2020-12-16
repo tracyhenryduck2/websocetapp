@@ -9,8 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.util.TextUtils;
-import me.siter.sdk.Hekr;
-import me.siter.sdk.inter.HekrMsgCallback;
+import me.siter.sdk.Siter;
+import me.siter.sdk.inter.SiterMsgCallback;
 
 
 /**
@@ -71,9 +71,9 @@ public class SocketCommand {
         }
     }
 
-    public void switchMode(int mode , HekrMsgCallback dataReceiverListener){
+    public void switchMode(int mode , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Hekr.getHekrClient().sendMessage(switchMode(mode),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(switchMode(mode),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
         }
     }
 
@@ -106,9 +106,9 @@ public class SocketCommand {
         }
     }
 
-    public void setCircleInfo(String Circle , HekrMsgCallback dataReceiverListener){
+    public void setCircleInfo(String Circle , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Hekr.getHekrClient().sendMessage(setCircleInfo(Circle),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(setCircleInfo(Circle),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
         }
     }
 
@@ -142,9 +142,9 @@ public class SocketCommand {
         }
     }
 
-    public void setCountdownInfo(String Count_down , HekrMsgCallback dataReceiverListener){
+    public void setCountdownInfo(String Count_down , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Hekr.getHekrClient().sendMessage(setCountdownInfo(Count_down),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(setCountdownInfo(Count_down),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
         }
     }
 
@@ -178,9 +178,9 @@ public class SocketCommand {
         }
     }
 
-    public void setTimerInfo(String timer , HekrMsgCallback dataReceiverListener){
+    public void setTimerInfo(String timer , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Hekr.getHekrClient().sendMessage(setTimerInfo(timer),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(setTimerInfo(timer),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
         }
     }
 
@@ -214,9 +214,9 @@ public class SocketCommand {
         }
     }
 
-    public void deleteTimer(int timer , HekrMsgCallback dataReceiverListener){
+    public void deleteTimer(int timer , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Hekr.getHekrClient().sendMessage(deleteTimer(timer),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(deleteTimer(timer),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
         }
     }
 
@@ -252,9 +252,9 @@ public class SocketCommand {
         }
     }
 
-    public void setZoneAndTime(int zone,String timer , HekrMsgCallback dataReceiverListener){
+    public void setZoneAndTime(int zone,String timer , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Hekr.getHekrClient().sendMessage(setZoneAndTime(zone,timer),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(setZoneAndTime(zone,timer),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
         }
     }
 
@@ -287,9 +287,9 @@ public class SocketCommand {
         }
     }
 
-    public void setSyncSocketStatus(HekrMsgCallback dataReceiverListener){
+    public void setSyncSocketStatus(SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Hekr.getHekrClient().sendMessage(setSyncSocketStatusJson("0200000000"),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(setSyncSocketStatusJson("0200000000"),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
         }
     }
 
@@ -322,9 +322,9 @@ public class SocketCommand {
         }
     }
 
-    public void setSocketControl(int On_Off , HekrMsgCallback dataReceiverListener){
+    public void setSocketControl(int On_Off , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Hekr.getHekrClient().sendMessage(setSocketControl(On_Off),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(setSocketControl(On_Off),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
         }
     }
 
@@ -357,9 +357,9 @@ public class SocketCommand {
         }
     }
 
-    public void setSocketName(String name , HekrMsgCallback dataReceiverListener){
+    public void setSocketName(String name , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Hekr.getHekrClient().sendMessage(setSocketName(name),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(setSocketName(name),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
         }
     }
 
