@@ -43,10 +43,10 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-import me.hekr.sdk.Constants;
-import me.hekr.sdk.Hekr;
-import me.hekr.sdk.inter.HekrCallback;
-import me.hekr.sdk.utils.CacheUtil;
+import me.siter.sdk.Constants;
+import me.siter.sdk.Hekr;
+import me.siter.sdk.inter.HekrCallback;
+import me.siter.sdk.utils.CacheUtil;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {

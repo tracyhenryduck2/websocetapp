@@ -15,7 +15,7 @@ import java.util.Locale;
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
 import cz.msebera.android.httpclient.message.BasicHeader;
-import me.hekr.sdk.utils.HekrLanguageUtil;
+import me.siter.sdk.utils.HekrLanguageUtil;
 
 import static com.loopj.android.http.AsyncHttpClient.HEADER_CONTENT_TYPE;
 

@@ -15,7 +15,7 @@ import com.siterwell.sdk.common.SitewellSDK;
 
 import java.util.List;
 
-import me.hekr.sdk.HekrSDK;
+import me.siter.sdk.HekrSDK;
 
 
 /**

@@ -14,7 +14,7 @@ import com.siterwell.sdk.http.bean.JWTBean;
 import java.util.Arrays;
 
 import cz.msebera.android.httpclient.Header;
-import me.hekr.sdk.Constants;
+import me.siter.sdk.Constants;
 
 /*
 @class HekrHttpUtil

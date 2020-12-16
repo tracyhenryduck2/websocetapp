@@ -15,8 +15,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import cz.msebera.android.httpclient.util.TextUtils;
-import me.hekr.sdk.Hekr;
-import me.hekr.sdk.inter.HekrMsgCallback;
+import me.siter.sdk.Hekr;
+import me.siter.sdk.inter.HekrMsgCallback;
 
 
 /**

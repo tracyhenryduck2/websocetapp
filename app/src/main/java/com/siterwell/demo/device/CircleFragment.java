@@ -27,7 +27,7 @@ import com.siterwell.sdk.protocol.SocketCommand;
 
 import java.util.ArrayList;
 
-import me.hekr.sdk.inter.HekrMsgCallback;
+import me.siter.sdk.inter.HekrMsgCallback;
 
 
 /**

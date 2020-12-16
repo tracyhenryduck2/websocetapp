@@ -27,9 +27,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import me.hekr.sdk.Hekr;
-import me.hekr.sdk.dispatcher.IMessageFilter;
-import me.hekr.sdk.inter.HekrMsgCallback;
+import me.siter.sdk.Hekr;
+import me.siter.sdk.dispatcher.IMessageFilter;
+import me.siter.sdk.inter.HekrMsgCallback;
 
 /**
  * Created by TracyHenry on 2018/4/25.

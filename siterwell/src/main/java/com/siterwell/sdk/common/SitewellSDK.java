@@ -35,10 +35,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.message.BasicHeader;
-import me.hekr.sdk.Constants;
-import me.hekr.sdk.Hekr;
-import me.hekr.sdk.dispatcher.IMessageFilter;
-import me.hekr.sdk.inter.HekrMsgCallback;
+import me.siter.sdk.Constants;
+import me.siter.sdk.Hekr;
+import me.siter.sdk.dispatcher.IMessageFilter;
+import me.siter.sdk.inter.HekrMsgCallback;
 
 
 /**

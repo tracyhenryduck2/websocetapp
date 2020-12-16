@@ -68,10 +68,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.hekr.sdk.Hekr;
-import me.hekr.sdk.HekrSDK;
-import me.hekr.sdk.inter.HekrCallback;
-import me.hekr.sdk.utils.ErrorCodeUtil;
+import me.siter.sdk.Hekr;
+import me.siter.sdk.HekrSDK;
+import me.siter.sdk.inter.HekrCallback;
+import me.siter.sdk.utils.ErrorCodeUtil;
 
 
 /**
