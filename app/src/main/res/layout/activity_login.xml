@@ -96,31 +96,6 @@
                 app:hint_text="@string/password_hint" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/save_password_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp">
-
-            <ImageView
-                android:id="@+id/save_password"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/save_pass_0" />
-
-            <TextView
-                android:id="@+id/rem_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="@string/remember_password"
-                android:textColor="#808080" />
-
-
-        </LinearLayout>
 
     </LinearLayout>
 

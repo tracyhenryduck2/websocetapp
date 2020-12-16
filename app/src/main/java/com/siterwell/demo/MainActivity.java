@@ -417,7 +417,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this,LoginActivity.class));
             finish();
         }else{
-            getFolderInfo();
+            //getFolderInfo();
         }
 
     }

@@ -20,13 +20,22 @@ public class CacheUtil {
         SpCache.init(context);
     }
 
-    public static void setUserToken(String access_token, String refresh_token) {
+    public static void setUserToken(String access_token, String refresh_token,String user_id) {
         SpCache.putString(Constants.JWT_TOKEN, access_token);
         SpCache.putString(Constants.REFRESH_TOKEN, refresh_token);
+        SpCache.putString(Constants.USER_ID, user_id);
     }
 
     public static String getUserToken() {
         return SpCache.getString(Constants.JWT_TOKEN, "");
+    }
+
+    public static String getRefreshToken(){
+        return SpCache.getString(Constants.REFRESH_TOKEN,"");
+    }
+
+    public static String getUserId(){
+        return SpCache.getString(Constants.USER_ID,"");
     }
 
     public static void setCloudUrls(Set<String> urls) {

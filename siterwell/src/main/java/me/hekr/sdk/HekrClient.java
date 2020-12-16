@@ -37,12 +37,7 @@ public class HekrClient implements IHekrClient {
 
     public synchronized void connect() {
         disconnect();
-        Set<String> urls = CacheUtil.getCloudUrls();
-        if (urls != null && urls.size() > 0) {
-            connectHosts(urls);
-        } else {
-            setDefaultHostUrl();
-        }
+        setDefaultHostUrl();
     }
 
     @Override

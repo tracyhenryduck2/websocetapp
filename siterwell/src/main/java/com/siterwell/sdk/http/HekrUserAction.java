@@ -66,6 +66,7 @@ import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.message.BasicHeader;
 import me.hekr.sdk.Constants;
 import me.hekr.sdk.HekrSDK;
+import me.hekr.sdk.utils.CacheUtil;
 import me.hekr.sdk.utils.SpCache;
 
 /**
@@ -131,9 +132,9 @@ public class HekrUserAction {
         mContext = new WeakReference<>(context.getApplicationContext());
         startWebServicesFlag = 1;
         //初始化的时候先读取token
-        JWT_TOKEN = SpCache.getString(SiterConstantsUtil.JWT_TOKEN, "");
-        refresh_TOKEN = SpCache.getString(SiterConstantsUtil.REFRESH_TOKEN, "");
-        userId = TokenToUid();
+        JWT_TOKEN = CacheUtil.getUserToken();
+        refresh_TOKEN = CacheUtil.getRefreshToken();
+        userId = CacheUtil.getUserId();
         Log.i(TAG,"userId+++++++++++++++++++++++++++++++++++"+userId);
         //判断是线上还是测试环境
     }
@@ -399,40 +400,6 @@ public class HekrUserAction {
     }
 
 
-    /**
-     * 3.5 用户登录
-     *
-     * @param userName      用户名
-     * @param passWord      密码
-     * @param loginListener 回调接口
-     */
-
-    public void login(final String userName, final String passWord, final HekrUser.LoginListener loginListener) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("username", userName);
-        jsonObject.put("password", passWord);
-        jsonObject.put("clientType", "Android");
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_LOGIN_URL).toString();
-        BaseHttpUtil.postData(mContext.get(), url, jsonObject.toString(), new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                JWTBean jwtBean = JSON.parseObject(new String(bytes), JWTBean.class);
-                UserBean userBean = new UserBean(userName, passWord, jwtBean.getAccessToken(), jwtBean.getRefreshToken());
-                //把相关的用户信息保存下来
-                setUserCache(userBean);
-                //执行登录
-                loginListener.loginSuccess(new String(bytes));
-                //启动服务
-                connectWsServices();
-                android.util.Log.e("xxxx",jwtBean.getAccessToken());
-            }
-
-            @Override
-            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                loginListener.loginFail(HekrCodeUtil.getErrorCode(i, bytes));
-            }
-        });
-    }
 
     /**
      * 3.6 使用手机号重置密码
@@ -679,78 +646,8 @@ public class HekrUserAction {
         }
     }
 
-    /**
-     * 3.13 移动端OAuth/第三方登录
-     *
-     * @param type           OOGLE, WECHAT, QQ, SINA, FACEBOOK, TWITTER	OAuth账号类型
-     * @param certificate    移动端OAuth之后返回的code，或者Twitter返回的access_token
-     * @param moAuthListener 回调接口
-     */
-    public void OAuthLogin(int type, @NotNull String certificate, final HekrUser.MOAuthListener moAuthListener) {
-        OAuthLogin(type, certificate, true, moAuthListener);
-    }
 
 
-    /**
-     * 3.13 移动端OAuth/第三方绑定
-     *
-     * @param type           OOGLE, WECHAT, QQ, SINA, FACEBOOK, TWITTER	OAuth账号类型
-     * @param certificate    移动端OAuth之后返回的code，或者Twitter返回的access_token
-     * @param isOAuthLogin   如果使用第三方登录，此参数为true【第三方绑定，此参数为false】
-     * @param moAuthListener 回调接口
-     */
-    public void OAuthLogin(int type, @NotNull String certificate, final boolean isOAuthLogin, final HekrUser.MOAuthListener moAuthListener) {
-        String auth_type = null;
-        switch (type) {
-            case OAUTH_QQ:
-                auth_type = "QQ";
-                break;
-            case OAUTH_WECHAT:
-                auth_type = "WECHAT";
-                break;
-            case OAUTH_SINA:
-                auth_type = "SINA";
-                break;
-            case OAUTH_TWITTER:
-                auth_type = "TWITTER";
-                break;
-            case OAUTH_FACEBOOK:
-                auth_type = "FACEBOOK";
-                break;
-            case OAUTH_GOOGLE_PLUS:
-                auth_type = "GOOGLE";
-                break;
-            default:
-                break;
-        }
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, "MOAuth?type=", auth_type, "&clientType=ANDROID&certificate=", certificate).toString();
-        BaseHttpUtil.getData(mContext.get(), url, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                JSONObject jsonObject = JSONObject.parseObject(new String(bytes));
-                if (jsonObject.containsKey("uid")) {
-                    MOAuthBean moAuthBean = JSONObject.parseObject(new String(bytes), MOAuthBean.class);
-                    moAuthListener.mOAuthSuccess(moAuthBean);
-                } else {
-                    JWTBean jwtBean = JSONObject.parseObject(new String(bytes), JWTBean.class);
-                    UserBean userBean = new UserBean("", "", jwtBean.getAccessToken(), jwtBean.getRefreshToken());
-                    if (isOAuthLogin) {
-                        //把相关的用户信息保存下来
-                        setUserCache(userBean);
-                        //启动服务
-                        connectWsServices();
-                    }
-                    moAuthListener.mOAuthSuccess(jwtBean);
-                }
-            }
-
-            @Override
-            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                moAuthListener.mOAuthFail(HekrCodeUtil.getErrorCode(i, bytes));
-            }
-        });
-
-    }
 
 
     /**
@@ -820,84 +717,7 @@ public class HekrUserAction {
     }
 
 
-    /**
-     * 3.16 移动端使用微信第三方账号登录
-     *
-     * @param certificate 移动端OAuth之后返回的code
-     */
-    public void weChatMOAuth(String certificate, final HekrUser.LoginListener loginListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, "weChatMOAuth?type=WECHAT", "&clientType=Android&certificate=", certificate);
-        BaseHttpUtil.getData(mContext.get(), url.toString(), new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                JWTBean jwtBean = JSON.parseObject(new String(bytes), JWTBean.class);
-                UserBean userBean = new UserBean("", "", jwtBean.getAccessToken(), jwtBean.getRefreshToken());
-                //把相关的用户信息保存下来
-                setUserCache(userBean);
-                //执行登录
-                loginListener.loginSuccess(new String(bytes));
-                //启动服务
-                connectWsServices();
-            }
 
-            @Override
-            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                loginListener.loginFail(HekrCodeUtil.getErrorCode(i, bytes));
-            }
-        });
-    }
-
-    /**
-     * 3.17 创建匿名Hekr主账户并与当前登录三方账户绑定
-     *
-     * @param type                      第三方登录类型
-     * @param token                     token参数是调用3.13 移动端OAuth接口，当OAuth账号和主账号没绑定时返回里的bindToken
-     * @param createUserAndBindListener 回调
-     */
-    public void createUserAndBind(int type, @NotNull String token, final HekrUser.CreateUserAndBindListener createUserAndBindListener) {
-        String auth_type = null;
-        switch (type) {
-            case OAUTH_QQ:
-                auth_type = "QQ";
-                break;
-            case OAUTH_WECHAT:
-                auth_type = "WECHAT";
-                break;
-            case OAUTH_SINA:
-                auth_type = "SINA";
-                break;
-            case OAUTH_TWITTER:
-                auth_type = "TWITTER";
-                break;
-            case OAUTH_FACEBOOK:
-                auth_type = "FACEBOOK";
-                break;
-            case OAUTH_GOOGLE_PLUS:
-                auth_type = "GOOGLE";
-                break;
-            default:
-                break;
-        }
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, "account/createUserAndBind?token=", token, "&type=", auth_type, "&clientType=ANDROID");
-        BaseHttpUtil.getData(mContext.get(), url.toString(), new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                JWTBean jwtBean = JSON.parseObject(new String(bytes), JWTBean.class);
-                UserBean userBean = new UserBean("", "", jwtBean.getAccessToken(), jwtBean.getRefreshToken());
-                //把相关的用户信息保存下来
-                setUserCache(userBean);
-                //执行登录
-                createUserAndBindListener.createSuccess(new String(bytes));
-                //启动服务
-                connectWsServices();
-            }
-
-            @Override
-            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                createUserAndBindListener.createFail(HekrCodeUtil.getErrorCode(i, bytes));
-            }
-        });
-    }
 
     /**
      * 通过手机将第三方账号升级为hekr主账号
@@ -2706,26 +2526,6 @@ public class HekrUserAction {
     }
 
 
-    /**
-     * 将用户的bean的数据保存下来
-     *
-     * @param userBean 用户实体类
-     */
-    public void setUserCache(UserBean userBean) {
-        this.JWT_TOKEN = userBean.getJWT_TOKEN();
-        this.refresh_TOKEN = userBean.getRefresh_token();
-        this.userId = TokenToUid();
-        try {
-            //把此token保存下来
-            SpCache.putString(SiterConstantsUtil.JWT_TOKEN, userBean.getJWT_TOKEN());
-            SpCache.putString(SiterConstantsUtil.HEKR_USER_NAME, userBean.getUsername());
-            SpCache.putString(SiterConstantsUtil.REFRESH_TOKEN, userBean.getRefresh_token());
-        } catch (Exception e) {
-            e.printStackTrace();
-            android.util.Log.e(TAG, "setUserCacheError");
-        }
-
-    }
 
 
     /**
@@ -2761,7 +2561,7 @@ public class HekrUserAction {
             } else {
                 startWebServicesFlag = 1;
             }*/
-            return SpCache.getString(SiterConstantsUtil.JWT_TOKEN, "");
+            return CacheUtil.getUserToken();
         } else {
             //connectWsServices();
             return JWT_TOKEN;
@@ -2782,7 +2582,7 @@ public class HekrUserAction {
 
     private String getRefreshToken() {
         if (TextUtils.isEmpty(refresh_TOKEN)) {
-            return SpCache.getString(SiterConstantsUtil.REFRESH_TOKEN, "");
+            return CacheUtil.getRefreshToken();
         } else {
             return refresh_TOKEN;
         }
@@ -2796,12 +2596,11 @@ public class HekrUserAction {
         this.JWT_TOKEN = jwtBean.getAccessToken();
         this.refresh_TOKEN = jwtBean.getRefreshToken();
         //把此token保存下来
-        this.userId = TokenToUid();
         if (!TextUtils.isEmpty(JWT_TOKEN)) {
-            SpCache.putString(SiterConstantsUtil.JWT_TOKEN, JWT_TOKEN);
+            SpCache.putString(Constants.JWT_TOKEN, JWT_TOKEN);
         }
         if (!TextUtils.isEmpty(refresh_TOKEN)) {
-            SpCache.putString(SiterConstantsUtil.REFRESH_TOKEN, refresh_TOKEN);
+            SpCache.putString(Constants.REFRESH_TOKEN, refresh_TOKEN);
         }
     }
 
@@ -2828,37 +2627,8 @@ public class HekrUserAction {
     }
 
 
-    /**
-     * 获取UID
-     *
-     * @return uid
-     */
-    public String getUserId() {
-        if (TextUtils.isEmpty(userId)) {
-            return TokenToUid();
-        } else {
-            return userId;
-        }
-    }
 
 
-    /**
-     * 提取出来UID
-     *
-     * @return uid
-     */
-    private String TokenToUid() {
-        if (getJWT_TOKEN().contains(".")) {
-            String[] strs = getJWT_TOKEN().split("\\.");
-            if (strs.length == 3 && !TextUtils.isEmpty(strs[1])) {
-                JSONObject uidObj = JSONObject.parseObject(new String(Base64.decode(strs[1], Base64.DEFAULT)));
-                if (uidObj.containsKey("uid")) {
-                    return uidObj.getString("uid");
-                }
-            }
-        }
-        return null;
-    }
 
     /**
      * hekrHttpGet  <br>此接口可自动管理token

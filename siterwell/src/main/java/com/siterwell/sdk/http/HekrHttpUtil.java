@@ -14,6 +14,7 @@ import com.siterwell.sdk.http.bean.JWTBean;
 import java.util.Arrays;
 
 import cz.msebera.android.httpclient.Header;
+import me.hekr.sdk.Constants;
 
 /*
 @class HekrHttpUtil
@@ -137,7 +138,7 @@ public class HekrHttpUtil {
     private synchronized static void refreshToken(final Context context, String ReFresh_Token, final HekrHttpUtil.RefreshTokenListener refreshTokenListener) {
         final JSONObject jsonObject = new JSONObject();
         jsonObject.put("refresh_token", ReFresh_Token);
-        String refresh_url = TextUtils.concat(SiterConstantsUtil.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_REFRESH_TOKEN).toString();
+        String refresh_url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, Constants.UrlUtil.UAA_REFRESH_TOKEN).toString();
         BaseHttpUtil.postData(context, refresh_url, jsonObject.toJSONString(), new AsyncHttpResponseHandler() {
 
             @Override

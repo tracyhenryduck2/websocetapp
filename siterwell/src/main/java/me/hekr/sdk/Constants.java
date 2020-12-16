@@ -15,16 +15,17 @@ public class Constants {
 
     public static final String JWT_TOKEN = "JWT_TOKEN";
     public static final String REFRESH_TOKEN = "REFRESH_TOKEN";
+    public static final String USER_ID = "USER_ID";
     public static final String CLOUD_CHANNELS = "CLOUD_CHANNELS";
 
     private static boolean IS_DEBUG_SITE = false;
 
     public static class UrlUtil {
-        public static String BASE_UAA_URL = "https://uaa-openapi.hekr.me/";
+        public static String BASE_UAA_URL = "http://192.168.12.163:1418/";
         public static String BASE_USER_URL = "https://user-openapi.hekr.me/";
         public static String BASE_CONSOLE_URL = "https://console-openapi.hekr.me/";
         public static String APP_WEBSOCKET_REPLACE_CLOUD_URL = "ws://%s:8899";
-        public static String APP_WEBSOCKET_REPLACE_TEST_CLOUD_URL = "wss://%s:186";
+        public static String APP_WEBSOCKET_REPLACE_TEST_CLOUD_URL = "ws://%s:8899";
 
         /**
          * 认证授权API

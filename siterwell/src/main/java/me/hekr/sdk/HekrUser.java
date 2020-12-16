@@ -44,7 +44,7 @@ public class HekrUser implements IHekrUser {
         // 初始化的时候先读取token
         mToken = CacheUtil.getString(Constants.JWT_TOKEN, "");
         mRefreshToken = CacheUtil.getString(Constants.REFRESH_TOKEN, "");
-        mUserId = tokenToUid();
+        mUserId = CacheUtil.getString(Constants.USER_ID, "");
         LogUtil.d(TAG, "init: " + "token = " + mToken + ", refresh token = " + mRefreshToken + ", user id = " + mUserId);
     }
 
@@ -63,10 +63,24 @@ public class HekrUser implements IHekrUser {
             PostRequest request = new PostRequest(url, jsonObject, new HttpResponse() {
                 @Override
                 public void onSuccess(int code, Map<String, String> headers, byte[] bytes) {
-                    refreshUserInfo(new String(bytes));
-                    Hekr.getHekrClient().disconnect();
-                    Hekr.getHekrClient().connect();
-                    callback.onSuccess(code, bytes);
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(new String(bytes));
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        int errCode = jsonObject.getInt("code");
+                        if(errCode==200){
+                            refreshUserInfo(data.toString());
+                            Hekr.getHekrClient().disconnect();
+                            Hekr.getHekrClient().connect();
+                            callback.onSuccess(code, bytes);
+                        }else{
+                            callback.onError(errCode,bytes);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        callback.onError(2, bytes);
+                    }
+
                 }
 
                 @Override
@@ -96,14 +110,26 @@ public class HekrUser implements IHekrUser {
             jsonObject.put("username", username);
             jsonObject.put("password", password);
             jsonObject.put("pid", HekrSDK.getPid());
-            jsonObject.put("clientType", "ANDROID");
+            jsonObject.put("login_type", 0);
             PostRequest request = new PostRequest(url, jsonObject, new HttpResponse() {
                 @Override
                 public void onSuccess(int code, Map<String, String> headers, byte[] bytes) {
-                    refreshUserInfo(new String(bytes));
-                    Hekr.getHekrClient().disconnect();
-                    Hekr.getHekrClient().connect();
-                    callback.onSuccess();
+                    try {
+                        JSONObject jsonObject = new JSONObject(new String(bytes));
+                        int errCode = jsonObject.getInt("code");
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        if(errCode==200){
+                            refreshUserInfo(data.toString());
+                            Hekr.getHekrClient().disconnect();
+                            Hekr.getHekrClient().connect();
+                            callback.onSuccess();
+                        }else{
+                            callback.onError(errCode,new String(bytes));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        callback.onError(2, new String(bytes));
+                    }
                 }
 
                 @Override
@@ -126,7 +152,7 @@ public class HekrUser implements IHekrUser {
     @Override
     public void logout(HekrCallback callback) {
         LogUtil.d(TAG, "logout");
-        CacheUtil.setUserToken("", "");
+        CacheUtil.setUserToken("", "","");
         mToken = "";
         mRefreshToken = "";
         mUserId = "";
@@ -186,26 +212,6 @@ public class HekrUser implements IHekrUser {
         }
     }
 
-    /**
-     * 提取出来UID
-     */
-    private String tokenToUid() {
-        if (mToken.contains(".")) {
-            String[] strs = mToken.split("\\.");
-            if (strs.length == 3 && !TextUtils.isEmpty(strs[1])) {
-                JSONObject uidObj;
-                try {
-                    uidObj = new JSONObject(new String(Base64.decode(strs[1], Base64.DEFAULT)));
-                    if (uidObj.has("uid")) {
-                        return uidObj.getString("uid");
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return "";
-    }
 
     /**
      * 重新设置用户token
@@ -214,12 +220,10 @@ public class HekrUser implements IHekrUser {
         try {
             JSONObject jsonObject = new JSONObject(info);
             LogUtil.d(TAG, "Refresh user info :" + jsonObject.toString());
-            String access_token = jsonObject.getString("access_token");
-            String refresh_token = jsonObject.getString("refresh_token");
-            mToken = access_token;
-            mRefreshToken = refresh_token;
-            mUserId = tokenToUid();
-            CacheUtil.setUserToken(access_token, refresh_token);
+            mToken = jsonObject.getString("access_token");
+            mRefreshToken = jsonObject.getString("refresh_token");
+            mUserId = jsonObject.getString("user_id");
+            CacheUtil.setUserToken(mToken, mRefreshToken,mUserId);
         } catch (JSONException e) {
             e.printStackTrace();
         }

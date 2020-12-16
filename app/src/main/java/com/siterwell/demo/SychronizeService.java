@@ -440,14 +440,10 @@ public class SychronizeService extends Service implements RefreshBatteryListener
 
     @Override
     public void tokentimeout() {
-        final String loginname = getUsername();
-        final String loginpsw = getPassword();
         Hekr.getHekrUser().refreshToken(new HekrRawCallback() {
             @Override
             public void onSuccess(int httpCode, byte[] bytes) {
                 Log.i(TAG,"刷新accesstoken成功");
-                UserBean userBean = new UserBean(loginname, loginpsw, CacheUtil.getUserToken(), CacheUtil.getString(Constants.REFRESH_TOKEN,""));
-                HekrUserAction.getInstance(SychronizeService.this).setUserCache(userBean);
             }
 
             @Override

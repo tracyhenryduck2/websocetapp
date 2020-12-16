@@ -68,8 +68,6 @@ private ZLoadingView zLoadingView;
             @Override
             public void onSuccess() {
                 Log.i(TAG,"自动登录成功");
-                UserBean userBean = new UserBean(getUsername(), getPassword(), CacheUtil.getUserToken(), CacheUtil.getString(Constants.REFRESH_TOKEN,""));
-                HekrUserAction.getInstance(InitActivity.this).setUserCache(userBean);
 
             }
 
