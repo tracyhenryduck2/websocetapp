@@ -12,7 +12,7 @@ android {
     }
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.unijem.smokealarmer"
+        applicationId "com.siterwell.websocket"
         minSdkVersion 16
         versionCode 1090
         versionName "1.090"
