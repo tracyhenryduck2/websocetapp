@@ -1,8 +1,8 @@
 package me.hekr.sdk.http;
 
 /**
- * Created by hucn on 2017/3/17.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: http网络请求的接口
  */
 

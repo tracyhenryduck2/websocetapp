@@ -23,8 +23,8 @@ import me.hekr.sdk.utils.HttpUtil;
 import me.hekr.sdk.utils.LogUtil;
 
 /**
- * Created by hucn on 2017/3/17.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 通过HttpURLConnection封装的请求类
  */
 

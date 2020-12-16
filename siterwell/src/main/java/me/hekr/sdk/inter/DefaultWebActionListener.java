@@ -1,7 +1,9 @@
 package me.hekr.sdk.inter;
 
 /**
- * HekrWeb的回调用，用于监听Web页面的动作。
+ *  * Created by TracyHenry on 2020/12/16.
+ *  * Author: TracyHenry
+ * Web的回调用，用于监听Web页面的动作。
  */
 public abstract class DefaultWebActionListener implements HekrWebActionListener {
 

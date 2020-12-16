@@ -9,8 +9,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import me.hekr.sdk.HekrSDK;
 
 /**
- * Created by hucn on 2017/3/24.
- * Author:hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 由于我们把保存连接的Service和Logic layer完全分开，所有Service想要传达的信息都会通过这个类来
  * 实现，目前有收到的消息和连接状态的监听
  */

@@ -6,7 +6,8 @@ import android.os.Build;
 import java.util.Locale;
 
 /**
- * Created by hekr_jds on 4/28 0028.
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  **/
 public class HekrLanguageUtil {
     //中文简体

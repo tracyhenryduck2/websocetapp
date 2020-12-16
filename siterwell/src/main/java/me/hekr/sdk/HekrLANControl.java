@@ -31,8 +31,8 @@ import me.hekr.sdk.utils.MessageCounter;
 import me.hekr.sdk.utils.NetworkUtil;
 
 /**
- * Created by hucn on 2017/4/13.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 本地控制的封装
  */
 

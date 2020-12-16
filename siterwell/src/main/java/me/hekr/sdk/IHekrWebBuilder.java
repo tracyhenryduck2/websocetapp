@@ -11,8 +11,8 @@ import me.hekr.sdk.web.HekrWebInterface;
 
 /**
  * IHekrWebClient的构造器。
- *
- * @author hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  */
 public interface IHekrWebBuilder {
 

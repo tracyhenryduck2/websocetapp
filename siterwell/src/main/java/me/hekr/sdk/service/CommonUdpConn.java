@@ -27,8 +27,8 @@ import io.netty.util.CharsetUtil;
 import me.hekr.sdk.utils.LogUtil;
 
 /**
- * Created by hucn on 2017/4/7.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: UDP 可以共用一个端口，所以就抽取成一个共用的类
  */
 

@@ -6,9 +6,9 @@ import java.util.Map;
 import me.hekr.sdk.DeviceType;
 
 /**
- * Created by hucn on 2017/3/30.
- * Author: hucn
- * Description: 提供给HekrWeb使用的Bean
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
+ * Description: 提供给Web使用的Bean
  */
 
 public class HekrWebBean {

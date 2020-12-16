@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Created by hucn on 2017/3/17.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 本地与设备通信的接口的实现
  */
 

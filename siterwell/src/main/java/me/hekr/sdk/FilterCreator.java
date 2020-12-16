@@ -10,8 +10,8 @@ import me.hekr.sdk.dispatcher.IMessageFilter;
 import me.hekr.sdk.dispatcher.MessageFilter;
 
 /**
- * Created by hucn on 2017/3/29.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: Filter 的建造者
  */
 

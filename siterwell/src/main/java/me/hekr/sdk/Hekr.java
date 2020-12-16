@@ -12,8 +12,8 @@ import me.hekr.sdk.service.ServiceBinder;
 import me.hekr.sdk.utils.LogUtil;
 
 /**
- * Created by hucn on 2017/3/17.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: SDK 的入口
  */
 

@@ -5,8 +5,8 @@ import java.util.List;
 import me.hekr.sdk.config.ConfigDevice;
 
 /**
- * Created by hucn on 2017/8/28.
- * Author:
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description:
  */
 

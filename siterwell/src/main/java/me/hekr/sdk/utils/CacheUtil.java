@@ -11,7 +11,8 @@ import java.util.Set;
 import me.hekr.sdk.Constants;
 
 /**
- * Created by hekr_jds on 3/27 0027.
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 缓存的封装
  */
 public class CacheUtil {

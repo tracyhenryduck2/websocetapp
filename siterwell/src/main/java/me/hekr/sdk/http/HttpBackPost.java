@@ -6,8 +6,8 @@ import android.os.Handler;
 import java.util.HashMap;
 
 /**
- * Created by hucn on 2017/3/17.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 返回类，主要作用是为了分发到主线程
  */
 

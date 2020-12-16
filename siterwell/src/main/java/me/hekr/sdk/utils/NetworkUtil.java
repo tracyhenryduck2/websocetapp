@@ -18,8 +18,8 @@ import java.util.Enumeration;
 import me.hekr.sdk.monitor.NetType;
 
 /**
- * Created by hucn on 2017/3/30.
- * Author:
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: NetWork in lite-common.jar
  */
 

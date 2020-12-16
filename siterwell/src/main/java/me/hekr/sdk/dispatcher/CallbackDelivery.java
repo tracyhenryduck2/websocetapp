@@ -7,8 +7,8 @@ import me.hekr.sdk.inter.HekrDispatcherListener;
 import me.hekr.sdk.inter.HekrMsgCallback;
 
 /**
- * Created by hucn on 2017/3/22.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 将回调的消息分发到指定线程
  */
 

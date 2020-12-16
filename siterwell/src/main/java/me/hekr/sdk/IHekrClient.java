@@ -10,8 +10,8 @@ import me.hekr.sdk.inter.HekrClientListener;
 import me.hekr.sdk.inter.HekrMsgCallback;
 
 /**
- * Created by hucn on 2017/3/17.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 与设备或通信的接口
  */
 

@@ -1,8 +1,8 @@
 package me.hekr.sdk.service;
 
 /**
- * Created by hucn on 2017/3/22.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 手机上网络变化的监听
  */
 

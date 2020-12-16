@@ -7,7 +7,7 @@ import java.io.Serializable;
 import me.hekr.sdk.utils.LogUtil;
 
 /**
- * Created by hucn on 2017/8/28.
+ * Created by TracyHenry on 2020/12/16.
  * Author:
  * Description: 设备配置状态
  */

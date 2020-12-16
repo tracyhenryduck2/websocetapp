@@ -11,8 +11,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import me.hekr.sdk.utils.LogUtil;
 
 /**
- * Created by hucn on 2017/3/20.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 服务,用于保存和创建连接池
  */
 

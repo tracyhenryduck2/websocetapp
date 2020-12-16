@@ -3,8 +3,8 @@ package me.hekr.sdk.utils;
 import android.util.Log;
 
 /**
- * Created by hucn on 2017/3/23.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 日志打印类
  */
 

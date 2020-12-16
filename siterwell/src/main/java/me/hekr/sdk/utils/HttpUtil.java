@@ -1,8 +1,8 @@
 package me.hekr.sdk.utils;
 
 /**
- * Created by Mike on 2017/11/20.
- * Author:
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description:
  */
 

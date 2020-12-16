@@ -3,8 +3,8 @@ package me.hekr.sdk.service;
 import me.hekr.sdk.utils.LogUtil;
 
 /**
- * Created by hucn on 2017/3/20.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 连接接口的实现，UDP连接
  * <p>
  * 网络状态变化时不进行任何处理

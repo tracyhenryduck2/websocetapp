@@ -1,8 +1,8 @@
 package me.hekr.sdk.service;
 
 /**
- * Created by hucn on 2017/3/23.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 产生不同连接的工厂
  */
 

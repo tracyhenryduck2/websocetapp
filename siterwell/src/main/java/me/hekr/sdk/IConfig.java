@@ -7,7 +7,8 @@ import java.util.Map;
 import me.hekr.sdk.inter.HekrConfigDeviceListener;
 
 /**
- * Created by hekr_xm on 2017/4/7.
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  **/
 
 public interface IConfig {

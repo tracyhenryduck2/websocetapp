@@ -11,7 +11,8 @@ import me.hekr.sdk.utils.ProtocolFilterUtil;
 /**
  * 消息过滤接口的默认实现。
  *
- * @author hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  */
 public class MessageFilter implements IMessageFilter {
 

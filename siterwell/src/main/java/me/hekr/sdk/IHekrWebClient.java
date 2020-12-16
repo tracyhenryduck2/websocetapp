@@ -14,8 +14,8 @@ import me.hekr.sdk.web.WebControlType;
 /**
  * 如果想使集成ekr SDK中的Web功能，请先导入hekrweb模块，不然调用这个类会报错。
  * 这个模块封装了web页面，所以外部不用关心web的实现，只要在需要实现Web功能的Activity或者Fragment中持有这个单例，并且实现相应的接口后初始化就可以了。
- *
- * @author hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  */
 public interface IHekrWebClient {
 

@@ -5,8 +5,8 @@ import java.util.List;
 
 /**
  * IMessageFiler的实现，包装多个Filter，当有一个过滤条件条件满足时，就通过过滤器。
- *
- * @author hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  */
 public class MessageFilterGroup implements IMessageFilter {
 

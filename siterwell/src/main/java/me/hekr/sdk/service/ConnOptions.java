@@ -1,8 +1,8 @@
 package me.hekr.sdk.service;
 
 /**
- * Created by hucn on 2017/3/20.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 创建连接时的选择项，可以为WebSocket/TCP/UDP等
  */
 

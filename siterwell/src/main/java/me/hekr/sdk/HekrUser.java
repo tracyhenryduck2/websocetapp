@@ -19,8 +19,8 @@ import me.hekr.sdk.utils.CacheUtil;
 import me.hekr.sdk.utils.LogUtil;
 
 /**
- * Created by hucn on 2017/3/17.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 配置用户信息接口的实现
  */
 public class HekrUser implements IHekrUser {

@@ -3,8 +3,8 @@ package me.hekr.sdk.dispatcher;
 
 /**
  * 如果希望使用消息过滤，那么继承此接口。
- *
- * @author hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  */
 public interface IMessageFilter {
 

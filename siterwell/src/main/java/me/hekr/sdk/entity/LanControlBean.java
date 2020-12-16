@@ -1,8 +1,8 @@
 package me.hekr.sdk.entity;
 
 /**
- * Created by hucn on 2017/4/13.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 外界传入的控制局域网设备的bean
  */
 

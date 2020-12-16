@@ -3,8 +3,8 @@ package me.hekr.sdk.utils;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Created by hucn on 2017/3/28.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 消息计数器
  */
 

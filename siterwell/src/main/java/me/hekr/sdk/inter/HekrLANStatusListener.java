@@ -1,8 +1,8 @@
 package me.hekr.sdk.inter;
 
 /**
- * Created by hucn on 2017/4/12.
- * Author:
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description:
  */
 

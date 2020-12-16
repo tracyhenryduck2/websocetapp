@@ -8,7 +8,8 @@ import org.json.JSONObject;
 import java.util.Iterator;
 
 /**
- * Created by hekr_xm on 2016/5/10.
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  **/
 public class ProtocolFilterUtil {
 

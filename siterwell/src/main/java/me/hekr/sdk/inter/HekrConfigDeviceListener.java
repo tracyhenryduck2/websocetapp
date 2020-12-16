@@ -3,7 +3,8 @@ package me.hekr.sdk.inter;
 import org.json.JSONObject;
 
 /**
- * Created by hekr_xm on 2017/3/30.
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  **/
 
 public interface HekrConfigDeviceListener {

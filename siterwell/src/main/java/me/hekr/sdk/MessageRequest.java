@@ -4,8 +4,8 @@ import me.hekr.sdk.dispatcher.IMessageFilter;
 import me.hekr.sdk.inter.HekrMsgCallback;
 
 /**
- * Created by hucn on 2017/3/21.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 内部封装的消息请求
  */
 

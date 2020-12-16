@@ -12,8 +12,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import me.hekr.sdk.utils.LogUtil;
 
 /**
- * Created by hucn on 2017/3/21.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 连接服务(Android Service)的工具类
  */
 

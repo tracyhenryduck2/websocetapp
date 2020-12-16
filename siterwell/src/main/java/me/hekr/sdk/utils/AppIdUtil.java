@@ -16,7 +16,8 @@ import java.util.UUID;
 import me.hekr.sdk.HekrSDK;
 
 /**
- * Created by hekr_jds on 5/20 0020.
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  **/
 public class AppIdUtil {
 

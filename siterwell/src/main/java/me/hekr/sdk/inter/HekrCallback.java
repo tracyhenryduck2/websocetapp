@@ -1,6 +1,8 @@
 package me.hekr.sdk.inter;
 
 /**
+ *  * Created by TracyHenry on 2020/12/16.
+ *  * Author: TracyHenry
  * 回调，这个接口返回成功和错误的信息。
  */
 

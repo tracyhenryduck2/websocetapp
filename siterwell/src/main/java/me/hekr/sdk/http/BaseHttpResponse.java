@@ -3,7 +3,8 @@ package me.hekr.sdk.http;
 import java.util.Map;
 
 /**
- * Created by hucn on 2017/3/27.
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Author: 基本的返回信息
  * Description:
  */

@@ -26,7 +26,8 @@ import me.hekr.sdk.utils.LogUtil;
 import me.hekr.sdk.utils.NetworkUtil;
 
 /**
- * Created by hekr_xm on 2016/4/21.
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  **/
 class HekrDeviceScanner implements IHekrDeviceScanner, ServiceListener {
 

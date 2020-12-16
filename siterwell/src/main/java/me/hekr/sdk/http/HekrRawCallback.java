@@ -1,6 +1,8 @@
 package me.hekr.sdk.http;
 
 /**
+ *  * Created by TracyHenry on 2020/12/16.
+ *  * Author: TracyHenry
  * 回调，这个接口将直接返请求后的http信息。
  **/
 public abstract class HekrRawCallback {

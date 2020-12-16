@@ -6,8 +6,8 @@ import me.hekr.sdk.inter.HekrLANDeviceListener;
 import me.hekr.sdk.inter.HekrMsgCallback;
 
 /**
- * Created by hucn on 2017/3/20.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 封装后的连接客户端
  */
 

@@ -11,8 +11,8 @@ import me.hekr.sdk.inter.HekrMsgCallback;
 /**
  * 局域网本地的控制。当开启时，会通过JmDNS发现局域网设备，然后刷新LanControlBean的List时去尝试连接设备。
  * IHekrLANControl与HekrLAN有所不同，这个类会发现和管理所有的本地局域网连接，而HekrLAN允许指定和连接某一个局域网设备。
- *
- * @author hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  */
 public interface IHekrLANControl {
 

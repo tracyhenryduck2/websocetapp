@@ -1,8 +1,8 @@
 package me.hekr.sdk;
 
 /**
- * Created by hucn on 2017/3/30.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 描述折别类型
  */
 

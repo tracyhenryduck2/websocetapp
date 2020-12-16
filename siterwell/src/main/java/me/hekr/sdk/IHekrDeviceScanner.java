@@ -3,8 +3,8 @@ package me.hekr.sdk;
 import me.hekr.sdk.inter.HekrLANListener;
 
 /**
- * Created by hucn on 2017/4/10.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: jmdns 封装，发现局域网内的设备
  */
 

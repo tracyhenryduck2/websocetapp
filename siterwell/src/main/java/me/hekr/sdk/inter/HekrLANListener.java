@@ -5,8 +5,8 @@ import java.util.List;
 import me.hekr.sdk.entity.LanDeviceBean;
 
 /**
- * Created by hucn on 2017/4/10.
- * Author:
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description:
  */
 

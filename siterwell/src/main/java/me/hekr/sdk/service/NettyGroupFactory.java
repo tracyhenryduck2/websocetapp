@@ -3,8 +3,8 @@ package me.hekr.sdk.service;
 import io.netty.channel.nio.NioEventLoopGroup;
 
 /**
- * Created by Mike on 2018/2/6.
- * Author:
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description:
  */
 

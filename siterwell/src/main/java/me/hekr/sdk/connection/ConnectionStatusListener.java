@@ -1,8 +1,8 @@
 package me.hekr.sdk.connection;
 
 /**
- * Created by hucn on 2017/3/20.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 连接状态的监听
  */
 

@@ -44,8 +44,8 @@ import me.hekr.sdk.utils.LogUtil;
 import me.hekr.sdk.utils.NetworkUtil;
 
 /**
- * Created by hucn on 2017/3/20.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 连接接口的实现，WebSocket连接
  */
 

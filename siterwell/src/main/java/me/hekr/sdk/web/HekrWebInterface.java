@@ -3,8 +3,8 @@ package me.hekr.sdk.web;
 import android.content.Context;
 
 /**
- * Created by hucn on 2017/3/30.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 无论是Fragment还是Activity还是其他，如果想使用HekrWeb，都需要实现这个接口
  */
 

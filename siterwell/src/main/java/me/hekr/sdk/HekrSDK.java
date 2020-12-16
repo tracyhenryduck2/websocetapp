@@ -11,10 +11,10 @@ import me.hekr.sdk.utils.OsUtil;
 import me.hekr.sdk.utils.ResourceUtil;
 
 /**
- * Hekr SDK的入口，初始化请调用init方法。
+ * SDK的入口，初始化请调用init方法。
  * 请在App启动时初始化。
- *
- * @author hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  */
 public class HekrSDK {
 

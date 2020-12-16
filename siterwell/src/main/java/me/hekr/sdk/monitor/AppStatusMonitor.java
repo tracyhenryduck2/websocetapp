@@ -15,8 +15,8 @@ import me.hekr.sdk.HekrSDK;
 import me.hekr.sdk.utils.LogUtil;
 
 /**
- * Created by hucn on 2017/5/16.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 监听网络的变化
  */
 

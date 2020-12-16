@@ -8,8 +8,8 @@ import me.hekr.sdk.inter.HekrCallback;
  * {@link #login(String username, String password, HekrCallback callback) login}或者
  * {@link #login(String username, String password, HekrRawCallback callback) login}
  * 方法进行登录，登录成功后才能使用SDK的功能。
- *
- * @author hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  */
 public interface IHekrUser {
 

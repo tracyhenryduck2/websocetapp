@@ -19,8 +19,8 @@ import me.hekr.sdk.utils.AndroidErrorMap;
 import me.hekr.sdk.utils.CacheUtil;
 
 /**
- * Created by Mike on 2017/12/25.
- * Author:
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description:
  */
 

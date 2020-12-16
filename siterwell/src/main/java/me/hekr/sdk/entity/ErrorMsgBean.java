@@ -3,7 +3,8 @@ package me.hekr.sdk.entity;
 import java.io.Serializable;
 
 /**
- * Created by hekr_jds on 2016/4/12.
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  **/
 public class ErrorMsgBean implements Serializable {
 

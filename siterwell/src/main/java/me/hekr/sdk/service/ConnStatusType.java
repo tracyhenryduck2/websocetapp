@@ -1,8 +1,8 @@
 package me.hekr.sdk.service;
 
 /**
- * Created by hucn on 2017/4/1.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 连接状态
  */
 

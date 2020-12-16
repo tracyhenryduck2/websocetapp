@@ -4,8 +4,8 @@ import me.hekr.sdk.IMessageRequest;
 import me.hekr.sdk.service.ConnOptions;
 
 /**
- * Created by hucn on 2017/3/20.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 与服务器连接和与设备连接的抽象接口
  */
 

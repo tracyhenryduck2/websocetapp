@@ -9,8 +9,8 @@ import me.hekr.sdk.entity.HekrWebBean;
 /**
  * 如果想使集成hekr SDK中的Web功能，请先导入hekrweb模块，不然调用这个类会报错。
  * 这个模块封装了web页面，所以外部不用关心web的实现，只要通过此接口拿到IHekrWebClient，并且实现相应的接口后初始化就可以了。
- *
- * @author hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  */
 public interface IHekrWeb {
 

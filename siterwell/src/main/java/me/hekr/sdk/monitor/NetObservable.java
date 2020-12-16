@@ -1,8 +1,8 @@
 package me.hekr.sdk.monitor;
 
 /**
- * Created by hucn on 2017/3/31.
- * Author: hucn
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
  * Description: 网络状态变化的接口
  */
 
