@@ -149,17 +149,17 @@ public class SiterClient implements ISIterClient {
     }
 
     @Override
-    public synchronized void addHekrClientListener(SiterClientListener listener) {
-        addHekrClientListener(listener, "");
+    public synchronized void addSiterClientListener(SiterClientListener listener) {
+        addSiterClientListener(listener, "");
     }
 
     @Override
-    public synchronized void removeHekrClientListener(SiterClientListener listener) {
-        removeHekrClientListener(listener, "");
+    public synchronized void removeSiterClientListener(SiterClientListener listener) {
+        removeSiterClientListener(listener, "");
     }
 
     @Override
-    public synchronized void addHekrClientListener(SiterClientListener listener, String host) {
+    public synchronized void addSiterClientListener(SiterClientListener listener, String host) {
         String url;
         if (TextUtils.isEmpty(host)) {
             url = getDefaultHostUrl();
@@ -168,12 +168,12 @@ public class SiterClient implements ISIterClient {
         }
         SiterCloudClient client = mClients.get(url);
         if (client != null) {
-            client.addHekrClientListener(listener);
+            client.addSiterclientListener(listener);
         }
     }
 
     @Override
-    public synchronized void removeHekrClientListener(SiterClientListener listener, String host) {
+    public synchronized void removeSiterClientListener(SiterClientListener listener, String host) {
         String url;
         if (TextUtils.isEmpty(host)) {
             url = getDefaultHostUrl();
@@ -186,7 +186,7 @@ public class SiterClient implements ISIterClient {
         }
         SiterCloudClient client = mClients.get(url);
         if (client != null) {
-            client.removeHekrClientListener(listener);
+            client.removeSiterClientListener(listener);
         }
     }
 

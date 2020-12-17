@@ -27,7 +27,7 @@ import com.siterwell.demo.commonview.CodeEdit;
 import com.siterwell.demo.commonview.ECAlertDialog;
 import com.siterwell.demo.commonview.ProgressDialog;
 import com.siterwell.demo.user.ClientUser;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.UserAction;
 
 import java.io.InvalidClassException;
 
@@ -182,7 +182,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if ( !phoneSatePermission || !writeSatePermission) {
             requestPermission();
         }else{
-            if (TextUtils.isEmpty(HekrUserAction.getInstance(this).getJWT_TOKEN())) {
+            if (TextUtils.isEmpty(UserAction.getInstance(this).getJWT_TOKEN())) {
                 initView();
             } else {
                 startActivity(new Intent(this, InitActivity.class));
@@ -217,7 +217,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == REQUEST_PERMISSION) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                if (TextUtils.isEmpty(HekrUserAction.getInstance(this).getJWT_TOKEN())) {
+                if (TextUtils.isEmpty(UserAction.getInstance(this).getJWT_TOKEN())) {
                     initView();
                 } else {
                     startActivity(new Intent(this, MainActivity.class));
@@ -241,13 +241,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    private String getdomain(){
-
-        SharedPreferences sharedPreferences = ECPreferences.getSharedPreferences();
-        ECPreferenceSettings flag = ECPreferenceSettings.SETTINGS_DOMAIN;
-        String autoflag = sharedPreferences.getString(flag.getId(), (String) flag.getDefaultValue());
-        return autoflag;
-    }
 
 
 }

@@ -10,7 +10,7 @@ import me.siter.sdk.inter.SiterMsgCallback;
 
 /**
  * 局域网本地的控制。当开启时，会通过JmDNS发现局域网设备，然后刷新LanControlBean的List时去尝试连接设备。
- * IHekrLANControl与HekrLAN有所不同，这个类会发现和管理所有的本地局域网连接，而HekrLAN允许指定和连接某一个局域网设备。
+ * ISiterLANControl与LAN有所不同，这个类会发现和管理所有的本地局域网连接，而LAN允许指定和连接某一个局域网设备。
  * Created by TracyHenry on 2020/12/16.
  * Author: TracyHenry
  */
@@ -34,7 +34,7 @@ public interface ISiterLANControl {
    * 获取局域网控制对象。
    *
    * @param tag 设备的devTid
-   * @return IHekrDeviceClient 局域网设备控制的对象
+   * @return ISiterDeviceClient 局域网设备控制的对象
    */
   ISiterDeviceClient getDeviceClient(String tag);
 
@@ -55,14 +55,14 @@ public interface ISiterLANControl {
   /**
    * 添加局域网状态变化的监听，可以设置多个。
    *
-   * @param listener HekrLANStatusListener
+   * @param listener SiterLANStatusListener
    */
   void addLANStatusChangeListener(SiterLANStatusListener listener);
 
   /**
    * 移除局域网状态变化的监听。
    *
-   * @param listener HekrLANStatusListener
+   * @param listener SiterLANStatusListener
    */
   void removeLANStatusChangeListener(SiterLANStatusListener listener);
 

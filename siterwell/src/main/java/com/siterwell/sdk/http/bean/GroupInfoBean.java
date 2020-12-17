@@ -3,7 +3,7 @@ package com.siterwell.sdk.http.bean;
 import java.io.Serializable;
 
 /**
- * Created by hekr_jds on 4/19 0019.
+ * Created by TracyHenry on 2020/12/16.
  **/
 public class GroupInfoBean implements Serializable {
 

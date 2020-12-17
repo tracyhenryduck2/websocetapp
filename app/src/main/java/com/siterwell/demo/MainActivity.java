@@ -51,8 +51,8 @@ import com.siterwell.demo.storage.DeviceDao;
 import com.siterwell.demo.storage.FolderDao;
 import com.siterwell.demo.storage.WifiTimerDao;
 import com.siterwell.demo.user.PersonalActivity;
-import com.siterwell.sdk.http.HekrUser;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.SiterUser;
+import com.siterwell.sdk.http.UserAction;
 import com.siterwell.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.http.bean.FolderListBean;
 
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                   handler.sendEmptyMessageDelayed(2, 1000);
                               }else{
 
-                                  HekrUserAction.getInstance(this).unPushTagBind(fcmtoken, 3, new HekrUser.UnPushTagBindListener() {
+                                  UserAction.getInstance(this).unPushTagBind(fcmtoken, 3, new SiterUser.UnPushTagBindListener() {
                                       @Override
                                       public void unPushTagBindSuccess() {
                                           handler.sendEmptyMessageDelayed(2, 1000);
@@ -316,7 +316,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     try {
                                         if(newname.getBytes("GBK").length<=15){
                                             alertDialog.setDismissFalse(true);
-                                            HekrUserAction.getInstance(MainActivity.this).renameFolder(newname+deviceBean.getImage(), deviceBean.getFolderId(), new HekrUser.RenameFolderListener() {
+                                            UserAction.getInstance(MainActivity.this).renameFolder(newname+deviceBean.getImage(), deviceBean.getFolderId(), new SiterUser.RenameFolderListener() {
                                                   @Override
                                                   public void renameSuccess() {
                                                       folderDao.updateFolderName(newname,deviceBean.getFolderId());
@@ -369,7 +369,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     ECAlertDialog ecAlertDialog = ECAlertDialog.buildPositiveAlert(MainActivity.this,getResources().getString(R.string.fold_has_device_hint),null);
                                     ecAlertDialog.show();
                                 }else {
-                                    HekrUserAction.getInstance(MainActivity.this).deleteFolder(deviceBean.getFolderId(), new HekrUser.DeleteFileListener() {
+                                    UserAction.getInstance(MainActivity.this).deleteFolder(deviceBean.getFolderId(), new SiterUser.DeleteFileListener() {
                                         @Override
                                         public void deleteSuccess()
                                         {
@@ -409,7 +409,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        if(TextUtils.isEmpty(HekrUserAction.getInstance(this).getJWT_TOKEN())){
+        if(TextUtils.isEmpty(UserAction.getInstance(this).getJWT_TOKEN())){
             startActivity(new Intent(this,LoginActivity.class));
             finish();
         }else{
@@ -422,7 +422,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         swipeRefreshLayout_em.setRefreshing(true);
         swipeRefreshLayout.setRefreshing(true);
 
-        HekrUserAction.getInstance(this).getFolder(0, new HekrUser.GetFolderListsListener() {
+        UserAction.getInstance(this).getFolder(0, new SiterUser.GetFolderListsListener() {
             @Override
             public void getSuccess(List<FolderListBean> folderList) {
                 Log.i(TAG,folderList.toString());
@@ -567,7 +567,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             }
                             Controller.getInstance().flag_service = false;
                             resetStorage();
-                            HekrUserAction.getInstance(MainActivity.this).userLogout();
+                            UserAction.getInstance(MainActivity.this).userLogout();
                             stopService(new Intent(MainActivity.this, SychronizeService.class));
                             startActivity(new Intent(MainActivity.this,LoginActivity.class));
                             finish();
@@ -585,7 +585,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                ErrorCodeUtil.getErrorDesc(errorCode);
                                Controller.getInstance().flag_service = false;
                                resetStorage();
-                               HekrUserAction.getInstance(MainActivity.this).userLogout();
+                               UserAction.getInstance(MainActivity.this).userLogout();
                                stopService(new Intent(MainActivity.this, SychronizeService.class));
                                startActivity(new Intent(MainActivity.this,LoginActivity.class));
                                finish();
@@ -614,7 +614,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void run() {
                     if(!TextUtils.isEmpty(event.getToken())){
-                        HekrUserAction.getInstance(MainActivity.this).pushTagBind(event.getToken(), event.getType(), new HekrUser.PushTagBindListener() {
+                        UserAction.getInstance(MainActivity.this).pushTagBind(event.getToken(), event.getType(), new SiterUser.PushTagBindListener() {
                             @Override
                             public void pushTagBindSuccess() {
 
@@ -641,7 +641,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(mProgressDialog!=null && mProgressDialog.isShowing()){
             mProgressDialog.dismiss();
         }
-        HekrUserAction.getInstance(this).userLogout();
+        UserAction.getInstance(this).userLogout();
         CCPAppManager.setClientUser(null);
 
         try {

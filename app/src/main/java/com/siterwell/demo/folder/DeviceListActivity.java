@@ -37,8 +37,8 @@ import com.siterwell.sdk.common.RefreshBatteryListener;
 import com.siterwell.sdk.common.RefreshWaterSensorListener;
 import com.siterwell.sdk.common.SitewellSDK;
 import com.siterwell.sdk.common.WIFISocketListener;
-import com.siterwell.sdk.http.HekrUser;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.SiterUser;
+import com.siterwell.sdk.http.UserAction;
 import com.siterwell.sdk.http.bean.DcInfo;
 import com.siterwell.sdk.http.bean.DeviceBean;
 
@@ -145,7 +145,7 @@ public class DeviceListActivity extends TopbarSuperActivity implements DeviceAda
 
 
         if(!TextUtils.isEmpty(Controller.getInstance().deviceTid)){
-            HekrUserAction.getInstance(this).devicesPutFolder(FolderPojo.getInstance().folderId, Controller.getInstance().ctrlKey, Controller.getInstance().deviceTid, new HekrUser.DevicePutFolderListener() {
+            UserAction.getInstance(this).devicesPutFolder(FolderPojo.getInstance().folderId, Controller.getInstance().ctrlKey, Controller.getInstance().deviceTid, new SiterUser.DevicePutFolderListener() {
                 @Override
                 public void putSuccess() {
                     Log.i(TAG,"分组成功");
@@ -192,7 +192,7 @@ public class DeviceListActivity extends TopbarSuperActivity implements DeviceAda
     private void getDeviceList(){
         swipeRefreshLayout.setRefreshing(true);
         swipeRefreshLayout_em.setRefreshing(true);
-        HekrUserAction.getInstance(this).getHekrData(Constants.UrlUtil.BASE_USER_URL+"device/"+folderBean.getFolderId()+"?size=20&page="+page, new HekrUserAction.GetHekrDataListener() {
+        UserAction.getInstance(this).getSiterData(Constants.UrlUtil.BASE_USER_URL+"device/"+folderBean.getFolderId()+"?size=20&page="+page, new UserAction.GetDataListener() {
             @Override
             public void getSuccess(Object object) {
 
@@ -321,7 +321,7 @@ public class DeviceListActivity extends TopbarSuperActivity implements DeviceAda
                                 final String newname = text.getText().toString().trim();
 
                                 if(!TextUtils.isEmpty(newname)){
-                                    HekrUserAction.getInstance(DeviceListActivity.this).renameDevice(deviceBean.getDevTid(), deviceBean.getCtrlKey(), newname, null, deviceBean.getDcInfo().getConnectHost(), new HekrUser.RenameDeviceListener() {
+                                    UserAction.getInstance(DeviceListActivity.this).renameDevice(deviceBean.getDevTid(), deviceBean.getCtrlKey(), newname, null, deviceBean.getDcInfo().getConnectHost(), new SiterUser.RenameDeviceListener() {
                                         @Override
                                         public void renameDeviceSuccess() {
                                             alertDialog.setDismissFalse(true);
@@ -377,7 +377,7 @@ public class DeviceListActivity extends TopbarSuperActivity implements DeviceAda
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
-                                    HekrUserAction.getInstance(DeviceListActivity.this).cancelOAuth(deviceBean.getCtrlKey(), CCPAppManager.getClientUser().getId(), new HekrUser.CancelOAuthListener() {
+                                    UserAction.getInstance(DeviceListActivity.this).cancelOAuth(deviceBean.getCtrlKey(), CCPAppManager.getClientUser().getId(), new SiterUser.CancelOAuthListener() {
                                         @Override
                                         public void CancelOAuthSuccess() {
                                             deviceDao.deleteByDeviceId(deviceBean.getDevTid());
@@ -418,7 +418,7 @@ public class DeviceListActivity extends TopbarSuperActivity implements DeviceAda
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
-                                    HekrUserAction.getInstance(DeviceListActivity.this).deleteDevice(deviceBean.getDevTid(), deviceBean.getBindKey(), new HekrUser.DeleteDeviceListener() {
+                                    UserAction.getInstance(DeviceListActivity.this).deleteDevice(deviceBean.getDevTid(), deviceBean.getBindKey(), new SiterUser.DeleteDeviceListener() {
                                         @Override
                                         public void deleteDeviceSuccess() {
                                             deviceDao.deleteByDeviceId(deviceBean.getDevTid());
@@ -468,7 +468,7 @@ public class DeviceListActivity extends TopbarSuperActivity implements DeviceAda
                             public void onDialogItemClick(Dialog d,final int position) {
 
 
-                                HekrUserAction.getInstance(DeviceListActivity.this).devicesPutFolder(list.get(position).getFolderId(), deviceBean.getCtrlKey(), deviceBean.getDevTid(), new HekrUser.DevicePutFolderListener() {
+                                UserAction.getInstance(DeviceListActivity.this).devicesPutFolder(list.get(position).getFolderId(), deviceBean.getCtrlKey(), deviceBean.getDevTid(), new SiterUser.DevicePutFolderListener() {
                                     @Override
                                     public void putSuccess() {
                                         DeviceBean deviceBean1 = new DeviceBean();

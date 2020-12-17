@@ -16,7 +16,7 @@ import me.siter.sdk.SiterSDK;
 
 
 /**
- * Created by hekr_jds on 6/30 0030.
+ * Created by TracyHenry on 2020/12/16.
  **/
 public class MyApplication extends MultiDexApplication {
     private static MyApplication mApp;
@@ -27,7 +27,7 @@ public class MyApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         mApp = this;
-        //初始化HekrSDK
+        //初始化SDK
         SiterSDK.init(getApplicationContext(), R.raw.config);
         SiterSDK.enableDebug(true);
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())

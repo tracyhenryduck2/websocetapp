@@ -17,15 +17,15 @@ import java.util.Map;
 import java.util.Scanner;
 
 /*
-@class HekrCommonUtil
+@class CommonUtil
 @autor Administrator
 @time 2017/10/16 14:05
 @email xuejunju_4595@qq.com
 */
-public class HekrCommonUtil {
+public class CommonUtil {
 
     /**
-     * 读取R.raw.hekr.json
+     * 读取R.raw.json
      */
     public static String convertStreamToString(Context mContext, int id) {
         InputStream is = mContext.getResources().openRawResource(id);
@@ -47,7 +47,7 @@ public class HekrCommonUtil {
      * @param context
      * @return
      */
-    public static String getHEKRIMEI(Context context) {
+    public static String getIMEI(Context context) {
         String str = TelephoneUtil.getIMEI(context);
         String IMEI = TextUtils.concat(str, context.getPackageName()).toString();
         if (str == null || TextUtils.isEmpty(TelephoneUtil.getIMEI(context))) {

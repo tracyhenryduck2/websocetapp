@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class FirmwareBean implements Serializable {
     private static final long serialVersionUID = -6013091826096823484L;
     /**
-     * binUrl : http://fs.hekr.me/dev/fw/ota/xxx.bin
+     * binUrl :
      * md5 : 5d41402abc4b2a76b9719d911017c592
      * latestBinType : B
      * latestBinVer : 1.2.3.4

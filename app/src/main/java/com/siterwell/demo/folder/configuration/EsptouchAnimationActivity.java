@@ -26,8 +26,8 @@ import com.siterwell.sdk.bean.DeviceType;
 import com.siterwell.sdk.common.SitewellSDK;
 import com.siterwell.sdk.event.SetSmokeTypeEvent;
 import com.siterwell.sdk.event.UdpShakeHandsEvent;
-import com.siterwell.sdk.http.HekrUser;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.SiterUser;
+import com.siterwell.sdk.http.UserAction;
 import com.siterwell.sdk.http.SmartConfig;
 import com.siterwell.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.http.bean.NewDeviceBean;
@@ -363,7 +363,7 @@ public class EsptouchAnimationActivity extends TopbarSuperActivity implements Vi
                         flag = 1;
                         Now_speed = SPEED2;
 
-                        HekrUserAction.getInstance(EsptouchAnimationActivity.this).devicesPutFolder(FolderPojo.getInstance().folderId, newDeviceBean.getCtrlKey(), newDeviceBean.getDevTid(), new HekrUser.DevicePutFolderListener() {
+                        UserAction.getInstance(EsptouchAnimationActivity.this).devicesPutFolder(FolderPojo.getInstance().folderId, newDeviceBean.getCtrlKey(), newDeviceBean.getDevTid(), new SiterUser.DevicePutFolderListener() {
                             @Override
                             public void putSuccess() {
                                 DeviceBean deviceBean = new DeviceBean();

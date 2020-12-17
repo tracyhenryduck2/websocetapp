@@ -20,7 +20,6 @@ public class ProfileBean implements Serializable {
      * updateDate : 1463291911715
      * phoneNumber :
      * gender : MAN
-     * avatarUrl : {"small":"http://hekr-images.ufile.ucloud.com.cn/ufile-3615199020600000000000-1530d614e5e8a377c56de591a2f30b24.jpg"}
      * description : 就是我
      * email : 2784451368@qq.com
      * age : 97
@@ -33,7 +32,6 @@ public class ProfileBean implements Serializable {
     private String phoneNumber;
     private String gender;
     /**
-     * small : http://hekr-images.ufile.ucloud.com.cn/ufile-3615199020600000000000-1530d614e5e8a377c56de591a2f30b24.jpg
      */
 
     private String small;

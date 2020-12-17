@@ -3,7 +3,6 @@ package com.siterwell.demo.updateapp;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
@@ -14,11 +13,9 @@ import android.view.View;
 import com.siterwell.demo.MyApplication;
 import com.siterwell.demo.R;
 import com.siterwell.demo.common.Config;
-import com.siterwell.demo.common.ECPreferenceSettings;
-import com.siterwell.demo.common.ECPreferences;
 import com.siterwell.demo.commonview.ECAlertDialog;
 import com.siterwell.demo.commonview.SettingItem;
-import com.siterwell.sdk.http.HekrUser;
+import com.siterwell.sdk.http.SiterUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -118,24 +115,7 @@ public class UpdateAppAuto {
             public void onClick(DialogInterface dialog, int which) {
 
                 dialog.dismiss();
-//                Intent intent = new Intent(context,UpdateService.class);
-//                intent.putExtra("Key_App_Name", Config.UPDATE_APKNAME);
-//                intent.putExtra("Key_Down_Url",Config.ApkUrl);
-//                context.startService(intent);
-                if(!"hekr.me".equals(getDomain())){
-                    String url = "https://play.google.com/store/apps/details?id="+context.getPackageName();
-                    Intent intent = new Intent();
-                    intent.setAction("android.intent.action.VIEW");
-                    Uri content_url = Uri.parse(url);
-                    intent.setData(content_url);
-                    MyApplication.getActivity().startActivity(intent);
-                }else{
-                    Intent intent = new Intent();
-                    intent.setAction("android.intent.action.VIEW");
-                    Uri content_url = Uri.parse("http://a.app.qq.com/o/simple.jsp?pkgname="+context.getPackageName());
-                    intent.setData(content_url);
-                    MyApplication.getActivity().startActivity(intent);
-                }
+
 
             }
         });
@@ -155,7 +135,7 @@ public class UpdateAppAuto {
     public void getUpdateInfo(){
         String appname =  context.getPackageName();
         Log.i(TAG,"appname:"+appname);
-        Config.getUpdateInfo(context, new HekrUser.LoginListener() {
+        Config.getUpdateInfo(context, new SiterUser.LoginListener() {
             @Override
             public void loginSuccess(String str) {
                 try {
@@ -208,11 +188,4 @@ public class UpdateAppAuto {
 
     }
 
-    private String getDomain(){
-
-        SharedPreferences sharedPreferences = ECPreferences.getSharedPreferences();
-        ECPreferenceSettings flag = ECPreferenceSettings.SETTINGS_DOMAIN;
-        String autoflag = sharedPreferences.getString(flag.getId(), (String) flag.getDefaultValue());
-        return autoflag;
-    }
 }

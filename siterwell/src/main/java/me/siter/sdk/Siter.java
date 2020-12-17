@@ -21,8 +21,8 @@ public class Siter {
 
     private static String TAG = Siter.class.getSimpleName();
 
-    private static ISiterUser hekrUser;
-    private static ISIterClient hekrClient;
+    private static ISiterUser User;
+    private static ISIterClient Client;
 
 
     private static IHttpClient httpClient;
@@ -34,12 +34,12 @@ public class Siter {
         binder.addListener(new ServiceBinder.ConnectServiceListener() {
             @Override
             public void onServiceConnected() {
-                LogUtil.i(TAG, "Hekr bind service success");
+                LogUtil.i(TAG, "bind service success");
             }
 
             @Override
             public void onServiceDisconnected() {
-                LogUtil.i(TAG, "Hekr unbind service success");
+                LogUtil.i(TAG, "unbind service success");
             }
         });
 
@@ -57,32 +57,32 @@ public class Siter {
 
 
     public static ISiterUser getSiterUser() {
-        if (hekrUser == null) {
+        if (User == null) {
             synchronized (Siter.class) {
-                if (hekrUser == null) {
-                    hekrUser = new SiterUser();
+                if (User == null) {
+                    User = new SiterUser();
                 }
             }
         }
-        return hekrUser;
+        return User;
     }
 
     public static ISIterClient getSiterClient() {
-        if (hekrClient == null) {
+        if (Client == null) {
             synchronized (Siter.class) {
-                if (hekrClient == null) {
-                    hekrClient = new SiterClient();
+                if (Client == null) {
+                    Client = new SiterClient();
                     // 连接到云端
                     if (!TextUtils.isEmpty(Siter.getSiterUser().getToken())) {
-                        LogUtil.d(TAG, "HekrCloudClient connect to the cloud");
-                        hekrClient.connect();
+                        LogUtil.d(TAG, "SiterCloudClient connect to the cloud");
+                        Client.connect();
                     } else {
-                        LogUtil.d(TAG, "HekrCloudClient can not connect to the cloud because the token is null");
+                        LogUtil.d(TAG, "SiterCloudClient can not connect to the cloud because the token is null");
                     }
                 }
             }
         }
-        return hekrClient;
+        return Client;
     }
 
 
@@ -102,15 +102,8 @@ public class Siter {
         return Dispatcher.getInstance();
     }
 
-    public static ISiterDeviceScanner createHekrLANScanner() {
+    public static ISiterDeviceScanner createSiterLANScanner() {
         return new SiterDeviceScanner();
     }
 
-    private static Class getHekrConfigClass() throws ClassNotFoundException {
-        return Class.forName("me.hekr.hekrconfig.HekrConfig");
-    }
-
-    private static Class getHekrWebClass() throws ClassNotFoundException {
-        return Class.forName("me.hekr.hekrweb.HekrWeb");
-    }
 }

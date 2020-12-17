@@ -57,12 +57,12 @@ class MessageRequest implements IMessageRequest {
     }
 
     @Override
-    public void setHekrMsgCallback(SiterMsgCallback callback) {
+    public void setMsgCallback(SiterMsgCallback callback) {
         mCallback = callback;
     }
 
     @Override
-    public SiterMsgCallback getHekrMsgCallback() {
+    public SiterMsgCallback getMsgCallback() {
         return mCallback;
     }
 

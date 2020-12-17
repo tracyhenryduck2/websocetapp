@@ -22,11 +22,6 @@ public class GateWaySubDeviceBean implements Serializable {
      * manufacturerName : Shuncom
      * description : kg-02
      * cidName : 生活电器/测试增加小品类
-     * logo : http://c-img-s.hekr.me/598139d2ba894218b3353d8041f163e2/1473406666891.png
-     * androidH5Page : https://h5page.hekr.me/android/8d5777b567f542a581a6065e0fb9046c/index.html
-     * iosH5Page : https://h5page.hekr.me/android/8d5777b567f542a581a6065e0fb9046c/index.html
-     * iosPageZipURL : https://h5package.hekr.me/android/8d5777b567f542a581a6065e0fb9046c/eUiFFzIO1474276827842.zip
-     * androidPageZipURL : https://h5package.hekr.me/android/8d5777b567f542a581a6065e0fb9046c/eUiFFzIO1474276827842.zip
      */
 
     private String devTid;

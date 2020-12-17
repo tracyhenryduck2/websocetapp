@@ -13,8 +13,8 @@ import com.siterwell.demo.commonview.CodeEdit;
 import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.common.UnitTools;
 import com.siterwell.demo.commonview.ECAlertDialog;
-import com.siterwell.sdk.http.HekrUser;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.SiterUser;
+import com.siterwell.sdk.http.UserAction;
 
 
 /**
@@ -98,7 +98,7 @@ public class ResetCodeActivity extends TopbarSuperActivity implements View.OnCli
                 if (!TextUtils.isEmpty(phone)) {
 
                     VerfyDialog dialog = new VerfyDialog();
-                    dialog.showDialog(this, HekrUserAction.getInstance(this),phone, HekrUserAction.CODE_TYPE_RE_REGISTER,1);
+                    dialog.showDialog(this, UserAction.getInstance(this),phone, UserAction.CODE_TYPE_RE_REGISTER,1);
                     dialog.show();
                 } else {
                     toastor.showSingleLongToast(getResources().getString(R.string.please_input_phone));
@@ -109,7 +109,7 @@ public class ResetCodeActivity extends TopbarSuperActivity implements View.OnCli
                 if (!TextUtils.isEmpty(email)) {
 
                     VerfyDialog dialog = new VerfyDialog();
-                    dialog.showDialog(this, HekrUserAction.getInstance(this),email, HekrUserAction.CODE_TYPE_RE_REGISTER,2);
+                    dialog.showDialog(this, UserAction.getInstance(this),email, UserAction.CODE_TYPE_RE_REGISTER,2);
                     dialog.show();
                 } else {
                     toastor.showSingleLongToast(getResources().getString(R.string.please_input_email));
@@ -170,7 +170,7 @@ public class ResetCodeActivity extends TopbarSuperActivity implements View.OnCli
 
     private void reset(String phoneNumber, String pwd, String code) {
 
-        HekrUserAction.getInstance(this).resetPwd(phoneNumber,  code,pwd, new HekrUser.ResetPwdListener() {
+        UserAction.getInstance(this).resetPwd(phoneNumber,  code,pwd, new SiterUser.ResetPwdListener() {
             @Override
             public void resetSuccess() {
                 toastor.showSingleLongToast(getResources().getString(R.string.success_reset));
@@ -185,7 +185,7 @@ public class ResetCodeActivity extends TopbarSuperActivity implements View.OnCli
     }
 
     private void resetByEmail(String email, String pwd,String code) {
-        HekrUserAction.getInstance(this).resetPwdByEmail(email, code,pwd, new HekrUser.ResetPwdListener() {
+        UserAction.getInstance(this).resetPwdByEmail(email, code,pwd, new SiterUser.ResetPwdListener() {
             @Override
             public void resetSuccess() {
                 ECAlertDialog D = ECAlertDialog.buildPositiveAlert(ResetCodeActivity.this, R.string.success_reset, new DialogInterface.OnClickListener() {

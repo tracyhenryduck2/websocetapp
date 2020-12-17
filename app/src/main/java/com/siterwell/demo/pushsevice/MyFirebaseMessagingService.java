@@ -21,7 +21,7 @@ import com.siterwell.demo.R;
 import com.siterwell.demo.device.bean.BatteryDescBean;
 import com.siterwell.demo.device.bean.WaterSensorDescBean;
 import com.siterwell.demo.storage.DeviceDao;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.UserAction;
 import com.siterwell.sdk.http.bean.DeviceBean;
 
 import org.json.JSONException;
@@ -58,7 +58,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         try {
 
 
-            if(TextUtils.isEmpty(HekrUserAction.getInstance(this).getJWT_TOKEN())){
+            if(TextUtils.isEmpty(UserAction.getInstance(this).getJWT_TOKEN())){
 
                 return;
             }

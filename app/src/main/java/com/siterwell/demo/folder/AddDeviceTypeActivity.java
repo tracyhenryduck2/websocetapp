@@ -24,8 +24,8 @@ import com.siterwell.demo.commonview.ProgressDialog;
 import com.siterwell.demo.folder.configuration.ConfigurationActivity;
 import com.siterwell.demo.storage.DeviceDao;
 import com.siterwell.sdk.bean.DeviceType;
-import com.siterwell.sdk.http.HekrUser;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.SiterUser;
+import com.siterwell.sdk.http.UserAction;
 import com.siterwell.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.protocol.GS140Command;
 import com.zbar.lib.ScanCaptureAct;
@@ -135,7 +135,7 @@ public class AddDeviceTypeActivity extends TopbarSuperActivity implements View.O
             String sn = data.getExtras().getString("SN");
             progressDialog = new ProgressDialog(this,R.string.wait);
             progressDialog.show();
-            HekrUserAction.getInstance(this).registerAuth(sn, new HekrUser.RegisterOAuthQRCodeListener() {
+            UserAction.getInstance(this).registerAuth(sn, new SiterUser.RegisterOAuthQRCodeListener() {
                 @Override
                 public void registerSuccess() {
                     //Toast.makeText(AddDeviceTypeActivity.this,"CHENGG",Toast.LENGTH_LONG).show();
@@ -157,7 +157,7 @@ public class AddDeviceTypeActivity extends TopbarSuperActivity implements View.O
     }
 
     private void getDeviceList(){
-        HekrUserAction.getInstance(this).getDevices(page, 20, new HekrUser.GetDevicesListener() {
+        UserAction.getInstance(this).getDevices(page, 20, new SiterUser.GetDevicesListener() {
             @Override
             public void getDevicesSuccess(List<DeviceBean> devicesLists) {
                 if(devicesLists.size()>=20){
@@ -205,8 +205,8 @@ public class AddDeviceTypeActivity extends TopbarSuperActivity implements View.O
             }
 
         }
-        HekrUserAction
-			.getInstance(this).devicesPutFolder(FolderPojo.getInstance().folderId, ctrlKey, devtid, new HekrUser.DevicePutFolderListener() {
+        UserAction
+			.getInstance(this).devicesPutFolder(FolderPojo.getInstance().folderId, ctrlKey, devtid, new SiterUser.DevicePutFolderListener() {
             @Override
             public void putSuccess() {
                 if(progressDialog!=null && progressDialog.isShowing()){

@@ -1,11 +1,7 @@
 package com.siterwell.demo;
 
 import android.content.DialogInterface;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextPaint;
 import android.text.TextUtils;
-import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,8 +13,8 @@ import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.common.UnitTools;
 import com.siterwell.demo.commonview.CodeEdit;
 import com.siterwell.demo.commonview.ECAlertDialog;
-import com.siterwell.sdk.http.HekrUser;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.SiterUser;
+import com.siterwell.sdk.http.UserAction;
 
 
 public class RegisterActivity extends TopbarSuperActivity implements View.OnClickListener{
@@ -99,7 +95,7 @@ public class RegisterActivity extends TopbarSuperActivity implements View.OnClic
                 if (!TextUtils.isEmpty(phone)) {
 
                     VerfyDialog dialog = new VerfyDialog();
-                    dialog.showDialog(this, HekrUserAction.getInstance(this),phone, HekrUserAction.REGISTER_TYPE_PHONE,1);
+                    dialog.showDialog(this, UserAction.getInstance(this),phone, UserAction.REGISTER_TYPE_PHONE,1);
                     dialog.show();
                 } else {
                     toastor.showSingleLongToast(getResources().getString(R.string.please_input_phone));
@@ -110,7 +106,7 @@ public class RegisterActivity extends TopbarSuperActivity implements View.OnClic
                 if (!TextUtils.isEmpty(email)) {
 
                     VerfyDialog dialog = new VerfyDialog();
-                    dialog.showDialog(this, HekrUserAction.getInstance(this),email, HekrUserAction.REGISTER_TYPE_PHONE,2);
+                    dialog.showDialog(this, UserAction.getInstance(this),email, UserAction.REGISTER_TYPE_PHONE,2);
                     dialog.show();
                 } else {
                     toastor.showSingleLongToast(getResources().getString(R.string.please_input_email));
@@ -170,7 +166,7 @@ public class RegisterActivity extends TopbarSuperActivity implements View.OnClic
 
 
     private void register(String phoneNumber, String pwd, String code) {
-        HekrUserAction.getInstance(this).registerByPhone(phoneNumber, pwd, code, new HekrUser.RegisterListener() {
+        UserAction.getInstance(this).registerByPhone(phoneNumber, pwd, code, new SiterUser.RegisterListener() {
             @Override
             public void registerSuccess(String uid) {
                 toastor.showSingleLongToast(getResources().getString(R.string.success_register));
@@ -185,7 +181,7 @@ public class RegisterActivity extends TopbarSuperActivity implements View.OnClic
     }
 
     private void registerByEmail(String email, String pwd,String code) {
-        HekrUserAction.getInstance(this).registerByEmail(email, pwd,code,  new HekrUser.RegisterListener() {
+        UserAction.getInstance(this).registerByEmail(email, pwd,code,  new SiterUser.RegisterListener() {
             @Override
             public void registerSuccess(String uid) {
                 ECAlertDialog D = ECAlertDialog.buildPositiveAlert(RegisterActivity.this, R.string.check_email, new DialogInterface.OnClickListener() {

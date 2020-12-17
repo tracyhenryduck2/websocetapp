@@ -32,7 +32,7 @@
         <!-- websocket control service -->
         <service android:name="me.siter.sdk.service.SiterConnectionService"
             android:exported="true"
-            android:label="HekrConnectionService"
+            android:label="ConnectionService"
             />
     </application>
 

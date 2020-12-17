@@ -8,7 +8,6 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.siterwell.sdk.R;
 import com.siterwell.sdk.http.bean.NewDeviceBean;
 
 import java.io.IOException;
@@ -23,7 +22,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 
 /**
- * Created by hekr_xm on 2016/8/9.
+ * Created by TracyHenry on 2020/12/17.
  **/
 public class SmartConfig {
 
@@ -42,7 +41,7 @@ public class SmartConfig {
     private CopyOnWriteArrayList<NewDeviceBean> deviceList = new CopyOnWriteArrayList<>();
     private CopyOnWriteArrayList<NewDeviceBean> localList = new CopyOnWriteArrayList<>();
 
-    private HekrUserAction hekrUserAction;
+    private UserAction userAction;
     private WifiManager.MulticastLock lock = null;
     private WifiManager manager;
 
@@ -84,7 +83,7 @@ public class SmartConfig {
                 case getDeviceCheckWhat:
                     if (!TextUtils.isEmpty(reallyPinCode) && !TextUtils.isEmpty(ssid)) {
                         Log.i(TAG, "查询新设备");
-                        hekrUserAction.getNewDevices(reallyPinCode, ssid, new HekrUser.GetNewDevicesListener() {
+                        userAction.getNewDevices(reallyPinCode, ssid, new SiterUser.GetNewDevicesListener() {
                             @Override
                             public void getSuccess(List<NewDeviceBean> list) {
                                 if (list != null && !list.isEmpty()) {
@@ -158,7 +157,7 @@ public class SmartConfig {
 
     public SmartConfig(Context context) {
         manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        hekrUserAction = HekrUserAction.getInstance(context);
+        userAction = UserAction.getInstance(context);
         smartConfigHandler = new SmartConfigHandler();
     }
 
@@ -185,7 +184,7 @@ public class SmartConfig {
     public void startConfig(final String ssid, final String password, final int number) {
         initConfig(ssid);
 
-        hekrUserAction.getPinCode(ssid, new HekrUser.GetPinCodeListener() {
+        userAction.getPinCode(ssid, new SiterUser.GetPinCodeListener() {
             @Override
             public void getSuccess(final String pinCode) {
                 reallyPinCode = pinCode;

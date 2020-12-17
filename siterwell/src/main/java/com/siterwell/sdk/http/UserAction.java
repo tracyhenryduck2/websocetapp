@@ -67,7 +67,7 @@ import me.siter.sdk.utils.SpCache;
  * Created by Administrator on 2017/10/16.
  */
 
-public class HekrUserAction {
+public class UserAction {
     /**
      * 用户注册类型
      * 1为手机号注册
@@ -81,7 +81,7 @@ public class HekrUserAction {
     public static final int REGISTER_NODE_ASIA = 3;
     public static final int REGISTER_NODE_AMERICA = 4;
     public static final int REGISTER_NODE_EUROPE = 5;
-    private static final String TAG = "HekrUserAction";
+    private static final String TAG = "userAction";
 
     /**
      * 发送验证码类型
@@ -107,21 +107,21 @@ public class HekrUserAction {
     private String JWT_TOKEN = null;
     private String refresh_TOKEN = null;
     private String userId = null;
-    private static volatile HekrUserAction instance = null;
+    private static volatile UserAction instance = null;
 
 
-    public static HekrUserAction getInstance(Context context) {
+    public static UserAction getInstance(Context context) {
         if (instance == null) {
-            synchronized (HekrUserAction.class) {
+            synchronized (UserAction.class) {
                 if (instance == null) {
-                    instance = new HekrUserAction(context.getApplicationContext());
+                    instance = new UserAction(context.getApplicationContext());
                 }
             }
         }
         return instance;
     }
 
-    private HekrUserAction(Context context) {
+    private UserAction(Context context) {
         SpCache.init(context.getApplicationContext());
         mContext = new WeakReference<>(context.getApplicationContext());
         startWebServicesFlag = 1;
@@ -139,7 +139,7 @@ public class HekrUserAction {
      * @param rid                   长度大于16，不能含有空格 验证码key
      * @param getImgCaptchaListener 回调接口
      */
-    public void getImgCaptcha(@NotNull String rid, final HekrUser.GetImgCaptchaListener getImgCaptchaListener) {
+    public void getImgCaptcha(@NotNull String rid, final SiterUser.GetImgCaptchaListener getImgCaptchaListener) {
         String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, "images/getImgCaptcha?rid=", rid).toString();
         BaseHttpUtil.getData(mContext.get(), url, new AsyncHttpResponseHandler() {
             @Override
@@ -148,13 +148,13 @@ public class HekrUserAction {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                     getImgCaptchaListener.getImgCaptchaSuccess(bitmap);
                 } else {
-                    getImgCaptchaListener.getImgCaptchaFail(HekrCodeUtil.getErrorCode(i, bytes));
+                    getImgCaptchaListener.getImgCaptchaFail(CodeUtil.getErrorCode(i, bytes));
                 }
             }
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                getImgCaptchaListener.getImgCaptchaFail(HekrCodeUtil.getErrorCode(i, bytes));
+                getImgCaptchaListener.getImgCaptchaFail(CodeUtil.getErrorCode(i, bytes));
             }
         });
     }
@@ -166,7 +166,7 @@ public class HekrUserAction {
      * @param code 验证码的值
      * @param rid  验证码key
      */
-    public void checkCaptcha(@NotNull String code, @NotNull String rid, final HekrUser.CheckCaptcha checkCaptcha) {
+    public void checkCaptcha(@NotNull String code, @NotNull String rid, final SiterUser.CheckCaptcha checkCaptcha) {
         String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, "images/checkCaptcha").toString();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code", code);
@@ -180,7 +180,7 @@ public class HekrUserAction {
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                checkCaptcha.checkCaptchaFail(HekrCodeUtil.getErrorCode(i, bytes));
+                checkCaptcha.checkCaptchaFail(CodeUtil.getErrorCode(i, bytes));
             }
         });
     }
@@ -193,7 +193,7 @@ public class HekrUserAction {
      * @param type                  验证码用途
      * @param getVerifyCodeListener 获取验证码回调
      */
-    public void getVerifyCode(String phoneNumber, int type,int style_type, final HekrUser.GetVerifyCodeListener getVerifyCodeListener) {
+    public void getVerifyCode(String phoneNumber, int type,int style_type, final SiterUser.GetVerifyCodeListener getVerifyCodeListener) {
         getVerifyCode(phoneNumber, type, 1, getVerifyCodeListener);
     }
 
@@ -206,7 +206,7 @@ public class HekrUserAction {
      * @param token                 校验图形验证码返回的token(发送手机短信校验码 接口中设备白名单过滤，如果pid在白名单中，访问改接口时，不需要带token 信息。否则访问时必须带token参数)
      * @param getVerifyCodeListener 获取验证码回调
      */
-    public void getVerifyCode(String phoneNumber, int type, String token, final HekrUser.GetVerifyCodeListener getVerifyCodeListener) {
+    public void getVerifyCode(String phoneNumber, int type, String token, final SiterUser.GetVerifyCodeListener getVerifyCodeListener) {
         String registerType;
         switch (type) {
             case CODE_TYPE_REGISTER:
@@ -228,7 +228,7 @@ public class HekrUserAction {
         maps.put("token", token);
         maps.put("type", registerType);
         maps.put("pid", SiterSDK.getPid());
-        url = HekrCommonUtil.getUrl(url, maps);
+        url = CommonUtil.getUrl(url, maps);
         BaseHttpUtil.getData(mContext.get(), url, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -238,7 +238,7 @@ public class HekrUserAction {
 
                     @Override
                     public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                        getVerifyCodeListener.getVerifyCodeFail(HekrCodeUtil.getErrorCode(i, bytes));
+                        getVerifyCodeListener.getVerifyCodeFail(CodeUtil.getErrorCode(i, bytes));
                     }
 
                 }
@@ -253,7 +253,7 @@ public class HekrUserAction {
      * @param token                 校验图形验证码返回的token(发送手机短信校验码 接口中设备白名单过滤，如果pid在白名单中，访问改接口时，不需要带token 信息。否则访问时必须带token参数)
      * @param getVerifyCodeListener 获取验证码回调
      */
-    public void getEmailVerifyCode(String email, int type, String token, final HekrUser.GetVerifyCodeListener getVerifyCodeListener) {
+    public void getEmailVerifyCode(String email, int type, String token, final SiterUser.GetVerifyCodeListener getVerifyCodeListener) {
         String registerType;
         switch (type) {
             case CODE_TYPE_REGISTER:
@@ -275,7 +275,7 @@ public class HekrUserAction {
         maps.put("token", token);
         maps.put("type", registerType);
         maps.put("pid", SiterSDK.getPid());
-        url = HekrCommonUtil.getUrl(url, maps);
+        url = CommonUtil.getUrl(url, maps);
         BaseHttpUtil.getData(mContext.get(), url, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -285,7 +285,7 @@ public class HekrUserAction {
 
                     @Override
                     public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                        getVerifyCodeListener.getVerifyCodeFail(HekrCodeUtil.getErrorCode(i, bytes));
+                        getVerifyCodeListener.getVerifyCodeFail(CodeUtil.getErrorCode(i, bytes));
                     }
 
                 }
@@ -301,7 +301,7 @@ public class HekrUserAction {
      * @param code                    用户收到的验证码，长度为6位
      * @param checkVerifyCodeListener 验证码校验回调
      */
-    public void checkVerifyCode(String phoneNumber, String code, final HekrUser.CheckVerifyCodeListener checkVerifyCodeListener) {
+    public void checkVerifyCode(String phoneNumber, String code, final SiterUser.CheckVerifyCodeListener checkVerifyCodeListener) {
         String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_CHECK_CODE_URL, phoneNumber, "&code=", code).toString();
         BaseHttpUtil.getData(mContext.get(), url, new AsyncHttpResponseHandler() {
             @Override
@@ -314,7 +314,7 @@ public class HekrUserAction {
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
                 //获取验证码失败
-                checkVerifyCodeListener.checkVerifyCodeFail(HekrCodeUtil.getErrorCode(i, bytes));
+                checkVerifyCodeListener.checkVerifyCodeFail(CodeUtil.getErrorCode(i, bytes));
             }
         });
     }
@@ -328,7 +328,7 @@ public class HekrUserAction {
      * @param code            校验验证码返回的注册TokenToken
      * @param registerListener 注册接口
      */
-    public void registerByPhone(String phoneNumber, String password, String code, final HekrUser.RegisterListener registerListener) {
+    public void registerByPhone(String phoneNumber, String password, String code, final SiterUser.RegisterListener registerListener) {
         /*String node = null;
         int dataCenterNode = 3;
         switch (dataCenterNode) {
@@ -359,7 +359,7 @@ public class HekrUserAction {
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                registerListener.registerFail(HekrCodeUtil.getErrorCode(i, bytes));
+                registerListener.registerFail(CodeUtil.getErrorCode(i, bytes));
             }
         });
     }
@@ -371,7 +371,7 @@ public class HekrUserAction {
      * @param email            用户邮箱
      * @param registerListener 注册回调
      */
-    public void registerByEmail(String email, String password,String code, final HekrUser.RegisterListener registerListener) {
+    public void registerByEmail(String email, String password,String code, final SiterUser.RegisterListener registerListener) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("password", password);
         jsonObject.put("email", email);
@@ -386,7 +386,7 @@ public class HekrUserAction {
 
                     @Override
                     public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                        registerListener.registerFail(HekrCodeUtil.getErrorCode(i, bytes));
+                        registerListener.registerFail(CodeUtil.getErrorCode(i, bytes));
                     }
                 }
 
@@ -403,7 +403,7 @@ public class HekrUserAction {
      * @param password         密码
      * @param resetPwdListener 回调
      */
-    public void resetPwd(String phoneNumber, String verifyCode, String password, final HekrUser.ResetPwdListener resetPwdListener) {
+    public void resetPwd(String phoneNumber, String verifyCode, String password, final SiterUser.ResetPwdListener resetPwdListener) {
         _resetPwd(phoneNumber, verifyCode, null, password, resetPwdListener);
     }
 
@@ -414,7 +414,7 @@ public class HekrUserAction {
      * @param password         用户新密码
      * @param resetPwdListener 回调
      */
-    public void resetPwdBySecurity(String token, String password, final HekrUser.ResetPwdListener resetPwdListener) {
+    public void resetPwdBySecurity(String token, String password, final SiterUser.ResetPwdListener resetPwdListener) {
         _resetPwd(null, null, token, password, resetPwdListener);
     }
 
@@ -428,7 +428,7 @@ public class HekrUserAction {
      * @param password         用户新密码
      * @param resetPwdListener 回调
      */
-    private void _resetPwd(String phoneNumber, String verifyCode, String token, String password, final HekrUser.ResetPwdListener resetPwdListener) {
+    private void _resetPwd(String phoneNumber, String verifyCode, String token, String password, final SiterUser.ResetPwdListener resetPwdListener) {
         String type = TextUtils.isEmpty(phoneNumber) ? "security" : "phone";
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("password", password);
@@ -451,7 +451,7 @@ public class HekrUserAction {
 
                     @Override
                     public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                        resetPwdListener.resetFail(HekrCodeUtil.getErrorCode(i, bytes));
+                        resetPwdListener.resetFail(CodeUtil.getErrorCode(i, bytes));
                     }
                 }
 
@@ -467,7 +467,7 @@ public class HekrUserAction {
      * @param password         用户新密码
      * @param resetPwdListener 回调
      */
-    public void resetPwdByEmail(String email, String verifyCode, String password, final HekrUser.ResetPwdListener resetPwdListener) {
+    public void resetPwdByEmail(String email, String verifyCode, String password, final SiterUser.ResetPwdListener resetPwdListener) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("password", password);
             jsonObject.put("email", email);
@@ -482,7 +482,7 @@ public class HekrUserAction {
 
                     @Override
                     public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                        resetPwdListener.resetFail(HekrCodeUtil.getErrorCode(i, bytes));
+                        resetPwdListener.resetFail(CodeUtil.getErrorCode(i, bytes));
                     }
                 }
 
@@ -497,12 +497,12 @@ public class HekrUserAction {
      * @param oldPassword       旧密码
      * @param changePwdListener 回调接口
      */
-    public void changePassword(String newPassword, String oldPassword, final HekrUser.ChangePwdListener changePwdListener) {
+    public void changePassword(String newPassword, String oldPassword, final SiterUser.ChangePwdListener changePwdListener) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("newPassword", newPassword);
         jsonObject.put("oldPassword", oldPassword);
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_CHANGR_PWD_URL);
-        postHekrData(url, jsonObject.toJSONString(), new GetHekrDataListener() {
+        postSiterData(url, jsonObject.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 changePwdListener.changeSuccess();
@@ -521,18 +521,18 @@ public class HekrUserAction {
      * <p>
      * 用户的老手机号不用了，想换一个手机号，而且希望老数据都能保存下来，可以使用该接口。
      *
-     * @param token                     token(需要调用发送短信验证码接口给老手机号发送验证码{@link #getVerifyCode},类型为{@link #CODE_TYPE_CHANGE_PHONE}，并调用校验短信验证码接口{@link #checkVerifyCode(String, String, HekrUser.CheckVerifyCodeListener)}成功时获取。)
+     * @param token                     token(需要调用发送短信验证码接口给老手机号发送验证码{@link #getVerifyCode},类型为{@link #CODE_TYPE_CHANGE_PHONE}，并调用校验短信验证码接口{@link #checkVerifyCode(String, String, SiterUser.CheckVerifyCodeListener)}成功时获取。)
      * @param verifyCode                验证码(需要调用发送短信验证码接口给新手机号phoneNumber发送验证码获取{@link #getVerifyCode},类型为{@link #CODE_TYPE_REGISTER})
      * @param phoneNumber               用户新手机号码
      * @param changePhoneNumberListener 回调接口
      */
-    public void changePhoneNumber(String token, String verifyCode, String phoneNumber, final HekrUser.ChangePhoneNumberListener changePhoneNumberListener) {
+    public void changePhoneNumber(String token, String verifyCode, String phoneNumber, final SiterUser.ChangePhoneNumberListener changePhoneNumberListener) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("token", token);
         jsonObject.put("verifyCode", verifyCode);
         jsonObject.put("phoneNumber", phoneNumber);
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_CHANGE_PHONE_URL);
-        postHekrData(url, jsonObject.toJSONString(), new GetHekrDataListener() {
+        postSiterData(url, jsonObject.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 changePhoneNumberListener.changePhoneNumberSuccess();
@@ -551,8 +551,8 @@ public class HekrUserAction {
      * @param email                          邮箱
      * @param sendResetPasswordEmailListener 回调接口
      */
-    public void sendResetPwdEmail(String email, final HekrUser.SendResetPwdEmailListener sendResetPasswordEmailListener) {
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, "sendResetPasswordEmail?email=", HekrCommonUtil.getEmail(email),"&pid=", SiterSDK.getPid()).toString();
+    public void sendResetPwdEmail(String email, final SiterUser.SendResetPwdEmailListener sendResetPasswordEmailListener) {
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, "sendResetPasswordEmail?email=", CommonUtil.getEmail(email),"&pid=", SiterSDK.getPid()).toString();
         BaseHttpUtil.getData(mContext.get(), url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -561,7 +561,7 @@ public class HekrUserAction {
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                sendResetPasswordEmailListener.sendFail(HekrCodeUtil.getErrorCode(i, bytes));
+                sendResetPasswordEmailListener.sendFail(CodeUtil.getErrorCode(i, bytes));
             }
         });
     }
@@ -573,8 +573,8 @@ public class HekrUserAction {
      * @param email               邮箱
      * @param reSendVerifiedEmail 回调接口
      */
-    public void reSendVerifiedEmail(@NotNull String email, final HekrUser.ReSendVerifiedEmailListener reSendVerifiedEmail) {
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, "resendVerifiedEmail?email=", HekrCommonUtil.getEmail(email)).toString();
+    public void reSendVerifiedEmail(@NotNull String email, final SiterUser.ReSendVerifiedEmailListener reSendVerifiedEmail) {
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, "resendVerifiedEmail?email=", CommonUtil.getEmail(email)).toString();
         BaseHttpUtil.getData(mContext.get(), url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -583,7 +583,7 @@ public class HekrUserAction {
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                reSendVerifiedEmail.reSendVerifiedEmailFail(HekrCodeUtil.getErrorCode(i, bytes));
+                reSendVerifiedEmail.reSendVerifiedEmailFail(CodeUtil.getErrorCode(i, bytes));
             }
         });
     }
@@ -597,10 +597,9 @@ public class HekrUserAction {
      * @param email                   邮箱
      * @param sendChangeEmailListener 回调接口
      */
-    public void sendChangeEmailStep1Email(@NotNull String email, final HekrUser.SendChangeEmailListener sendChangeEmailListener) {
-        //http://uaa.openapi.hekr.me/sendChangeEmailStep1Email?email=test@hekr.me&pid=01698862200
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_SEND_CHANGE_EMAIL, HekrCommonUtil.getEmail(email));
-        getHekrData(url, new GetHekrDataListener() {
+    public void sendChangeEmailStep1Email(@NotNull String email, final SiterUser.SendChangeEmailListener sendChangeEmailListener) {
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_SEND_CHANGE_EMAIL, CommonUtil.getEmail(email));
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 sendChangeEmailListener.sendChangeEmailSuccess();
@@ -632,11 +631,11 @@ public class HekrUserAction {
 
                 @Override
                 public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                    Log.e(SiterConstantsUtil.HEKR_SDK_ERROR, HekrCodeUtil.errorCode2Msg(HekrCodeUtil.getErrorCode(i, bytes)));
+                    Log.e(SiterConstantsUtil.SDK_ERROR, CodeUtil.errorCode2Msg(CodeUtil.getErrorCode(i, bytes)));
                 }
             });
         } else {
-            Log.e(SiterConstantsUtil.HEKR_SDK_ERROR, "Token is null");
+            Log.e(SiterConstantsUtil.SDK_ERROR, "Token is null");
         }
     }
 
@@ -650,9 +649,9 @@ public class HekrUserAction {
      * @param token             绑定token
      * @param bindOAuthListener 绑定接口。使用此接口之前必须登录！
      */
-    public void bindOAuth(@NotNull String token, final HekrUser.BindOAuthListener bindOAuthListener) {
+    public void bindOAuth(@NotNull String token, final SiterUser.BindOAuthListener bindOAuthListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, "account/bind?token=", token);
-        getHekrData(url, new GetHekrDataListener() {
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 bindOAuthListener.bindSuccess();
@@ -671,7 +670,7 @@ public class HekrUserAction {
      * @param type              类型 QQ 微博 微信
      * @param bindOAuthListener 回调接口
      */
-    public void unbindOAuth(int type, final HekrUser.BindOAuthListener bindOAuthListener) {
+    public void unbindOAuth(int type, final SiterUser.BindOAuthListener bindOAuthListener) {
         String auth_type = null;
         switch (type) {
             case OAUTH_QQ:
@@ -696,7 +695,7 @@ public class HekrUserAction {
                 break;
         }
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, "account/unbind?type=", auth_type);
-        getHekrData(url, new GetHekrDataListener() {
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 bindOAuthListener.bindSuccess();
@@ -714,21 +713,21 @@ public class HekrUserAction {
 
 
     /**
-     * 通过手机将第三方账号升级为hekr主账号
+     * 通过手机将第三方账号升级为主账号
      *
      * @param phoneNumber 用户手机号
      * @param password    用户密码
      * @param verifyCode  手机验证码
-     * @param token       3.2返回里的token{@link #checkVerifyCode(String, String, HekrUser.CheckVerifyCodeListener)}
+     * @param token       3.2返回里的token{@link #checkVerifyCode(String, String, SiterUser.CheckVerifyCodeListener)}
      */
-    public void accountUpgrade(@NotNull String phoneNumber, @NotNull String password, @NotNull String verifyCode, @NotNull String token, final HekrUser.AccountUpgradeListener upgradeListener) {
+    public void accountUpgrade(@NotNull String phoneNumber, @NotNull String password, @NotNull String verifyCode, @NotNull String token, final SiterUser.AccountUpgradeListener upgradeListener) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("phoneNumber", phoneNumber);
         jsonObject.put("password", password);
         jsonObject.put("token", token);
         jsonObject.put("verifyCode", verifyCode);
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.ACCOUNT_UPGRADE);
-        postHekrData(url, jsonObject.toJSONString(), new GetHekrDataListener() {
+        postSiterData(url, jsonObject.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 upgradeListener.UpgradeSuccess();
@@ -747,13 +746,13 @@ public class HekrUserAction {
      * @param email    用户邮箱
      * @param password 用户密码
      */
-    public void accountUpgradeByEmail(@NotNull String email, @NotNull String password, final HekrUser.SendEmailListener sendEmailListener) {
+    public void accountUpgradeByEmail(@NotNull String email, @NotNull String password, final SiterUser.SendEmailListener sendEmailListener) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("email", email);
         jsonObject.put("password", password);
         jsonObject.put("from", "uaa");
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.SEND_EMAIL);
-        postHekrData(url, jsonObject.toJSONString(), new GetHekrDataListener() {
+        postSiterData(url, jsonObject.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 sendEmailListener.sendSuccess();
@@ -773,13 +772,13 @@ public class HekrUserAction {
      * @param secondSecurityQues 密保问题2
      * @param thirdSecurityQues  密保问题3
      */
-    public void setSecurityQuestion(@NotNull String firstSecurityQues, @NotNull String secondSecurityQues, @NotNull String thirdSecurityQues, final HekrUser.SetSecurityQuestionListener setListener) {
+    public void setSecurityQuestion(@NotNull String firstSecurityQues, @NotNull String secondSecurityQues, @NotNull String thirdSecurityQues, final SiterUser.SetSecurityQuestionListener setListener) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("firstSecurityQues", firstSecurityQues);
         jsonObject.put("secondSecurityQues", secondSecurityQues);
         jsonObject.put("thirdSecurityQues", thirdSecurityQues);
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, "setSecurityQuestion");
-        postHekrData(url, jsonObject.toJSONString(), new GetHekrDataListener() {
+        postSiterData(url, jsonObject.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 setListener.setSuccess();
@@ -800,7 +799,7 @@ public class HekrUserAction {
      * @param secondSecurityQues 密保问题2
      * @param thirdSecurityQues  密保问题3
      */
-    public void checkSecurityQuestion(@NotNull String firstSecurityQues, @NotNull String secondSecurityQues, @NotNull String thirdSecurityQues, String phoneNumber, final HekrUser.CheckVerifyCodeListener checkVerifyCodeListener) {
+    public void checkSecurityQuestion(@NotNull String firstSecurityQues, @NotNull String secondSecurityQues, @NotNull String thirdSecurityQues, String phoneNumber, final SiterUser.CheckVerifyCodeListener checkVerifyCodeListener) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("firstSecurityQues", firstSecurityQues);
         jsonObject.put("secondSecurityQues", secondSecurityQues);
@@ -817,7 +816,7 @@ public class HekrUserAction {
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                checkVerifyCodeListener.checkVerifyCodeFail(HekrCodeUtil.getErrorCode(i, bytes));
+                checkVerifyCodeListener.checkVerifyCodeFail(CodeUtil.getErrorCode(i, bytes));
 
             }
         });
@@ -829,7 +828,7 @@ public class HekrUserAction {
      * @param phoneNumber 用户手机号
      * @param is          回调
      */
-    public void isSecurityAccount(@NotNull String phoneNumber, final HekrUser.IsSecurityAccountListener is) {
+    public void isSecurityAccount(@NotNull String phoneNumber, final SiterUser.IsSecurityAccountListener is) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, "isSecurityAccount?phoneNumber=", phoneNumber);
         BaseHttpUtil.getData(mContext.get(), url.toString(), new AsyncHttpResponseHandler() {
             @Override
@@ -840,7 +839,7 @@ public class HekrUserAction {
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                is.checkFail(HekrCodeUtil.getErrorCode(i, bytes));
+                is.checkFail(CodeUtil.getErrorCode(i, bytes));
             }
         });
     }
@@ -851,7 +850,7 @@ public class HekrUserAction {
      * @param bindDeviceBean     绑定设备Bean
      * @param bindDeviceListener 回调接口
      */
-    public void bindDevice(BindDeviceBean bindDeviceBean, final HekrUser.BindDeviceListener bindDeviceListener) {
+    public void bindDevice(BindDeviceBean bindDeviceBean, final SiterUser.BindDeviceListener bindDeviceListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.BIND_DEVICE);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("devTid", bindDeviceBean.getDevTid());
@@ -859,7 +858,7 @@ public class HekrUserAction {
         jsonObject.put("deviceName", bindDeviceBean.getDeviceName());
         jsonObject.put("desc", bindDeviceBean.getDesc());
 
-        postHekrData(url, jsonObject.toString(), new GetHekrDataListener() {
+        postSiterData(url, jsonObject.toString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 bindDeviceListener.bindDeviceSuccess(JSON.parseObject(object.toString(), DeviceBean.class));
@@ -878,7 +877,7 @@ public class HekrUserAction {
      *
      * @param getDevicesListener 回调接口
      */
-    public void getDevices(HekrUser.GetDevicesListener getDevicesListener) {
+    public void getDevices(SiterUser.GetDevicesListener getDevicesListener) {
         getDevices(0, 20, getDevicesListener);
     }
 
@@ -888,7 +887,7 @@ public class HekrUserAction {
      *
      * @param getDevicesListener 回调接口
      */
-    public void getDevices(String devTid, HekrUser.GetDevicesListener getDevicesListener) {
+    public void getDevices(String devTid, SiterUser.GetDevicesListener getDevicesListener) {
         getDevices(0, 20, devTid, getDevicesListener);
     }
 
@@ -898,7 +897,7 @@ public class HekrUserAction {
      *
      * @param getDevicesListener 回调接口
      */
-    public void getDevices(int page, int size, HekrUser.GetDevicesListener getDevicesListener) {
+    public void getDevices(int page, int size, SiterUser.GetDevicesListener getDevicesListener) {
 
         getDevices(page, size, null, getDevicesListener);
     }
@@ -909,16 +908,16 @@ public class HekrUserAction {
      *
      * @param getDevicesListener 回调接口
      */
-    public void getDevices(int page, int size, String devTid, final HekrUser.GetDevicesListener getDevicesListener) {
+    public void getDevices(int page, int size, String devTid, final SiterUser.GetDevicesListener getDevicesListener) {
         //CharSequence url = TextUtils.concat(SiterConstantsUtil.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.BIND_DEVICE, "?page=", String.valueOf(page), "&size=", String.valueOf(size));
         String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.BIND_DEVICE).toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("devTid", devTid);
         maps.put("page", String.valueOf(page));
         maps.put("size", String.valueOf(size));
-        url = HekrCommonUtil.getUrl(url, maps);
+        url = CommonUtil.getUrl(url, maps);
 
-        getHekrData(url, new GetHekrDataListener() {
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 List<DeviceBean> lists = JSON.parseArray(object.toString(), DeviceBean.class);
@@ -941,10 +940,9 @@ public class HekrUserAction {
      * @param bindKey       绑定码
      * @param deleteDevices 回调接口
      */
-    public void deleteDevice(@NotNull String devTid, @NotNull String bindKey, final HekrUser.DeleteDeviceListener deleteDevices) {
+    public void deleteDevice(@NotNull String devTid, @NotNull String bindKey, final SiterUser.DeleteDeviceListener deleteDevices) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.BIND_DEVICE, "/", devTid, "?bindKey=", bindKey);
-        //http://user.openapi.hekr.me/device/{devTid}?bindKey={bindKey};
-        deleteHekrData(url, new GetHekrDataListener() {
+        deleteSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 deleteDevices.deleteDeviceSuccess();
@@ -967,7 +965,7 @@ public class HekrUserAction {
      * @param desc                 设备描述 长度[1, 128]
      * @param renameDeviceListener 回调接口
      */
-    public void renameDevice(@NotNull String devTid, @NotNull String ctrlKey, @NotNull String deviceName, String desc,String ConnectHost, final HekrUser.RenameDeviceListener renameDeviceListener) {
+    public void renameDevice(@NotNull String devTid, @NotNull String ctrlKey, @NotNull String deviceName, String desc,String ConnectHost, final SiterUser.RenameDeviceListener renameDeviceListener) {
         renameDevice(devTid, null, ctrlKey, deviceName, desc,ConnectHost, renameDeviceListener);
     }
 
@@ -981,13 +979,12 @@ public class HekrUserAction {
      * @param desc                 设备描述 长度[1, 128]
      * @param renameDeviceListener 回调接口
      */
-    public void renameDevice(@NotNull String devTid, String subDevTid, @NotNull String ctrlKey, @NotNull String deviceName, String desc,String ConnectHost, final HekrUser.RenameDeviceListener renameDeviceListener) {
+    public void renameDevice(@NotNull String devTid, String subDevTid, @NotNull String ctrlKey, @NotNull String deviceName, String desc,String ConnectHost, final SiterUser.RenameDeviceListener renameDeviceListener) {
 
         try {
             if(deviceName.getBytes("GBK").length<=15){
 
                 if(!EmojiFilter.containsEmoji(deviceName)){
-                    // "http://user.openapi.hekr.me/device/{devTid}"
                     CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.BIND_DEVICE, "/", devTid);
                     if (!TextUtils.isEmpty(subDevTid)) {
                         //网关下子设备
@@ -1000,7 +997,7 @@ public class HekrUserAction {
                     if (!TextUtils.isEmpty(desc)) {
                         jsonObject.put("desc", desc);
                     }
-                    patchHekrData(url, jsonObject.toString(), new GetHekrDataListener() {
+                    patchSiterData(url, jsonObject.toString(), new GetDataListener() {
                         @Override
                         public void getSuccess(Object object) {
                             renameDeviceListener.renameDeviceSuccess();
@@ -1043,13 +1040,13 @@ public class HekrUserAction {
      * 4.1.5 获取当前局域网内所有设备绑定状态<br>
      * 只返回正确的devTid/bindKey对应的设备绑定状态，所以返回里的元素数量会少于提交里的元素数量。<br>
      * 后续操作按照4.1.1执行
-     * {@link #bindDevice(BindDeviceBean, HekrUser.BindDeviceListener)}
+     * {@link #bindDevice(BindDeviceBean, SiterUser.BindDeviceListener)}
      *
      * @param devTid                设备ID
      * @param bindKey               绑定码
      * @param getBindStatusListener 回调接口
      */
-    public void deviceBindStatus(String devTid, String bindKey, final HekrUser.GetBindStatusListener getBindStatusListener) {
+    public void deviceBindStatus(String devTid, String bindKey, final SiterUser.GetBindStatusListener getBindStatusListener) {
         final JSONObject obj = new JSONObject();
         obj.put("devTid", devTid);
         obj.put("bindKey", bindKey);
@@ -1063,14 +1060,14 @@ public class HekrUserAction {
      * 4.1.5 获取当前局域网内所有设备绑定状态<br>
      * 只返回正确的devTid/bindKey对应的设备绑定状态，所以返回里的元素数量会少于提交里的元素数量。<br>
      * 后续操作按照4.1.1执行
-     * {@link #bindDevice(BindDeviceBean, HekrUser.BindDeviceListener)}
+     * {@link #bindDevice(BindDeviceBean, SiterUser.BindDeviceListener)}
      *
      * @param array                 [ {"bindKey" : "xxxxx", "devTid" : "ESP_test"},... }]
-     * @param getBindStatusListener 回调接口{@link HekrUser.GetBindStatusListener}
+     * @param getBindStatusListener 回调接口{@link SiterUser.GetBindStatusListener}
      */
-    public void deviceBindStatus(JSONArray array, final HekrUser.GetBindStatusListener getBindStatusListener) {
+    public void deviceBindStatus(JSONArray array, final SiterUser.GetBindStatusListener getBindStatusListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.DEVICE_BIND_STATUS);
-        postHekrData(url, array.toString(), new GetHekrDataListener() {
+        postSiterData(url, array.toString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 getBindStatusListener.getStatusSuccess(JSONArray.parseArray(object.toString(), DeviceStatusBean.class));
@@ -1086,20 +1083,20 @@ public class HekrUserAction {
 
     /**
      * 4.1.5 获取当前局域网内所有设备绑定状态，
-     * 如果可以绑定直接就进行调用4.1.1接口{@link #bindDevice(BindDeviceBean, HekrUser.BindDeviceListener)}进行绑定操作;<br>
+     * 如果可以绑定直接就进行调用4.1.1接口{@link #bindDevice(BindDeviceBean, SiterUser.BindDeviceListener)}进行绑定操作;<br>
      *
      * @param devTid                       设备ID
      * @param bindKey                      绑定码
-     * @param getBindStatusAndBindListener 回调接口 {@link HekrUser.GetBindStatusAndBindListener}
+     * @param getBindStatusAndBindListener 回调接口 {@link SiterUser.GetBindStatusAndBindListener}
      */
-    public void deviceBindStatusAndBind(final String devTid, final String bindKey, final HekrUser.GetBindStatusAndBindListener getBindStatusAndBindListener) {
+    public void deviceBindStatusAndBind(final String devTid, final String bindKey, final SiterUser.GetBindStatusAndBindListener getBindStatusAndBindListener) {
         try {
             final JSONObject obj = new JSONObject();
             obj.put("devTid", devTid);
             obj.put("bindKey", bindKey);
             JSONArray array = new JSONArray();
             array.add(obj);
-            deviceBindStatus(array, new HekrUser.GetBindStatusListener() {
+            deviceBindStatus(array, new SiterUser.GetBindStatusListener() {
                 @Override
                 public void getStatusSuccess(List<DeviceStatusBean> deviceStatusBeanLists) {
                     //直接进行绑定操作
@@ -1110,7 +1107,7 @@ public class HekrUserAction {
                         if (deviceStatusBean.isForceBind() || !deviceStatusBean.isBindToUser()) {
                             String name = (deviceStatusBean.getCidName().substring(deviceStatusBean.getCidName().indexOf("/") + 1));
                             BindDeviceBean bindDeviceBean = new BindDeviceBean(devTid, bindKey, name, "");
-                            bindDevice(bindDeviceBean, new HekrUser.BindDeviceListener() {
+                            bindDevice(bindDeviceBean, new SiterUser.BindDeviceListener() {
                                 @Override
                                 public void bindDeviceSuccess(DeviceBean deviceBean) {
                                     getBindStatusAndBindListener.bindDeviceSuccess(deviceBean);
@@ -1143,12 +1140,12 @@ public class HekrUserAction {
      * @param bindKey               绑定码
      * @param getQueryOwnerListener 回调接口
      */
-    public void queryOwner(String devTid, String bindKey, final HekrUser.GetQueryOwnerListener getQueryOwnerListener) {
+    public void queryOwner(String devTid, String bindKey, final SiterUser.GetQueryOwnerListener getQueryOwnerListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, "queryOwner");
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("devTid", devTid);
         jsonObject.put("bindKey", bindKey);
-        postHekrData(url, jsonObject.toJSONString(), new GetHekrDataListener() {
+        postSiterData(url, jsonObject.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 JSONObject jsonObject = JSONObject.parseObject(object.toString());
@@ -1167,9 +1164,9 @@ public class HekrUserAction {
      * 4.1.10 获取当前局域网设备配网详情
      * 该接口用于配网时查看当前局域网内设备配网进度
      */
-    public void getNewDevices(String pinCode, String ssid, final HekrUser.GetNewDevicesListener getNewDevicesListener) {
+    public void getNewDevices(String pinCode, String ssid, final SiterUser.GetNewDevicesListener getNewDevicesListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.GET_NEW_DEVICE, pinCode, "&ssid=", ssid);
-        getHekrData(url, new GetHekrDataListener() {
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 Log.i(TAG, "object:" + object.toString());
@@ -1188,13 +1185,13 @@ public class HekrUserAction {
      * 4.2.1 添加目录
      *
      * @param folderName        目录名称
-     * @param addFolderListener 回调接口{@link HekrUser.AddFolderListener}
+     * @param addFolderListener 回调接口{@link SiterUser.AddFolderListener}
      */
-    public void addFolder(@NotNull String folderName, final HekrUser.AddFolderListener addFolderListener) {
+    public void addFolder(@NotNull String folderName, final SiterUser.AddFolderListener addFolderListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.FOLDER);
         JSONObject obj = new JSONObject();
         obj.put("folderName", folderName);
-        postHekrData(url, obj.toString(), new GetHekrDataListener() {
+        postSiterData(url, obj.toString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 addFolderListener.addFolderSuccess(JSON.parseObject(object.toString(), FolderBean.class));
@@ -1213,10 +1210,9 @@ public class HekrUserAction {
      *
      * @param page 页数
      */
-    public void getFolder(int page, final HekrUser.GetFolderListsListener getFolderListsListener) {
-        //http://user.openapi.hekr.me/folder?folderId=xxx,xxx1&page=1&size=1
+    public void getFolder(int page, final SiterUser.GetFolderListsListener getFolderListsListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.FOLDER, "?page=", String.valueOf(page));
-        getHekrData(url, new GetHekrDataListener() {
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 getFolderListsListener.getSuccess(JSON.parseArray(object.toString(), FolderListBean.class));
@@ -1237,12 +1233,12 @@ public class HekrUserAction {
      * @param folderId             目录ID
      * @param renameFolderListener 回调接口
      */
-    public void renameFolder(String newFolderName, String folderId, final HekrUser.RenameFolderListener renameFolderListener) {
+    public void renameFolder(String newFolderName, String folderId, final SiterUser.RenameFolderListener renameFolderListener) {
         JSONObject object = new JSONObject();
         object.put("newFolderName", newFolderName);
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.FOLDER, "/", folderId);
 
-        putHekrData(url, object.toJSONString(), new GetHekrDataListener() {
+        putSiterData(url, object.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 renameFolderListener.renameSuccess();
@@ -1261,7 +1257,7 @@ public class HekrUserAction {
      *
      * @param deleteFolderListener 回调
      */
-    public void deleteFolder(final HekrUser.DeleteFolderListener deleteFolderListener) {
+    public void deleteFolder(final SiterUser.DeleteFolderListener deleteFolderListener) {
         deleteFolder(null, deleteFolderListener);
     }
 
@@ -1273,12 +1269,12 @@ public class HekrUserAction {
      * @param folderId             目录ID
      * @param deleteFolderListener 回调
      */
-    public void deleteFolder(String folderId, final HekrUser.DeleteFolderListener deleteFolderListener) {
+    public void deleteFolder(String folderId, final SiterUser.DeleteFolderListener deleteFolderListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.FOLDER);
         if (!TextUtils.isEmpty(folderId)) {
             url = TextUtils.concat(url, "/", folderId);
         }
-        deleteHekrData(url, new GetHekrDataListener() {
+        deleteSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 deleteFolderListener.deleteSuccess();
@@ -1299,12 +1295,12 @@ public class HekrUserAction {
      * @param devTid                  设备ID
      * @param devicePutFolderListener 回调接口
      */
-    public void devicesPutFolder(String folderId, String ctrlKey, String devTid, final HekrUser.DevicePutFolderListener devicePutFolderListener) {
+    public void devicesPutFolder(String folderId, String ctrlKey, String devTid, final SiterUser.DevicePutFolderListener devicePutFolderListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.FOLDER, "/", folderId);
         JSONObject obj = new JSONObject();
         obj.put("devTid", devTid);
         obj.put("ctrlKey", ctrlKey);
-        postHekrData(url, obj.toJSONString(), new GetHekrDataListener() {
+        postSiterData(url, obj.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 devicePutFolderListener.putSuccess();
@@ -1325,9 +1321,9 @@ public class HekrUserAction {
      * @param devTid                  设备控制码
      * @param devicePutFolderListener 回调方法
      */
-    public void folderToRoot(String folderId, String ctrlKey, String devTid, final HekrUser.DevicePutFolderListener devicePutFolderListener) {
+    public void folderToRoot(String folderId, String ctrlKey, String devTid, final SiterUser.DevicePutFolderListener devicePutFolderListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.FOLDER, "/", folderId, "/", devTid, "?", SiterConstantsUtil.UrlUtil.CTRL_KEY, ctrlKey);
-        deleteHekrData(url, new GetHekrDataListener() {
+        deleteSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 devicePutFolderListener.putSuccess();
@@ -1348,11 +1344,11 @@ public class HekrUserAction {
      *
      * @param createOAuthQRCodeListener 回调接口
      */
-    public void oAuthCreateCode(String ctrlKey, final HekrUser.CreateOAuthQRCodeListener createOAuthQRCodeListener) {
+    public void oAuthCreateCode(String ctrlKey, final SiterUser.CreateOAuthQRCodeListener createOAuthQRCodeListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.AUTHORIZATION_REVERSE_AUTH_URL);
         JSONObject obj = new JSONObject();
         obj.put("ctrlKey", ctrlKey);
-        postHekrData(url, JSON.toJSONString(obj), new GetHekrDataListener() {
+        postSiterData(url, JSON.toJSONString(obj), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 String reverseAuthorizationTemplateId = JSON.parseObject(object.toString()).getString("reverseAuthorizationTemplateId");
@@ -1375,9 +1371,9 @@ public class HekrUserAction {
      * @param reverseAuthorizationTemplateId 回调接口
      * @param registerOAuthQRCodeListener    授权id
      */
-    public void registerAuth(String reverseAuthorizationTemplateId, final HekrUser.RegisterOAuthQRCodeListener registerOAuthQRCodeListener) {
+    public void registerAuth(String reverseAuthorizationTemplateId, final SiterUser.RegisterOAuthQRCodeListener registerOAuthQRCodeListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.AUTHORIZATION_REVERSE_REGISTER, SiterConstantsUtil.UrlUtil.REVERSE_TEMPLATE_ID, reverseAuthorizationTemplateId);
-        postHekrData(url, null, new GetHekrDataListener() {
+        postSiterData(url, null, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 registerOAuthQRCodeListener.registerSuccess();
@@ -1404,7 +1400,7 @@ public class HekrUserAction {
      * @param reverseRegisterId    可选
      * @param getOauthInfoListener 回调接口
      */
-    public void getOAuthInfoRequest(String devTid, int page, int size, String reverseRegisterId, final HekrUser.GetOauthInfoListener getOauthInfoListener) {
+    public void getOAuthInfoRequest(String devTid, int page, int size, String reverseRegisterId, final SiterUser.GetOauthInfoListener getOauthInfoListener) {
         //CharSequence url = TextUtils.concat(SiterConstantsUtil.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.AUTHORIZATION_REVERSE_REGISTER, "?page=", String.valueOf(page), "&size=", String.valueOf(size));
         String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.AUTHORIZATION_REVERSE_REGISTER).toString();
         HashMap<String, String> maps = new HashMap<>();
@@ -1412,8 +1408,8 @@ public class HekrUserAction {
         maps.put("reverseRegisterId", reverseRegisterId);
         maps.put("page", String.valueOf(page));
         maps.put("size", String.valueOf(size));
-        url = HekrCommonUtil.getUrl(url, maps);
-        getHekrData(url, new GetHekrDataListener() {
+        url = CommonUtil.getUrl(url, maps);
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 getOauthInfoListener.getOauthInfoSuccess(JSON.parseArray(object.toString(), OAuthRequestBean.class));
@@ -1434,12 +1430,12 @@ public class HekrUserAction {
      *
      * @param devTid             必选
      * @param ctrlKey            必选
-     * @param reverseRegisterId  必选 通过4.3.2-3{@link #getOAuthInfoRequest(String, int, int, String, HekrUser.GetOauthInfoListener)}接口拿到的数据
+     * @param reverseRegisterId  必选 通过4.3.2-3{@link #getOAuthInfoRequest(String, int, int, String, SiterUser.GetOauthInfoListener)}接口拿到的数据
      * @param agreeOauthListener 回调接口
      */
-    public void agreeOAuth(String devTid, String ctrlKey, String reverseRegisterId, final HekrUser.AgreeOauthListener agreeOauthListener) {
+    public void agreeOAuth(String devTid, String ctrlKey, String reverseRegisterId, final SiterUser.AgreeOauthListener agreeOauthListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.AUTHORIZATION_REVERSE_DEV_TID, devTid, "&", SiterConstantsUtil.UrlUtil.CTRL_KEY, ctrlKey, SiterConstantsUtil.UrlUtil.REVERSE_REGISTER_ID, reverseRegisterId);
-        postHekrData(url, null, new GetHekrDataListener() {
+        postSiterData(url, null, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 agreeOauthListener.AgreeOauthSuccess();
@@ -1460,14 +1456,14 @@ public class HekrUserAction {
      *
      * @param devTid              必选
      * @param ctrlKey             必选
-     * @param grantee             必选 通过4.3.2-3接口{@link #getOAuthInfoRequest(String, int, int, String, HekrUser.GetOauthInfoListener)}拿到的数据
-     * @param reverseRegisterId   必选 通过4.3.2-3接口{@link #getOAuthInfoRequest(String, int, int, String, HekrUser.GetOauthInfoListener)}拿到的数据！
+     * @param grantee             必选 通过4.3.2-3接口{@link #getOAuthInfoRequest(String, int, int, String, SiterUser.GetOauthInfoListener)}拿到的数据
+     * @param reverseRegisterId   必选 通过4.3.2-3接口{@link #getOAuthInfoRequest(String, int, int, String, SiterUser.GetOauthInfoListener)}拿到的数据！
      * @param refuseOAuthListener 回调接口
      */
-    public void refuseOAuth(@NotNull String devTid, @NotNull String ctrlKey, @NotNull String grantee, @NotNull String reverseRegisterId, final HekrUser.RefuseOAuthListener refuseOAuthListener) {
+    public void refuseOAuth(@NotNull String devTid, @NotNull String ctrlKey, @NotNull String grantee, @NotNull String reverseRegisterId, final SiterUser.RefuseOAuthListener refuseOAuthListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.AUTHORIZATION_REVERSE_REGISTER, "/", reverseRegisterId, "?", SiterConstantsUtil.UrlUtil.DEV_TID,
                 devTid, "&uid=", grantee, "&", SiterConstantsUtil.UrlUtil.CTRL_KEY, ctrlKey);
-        deleteHekrData(url, new GetHekrDataListener() {
+        deleteSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 refuseOAuthListener.refuseOauthSuccess();
@@ -1486,14 +1482,14 @@ public class HekrUserAction {
      * @param ctrlKey 被授权用户uid，多个使用逗号分隔；当不提交该参数时，表示授权者删除该设备上对所有被授权者的授权关系
      * @param grantee 控制码
      */
-    public void cancelOAuth(String ctrlKey, String grantee,final HekrUser.CancelOAuthListener cancelOAuthListener) {
+    public void cancelOAuth(String ctrlKey, String grantee,final SiterUser.CancelOAuthListener cancelOAuthListener) {
         //CharSequence url = TextUtils.concat(SiterConstantsUtil.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.AUTHORIZATION_GRANTOR, grantor, "&", SiterConstantsUtil.UrlUtil.CTRL_KEY, ctrlKey, "&", SiterConstantsUtil.UrlUtil.GRANTEE, grantee, "&", SiterConstantsUtil.UrlUtil.DEV_TID, devTid);
         String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL,SiterConstantsUtil.UrlUtil.AUTHORIZATION_REVERSE_CANCEL, ctrlKey).toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("grantee", grantee);
-        url = HekrCommonUtil.getUrl(url, maps);
+        url = CommonUtil.getUrl(url, maps);
 
-        deleteHekrData(url, new GetHekrDataListener() {
+        deleteSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 cancelOAuthListener.CancelOAuthSuccess();
@@ -1515,7 +1511,7 @@ public class HekrUserAction {
      * @param devTid  设备ID
      * @param grantee 被授权用户uid，多个使用逗号分隔；当不提交该参数时，表示列举该设备上所有的授权关系；被授权者调用时不得为空，且其值为当前调用用户的uid
      */
-    public void getOAuthList(String grantor, String ctrlKey, String devTid, String grantee, final HekrUser.GetOAuthListener getOAuthListener) {
+    public void getOAuthList(String grantor, String ctrlKey, String devTid, String grantee, final SiterUser.GetOAuthListener getOAuthListener) {
         _getOAuthList(grantor, ctrlKey, devTid, grantee, getOAuthListener);
     }
 
@@ -1528,7 +1524,7 @@ public class HekrUserAction {
      * @param devTid           设备ID
      * @param getOAuthListener 回调接口
      */
-    public void getOAuthList(String grantor, String ctrlKey, String devTid, final HekrUser.GetOAuthListener getOAuthListener) {
+    public void getOAuthList(String grantor, String ctrlKey, String devTid, final SiterUser.GetOAuthListener getOAuthListener) {
         _getOAuthList(grantor, ctrlKey, devTid, null, getOAuthListener);
     }
 
@@ -1541,7 +1537,7 @@ public class HekrUserAction {
      * @param grantee          grantee	可选	String		被授权用户uid，多个使用逗号分隔；当不提交该参数时，表示列举该设备上所有的授权关系；被授权者调用时不得为空，且其值为当前调用用户的uid
      * @param getOAuthListener 回调接口
      */
-    private void _getOAuthList(String grantor, String ctrlKey, String devTid, String grantee, final HekrUser.GetOAuthListener getOAuthListener) {
+    private void _getOAuthList(String grantor, String ctrlKey, String devTid, String grantee, final SiterUser.GetOAuthListener getOAuthListener) {
         //CharSequence url = TextUtils.concat(SiterConstantsUtil.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.AUTHORIZATION_GRANTOR, grantor, "&", SiterConstantsUtil.UrlUtil.CTRL_KEY, ctrlKey, "&", SiterConstantsUtil.UrlUtil.DEV_TID, devTid);
         String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, "authorization").toString();
         HashMap<String, String> maps = new HashMap<>();
@@ -1549,8 +1545,8 @@ public class HekrUserAction {
         maps.put("ctrlKey", ctrlKey);
         maps.put("grantee", grantee);
         maps.put("devTid", devTid);
-        url = HekrCommonUtil.getUrl(url, maps);
-        getHekrData(url, new GetHekrDataListener() {
+        url = CommonUtil.getUrl(url, maps);
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 getOAuthListener.getOAuthListSuccess(JSON.parseArray(object.toString(), OAuthListBean.class));
@@ -1569,8 +1565,8 @@ public class HekrUserAction {
      *
      * @param ruleBean 预约任务
      */
-    public void creatRule(RuleBean ruleBean, final HekrUser.CreateRuleListener createRuleListener) {
-        postHekrData(TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.CREATE_RULE), JSON.toJSONString(ruleBean), new GetHekrDataListener() {
+    public void creatRule(RuleBean ruleBean, final SiterUser.CreateRuleListener createRuleListener) {
+        postSiterData(TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.CREATE_RULE), JSON.toJSONString(ruleBean), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 createRuleListener.createSuccess();
@@ -1591,14 +1587,14 @@ public class HekrUserAction {
      * @param taskId           任务ID，按其value筛选
      * @param getRulesListener 回调方法
      */
-    public void getRules(String devTid, String ctrlKey, String taskId, final HekrUser.GetRulesListener getRulesListener) {
+    public void getRules(String devTid, String ctrlKey, String taskId, final SiterUser.GetRulesListener getRulesListener) {
         String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.CREATE_RULE).toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("ctrlKey", ctrlKey);
         maps.put("devTid", devTid);
         maps.put("taskId", taskId);
-        url = HekrCommonUtil.getUrl(url, maps);
-        getHekrData(url, new GetHekrDataListener() {
+        url = CommonUtil.getUrl(url, maps);
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 getRulesListener.getRulesSuccess(JSON.parseArray(object.toString(), RuleBean.class));
@@ -1620,14 +1616,14 @@ public class HekrUserAction {
      * @param ruleBean              ruleBean（taskName, desc,  code,enable,cronExpr, feedback）
      * @param operationRuleListener 回调方法
      */
-    public void editRule(String devTid, String ctrlKey, @NotNull String taskId, RuleBean ruleBean, final HekrUser.OperationRuleListener operationRuleListener) {
+    public void editRule(String devTid, String ctrlKey, @NotNull String taskId, RuleBean ruleBean, final SiterUser.OperationRuleListener operationRuleListener) {
         String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.CREATE_RULE).toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("ctrlKey", ctrlKey);
         maps.put("devTid", devTid);
         maps.put("taskId", taskId);
-        url = HekrCommonUtil.getUrl(url, maps);
-        putHekrData(url, ruleBean.toString(), new GetHekrDataListener() {
+        url = CommonUtil.getUrl(url, maps);
+        putSiterData(url, ruleBean.toString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 operationRuleListener.operationRuleSuccess();
@@ -1647,14 +1643,14 @@ public class HekrUserAction {
      * @param ctrlKey 控制码
      * @param taskId  任务ID，多个逗号分隔；若不指定该参数，则会删除全部预约任务
      */
-    public void deleteRules(String devTid, String ctrlKey, String taskId, final HekrUser.OperationRuleListener operationRuleListener) {
+    public void deleteRules(String devTid, String ctrlKey, String taskId, final SiterUser.OperationRuleListener operationRuleListener) {
         String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.CREATE_RULE).toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("ctrlKey", ctrlKey);
         maps.put("devTid", devTid);
         maps.put("taskId", taskId);
-        url = HekrCommonUtil.getUrl(url, maps);
-        deleteHekrData(url, new GetHekrDataListener() {
+        url = CommonUtil.getUrl(url, maps);
+        deleteSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 operationRuleListener.operationRuleSuccess();
@@ -1672,9 +1668,9 @@ public class HekrUserAction {
      *
      * @param getProfileListener 回调接口
      */
-    public void getProfile(final HekrUser.GetProfileListener getProfileListener) {
+    public void getProfile(final SiterUser.GetProfileListener getProfileListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.PROFILE);
-        getHekrData(url, new GetHekrDataListener() {
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 setUserCache(object.toString());
@@ -1694,12 +1690,12 @@ public class HekrUserAction {
     /**
      * 4.5.2 更新用户档案
      *
-     * @param jsonObject         用户json，参考文档docs4.5.2 http://docs.hekr.me/v4/developerGuide/openapi/#452
+     * @param jsonObject         用户json，参考文档docs4.5.2
      * @param setProfileListener 回调
      */
-    public void setProfile(@NotNull final JSONObject jsonObject, final HekrUser.SetProfileListener setProfileListener) {
+    public void setProfile(@NotNull final JSONObject jsonObject, final SiterUser.SetProfileListener setProfileListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.PROFILE);
-        putHekrData(url, jsonObject.toString(), new GetHekrDataListener() {
+        putSiterData(url, jsonObject.toString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 setProfileListener.setProfileSuccess();
@@ -1719,12 +1715,12 @@ public class HekrUserAction {
      * @param uri                绝对地址
      * @param uploadFileListener 回调
      */
-    public void uploadFile(@NotNull final String uri, final HekrUser.UploadFileListener uploadFileListener) throws FileNotFoundException {
+    public void uploadFile(@NotNull final String uri, final SiterUser.UploadFileListener uploadFileListener) throws FileNotFoundException {
         File file = new File(uri);
         RequestParams params = new RequestParams();
         params.put("file", file, "image/png", System.currentTimeMillis() + ".png");
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.USER_FILE);
-        postParamsHekrData(url.toString(), params, new GetHekrDataListener() {
+        postParamsSiterData(url.toString(), params, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 uploadFileListener.uploadFileSuccess(JSONObject.parseObject(object.toString(), FileBean.class));
@@ -1739,7 +1735,7 @@ public class HekrUserAction {
             @Override
             public void getProgress(long bytesWritten, long totalSize) {
                 super.getProgress(bytesWritten, totalSize);
-                uploadFileListener.uploadProgress(HekrCommonUtil.getProgress(bytesWritten, totalSize));
+                uploadFileListener.uploadProgress(CommonUtil.getProgress(bytesWritten, totalSize));
             }
         });
     }
@@ -1751,14 +1747,14 @@ public class HekrUserAction {
      * @param page     page	可选	int	[0, ?]	分页参数
      * @param size     size	可选	int	[0, 20]	分页参数
      */
-    public void getUserFiles(String fileName, int page, int size, final HekrUser.GetFileListener getFileListener) {
+    public void getUserFiles(String fileName, int page, int size, final SiterUser.GetFileListener getFileListener) {
         String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, "user/file").toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("fileName", fileName);
         maps.put("page", String.valueOf(page));
         maps.put("size", String.valueOf(size));
-        url = HekrCommonUtil.getUrl(url, maps);
-        getHekrData(url, new GetHekrDataListener() {
+        url = CommonUtil.getUrl(url, maps);
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 getFileListener.getSuccess(JSONObject.parseObject(object.toString(), UserFileBean.class));
@@ -1778,9 +1774,9 @@ public class HekrUserAction {
      * @param fileName           fileName	必选 	String		文件名
      * @param deleteFileListener 回调
      */
-    public void deleteUserFile(@NotNull String fileName, final HekrUser.DeleteFileListener deleteFileListener) {
+    public void deleteUserFile(@NotNull String fileName, final SiterUser.DeleteFileListener deleteFileListener) {
         String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, "user/file?fileName=", fileName).toString();
-        deleteHekrData(url, new GetHekrDataListener() {
+        deleteSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 deleteFileListener.deleteSuccess();
@@ -1796,7 +1792,7 @@ public class HekrUserAction {
 
     public void getFoldDeviceList(Context context,int page,int size,String folderid,final GetDeviceListListener getDeviceListListener){
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.BIND_DEVICE,"/",folderid);
-        HekrUserAction.getInstance(context).getHekrData(url.toString()+"?page="+page+"&size="+size, new HekrUserAction.GetHekrDataListener() {
+        UserAction.getInstance(context).getSiterData(url.toString()+"?page="+page+"&size="+size, new UserAction.GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 try {
@@ -1839,11 +1835,11 @@ public class HekrUserAction {
     /**
      * 获取某个设备的报警信息，所有的
      * @param deviceBean
-     * @param getHekrDataListener
+     * @param GetDataListener
      */
-    public void getAlarmHistory(int page,int size, DeviceBean deviceBean,final HekrUserAction.GetHekrDataListener getHekrDataListener) {
-        HekrUserAction hekrUserAction = HekrUserAction.getInstance(mContext.get());
-        BasicHeader header = new BasicHeader("X-Hekr-ProdPubKey",deviceBean.getProductPublicKey());
+    public void getAlarmHistory(int page,int size, DeviceBean deviceBean,final UserAction.GetDataListener GetDataListener) {
+        UserAction userAction = UserAction.getInstance(mContext.get());
+        BasicHeader header = new BasicHeader("X-Siter-ProdPubKey",deviceBean.getProductPublicKey());
         CharSequence url2 = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.QUERY_WARNINGS);
         String url = url2.toString() +
                 "devTid="+deviceBean.getDevTid()+"" +
@@ -1851,15 +1847,15 @@ public class HekrUserAction {
                 "&size="+size+
                 "&page="+page;
 
-        hekrUserAction.getHekrData(url, new Header[]{header}, new HekrUserAction.GetHekrDataListener() {
+        userAction.getSiterData(url, new Header[]{header}, new UserAction.GetDataListener() {
             @Override
             public void getSuccess(Object object) {
-                getHekrDataListener.getSuccess(object);
+                GetDataListener.getSuccess(object);
             }
 
             @Override
             public void getFail(int errorCode) {
-                getHekrDataListener.getFail(errorCode);
+                GetDataListener.getFail(errorCode);
             }
         });
     }
@@ -1867,25 +1863,25 @@ public class HekrUserAction {
 
     /**
      * 获取所有报警数据
-     * @param getHekrDataListener
+     * @param GetDataListener
      */
-    public void getAllAlarmHistory(int page,int size,final HekrUserAction.GetHekrDataListener getHekrDataListener) {
-        HekrUserAction hekrUserAction = HekrUserAction.getInstance(mContext.get());
+    public void getAllAlarmHistory(int page,int size,final UserAction.GetDataListener GetDataListener) {
+        UserAction userAction = UserAction.getInstance(mContext.get());
         CharSequence url2 = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.QUERY_WARNINGS);
         String url = url2.toString() +
                 "&startTime="+dateGetOneDay()+
                 "&size="+size+
                 "&page="+page;
 
-        hekrUserAction.getHekrData(url,new HekrUserAction.GetHekrDataListener() {
+        userAction.getSiterData(url,new UserAction.GetDataListener() {
             @Override
             public void getSuccess(Object object) {
-                getHekrDataListener.getSuccess(object);
+                GetDataListener.getSuccess(object);
             }
 
             @Override
             public void getFail(int errorCode) {
-                getHekrDataListener.getFail(errorCode);
+                GetDataListener.getFail(errorCode);
             }
         });
     }
@@ -1895,8 +1891,8 @@ public class HekrUserAction {
      * @param deviceBeanList
      *
      */
-    public void getGS140AndGS156WCurrentStatus(@NotNull final List<DeviceBean> deviceBeanList,final HekrUser.GetGS140AndGS156WListener getGS140AndGS156WListener) {
-        HekrUserAction hekrUserAction = HekrUserAction.getInstance(mContext.get());
+    public void getGS140AndGS156WCurrentStatus(@NotNull final List<DeviceBean> deviceBeanList,final SiterUser.GetGS140AndGS156WListener getGS140AndGS156WListener) {
+        UserAction userAction = UserAction.getInstance(mContext.get());
         CharSequence url2 = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.QUERY_DEVICE_STATUS);
         JSONArray jsonArray = new JSONArray();
 
@@ -1907,7 +1903,7 @@ public class HekrUserAction {
             J2.put("ctrlKey",deviceBeanList.get(i).getCtrlKey());
             jsonArray.add(i,J2);
         }
-        hekrUserAction.postHekrData(url2,jsonArray.toString(), new HekrUserAction.GetHekrDataListener() {
+        userAction.postSiterData(url2,jsonArray.toString(), new UserAction.GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 try {
@@ -2021,7 +2017,7 @@ public class HekrUserAction {
      * @param clientId            个推分配给app的客户端id
      * @param pushTagBindListener 回调方法
      */
-    public void pushTagBind(@NotNull String clientId, final HekrUser.PushTagBindListener pushTagBindListener) {
+    public void pushTagBind(@NotNull String clientId, final SiterUser.PushTagBindListener pushTagBindListener) {
         pushTagBind(clientId, 0, pushTagBindListener);
     }
 
@@ -2035,7 +2031,7 @@ public class HekrUserAction {
      * @param clientId            个推分配给app的客户端id
      * @param pushTagBindListener 回调方法
      */
-    public void pushTagBind(@NotNull String clientId, int type, final HekrUser.PushTagBindListener pushTagBindListener) {
+    public void pushTagBind(@NotNull String clientId, int type, final SiterUser.PushTagBindListener pushTagBindListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.PUSH_TAG_BIND);
         String phoneType = "";
         String platform = "";
@@ -2063,7 +2059,7 @@ public class HekrUserAction {
         object.put("locale", Locale.getDefault());
         object.put("pushPlatform",platform);
         final String finalPhoneType = phoneType;
-        postHekrData(url, object.toJSONString(), new GetHekrDataListener() {
+        postSiterData(url, object.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 Log.i(TAG, finalPhoneType + "绑定推送标签接口调用成功");
@@ -2084,7 +2080,7 @@ public class HekrUserAction {
      * @param clientId              个推分配给app的客户端id
      * @param unPushTagBindListener 回调方法
      */
-    public void unPushTagBind(@NotNull String clientId, int type, final HekrUser.UnPushTagBindListener unPushTagBindListener) {
+    public void unPushTagBind(@NotNull String clientId, int type, final SiterUser.UnPushTagBindListener unPushTagBindListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.UNPUSH_ALIAS_BIND);
         String phoneType = "";
         String platform = "";
@@ -2110,7 +2106,7 @@ public class HekrUserAction {
         JSONObject object = new JSONObject();
         object.put("clientId", clientId);
         object.put("pushPlatform", platform);
-        postHekrData(url, object.toJSONString(), new GetHekrDataListener() {
+        postSiterData(url, object.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 Log.i(TAG, "推送解绑标签接口调用成功");
@@ -2130,7 +2126,7 @@ public class HekrUserAction {
      *
      * @param getWeatherListener 回调
      */
-    public void getWeather(String location, String Code, final HekrUser.GetWeatherListener getWeatherListener) {
+    public void getWeather(String location, String Code, final SiterUser.GetWeatherListener getWeatherListener) {
         String time = String.valueOf(System.currentTimeMillis());
         byte[] bytes = (MD5Util.md5(TextUtils.concat(time, Code, time).toString()));
         StringBuilder ret = new StringBuilder(bytes.length << 1);
@@ -2139,14 +2135,14 @@ public class HekrUserAction {
             ret.append(Character.forDigit(aByte & 0xf, 16));
         }
         String language;
-        switch (HekrCodeUtil.getLanguage(mContext.get())) {
-            case HekrCodeUtil.LANGUAGE_zh_Hans:
+        switch (CodeUtil.getLanguage(mContext.get())) {
+            case CodeUtil.LANGUAGE_zh_Hans:
                 language = "zh-Hans";
                 break;
-            case HekrCodeUtil.LANGUAGE_zh_Hant:
+            case CodeUtil.LANGUAGE_zh_Hant:
                 language = "zh-Hant";
                 break;
-            case HekrCodeUtil.LANGUAGE_en:
+            case CodeUtil.LANGUAGE_en:
                 language = "en";
                 break;
             default:
@@ -2156,7 +2152,7 @@ public class HekrUserAction {
 
 
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.UAA_WEATHER, location, "&sign=", ret.toString(), "&timestamp=", time, "&language=", language);
-        getHekrData(url, new GetHekrDataListener() {
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 String results = JSONArray.parseArray(JSONObject.parseObject(object.toString()).getString("results")).get(0).toString();
@@ -2179,7 +2175,7 @@ public class HekrUserAction {
      *
      * @param getAirQualityListener 回调
      */
-    public void getAirQuality(String location, String Code, final HekrUser.GetAirQualityListener getAirQualityListener) {
+    public void getAirQuality(String location, String Code, final SiterUser.GetAirQualityListener getAirQualityListener) {
         String time = String.valueOf(System.currentTimeMillis());
         byte[] bytes = (MD5Util.md5(TextUtils.concat(time, Code, time).toString()));
         StringBuilder ret = new StringBuilder(bytes.length << 1);
@@ -2188,14 +2184,14 @@ public class HekrUserAction {
             ret.append(Character.forDigit(aByte & 0xf, 16));
         }
         String language;
-        switch (HekrCodeUtil.getLanguage(mContext.get())) {
-            case HekrCodeUtil.LANGUAGE_zh_Hans:
+        switch (CodeUtil.getLanguage(mContext.get())) {
+            case CodeUtil.LANGUAGE_zh_Hans:
                 language = "zh-Hans";
                 break;
-            case HekrCodeUtil.LANGUAGE_zh_Hant:
+            case CodeUtil.LANGUAGE_zh_Hant:
                 language = "zh-Hant";
                 break;
-            case HekrCodeUtil.LANGUAGE_en:
+            case CodeUtil.LANGUAGE_en:
                 language = "en";
                 break;
             default:
@@ -2205,7 +2201,7 @@ public class HekrUserAction {
 
 
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.UAA_AIR_QUALITY, location, "&sign=", ret.toString(), "&timestamp=", time, "&language=", language);
-        getHekrData(url, new GetHekrDataListener() {
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 AirQualityBean airQualityBean = JSON.parseObject(object.toString(),AirQualityBean.class);
@@ -2228,7 +2224,7 @@ public class HekrUserAction {
      *
      * @param getWeatherListener 回调
      */
-    public void getNewWeather(String location, String Code, final HekrUser.GetNewWeatherListener getWeatherListener) {
+    public void getNewWeather(String location, String Code, final SiterUser.GetNewWeatherListener getWeatherListener) {
         String time = String.valueOf(System.currentTimeMillis());
         byte[] bytes = (MD5Util.md5(TextUtils.concat(time, Code, time).toString()));
         StringBuilder ret = new StringBuilder(bytes.length << 1);
@@ -2237,14 +2233,14 @@ public class HekrUserAction {
             ret.append(Character.forDigit(aByte & 0xf, 16));
         }
         String language;
-        switch (HekrCodeUtil.getLanguage(mContext.get())) {
-            case HekrCodeUtil.LANGUAGE_zh_Hans:
+        switch (CodeUtil.getLanguage(mContext.get())) {
+            case CodeUtil.LANGUAGE_zh_Hans:
                 language = "zh-Hans";
                 break;
-            case HekrCodeUtil.LANGUAGE_zh_Hant:
+            case CodeUtil.LANGUAGE_zh_Hant:
                 language = "zh-Hant";
                 break;
-            case HekrCodeUtil.LANGUAGE_en:
+            case CodeUtil.LANGUAGE_en:
                 language = "en";
                 break;
             default:
@@ -2254,7 +2250,7 @@ public class HekrUserAction {
 
 
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.UAA_WEATHER_ADD_QUALITY, location, "&sign=", ret.toString(), "&timestamp=", time, "&language=", language);
-        getHekrData(url, new GetHekrDataListener() {
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 getWeatherListener.getSuccess(JSONObject.parseObject(object.toString(), WeatherAirBean.class));
@@ -2271,7 +2267,7 @@ public class HekrUserAction {
     /**
      * 4.7.2 列举群组
      */
-    public void getGroup(final HekrUser.GetGroupListener getGroupListener) {
+    public void getGroup(final SiterUser.GetGroupListener getGroupListener) {
         getGroup(null, getGroupListener);
     }
 
@@ -2281,13 +2277,12 @@ public class HekrUserAction {
      *
      * @param groupId 群组id
      */
-    private void getGroup(String groupId, final HekrUser.GetGroupListener getGroupListener) {
-        //"http://user.openapi.hekr.me/group?groupId=xxx"
+    private void getGroup(String groupId, final SiterUser.GetGroupListener getGroupListener) {
         String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.UAA_GROUP).toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put(groupId, groupId);
-        url = HekrCommonUtil.getUrl(url, maps);
-        getHekrData(url, new GetHekrDataListener() {
+        url = CommonUtil.getUrl(url, maps);
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 List<GroupBean> groupBeen = JSONArray.parseArray(object.toString(), GroupBean.class);
@@ -2308,11 +2303,11 @@ public class HekrUserAction {
      * @param newGroupName           群组新的名称(必选)
      * @param operationGroupListener 回调方法
      */
-    private void renameGroup(@NotNull String groupId, @NotNull String newGroupName, final HekrUser.OperationGroupListener operationGroupListener) {
+    private void renameGroup(@NotNull String groupId, @NotNull String newGroupName, final SiterUser.OperationGroupListener operationGroupListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.UAA_GROUP, "/", groupId);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("newGroupName", newGroupName);
-        putHekrData(url, jsonObject.toJSONString(), new GetHekrDataListener() {
+        putSiterData(url, jsonObject.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 operationGroupListener.OperationSuccess();
@@ -2332,9 +2327,9 @@ public class HekrUserAction {
      * @param groupId                群组ID(必选)
      * @param operationGroupListener 回调方法
      */
-    private void deleteGroup(@NotNull String groupId, final HekrUser.OperationGroupListener operationGroupListener) {
+    private void deleteGroup(@NotNull String groupId, final SiterUser.OperationGroupListener operationGroupListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.UAA_GROUP, "?groupId=", groupId);
-        deleteHekrData(url, new GetHekrDataListener() {
+        deleteSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 operationGroupListener.OperationSuccess();
@@ -2356,7 +2351,7 @@ public class HekrUserAction {
      * @param binType          固件类型
      * @param binVer           固件版本
      */
-    public void checkFirmwareUpdate(@NotNull String devTid, @NotNull String productPublicKey, @NotNull String binType, @NotNull String binVer, final HekrUser.CheckFwUpdateListener checkFwUpdateListener) {
+    public void checkFirmwareUpdate(@NotNull String devTid, @NotNull String productPublicKey, @NotNull String binType, @NotNull String binVer, final SiterUser.CheckFwUpdateListener checkFwUpdateListener) {
         final JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("devTid", devTid);
@@ -2365,7 +2360,7 @@ public class HekrUserAction {
         jsonObject.put("binVer", binVer);
         jsonArray.add(jsonObject);
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_CONSOLE_URL, SiterConstantsUtil.UrlUtil.CHECK_FW_UPDATE);
-        postHekrData(url, jsonArray.toJSONString(), new GetHekrDataListener() {
+        postSiterData(url, jsonArray.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 try {
@@ -2398,14 +2393,14 @@ public class HekrUserAction {
     /**
      * 5.2 根据pid获取企业资讯
      */
-    public void getNewsByPid(HekrUser.GetInfoListener getInfoListener) {
+    public void getNewsByPid(SiterUser.GetInfoListener getInfoListener) {
         getNewsByPid(null, null, getInfoListener);
     }
 
     /**
      * 5.2 根据pid获取企业资讯
      */
-    public void getNewsByPid(int page, int size, HekrUser.GetInfoListener getInfoListener) {
+    public void getNewsByPid(int page, int size, SiterUser.GetInfoListener getInfoListener) {
         getNewsByPid(String.valueOf(page), String.valueOf(size), getInfoListener);
     }
 
@@ -2413,13 +2408,13 @@ public class HekrUserAction {
     /**
      * 5.2 根据pid获取企业资讯
      */
-    private void getNewsByPid(String page, String size, final HekrUser.GetInfoListener getInfoListener) {
+    private void getNewsByPid(String page, String size, final SiterUser.GetInfoListener getInfoListener) {
         String url = TextUtils.concat(Constants.UrlUtil.BASE_CONSOLE_URL, "external/vc/getByPid").toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("page", page);
         maps.put("size", size);
-        url = HekrCommonUtil.getUrl(url, maps);
-        getHekrData(url, new GetHekrDataListener() {
+        url = CommonUtil.getUrl(url, maps);
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 getInfoListener.getInfoSuccess(JSON.parseObject(object.toString(), NewsBean.class));
@@ -2439,7 +2434,7 @@ public class HekrUserAction {
      * @param content          反馈内容
      * @param feedbackListener 回调接口
      */
-    public void feedback(@NotNull String content, String images, final HekrUser.FeedbackListener feedbackListener) {
+    public void feedback(@NotNull String content, String images, final SiterUser.FeedbackListener feedbackListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_CONSOLE_URL, "external/feedback");
         JSONObject jsonObject = new JSONObject();
         if (TextUtils.isEmpty(getUserCache().getEmail())) {
@@ -2452,7 +2447,7 @@ public class HekrUserAction {
         if (!TextUtils.isEmpty(images)) {
             jsonObject.put("images", images);
         }
-        postHekrData(url, jsonObject.toJSONString(), new GetHekrDataListener() {
+        postSiterData(url, jsonObject.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 android.util.Log.d(TAG, "getSuccess: " + object.toString());
@@ -2470,10 +2465,9 @@ public class HekrUserAction {
     /**
      * 5.10 获取默认演示设备
      */
-    public void getDefaultStatic(final HekrUser.GetDefaultDevicesListener getDefaultDevices) {
-        //http://console.openapi.hekr.me/external/device/default/static
+    public void getDefaultStatic(final SiterUser.GetDefaultDevicesListener getDefaultDevices) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_CONSOLE_URL, SiterConstantsUtil.UrlUtil.DEFAULT_STATIC);
-        getHekrData(url, new GetHekrDataListener() {
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 getDefaultDevices.getSuccess(JSON.parseArray(object.toString(), DefaultDeviceBean.class));
@@ -2491,9 +2485,9 @@ public class HekrUserAction {
      *
      * @param getPinCodeListener 回调接口
      */
-    public void getPinCode(String ssid, final HekrUser.GetPinCodeListener getPinCodeListener) {
+    public void getPinCode(String ssid, final SiterUser.GetPinCodeListener getPinCodeListener) {
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.GET_PIN_CODE, ssid);
-        getHekrData(url, new GetHekrDataListener() {
+        getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 try {
@@ -2540,9 +2534,9 @@ public class HekrUserAction {
         SpCache.putString("uname", un_name);
         //清理掉后
         SpCache.putBoolean("pushTag", false);
-        SpCache.putString(SiterConstantsUtil.HEKR_PUSH_CLIENT_ID, Global.clientId);
-        SpCache.putString(SiterConstantsUtil.HEKR_MI_PUSH_CLIENT_ID, Global.mRegId);
-        SpCache.putString(SiterConstantsUtil.HEKR_HUA_WEI_PUSH_CLIENT_ID, Global.huaWeiToken);
+        SpCache.putString(SiterConstantsUtil.PUSH_CLIENT_ID, Global.clientId);
+        SpCache.putString(SiterConstantsUtil.MI_PUSH_CLIENT_ID, Global.mRegId);
+        SpCache.putString(SiterConstantsUtil.HUA_WEI_PUSH_CLIENT_ID, Global.huaWeiToken);
     }
 
     /**
@@ -2603,7 +2597,7 @@ public class HekrUserAction {
      * 将获取到的用户信息保存下来
      */
     private void setUserCache(String userInfo) {
-        SpCache.putString("HEKR_USER_INFO", userInfo);
+        SpCache.putString("SITER_USER_INFO", userInfo);
     }
 
     /**
@@ -2613,7 +2607,7 @@ public class HekrUserAction {
      */
     public ProfileBean getUserCache() {
         ProfileBean profileBean = new ProfileBean();
-        String var = SpCache.getString("HEKR_USER_INFO", "");
+        String var = SpCache.getString("SITER_USER_INFO", "");
         if (!TextUtils.isEmpty(var)) {
             profileBean = JSON.parseObject(var, ProfileBean.class);
         }
@@ -2625,107 +2619,107 @@ public class HekrUserAction {
 
 
     /**
-     * hekrHttpGet  <br>此接口可自动管理token
+     * HttpGet  <br>此接口可自动管理token
      *
      * @param url                 url
-     * @param getHekrDataListener 回调方法
+     * @param GetDataListener 回调方法
      */
-    public void getHekrData(CharSequence url, final GetHekrDataListener getHekrDataListener) {
-        getHekrData(url.toString(), getHekrDataListener);
+    public void getSiterData(CharSequence url, final GetDataListener GetDataListener) {
+        getSiterData(url.toString(), GetDataListener);
     }
 
 
     /**
-     * hekrHttpGet  <br>此接口可自动管理token
+     * HttpGet  <br>此接口可自动管理token
      *
      * @param url                 url
-     * @param getHekrDataListener 回调方法
+     * @param GetDataListener 回调方法
      */
-    public void getHekrData(String url, final GetHekrDataListener getHekrDataListener) {
-        HekrHttpUtil.getDataReFreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, null, new GetHekrData(getHekrDataListener));
+    public void getSiterData(String url, final GetDataListener GetDataListener) {
+        HttpUtil.getDataReFreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, null, new GetSiterData(GetDataListener));
     }
 
 
     /**
-     * hekrHttpGet  <br>此接口可自动管理token
+     * HttpGet  <br>此接口可自动管理token
      *
      * @param url                 url
      * @param headers             headers
-     * @param getHekrDataListener 回调方法
+     * @param GetDataListener 回调方法
      */
-    public void getHekrData(String url, Header[] headers, final GetHekrDataListener getHekrDataListener) {
-        HekrHttpUtil.getDataReFreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, headers, new GetHekrData(getHekrDataListener));
+    public void getSiterData(String url, Header[] headers, final GetDataListener GetDataListener) {
+        HttpUtil.getDataReFreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, headers, new GetSiterData(GetDataListener));
     }
 
 
     /**
-     * hekrHttpPost <br>此接口可自动管理token
+     * HttpPost <br>此接口可自动管理token
      *
      * @param url                 url
      * @param entity              entity
-     * @param getHekrDataListener 回调
+     * @param GetDataListener 回调
      */
-    public void postHekrData(CharSequence url, String entity, final GetHekrDataListener getHekrDataListener) {
-        postHekrData(url.toString(), null, entity, getHekrDataListener);
+    public void postSiterData(CharSequence url, String entity, final GetDataListener GetDataListener) {
+        postSiterData(url.toString(), null, entity, GetDataListener);
     }
 
     /**
-     * hekrHttpPost <br>此接口可自动管理token
+     * HttpPost <br>此接口可自动管理token
      *
      * @param url                 url
      * @param entity              entity
-     * @param getHekrDataListener 回调
+     * @param GetDataListener 回调
      */
-    public void postHekrData(String url, String entity, final GetHekrDataListener getHekrDataListener) {
-        postHekrData(url, null, entity, getHekrDataListener);
+    public void postSiterData(String url, String entity, final GetDataListener GetDataListener) {
+        postSiterData(url, null, entity, GetDataListener);
     }
 
 
     /**
-     * hekrHttpPost <br>此接口可自动管理token
+     * HttpPost <br>此接口可自动管理token
      *
      * @param url                 url
      * @param headers             headers
      * @param entity              entity
-     * @param getHekrDataListener 回调
+     * @param GetDataListener 回调
      */
-    public void postHekrData(String url, Header[] headers, String entity, final GetHekrDataListener getHekrDataListener) {
-        HekrHttpUtil.postDataReFreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, headers, entity, new GetHekrData(getHekrDataListener));
+    public void postSiterData(String url, Header[] headers, String entity, final GetDataListener GetDataListener) {
+        HttpUtil.postDataReFreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, headers, entity, new GetSiterData(GetDataListener));
     }
 
 
     /**
-     * hekrHttpPut <br>此接口可自动管理token
+     * HttpPut <br>此接口可自动管理token
      *
      * @param url                 url
      * @param entity              entity
-     * @param getHekrDataListener 回调
+     * @param GetDataListener 回调
      */
-    public void putHekrData(String url, String entity, final GetHekrDataListener getHekrDataListener) {
-        putHekrData(url, null, entity, getHekrDataListener);
+    public void putSiterData(String url, String entity, final GetDataListener GetDataListener) {
+        putSiterData(url, null, entity, GetDataListener);
     }
 
 
     /**
-     * hekrHttpPut <br>此接口可自动管理token
+     * HttpPut <br>此接口可自动管理token
      *
      * @param url                 url
      * @param entity              entity
-     * @param getHekrDataListener 回调
+     * @param GetDataListener 回调
      */
-    public void putHekrData(CharSequence url, String entity, final GetHekrDataListener getHekrDataListener) {
-        putHekrData(url.toString(), null, entity, getHekrDataListener);
+    public void putSiterData(CharSequence url, String entity, final GetDataListener GetDataListener) {
+        putSiterData(url.toString(), null, entity, GetDataListener);
     }
 
     /**
-     * hekrHttpPut <br>此接口可自动管理token
+     * HttpPut <br>此接口可自动管理token
      *
      * @param url                 url
      * @param entity              entity
-     * @param getHekrDataListener 回调
+     * @param GetDataListener 回调
      */
-    public void putHekrData(String url, Header[] headers, String entity, final GetHekrDataListener getHekrDataListener) {
-        HekrHttpUtil.putDataRefreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, headers, entity, new GetHekrData(getHekrDataListener));
+    public void putSiterData(String url, Header[] headers, String entity, final GetDataListener GetDataListener) {
+        HttpUtil.putDataRefreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, headers, entity, new GetSiterData(GetDataListener));
     }
 
 
@@ -2733,10 +2727,10 @@ public class HekrUserAction {
      * deleteHttpDelete <br>此接口可自动管理token
      *
      * @param url                 url
-     * @param getHekrDataListener 回调
+     * @param GetDataListener 回调
      */
-    public void deleteHekrData(String url, final GetHekrDataListener getHekrDataListener) {
-        deleteHekrData(url, null, getHekrDataListener);
+    public void deleteSiterData(String url, final GetDataListener GetDataListener) {
+        deleteSiterData(url, null, GetDataListener);
     }
 
 
@@ -2744,20 +2738,20 @@ public class HekrUserAction {
      * deleteHttpDelete <br>此接口可自动管理token
      *
      * @param url                 url
-     * @param getHekrDataListener 回调
+     * @param GetDataListener 回调
      */
-    public void deleteHekrData(CharSequence url, final GetHekrDataListener getHekrDataListener) {
-        deleteHekrData(url.toString(), null, getHekrDataListener);
+    public void deleteSiterData(CharSequence url, final GetDataListener GetDataListener) {
+        deleteSiterData(url.toString(), null, GetDataListener);
     }
 
     /**
      * deleteHttpDelete <br>此接口可自动管理token
      *
      * @param url                 url
-     * @param getHekrDataListener 回调
+     * @param GetDataListener 回调
      */
-    public void deleteHekrData(String url, Header[] headers, final GetHekrDataListener getHekrDataListener) {
-        HekrHttpUtil.deleteDataReFreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, headers, new GetHekrData(getHekrDataListener));
+    public void deleteSiterData(String url, Header[] headers, final GetDataListener GetDataListener) {
+        HttpUtil.deleteDataReFreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, headers, new GetSiterData(GetDataListener));
     }
 
 
@@ -2767,10 +2761,10 @@ public class HekrUserAction {
      *
      * @param url                 url
      * @param entity              entity
-     * @param getHekrDataListener 回调
+     * @param GetDataListener 回调
      */
-    public void patchHekrData(CharSequence url, String entity, final GetHekrDataListener getHekrDataListener) {
-        patchHekrData(url.toString(), null, entity, getHekrDataListener);
+    public void patchSiterData(CharSequence url, String entity, final GetDataListener GetDataListener) {
+        patchSiterData(url.toString(), null, entity, GetDataListener);
     }
 
     /**
@@ -2779,10 +2773,10 @@ public class HekrUserAction {
      *
      * @param url                 url
      * @param entity              entity
-     * @param getHekrDataListener 回调
+     * @param GetDataListener 回调
      */
-    public void patchHekrData(String url, String entity, final GetHekrDataListener getHekrDataListener) {
-        patchHekrData(url, null, entity, getHekrDataListener);
+    public void patchSiterData(String url, String entity, final GetDataListener GetDataListener) {
+        patchSiterData(url, null, entity, GetDataListener);
     }
 
     /**
@@ -2792,28 +2786,28 @@ public class HekrUserAction {
      * @param url                 url
      * @param headers             headers
      * @param entity              entity
-     * @param getHekrDataListener 回调
+     * @param GetDataListener 回调
      */
-    public void patchHekrData(String url, Header[] headers, String entity, final GetHekrDataListener getHekrDataListener) {
-        HekrHttpUtil.patchDataToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, headers, entity, new GetHekrData(getHekrDataListener));
+    public void patchSiterData(String url, Header[] headers, String entity, final GetDataListener GetDataListener) {
+        HttpUtil.patchDataToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, headers, entity, new GetSiterData(GetDataListener));
     }
 
     /**
-     * hekrHttpPost <br>此接口可自动管理token
+     * HttpPost <br>此接口可自动管理token
      *
      * @param url                 url
      * @param params              表单
-     * @param getHekrDataListener 回调
+     * @param GetDataListener 回调
      */
-    public void postParamsHekrData(String url, RequestParams params, final GetHekrDataListener getHekrDataListener) {
-        HekrHttpUtil.postFileReFreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, params, new GetHekrData(getHekrDataListener));
+    public void postParamsSiterData(String url, RequestParams params, final GetDataListener GetDataListener) {
+        HttpUtil.postFileReFreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, params, new GetSiterData(GetDataListener));
     }
 
     /**
      * 获取云端数据抽象类<br>
      * 获取数据成功/获取数据失败/进度显示
      */
-    public static abstract class GetHekrDataListener {
+    public static abstract class GetDataListener {
 
         public abstract void getSuccess(Object object);
 
@@ -2826,18 +2820,18 @@ public class HekrUserAction {
     }
 
 
-    private class GetHekrData extends GetHekrDataWithTokenListener {
+    private class GetSiterData extends GetSiterDataWithTokenListener {
 
-        private GetHekrDataListener getHekrDataListener;
+        private GetDataListener getDataListener;
 
 
-        public GetHekrData(GetHekrDataListener getHekrDataListener) {
-            this.getHekrDataListener = getHekrDataListener;
+        public GetSiterData(GetDataListener GetDataListener) {
+            this.getDataListener = GetDataListener;
         }
 
         @Override
         public void getDataSuccess(Object object) {
-            getHekrDataListener.getSuccess(object);
+            getDataListener.getSuccess(object);
         }
 
         @Override
@@ -2849,7 +2843,7 @@ public class HekrUserAction {
 
         @Override
         public void getDataFail(int errorCode) {
-            getHekrDataListener.getFail(errorCode);
+            getDataListener.getFail(errorCode);
         }
 
         @Override
@@ -2859,7 +2853,7 @@ public class HekrUserAction {
             if (count > 100) {
                 count = 100;
             }*/
-            getHekrDataListener.getProgress(bytesWritten, totalSize);
+            getDataListener.getProgress(bytesWritten, totalSize);
         }
     }
 

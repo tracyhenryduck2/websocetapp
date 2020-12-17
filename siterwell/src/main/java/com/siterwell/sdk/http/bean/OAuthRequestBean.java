@@ -16,14 +16,12 @@ public class OAuthRequestBean implements Serializable {
      * devTid : ESP_2M_5CCF7F05D670
      * ctrlKey : e9c8a2b3df7d4dc6b6f3578e308c6cbc
      * expire : 30000000000
-     * desc : hekr
      * instructionExpire : null
      * mode : ALL
      * enableIFTTT : false
      * enableScheduler : false
      * deviceName :
      * granteeName : Joyful
-     * granteeAvater : {"small":"http://hekr-images.ufile.ucloud.com.cn/ufile-1416932129000000000000-788e1a7d62ccb6eafd91a84fecb8d701.jpg"}
      */
 
     private String registerId;
@@ -40,7 +38,6 @@ public class OAuthRequestBean implements Serializable {
     private String deviceName;
     private String granteeName;
     /**
-     * small : http://hekr-images.ufile.ucloud.com.cn/ufile-1416932129000000000000-788e1a7d62ccb6eafd91a84fecb8d701.jpg
      */
 
     private GranteeAvater granteeAvater;

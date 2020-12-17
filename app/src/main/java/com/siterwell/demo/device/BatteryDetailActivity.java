@@ -46,7 +46,7 @@ import com.siterwell.sdk.common.RefreshBatteryListener;
 import com.siterwell.sdk.common.SitewellSDK;
 import com.siterwell.sdk.event.SilenceEvent;
 import com.siterwell.sdk.event.UdpShakeHandsEvent;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.UserAction;
 import com.siterwell.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.protocol.BatteryCommand;
 
@@ -193,7 +193,7 @@ public class BatteryDetailActivity extends TopbarSuperActivity implements View.O
     private void queryhistory(){
         Log.i(TAG,"page:"+page);
 
-        HekrUserAction.getInstance(this).getAlarmHistory(page, 20, batteryDescBean, new HekrUserAction.GetHekrDataListener() {
+        UserAction.getInstance(this).getAlarmHistory(page, 20, batteryDescBean, new UserAction.GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 Log.i(TAG,"object:"+object.toString());

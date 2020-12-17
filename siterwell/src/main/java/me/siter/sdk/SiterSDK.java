@@ -96,7 +96,7 @@ public class SiterSDK {
      */
     public static void resetPid(String currentPid) {
         pid = currentPid;
-        CacheUtil.putString(Constants.HEKR_PID, pid);
+        CacheUtil.putString(Constants.SITER_PID, pid);
     }
 
     /**
@@ -172,15 +172,15 @@ public class SiterSDK {
         try {
             if (!TextUtils.isEmpty(json)) {
                 org.json.JSONObject jsonConfig = new org.json.JSONObject(json);
-                if (jsonConfig.has("Hekr")) {
-                    pid = jsonConfig.getJSONObject("Hekr").getString("AppId");
-                    CacheUtil.putString(Constants.HEKR_PID, pid);
-                    LogUtil.d(Constants.HEKR_SDK, "init: " + pid);
+                if (jsonConfig.has("Siter")) {
+                    pid = jsonConfig.getJSONObject("Siter").getString("AppId");
+                    CacheUtil.putString(Constants.SITER_PID, pid);
+                    LogUtil.d(Constants.SITER_SDK, "init: " + pid);
                     if (TextUtils.isEmpty(pid)) {
-                        throw new IllegalArgumentException("Hekr AppId is error in json");
+                        throw new IllegalArgumentException("AppId is error in json");
                     }
                 } else {
-                    throw new IllegalArgumentException("Can not find the Hekr config in json");
+                    throw new IllegalArgumentException("Can not find the config in json");
                 }
             } else {
                 throw new IllegalArgumentException("Json is empty");

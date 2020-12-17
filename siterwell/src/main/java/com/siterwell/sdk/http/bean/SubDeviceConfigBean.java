@@ -43,7 +43,7 @@ public class SubDeviceConfigBean {
          * binVer : 3.0.1.2
          * subDevName :
          * subDevModel :
-         * manufacturerName : hekr
+         * manufacturerName :
          * description :
          */
 

@@ -11,7 +11,7 @@ import com.siterwell.sdk.bean.SocketBean;
 import com.siterwell.sdk.bean.WaterSensorBean;
 import com.siterwell.sdk.bean.WifiTimerBean;
 import com.siterwell.sdk.event.UdpShakeHandsEvent;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.UserAction;
 import com.siterwell.sdk.http.SiterConstantsUtil;
 import com.siterwell.sdk.protocol.ResolveSocket;
 
@@ -418,7 +418,7 @@ public class SitewellSDK {
         }
         Log.i(TAG,"jsonArray:"+jsonArray.toString());
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.QUERY_DEVICE_STATUS);
-        HekrUserAction.getInstance(mContext.get()).postHekrData(url.toString(),jsonArray.toString(), new HekrUserAction.GetHekrDataListener() {
+        UserAction.getInstance(mContext.get()).postSiterData(url.toString(),jsonArray.toString(), new UserAction.GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 try {
@@ -498,7 +498,7 @@ public class SitewellSDK {
         }
         Log.i(TAG,"jsonArray:"+jsonArray.toString());
         CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.QUERY_DEVICE_STATUS);
-        HekrUserAction.getInstance(mContext.get()).postHekrData(url.toString(),jsonArray.toString(), new HekrUserAction.GetHekrDataListener() {
+        UserAction.getInstance(mContext.get()).postSiterData(url.toString(),jsonArray.toString(), new UserAction.GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 try {

@@ -17,7 +17,7 @@ import com.siterwell.demo.common.ECPreferenceSettings;
 import com.siterwell.demo.common.ECPreferences;
 import com.siterwell.demo.commonview.loadingView.ZLoadingView;
 import com.siterwell.demo.commonview.loadingView.Z_TYPE;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.UserAction;
 
 import java.io.InvalidClassException;
 
@@ -82,7 +82,7 @@ private ZLoadingView zLoadingView;
                         } catch (InvalidClassException e) {
                             e.printStackTrace();
                         }
-                        HekrUserAction.getInstance(InitActivity.this).userLogout();
+                        UserAction.getInstance(InitActivity.this).userLogout();
                         CCPAppManager.setClientUser(null);
                         handler.sendEmptyMessage(2);
                     }else {

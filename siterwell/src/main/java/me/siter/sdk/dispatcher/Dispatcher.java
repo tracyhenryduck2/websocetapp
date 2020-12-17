@@ -166,7 +166,7 @@ public class Dispatcher extends IDispatcher implements IMsgObserver {
     public void enqueue(IMessageRequest request, FilterType type) {
         SiterConnectionService service = ServiceBinder.getInstance().getService();
         if (service != null) {
-            FilterNet filterNet = new FilterNet(request.getFilter(), request.getHekrMsgCallback(), type);
+            FilterNet filterNet = new FilterNet(request.getFilter(), request.getMsgCallback(), type);
             filterNet.setRequest(request);
             add(filterNet);
             if (!TextUtils.isEmpty(request.getMessage())) {
@@ -186,7 +186,7 @@ public class Dispatcher extends IDispatcher implements IMsgObserver {
     public void enqueue(IMessageRequest request, String ip, int port, FilterType type) {
         SiterConnectionService service = ServiceBinder.getInstance().getService();
         if (service != null) {
-            FilterNet filterNet = new FilterNet(request.getFilter(), request.getHekrMsgCallback(), type);
+            FilterNet filterNet = new FilterNet(request.getFilter(), request.getMsgCallback(), type);
             filterNet.setRequest(request);
             add(filterNet);
             if (!TextUtils.isEmpty(request.getMessage())) {
@@ -206,7 +206,7 @@ public class Dispatcher extends IDispatcher implements IMsgObserver {
     public void enqueue(IMessageRequest request, FilterType type, long expired) {
         SiterConnectionService service = ServiceBinder.getInstance().getService();
         if (service != null) {
-            FilterNet filterNet = new FilterNet(request.getFilter(), request.getHekrMsgCallback(), type, expired);
+            FilterNet filterNet = new FilterNet(request.getFilter(), request.getMsgCallback(), type, expired);
             filterNet.setRequest(request);
             if (request.getChannel() == IMessageRequest.CHANNEL_CLOUD && service.cloudConnExist(request.getHandler())) {
                 if (!TextUtils.isEmpty(request.getMessage())) {

@@ -13,12 +13,12 @@ public class SiterConstantsUtil {
     public static final String TOKEN_OUT_ERROR = "Token expired, please re login";
     public static final String UNKNOWN_ERROR = "UNKNOWN_ERROR";
 
-    public static final String HEKR_SDK_ERROR = "HEKR_SDK_ERROR";
-    public static final String HEKR_WS_PAYLOAD = "hekr_ws_payload";
-    public static final String HEKR_SDK = "HEKR_SDK";
-    public static final String HEKR_PUSH_CLIENT_ID = "clientid";
-    public static final String HEKR_MI_PUSH_CLIENT_ID = "mRegId";
-    public static final String HEKR_HUA_WEI_PUSH_CLIENT_ID = "huaWeiToken";
+    public static final String SDK_ERROR = "SDK_ERROR";
+    public static final String WS_PAYLOAD = "siter_ws_payload";
+    public static final String SDK = "SITER_SDK";
+    public static final String PUSH_CLIENT_ID = "clientid";
+    public static final String MI_PUSH_CLIENT_ID = "mRegId";
+    public static final String HUA_WEI_PUSH_CLIENT_ID = "huaWeiToken";
 
     /**
      * 网址
@@ -63,7 +63,6 @@ public class SiterConstantsUtil {
         /**
          * 授权
          */
-        public static final String OAUTH_URL = "http://www.hekr.me?action=rauth&token=";
         public static final String AUTHORIZATION_REVERSE_REGISTER = "authorization/reverse/register";
         public static final String AUTHORIZATION_REVERSE_AUTH_URL = "authorization/reverse/authUrl";
         public static final String REVERSE_TEMPLATE_ID = "?reverseTemplateId=";
@@ -86,8 +85,8 @@ public class SiterConstantsUtil {
     }
 
     public static class ActionStrUtil {
-        public static final String ACTION_WS_DATA_RECEIVE = "me.hekr.action.ws.data";
-        public static final String ACTION_PUSH_DATA_RECEIVE = "me.hekr.push.action";
+        public static final String ACTION_WS_DATA_RECEIVE = "me.action.ws.data";
+        public static final String ACTION_PUSH_DATA_RECEIVE = "me.push.action";
     }
 
     public static class ErrorCode {

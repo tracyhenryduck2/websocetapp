@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class ResourceUtil {
     /**
-     * 读取R.raw.hekr.json
+     * 读取R.raw.json
      */
     public static String convertStreamToString(Context mContext, int id) {
         InputStream is = mContext.getResources().openRawResource(id);

@@ -8,20 +8,13 @@ import java.util.TimerTask;
 import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.IBinder;
 
-import com.siterwell.demo.BroadCastForNotification;
-import com.siterwell.demo.NotificationConstant;
 import com.siterwell.demo.device.bean.BatteryDescBean;
 import com.siterwell.demo.folder.bean.LocalFolderBean;
 import com.siterwell.demo.storage.DeviceDao;
 import com.siterwell.sdk.bean.BatteryBean;
-import com.siterwell.sdk.common.SitewellSDK;
-import com.siterwell.sdk.common.SycBatteryStatusListener;
-import com.siterwell.sdk.http.HekrUserAction;
 import com.siterwell.sdk.http.bean.DeviceBean;
 
 public class SilenceOverNotificationService extends IntentService {

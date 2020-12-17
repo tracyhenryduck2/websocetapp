@@ -38,7 +38,7 @@ public class SiterReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         //云端返回所有信息
-        String backData=intent.getStringExtra(SiterConstantsUtil.HEKR_WS_PAYLOAD);
+        String backData=intent.getStringExtra(SiterConstantsUtil.WS_PAYLOAD);
         Log.i(TAG,backData);
         decodeFromJSON(backData);
     }

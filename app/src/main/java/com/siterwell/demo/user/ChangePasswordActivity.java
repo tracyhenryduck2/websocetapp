@@ -9,8 +9,8 @@ import android.widget.Toast;
 import com.siterwell.demo.R;
 import com.siterwell.demo.common.Errcode;
 import com.siterwell.demo.common.TopbarSuperActivity;
-import com.siterwell.sdk.http.HekrUser;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.SiterUser;
+import com.siterwell.sdk.http.UserAction;
 
 
 /**
@@ -68,7 +68,7 @@ public class ChangePasswordActivity extends TopbarSuperActivity implements View.
             return;
         }else{
              showProgressDialog(getResources().getString(R.string.modifying_newpassword));
-            HekrUserAction.getInstance(this).changePassword(newpsw, oldpsw, new HekrUser.ChangePwdListener() {
+            UserAction.getInstance(this).changePassword(newpsw, oldpsw, new SiterUser.ChangePwdListener() {
                 @Override
                 public void changeSuccess() {
                     Toast.makeText(ChangePasswordActivity.this, getResources().getString(R.string.modify_newpassword_success), Toast.LENGTH_SHORT).show();

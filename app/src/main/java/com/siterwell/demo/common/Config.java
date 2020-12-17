@@ -8,8 +8,8 @@ import android.util.Log;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.siterwell.demo.R;
 import com.siterwell.sdk.http.BaseHttpUtil;
-import com.siterwell.sdk.http.HekrCodeUtil;
-import com.siterwell.sdk.http.HekrUser;
+import com.siterwell.sdk.http.CodeUtil;
+import com.siterwell.sdk.http.SiterUser;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -61,7 +61,7 @@ public class Config {
 	 * @param loginListener 回调接口
 	 */
 
-	public static void getUpdateInfo(Context mContext, final HekrUser.LoginListener loginListener) {
+	public static void getUpdateInfo(Context mContext, final SiterUser.LoginListener loginListener) {
 
 		BaseHttpUtil.getData(mContext, ApkVerUrl, new AsyncHttpResponseHandler() {
 			@Override
@@ -71,7 +71,7 @@ public class Config {
 
 			@Override
 			public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-				loginListener.loginFail(HekrCodeUtil.getErrorCode(i, bytes));
+				loginListener.loginFail(CodeUtil.getErrorCode(i, bytes));
 			}
 		});
 	}

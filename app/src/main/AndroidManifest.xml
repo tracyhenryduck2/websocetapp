@@ -230,7 +230,7 @@
         <receiver
             android:name="com.siterwell.sdk.common.SiterReceiver">
             <intent-filter>
-                <action android:name="me.hekr.action.ws.data" />
+                <action android:name="me.action.ws.data" />
             </intent-filter>
         </receiver>
         <receiver android:name="com.siterwell.sdk.common.UDPreceiver">

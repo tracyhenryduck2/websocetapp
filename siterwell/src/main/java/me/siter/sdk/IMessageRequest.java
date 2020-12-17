@@ -23,9 +23,9 @@ public interface IMessageRequest {
 
   IMessageFilter getFilter();
 
-  void setHekrMsgCallback(SiterMsgCallback callback);
+  void setMsgCallback(SiterMsgCallback callback);
 
-  SiterMsgCallback getHekrMsgCallback();
+  SiterMsgCallback getMsgCallback();
 
   String getHandler();
 

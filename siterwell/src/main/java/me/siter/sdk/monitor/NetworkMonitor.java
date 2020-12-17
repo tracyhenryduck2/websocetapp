@@ -50,19 +50,9 @@ public class NetworkMonitor {
     }
 
     public void startMonitor() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//            ConnectivityManager connectivityManager = (ConnectivityManager) HekrSDK.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-//            mNetworkCallback = new NetCallback();
-//            NetworkRequest request = new NetworkRequest.Builder()
-//                    .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
-//                    .addCapability(NetworkCapabilities.TRANSPORT_WIFI)
-//                    .build();
-//            connectivityManager.registerNetworkCallback(request, mNetworkCallback);
-//        } else {
         IntentFilter filter = new IntentFilter();
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         SiterSDK.getContext().registerReceiver(mReceiver, filter);
-//        }
     }
 
     public void stopMonitor() {

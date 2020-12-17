@@ -11,7 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.siterwell.demo.common.Errcode;
 import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.device.bean.WarningHistoryBean;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.UserAction;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -128,7 +128,7 @@ public class AlarmListActivity extends TopbarSuperActivity {
         }
 
 
-        HekrUserAction.getInstance(this).getAllAlarmHistory(page, 20, new HekrUserAction.GetHekrDataListener() {
+        UserAction.getInstance(this).getAllAlarmHistory(page, 20, new UserAction.GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 Log.i(TAG,object.toString());

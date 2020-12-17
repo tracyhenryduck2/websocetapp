@@ -38,8 +38,8 @@ import com.siterwell.sdk.common.RefreshWaterSensorListener;
 import com.siterwell.sdk.common.SitewellSDK;
 import com.siterwell.sdk.common.TokenTimeoutListener;
 import com.siterwell.sdk.common.WIFISocketListener;
-import com.siterwell.sdk.http.HekrUser;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.SiterUser;
+import com.siterwell.sdk.http.UserAction;
 import com.siterwell.sdk.http.bean.DeviceBean;
 
 import org.greenrobot.eventbus.EventBus;
@@ -149,7 +149,7 @@ public class SychronizeService extends Service implements RefreshBatteryListener
        final String ds = folderlist.get(count);
         Log.i(TAG,"同步文件夹:"+folderlist.get(count));
 
-        HekrUserAction.getInstance(this).getFoldDeviceList(this, 0, 20, ds, new GetDeviceListListener() {
+        UserAction.getInstance(this).getFoldDeviceList(this, 0, 20, ds, new GetDeviceListListener() {
             @Override
             public void succuss(List<DeviceBean> deviceBeans) {
                 try {
@@ -212,7 +212,7 @@ public class SychronizeService extends Service implements RefreshBatteryListener
 
     private void queryFolderDevices(List<DeviceBean> deviceBeanList){
 
-        HekrUserAction.getInstance(this).getGS140AndGS156WCurrentStatus(deviceBeanList, new HekrUser.GetGS140AndGS156WListener() {
+        UserAction.getInstance(this).getGS140AndGS156WCurrentStatus(deviceBeanList, new SiterUser.GetGS140AndGS156WListener() {
             @Override
             public void getSuccess(List<BatteryBean> batteryBeanList, List<WaterSensorBean> WaterSensorBeanList) {
                 DeviceDao deviceDao = new DeviceDao(SychronizeService.this);

@@ -23,7 +23,7 @@ public class OAuthListBean implements Serializable {
      * enableIFTTT : true
      * enableScheduler : true
      * desc :
-     * grantorName : HEKR演示账号
+     * grantorName :
      * granteeName : 123ghhh
      */
 

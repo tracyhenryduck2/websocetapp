@@ -32,7 +32,7 @@ import me.siter.sdk.utils.NetworkUtil;
 class SiterDeviceScanner implements ISiterDeviceScanner, ServiceListener {
 
     private static final String TAG = SiterDeviceScanner.class.getSimpleName();
-    private static final String TYPE_SERVICE_UDP = "_hekr._udp.local.";
+    private static final String TYPE_SERVICE_UDP = "_siter._udp.local.";
 
     // 服务实际类型
     private String mType = TYPE_SERVICE_UDP;

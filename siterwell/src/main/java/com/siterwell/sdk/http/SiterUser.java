@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * Created by jin123d on 2016/4/8.
  **/
-public class HekrUser {
+public class SiterUser {
 
     public interface GetDataListener {
         void getDataSuccess(Object object);
@@ -222,7 +222,7 @@ public class HekrUser {
     }
 
     /**
-     * 3.17 创建匿名Hekr主账户并与当前登录三方账户绑定
+     * 3.17 创建匿名主账户并与当前登录三方账户绑定
      */
     public interface CreateUserAndBindListener {
         void createSuccess(String str);
@@ -231,7 +231,7 @@ public class HekrUser {
     }
 
     /**
-     * 通过手机将第三方账号升级为hekr主账号
+     * 通过手机将第三方账号升级为主账号
      */
     public interface AccountUpgradeListener {
         void UpgradeSuccess();
@@ -422,7 +422,6 @@ public class HekrUser {
      * 1. 创建授权二维码URL
      * <br>
      * 在openApi中这个接口返回是"reverseAuthorizationTemplateId",SDK中直接将这个参数添加至一个url
-     * (<a href="http://www.hekr.me?action=rauth&token=reverseAuthorizationTemplateId">二维码url</a>)中，
      * 因此创建二维码应该使用整个url进行创建，扫描解析时拿到url中的token参数来进行处理。
      * <br>
      */

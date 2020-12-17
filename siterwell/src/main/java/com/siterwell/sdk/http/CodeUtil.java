@@ -16,12 +16,12 @@ import java.util.regex.Pattern;
 
 
 /*
-@class HekrCodeUtil
+@class CodeUtil
 @autor Administrator
 @time 2017/10/16 13:49
 @email xuejunju_4595@qq.com
 */
-public class HekrCodeUtil {
+public class CodeUtil {
     //中文简体
     public static final int LANGUAGE_zh_Hans = 1;
     //中文繁体
@@ -30,7 +30,7 @@ public class HekrCodeUtil {
     public static final int LANGUAGE_en = 3;
 
 
-    public HekrCodeUtil() {
+    public CodeUtil() {
     }
 
     /**
@@ -80,7 +80,7 @@ public class HekrCodeUtil {
      * @return zh-CN/en-US
      */
     public static String getLanguageTag(Context context) {
-        return (getLanguage(context) == HekrCodeUtil.LANGUAGE_zh_Hans) ? "zh-CN" : "en-US";
+        return (getLanguage(context) == CodeUtil.LANGUAGE_zh_Hans) ? "zh-CN" : "en-US";
     }
 
     /**
@@ -90,7 +90,7 @@ public class HekrCodeUtil {
      * @return zh-CN/en-US
      */
     public static String getLanguageTag2(Context context) {
-        return (getLanguage(context) == HekrCodeUtil.LANGUAGE_zh_Hans) ? "zh_CN" : "en_US";
+        return (getLanguage(context) == CodeUtil.LANGUAGE_zh_Hans) ? "zh_CN" : "en_US";
     }
 
 
@@ -314,18 +314,18 @@ public class HekrCodeUtil {
     public static int getErrorCode(int code, byte[] bytes) {
         switch (code) {
             case SiterConstantsUtil.ErrorCode.NETWORK_TIME_OUT:
-                Log.e(SiterConstantsUtil.HEKR_SDK_ERROR, SiterConstantsUtil.NETWORK_ERROR);
+                Log.e(SiterConstantsUtil.SDK_ERROR, SiterConstantsUtil.NETWORK_ERROR);
                 return code;
             case SiterConstantsUtil.ErrorCode.TOKEN_TIME_OUT:
-                Log.e(SiterConstantsUtil.HEKR_SDK_ERROR, SiterConstantsUtil.TOKEN_OUT_ERROR);
+                Log.e(SiterConstantsUtil.SDK_ERROR, SiterConstantsUtil.TOKEN_OUT_ERROR);
                 return code;
             case SiterConstantsUtil.ErrorCode.SERVER_ERROR:
                 if (bytes != null && bytes.length > 0) {
-                    Log.e(SiterConstantsUtil.HEKR_SDK_ERROR, new String(bytes));
+                    Log.e(SiterConstantsUtil.SDK_ERROR, new String(bytes));
                 }
                 return code;
             default:
-                Log.e(SiterConstantsUtil.HEKR_SDK_ERROR, "HTTP-" + code + new String(bytes));
+                Log.e(SiterConstantsUtil.SDK_ERROR, "HTTP-" + code + new String(bytes));
                 ErrorMsgBean errorMsgBean = msg2Bean(bytes);
                 return errorMsgBean.getCode();
         }
@@ -345,21 +345,21 @@ public class HekrCodeUtil {
         switch (code) {
             case SiterConstantsUtil.ErrorCode.NETWORK_TIME_OUT:
                 errorMsg = SiterConstantsUtil.NETWORK_ERROR;
-                Log.e(SiterConstantsUtil.HEKR_SDK_ERROR, url + "\n" + "HTTP-" + code + "\n" + errorMsg);
+                Log.e(SiterConstantsUtil.SDK_ERROR, url + "\n" + "HTTP-" + code + "\n" + errorMsg);
                 return code;
             case SiterConstantsUtil.ErrorCode.TOKEN_TIME_OUT:
                 errorMsg = SiterConstantsUtil.TOKEN_OUT_ERROR;
-                Log.e(SiterConstantsUtil.HEKR_SDK_ERROR, url + "\n" + "HTTP-" + code + "\n" + errorMsg);
+                Log.e(SiterConstantsUtil.SDK_ERROR, url + "\n" + "HTTP-" + code + "\n" + errorMsg);
                 return code;
             case SiterConstantsUtil.ErrorCode.SERVER_ERROR:
                 if (bytes != null && bytes.length > 0) {
                     errorMsg = new String(bytes);
-                    Log.e(SiterConstantsUtil.HEKR_SDK_ERROR, url + "\n" + "HTTP-" + code + "\n" + errorMsg);
+                    Log.e(SiterConstantsUtil.SDK_ERROR, url + "\n" + "HTTP-" + code + "\n" + errorMsg);
                 }
                 return code;
             default:
                 ErrorMsgBean errorMsgBean = msg2Bean(bytes);
-                Log.e(SiterConstantsUtil.HEKR_SDK_ERROR, url + "\n" + "HTTP-" + code + "\n" + new String(bytes));
+                Log.e(SiterConstantsUtil.SDK_ERROR, url + "\n" + "HTTP-" + code + "\n" + new String(bytes));
                 return errorMsgBean.getCode();
         }
     }

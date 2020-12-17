@@ -273,11 +273,11 @@ public class SiterCloudClient implements NetObservable, Connectable, AppStatusOb
         return isOnline;
     }
 
-    synchronized void addHekrClientListener(SiterClientListener listener) {
+    synchronized void addSiterclientListener(SiterClientListener listener) {
         mSiterClientListeners.add(listener);
     }
 
-    synchronized void removeHekrClientListener(SiterClientListener listener) {
+    synchronized void removeSiterClientListener(SiterClientListener listener) {
         mSiterClientListeners.remove(listener);
     }
 

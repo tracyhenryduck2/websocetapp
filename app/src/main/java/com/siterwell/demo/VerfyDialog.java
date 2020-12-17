@@ -14,8 +14,8 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.litesuits.common.assist.Toastor;
 import com.siterwell.demo.common.Errcode;
-import com.siterwell.sdk.http.HekrUser;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.SiterUser;
+import com.siterwell.sdk.http.UserAction;
 
 import java.lang.reflect.Field;
 import java.util.Random;
@@ -40,7 +40,7 @@ public class VerfyDialog {
     private Activity activity;
     //随机数
     private String str_rid;
-    private HekrUserAction hekrUserAction;
+    private UserAction userAction;
 
     //手机号
     private String username;
@@ -56,14 +56,14 @@ public class VerfyDialog {
 
     /**
      * @param context context
-     * @param action  HekrUserAction
+     * @param action  userAction
      * @param phone   手机号
      * @param type    类型
      * @return AlertDialog
      */
-    public AlertDialog showDialog(final Activity context, HekrUserAction action, String phone, int type,int style_type) {
+    public AlertDialog showDialog(final Activity context, UserAction action, String phone, int type, int style_type) {
         if (vfDialog == null) {
-            this.hekrUserAction = action;
+            this.userAction = action;
             this.activity = context;
             this.username = phone;
             this.yz_type = type;
@@ -166,7 +166,7 @@ public class VerfyDialog {
      * 拉取图片
      */
     private void disPlay() {
-        hekrUserAction.getImgCaptcha(getRandomString(), new HekrUser.GetImgCaptchaListener() {
+        userAction.getImgCaptcha(getRandomString(), new SiterUser.GetImgCaptchaListener() {
             @Override
             public void getImgCaptchaSuccess(Bitmap bitmap) {
                 iv_code.setImageBitmap(bitmap);
@@ -184,7 +184,7 @@ public class VerfyDialog {
      */
 
     private void verifyImg() {
-        hekrUserAction.checkCaptcha(et_code.getText().toString(), str_rid, new HekrUser.CheckCaptcha() {
+        userAction.checkCaptcha(et_code.getText().toString(), str_rid, new SiterUser.CheckCaptcha() {
             @Override
             public void checkCaptchaSuccess(String captchaToken) {
                 Log.i("RegisterFragment", captchaToken);
@@ -206,7 +206,7 @@ public class VerfyDialog {
     private void sendMess(final String captchaToken) {
 
         if(stype_type == 1){
-            hekrUserAction.getVerifyCode(username, yz_type, captchaToken, new HekrUser.GetVerifyCodeListener() {
+            userAction.getVerifyCode(username, yz_type, captchaToken, new SiterUser.GetVerifyCodeListener() {
                 @Override
                 public void getVerifyCodeSuccess() {
                     toastor.showSingletonToast(activity.getString(R.string.success_send));
@@ -222,7 +222,7 @@ public class VerfyDialog {
                 }
             });
         }else{
-            hekrUserAction. getEmailVerifyCode(username, yz_type, captchaToken, new HekrUser.GetVerifyCodeListener() {
+            userAction. getEmailVerifyCode(username, yz_type, captchaToken, new SiterUser.GetVerifyCodeListener() {
                 @Override
                 public void getVerifyCodeSuccess() {
                     toastor.showSingletonToast(activity.getString(R.string.success_send_email));

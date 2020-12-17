@@ -116,7 +116,7 @@ public class SiterCoreService extends Service {
                 public void onReceived(String msg) {
                     // 收到消息
                     Intent intent = new Intent(SiterConstantsUtil.ActionStrUtil.ACTION_WS_DATA_RECEIVE);
-                    intent.putExtra(SiterConstantsUtil.HEKR_WS_PAYLOAD,msg);
+                    intent.putExtra(SiterConstantsUtil.WS_PAYLOAD,msg);
                     sendBroadcast(intent);
                 }
 
@@ -134,7 +134,7 @@ public class SiterCoreService extends Service {
                 public void onError(int errorCode, String message) {
                     // 接收错误
                     Intent intent = new Intent(SiterConstantsUtil.ActionStrUtil.ACTION_WS_DATA_RECEIVE);
-                    intent.putExtra(SiterConstantsUtil.HEKR_WS_PAYLOAD,message);
+                    intent.putExtra(SiterConstantsUtil.WS_PAYLOAD,message);
                     sendBroadcast(intent);
                 }
             });

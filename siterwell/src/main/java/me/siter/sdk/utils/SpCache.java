@@ -20,7 +20,7 @@ public class SpCache {
     private static final String TAG = SpCache.class.getSimpleName();
     private static SpCache INSTANCE;
     private ConcurrentMap<String, SoftReference<Object>> mCache;
-    private String mPrefFileName = "HEKR_SDK";
+    private String mPrefFileName = "SITER_SDK";
     private Context mContext;
 
 
@@ -55,7 +55,7 @@ public class SpCache {
 
     private static SpCache getInstance() {
         if (INSTANCE == null)
-            throw new NullPointerException("You should invoke HekrSDK.init() before using it.");
+            throw new NullPointerException("You should invoke SiterSDK.init() before using it.");
         return INSTANCE;
     }
 

@@ -224,7 +224,7 @@ public class SiterWebBean {
 
     @Override
     public String toString() {
-        return "HekrWebBean{" +
+        return "SiterWebBean{" +
                 "devTid='" + devTid + '\'' +
                 ", subDevTid='" + subDevTid + '\'' +
                 ", ctrlKey='" + ctrlKey + '\'' +

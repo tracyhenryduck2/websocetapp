@@ -12,8 +12,7 @@ public enum ECPreferenceSettings {
     SETTINGS_PASSWORD("com.siterwell.demo.password" , ""),
     SETTINGS_REMEMBER_PASSWORD("com.siterwell.demo.rememberpassword", Boolean.FALSE),
     SETTINGS_CONFIG_REMEMBER_PASSWORD("com.siterwell.demo.configrememberpassword", Boolean.TRUE),
-    SETTINGS_HUAWEI_TOKEN("com.siterwell.demo.huaweitoken",""),
-    SETTINGS_DOMAIN("com.siterwell.demo.domain","hekr.me");
+    SETTINGS_HUAWEI_TOKEN("com.siterwell.demo.huaweitoken","");
     private final String mId;
     private final Object mDefaultValue;
 

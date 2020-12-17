@@ -24,7 +24,7 @@ public class DeviceBean implements Serializable {
      * binType : A
      * serviceHost : null
      * servicePort : 0
-     * ssid : HEKR-C
+     * ssid :
      * mac : C89346546428
      * finger : 9624c128-4a2e-4f1e-8fa7-4b7001332b29
      * currentLoginTime : 1460545154134
@@ -41,7 +41,6 @@ public class DeviceBean implements Serializable {
      * desc : devdesc
      * folderId : 0
      * productPublicKey : k0wfHypbzGlO9HFLdv8MEZdsNbLFgrIaR1HlbDpW1Eynx6x0nPeX6DR8QDzQprOdoM
-     * logo : http://app.hekr.me/res/img/icon/icon_49@3x.png
      * androidH5Page :
      * iosH5Page :
      * granted : false
@@ -99,8 +98,6 @@ public class DeviceBean implements Serializable {
     /**
      * forceBind : false
      * maxDevShareNum : 0
-     * androidH5Page : http://h5page.resource.hekr.me/android/f36b434b874b4b0fb3a35c0df48a215e/index.html
-     * iosH5Page : http://h5page.resource.hekr.me/android/f36b434b874b4b0fb3a35c0df48a215e/index.html
      */
 
     private boolean forceBind;

@@ -13,8 +13,8 @@ public class DefaultDeviceBean implements Serializable {
      * deviceName : 智能空气净化器
      * logo : http://7xsk3x.com2.z0.glb.qiniucdn.com/dev_static_kqjhq.png
      * desc : 默认体验设备
-     * androidH5Page : http://app.hekr.me/android/124/
-     * iosH5Page : http://app.hekr.me/android/124/
+     * androidH5Page : 
+     * iosH5Page :
      */
 
     private String pid;

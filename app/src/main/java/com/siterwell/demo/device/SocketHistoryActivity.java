@@ -13,7 +13,7 @@ import com.siterwell.demo.common.Errcode;
 import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.device.bean.SocketDescBean;
 import com.siterwell.demo.device.bean.SocketHistoryBean;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.UserAction;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -135,7 +135,7 @@ public class SocketHistoryActivity extends TopbarSuperActivity {
             swipeRefreshLayout_em.setRefreshing(true);
         }
 
-        HekrUserAction.getInstance(this).getAlarmHistory(page, 20, socketDescBean, new HekrUserAction.GetHekrDataListener() {
+        UserAction.getInstance(this).getAlarmHistory(page, 20, socketDescBean, new UserAction.GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 Log.i(TAG,object.toString());

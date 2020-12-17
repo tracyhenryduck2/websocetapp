@@ -26,7 +26,7 @@ import static com.loopj.android.http.AsyncHttpClient.HEADER_CONTENT_TYPE;
 @email xuejunju_4595@qq.com
 */
 public class BaseHttpUtil {
-    private static final String TAG = "HEKR_BaseHttpUtil";
+    private static final String TAG = "BaseHttpUtil";
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 

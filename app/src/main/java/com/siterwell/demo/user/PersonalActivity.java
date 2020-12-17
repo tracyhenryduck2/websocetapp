@@ -15,8 +15,8 @@ import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.common.UnitTools;
 import com.siterwell.demo.commonview.ECAlertDialog;
 import com.siterwell.demo.commonview.SettingItem;
-import com.siterwell.sdk.http.HekrUser;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.SiterUser;
+import com.siterwell.sdk.http.UserAction;
 
 
 /**
@@ -84,7 +84,7 @@ public class PersonalActivity extends TopbarSuperActivity implements View.OnClic
                                 alertDialog.setDismissFalse(true);
                                 com.alibaba.fastjson.JSONObject object = new com.alibaba.fastjson.JSONObject();
                                 object.put("description",newname.toString().trim());
-                                HekrUserAction.getInstance(PersonalActivity.this).setProfile(object, new HekrUser.SetProfileListener() {
+                                UserAction.getInstance(PersonalActivity.this).setProfile(object, new SiterUser.SetProfileListener() {
                                     @Override
                                     public void setProfileSuccess() {
 

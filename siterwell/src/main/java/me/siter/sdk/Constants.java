@@ -10,8 +10,8 @@ import android.text.TextUtils;
 
 public class Constants {
 
-    public static final String HEKR_PID = "HEKR_PID";
-    public static final String HEKR_SDK = "HEKR_SDK";
+    public static final String SITER_PID = "SITER_PID";
+    public static final String SITER_SDK = "SITER_SDK";
 
     public static final String JWT_TOKEN = "JWT_TOKEN";
     public static final String REFRESH_TOKEN = "REFRESH_TOKEN";
@@ -22,8 +22,8 @@ public class Constants {
 
     public static class UrlUtil {
         public static String BASE_UAA_URL = "http://192.168.12.163:1418/";
-        public static String BASE_USER_URL = "https://user-openapi.hekr.me/";
-        public static String BASE_CONSOLE_URL = "https://console-openapi.hekr.me/";
+        public static String BASE_USER_URL = "https://user-openapi.siter.me/";
+        public static String BASE_CONSOLE_URL = "https://console-openapi.siter.me/";
         public static String APP_WEBSOCKET_REPLACE_CLOUD_URL = "ws://%s:8899";
         public static String APP_WEBSOCKET_REPLACE_TEST_CLOUD_URL = "ws://%s:8899";
 
@@ -53,9 +53,9 @@ public class Constants {
     public static void setTestSite(String domain) {
         IS_DEBUG_SITE = true;
         if (TextUtils.isEmpty(domain)) {
-            UrlUtil.BASE_UAA_URL = "https://test-uaa-openapi.hekr.me/";
-            UrlUtil.BASE_USER_URL = "https://test-user-openapi.hekr.me/";
-            UrlUtil.BASE_CONSOLE_URL = "https://test-console-openapi.hekr.me/";
+            UrlUtil.BASE_UAA_URL = "https://test-uaa-openapi.siter.me/";
+            UrlUtil.BASE_USER_URL = "https://test-user-openapi.siter.me/";
+            UrlUtil.BASE_CONSOLE_URL = "https://test-console-openapi.siter.me/";
         } else {
             UrlUtil.BASE_UAA_URL = "https://test-uaa-openapi." + domain + "/";
             UrlUtil.BASE_USER_URL = "https://test-user-openapi." + domain + "/";
@@ -71,9 +71,9 @@ public class Constants {
     public static void setOnlineSite(String domain) {
         IS_DEBUG_SITE = false;
         if (TextUtils.isEmpty(domain)) {
-            UrlUtil.BASE_UAA_URL = "https://uaa-openapi.hekr.me/";
-            UrlUtil.BASE_USER_URL = "https://user-openapi.hekr.me/";
-            UrlUtil.BASE_CONSOLE_URL = "https://console-openapi.hekr.me/";
+            UrlUtil.BASE_UAA_URL = "https://uaa-openapi.siter.me/";
+            UrlUtil.BASE_USER_URL = "https://user-openapi.siter.me/";
+            UrlUtil.BASE_CONSOLE_URL = "https://console-openapi.siter.me/";
         } else {
             UrlUtil.BASE_UAA_URL = "https://uaa-openapi." + domain + "/";
             UrlUtil.BASE_USER_URL = "https://user-openapi." + domain + "/";

@@ -14,10 +14,8 @@ public class DeviceStatusBean implements Serializable {
      * bindToUser : true
      * forceBind : false
      * deviceName :
-     * logo : http://app.hekr.me/res/img/icon/icon_33@3x.png
      * cid : fc1345a42510
      * cidName : 厨房电器/电饭煲
-     * productBand : HEKR
      */
 
     private String devTid;

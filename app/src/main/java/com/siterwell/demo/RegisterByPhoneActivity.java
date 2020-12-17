@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.litesuits.common.assist.Toastor;
 import com.siterwell.demo.common.Errcode;
-import com.siterwell.sdk.http.HekrUser;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.SiterUser;
+import com.siterwell.sdk.http.UserAction;
 
 public class RegisterByPhoneActivity extends AppCompatActivity implements View.OnClickListener, VerfyDialog.VerifyCodeSuccess {
     private EditText et_phone, et_code, et_pwd;
@@ -50,7 +50,7 @@ public class RegisterByPhoneActivity extends AppCompatActivity implements View.O
                 phone = et_phone.getText().toString().trim();
                 if (!TextUtils.isEmpty(phone) && VerfyDialog.isMobile(phone)) {
                     VerfyDialog dialog = new VerfyDialog();
-                    dialog.showDialog(this, HekrUserAction.getInstance(this), et_phone.getText().toString().trim(), HekrUserAction.CODE_TYPE_REGISTER,1);
+                    dialog.showDialog(this, UserAction.getInstance(this), et_phone.getText().toString().trim(), UserAction.CODE_TYPE_REGISTER,1);
                     dialog.show();
                     dialog.setVerifyCodeSuccess(this);
                 } else {
@@ -62,7 +62,7 @@ public class RegisterByPhoneActivity extends AppCompatActivity implements View.O
                 String code = et_code.getText().toString().trim();
                 pwd = et_pwd.getText().toString().trim();
                 if (!TextUtils.isEmpty(code) && !TextUtils.isEmpty(pwd)) {
-                    HekrUserAction.getInstance(this).checkVerifyCode(phone, code, new HekrUser.CheckVerifyCodeListener() {
+                    UserAction.getInstance(this).checkVerifyCode(phone, code, new SiterUser.CheckVerifyCodeListener() {
                         @Override
                         public void checkVerifyCodeSuccess(String phoneNumber, String verifyCode, String token, String expireTime) {
                             register(phoneNumber, pwd, token);
@@ -82,7 +82,7 @@ public class RegisterByPhoneActivity extends AppCompatActivity implements View.O
 
 
     private void register(String phoneNumber, String pwd, String token) {
-        HekrUserAction.getInstance(this).registerByPhone(phoneNumber, pwd, token, new HekrUser.RegisterListener() {
+        UserAction.getInstance(this).registerByPhone(phoneNumber, pwd, token, new SiterUser.RegisterListener() {
             @Override
             public void registerSuccess(String uid) {
                 toastor.showSingleLongToast(getResources().getString(R.string.register_success));

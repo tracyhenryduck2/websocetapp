@@ -4,12 +4,12 @@ package com.siterwell.sdk.http;
 import com.siterwell.sdk.http.bean.JWTBean;
 
 /*
-@class GetHekrDataWithTokenListener
+@class GetSiterDataWithTokenListener
 @autor Administrator
 @time 2017/10/16 14:26
 @email xuejunju_4595@qq.com
 */
-public abstract class GetHekrDataWithTokenListener {
+public abstract class GetSiterDataWithTokenListener {
 
     public abstract void getDataSuccess(Object object);
 

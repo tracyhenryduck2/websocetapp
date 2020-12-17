@@ -115,14 +115,14 @@ public interface ISIterClient {
    *
    * @param listener 监听
    */
-  void addHekrClientListener(SiterClientListener listener);
+  void addSiterClientListener(SiterClientListener listener);
 
   /**
    * 移除对连接状态的监听
    *
    * @param listener 监听
    */
-  void removeHekrClientListener(SiterClientListener listener);
+  void removeSiterClientListener(SiterClientListener listener);
 
   /**
    * 添加对连接状态的监听
@@ -130,7 +130,7 @@ public interface ISIterClient {
    * @param listener 监听
    * @param host   域名
    */
-  void addHekrClientListener(SiterClientListener listener, String host);
+  void addSiterClientListener(SiterClientListener listener, String host);
 
   /**
    * 移除对连接状态的监听
@@ -138,7 +138,7 @@ public interface ISIterClient {
    * @param listener 监听
    * @param host   域名
    */
-  void removeHekrClientListener(SiterClientListener listener, String host);
+  void removeSiterClientListener(SiterClientListener listener, String host);
 
   /**
    * 获取当前连接的状态

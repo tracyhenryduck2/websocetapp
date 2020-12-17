@@ -46,7 +46,7 @@ class SiterLANControl implements ISiterLANControl, SiterLANListener, NetObservab
     private SiterDeviceScanner mSiterDeviceScanner;
     private Map<String, LanControlBean> mLANControlDevices;
     private ArrayList<SiterLANStatusListener> mLANStatusListeners;
-    private Map<String, SIterLANDeviceListener> mHekrLANDeviceListeners;
+    private Map<String, SIterLANDeviceListener> mLANDeviceListeners;
 
     SiterLANControl() {
         this.isNetOffBefore = !NetworkUtil.isWifiConnected(SiterSDK.getContext());
@@ -54,7 +54,7 @@ class SiterLANControl implements ISiterLANControl, SiterLANListener, NetObservab
         this.mLANControlDevices = new ConcurrentHashMap<>();
         this.mLANStatusListeners = new ArrayList<>();
         this.mDeviceClients = new ConcurrentHashMap<>();
-        this.mHekrLANDeviceListeners = new ConcurrentHashMap<>();
+        this.mLANDeviceListeners = new ConcurrentHashMap<>();
     }
 
     @Override
@@ -184,7 +184,7 @@ class SiterLANControl implements ISiterLANControl, SiterLANListener, NetObservab
                     }
                 };
 
-                mHekrLANDeviceListeners.put(tag, listener);
+                mLANDeviceListeners.put(tag, listener);
                 client.addLANDeviceListener(listener);
                 client.connect(bean.getDeviceIP(), bean.getDevicePort());
             } else {
@@ -210,10 +210,10 @@ class SiterLANControl implements ISiterLANControl, SiterLANListener, NetObservab
         for (String tag : mLANControlDevices.keySet()) {
             ISiterDeviceClient client = getDeviceClient(tag);
             if (client != null) {
-                if (mHekrLANDeviceListeners.containsKey(tag)) {
-                    SIterLANDeviceListener listener = mHekrLANDeviceListeners.get(tag);
+                if (mLANDeviceListeners.containsKey(tag)) {
+                    SIterLANDeviceListener listener = mLANDeviceListeners.get(tag);
                     client.removeLANDeviceListener(listener);
-                    mHekrLANDeviceListeners.remove(tag);
+                    mLANDeviceListeners.remove(tag);
                 }
                 removeDeviceClient(tag);
             }

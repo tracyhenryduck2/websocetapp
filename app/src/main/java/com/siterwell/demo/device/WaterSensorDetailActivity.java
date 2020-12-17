@@ -22,10 +22,9 @@ import com.siterwell.demo.device.bean.WaterSensorDescBean;
 import com.siterwell.demo.storage.DeviceDao;
 import com.siterwell.sdk.common.RefreshWaterSensorListener;
 import com.siterwell.sdk.common.SitewellSDK;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.UserAction;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -129,7 +128,7 @@ public class WaterSensorDetailActivity extends TopbarSuperActivity implements Vi
 
     private void queryhistory(){
 
-        HekrUserAction.getInstance(this).getAlarmHistory(page, 20, waterSensorDescBean, new HekrUserAction.GetHekrDataListener() {
+        UserAction.getInstance(this).getAlarmHistory(page, 20, waterSensorDescBean, new UserAction.GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 Log.i(TAG,"object:"+object.toString());

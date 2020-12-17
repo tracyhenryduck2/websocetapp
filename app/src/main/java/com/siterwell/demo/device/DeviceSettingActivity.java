@@ -19,11 +19,10 @@ import com.siterwell.demo.storage.DeviceDao;
 import com.siterwell.sdk.common.SitewellSDK;
 import com.siterwell.sdk.common.TimeOutListener;
 import com.siterwell.sdk.common.UpgradeListener;
-import com.siterwell.sdk.http.HekrUser;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.SiterUser;
+import com.siterwell.sdk.http.UserAction;
 import com.siterwell.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.http.bean.FirmwareBean;
-import com.siterwell.sdk.http.bean.OAuthBean;
 import com.siterwell.sdk.protocol.UpgradeCommand;
 import com.zbar.lib.UIFactory;
 
@@ -111,7 +110,7 @@ public class DeviceSettingActivity extends TopbarSuperActivity implements View.O
 
 
     private void getFirmwareInfo(){
-        HekrUserAction.getInstance(this).getDevices(deviceid, new HekrUser.GetDevicesListener() {
+        UserAction.getInstance(this).getDevices(deviceid, new SiterUser.GetDevicesListener() {
             @Override
             public void getDevicesSuccess(List<DeviceBean> devicesLists) {
                Log.i(TAG,devicesLists.toString());
@@ -123,7 +122,7 @@ public class DeviceSettingActivity extends TopbarSuperActivity implements View.O
                     String bintype = devicesLists.get(0).getBinType();
                     settingItem_bintype.setDetailText(bintype);
                     String ppk = devicesLists.get(0).getProductPublicKey();
-                    HekrUserAction.getInstance(DeviceSettingActivity.this).checkFirmwareUpdate(deviceid, ppk, bintype, ver, new HekrUser.CheckFwUpdateListener() {
+                    UserAction.getInstance(DeviceSettingActivity.this).checkFirmwareUpdate(deviceid, ppk, bintype, ver, new SiterUser.CheckFwUpdateListener() {
                         @Override
                         public void checkNotNeedUpdate() {
                             Log.i(TAG,"无需更新");
@@ -171,7 +170,7 @@ public class DeviceSettingActivity extends TopbarSuperActivity implements View.O
                          final DeviceBean deviceBean = deviceDao.findDeviceBySid(deviceid);
                          if(!TextUtils.isEmpty(newname)){
 
-                             HekrUserAction.getInstance(DeviceSettingActivity.this).renameDevice(deviceBean.getDevTid(), deviceBean.getCtrlKey(), newname, null, deviceBean.getDcInfo().getConnectHost(), new HekrUser.RenameDeviceListener() {
+                             UserAction.getInstance(DeviceSettingActivity.this).renameDevice(deviceBean.getDevTid(), deviceBean.getCtrlKey(), newname, null, deviceBean.getDcInfo().getConnectHost(), new SiterUser.RenameDeviceListener() {
                                  @Override
                                  public void renameDeviceSuccess() {
                                      alertDialog.setDismissFalse(true);
@@ -288,7 +287,7 @@ public class DeviceSettingActivity extends TopbarSuperActivity implements View.O
     }
 
     private void createScanCode(){
-        HekrUserAction.getInstance(this).oAuthCreateCode(deviceBean.getCtrlKey(), new HekrUser.CreateOAuthQRCodeListener() {
+        UserAction.getInstance(this).oAuthCreateCode(deviceBean.getCtrlKey(), new SiterUser.CreateOAuthQRCodeListener() {
             @Override
             public void createSuccess(String url) {
                 // 生成二维码

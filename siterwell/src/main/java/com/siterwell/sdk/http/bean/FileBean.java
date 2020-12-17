@@ -12,8 +12,6 @@ public class FileBean implements Serializable {
     /**
      * fileOriginName : cdraw.png
      * fileName : ufile-1538871986600000000000-3ba434398bbde210435afba88f64e908.png
-     * fileSourceUrl : http://hekr-images.ufile.ucloud.cn/ufile-1538871986600000000000-3ba434398bbde210435afba88f64e908.png
-     * fileCDNUrl : http://hekr-images.ufile.ucloud.com.cn/ufile-1538871986600000000000-3ba434398bbde210435afba88f64e908.png
      * uploadTime : 1458031660384
      * md5 : 3ba434398bbde210435afba88f64e908
      */

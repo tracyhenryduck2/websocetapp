@@ -58,7 +58,7 @@ class SiterDeviceClient implements ISiterDeviceClient, NetObservable, Connectabl
         if (TextUtils.isEmpty(tag)) {
             throw new IllegalArgumentException("DevTid can not be empty");
         }
-        LogUtil.d(TAG, "Create new HekrDeviceClient: " + tag);
+        LogUtil.d(TAG, "Create new SiterDeviceClient: " + tag);
         this.mTag = tag;
         this.mCtrlKey = ctrlKey;
         this.mAppId = AppIdUtil.getAppId(SiterSDK.getContext());

@@ -1,6 +1,5 @@
 package com.siterwell.demo.folder;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -8,8 +7,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,8 +19,8 @@ import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.common.UnitTools;
 import com.siterwell.demo.folder.bean.LocalFolderBean;
 import com.siterwell.demo.storage.FolderDao;
-import com.siterwell.sdk.http.HekrUser;
-import com.siterwell.sdk.http.HekrUserAction;
+import com.siterwell.sdk.http.SiterUser;
+import com.siterwell.sdk.http.UserAction;
 import com.siterwell.sdk.http.bean.FolderBean;
 
 import java.io.File;
@@ -131,7 +128,7 @@ public class AddFolderActivity extends TopbarSuperActivity implements View.OnCli
                  else
                    {
                     showProgressDialog(getResources().getString(R.string.wait));
-                           HekrUserAction.getInstance(AddFolderActivity.this).addFolder(name+"ufile"+ico_index, new HekrUser.AddFolderListener() {
+                           UserAction.getInstance(AddFolderActivity.this).addFolder(name+"ufile"+ico_index, new SiterUser.AddFolderListener() {
                                @Override
                                public void addFolderSuccess(FolderBean folderBean) {
                                    hideProgressDialog();
