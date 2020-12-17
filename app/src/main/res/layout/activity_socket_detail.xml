@@ -155,11 +155,11 @@
                         />
 
                 </RelativeLayout>
-                <android.support.v4.view.ViewPager
+                <androidx.viewpager.widget.ViewPager
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:id="@+id/operation">
-                </android.support.v4.view.ViewPager>
+                </androidx.viewpager.widget.ViewPager>
 
             </LinearLayout>
 </com.siterwell.demo.commonview.RefreshableView>

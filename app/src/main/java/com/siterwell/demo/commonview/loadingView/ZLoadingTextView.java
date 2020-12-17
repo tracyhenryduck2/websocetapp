@@ -2,9 +2,10 @@ package com.siterwell.demo.commonview.loadingView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+
+import androidx.annotation.NonNull;
 
 import com.siterwell.demo.R;
 import com.siterwell.demo.commonview.loadingView.text.TextBuilder;

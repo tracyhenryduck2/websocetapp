@@ -8,7 +8,8 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.support.annotation.FloatRange;
+
+import androidx.annotation.FloatRange;
 
 import com.siterwell.demo.commonview.loadingView.ZLoadingBuilder;
 

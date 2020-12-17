@@ -65,17 +65,17 @@
             android:background="#fff"
             android:gravity="center">
 
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <android.support.design.widget.TextInputEditText
+                <EditText
                     android:id="@+id/pwd_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="请输入网络密码"/>
 
-            </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
 
         </RelativeLayout>
 

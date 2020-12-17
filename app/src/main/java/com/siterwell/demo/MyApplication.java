@@ -3,7 +3,8 @@ package com.siterwell.demo;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.multidex.MultiDexApplication;
+
+import androidx.multidex.MultiDexApplication;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;

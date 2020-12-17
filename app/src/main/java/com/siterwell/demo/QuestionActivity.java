@@ -1,8 +1,9 @@
 package com.siterwell.demo;
 
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.siterwell.demo.common.TopbarSuperActivity;
 
