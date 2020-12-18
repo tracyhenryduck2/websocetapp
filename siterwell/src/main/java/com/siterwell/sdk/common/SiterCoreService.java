@@ -7,7 +7,6 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.siterwell.sdk.event.UdpShakeHandsEvent;
-import com.siterwell.sdk.http.SiterConstantsUtil;
 import com.siterwell.sdk.udp.ConnectB;
 import com.siterwell.sdk.udp.NetWorkUtils;
 import com.siterwell.sdk.udp.SeartchWifiData;
@@ -27,6 +26,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import me.siter.sdk.Constants;
 import me.siter.sdk.Siter;
 import me.siter.sdk.dispatcher.IMessageFilter;
 import me.siter.sdk.inter.SiterMsgCallback;
@@ -88,7 +88,7 @@ public class SiterCoreService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         receiveAllMessage();
         siterReceiver = new SiterReceiver();
-        registerReceiver(siterReceiver, new IntentFilter(SiterConstantsUtil.ActionStrUtil.ACTION_WS_DATA_RECEIVE));
+        registerReceiver(siterReceiver, new IntentFilter(Constants.ActionStrUtil.ACTION_WS_DATA_RECEIVE));
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -115,8 +115,8 @@ public class SiterCoreService extends Service {
                 @Override
                 public void onReceived(String msg) {
                     // 收到消息
-                    Intent intent = new Intent(SiterConstantsUtil.ActionStrUtil.ACTION_WS_DATA_RECEIVE);
-                    intent.putExtra(SiterConstantsUtil.WS_PAYLOAD,msg);
+                    Intent intent = new Intent(Constants.ActionStrUtil.ACTION_WS_DATA_RECEIVE);
+                    intent.putExtra(Constants.WS_PAYLOAD,msg);
                     sendBroadcast(intent);
                 }
 
@@ -133,8 +133,8 @@ public class SiterCoreService extends Service {
                 @Override
                 public void onError(int errorCode, String message) {
                     // 接收错误
-                    Intent intent = new Intent(SiterConstantsUtil.ActionStrUtil.ACTION_WS_DATA_RECEIVE);
-                    intent.putExtra(SiterConstantsUtil.WS_PAYLOAD,message);
+                    Intent intent = new Intent(Constants.ActionStrUtil.ACTION_WS_DATA_RECEIVE);
+                    intent.putExtra(Constants.WS_PAYLOAD,message);
                     sendBroadcast(intent);
                 }
             });

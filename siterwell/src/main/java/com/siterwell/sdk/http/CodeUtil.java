@@ -14,6 +14,8 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import me.siter.sdk.Constants;
+
 
 /*
 @class CodeUtil
@@ -313,19 +315,19 @@ public class CodeUtil {
      */
     public static int getErrorCode(int code, byte[] bytes) {
         switch (code) {
-            case SiterConstantsUtil.ErrorCode.NETWORK_TIME_OUT:
-                Log.e(SiterConstantsUtil.SDK_ERROR, SiterConstantsUtil.NETWORK_ERROR);
+            case Constants.ErrorCode.NETWORK_TIME_OUT:
+                Log.e(Constants.SDK_ERROR, "Network is not available");
                 return code;
-            case SiterConstantsUtil.ErrorCode.TOKEN_TIME_OUT:
-                Log.e(SiterConstantsUtil.SDK_ERROR, SiterConstantsUtil.TOKEN_OUT_ERROR);
+            case Constants.ErrorCode.TOKEN_TIME_OUT:
+                Log.e(Constants.SDK_ERROR, "Token expired, please re login");
                 return code;
-            case SiterConstantsUtil.ErrorCode.SERVER_ERROR:
+            case Constants.ErrorCode.SERVER_ERROR:
                 if (bytes != null && bytes.length > 0) {
-                    Log.e(SiterConstantsUtil.SDK_ERROR, new String(bytes));
+                    Log.e(Constants.SDK_ERROR, new String(bytes));
                 }
                 return code;
             default:
-                Log.e(SiterConstantsUtil.SDK_ERROR, "HTTP-" + code + new String(bytes));
+                Log.e(Constants.SDK_ERROR, "HTTP-" + code + new String(bytes));
                 ErrorMsgBean errorMsgBean = msg2Bean(bytes);
                 return errorMsgBean.getCode();
         }
@@ -343,23 +345,23 @@ public class CodeUtil {
     public static int getErrorCode(String url, int code, byte[] bytes) {
         String errorMsg;
         switch (code) {
-            case SiterConstantsUtil.ErrorCode.NETWORK_TIME_OUT:
-                errorMsg = SiterConstantsUtil.NETWORK_ERROR;
-                Log.e(SiterConstantsUtil.SDK_ERROR, url + "\n" + "HTTP-" + code + "\n" + errorMsg);
+            case Constants.ErrorCode.NETWORK_TIME_OUT:
+                errorMsg = "Network is not available";
+                Log.e(Constants.SDK_ERROR, url + "\n" + "HTTP-" + code + "\n" + errorMsg);
                 return code;
-            case SiterConstantsUtil.ErrorCode.TOKEN_TIME_OUT:
-                errorMsg = SiterConstantsUtil.TOKEN_OUT_ERROR;
-                Log.e(SiterConstantsUtil.SDK_ERROR, url + "\n" + "HTTP-" + code + "\n" + errorMsg);
+            case Constants.ErrorCode.TOKEN_TIME_OUT:
+                errorMsg = "Token expired, please re login";
+                Log.e(Constants.SDK_ERROR, url + "\n" + "HTTP-" + code + "\n" + errorMsg);
                 return code;
-            case SiterConstantsUtil.ErrorCode.SERVER_ERROR:
+            case Constants.ErrorCode.SERVER_ERROR:
                 if (bytes != null && bytes.length > 0) {
                     errorMsg = new String(bytes);
-                    Log.e(SiterConstantsUtil.SDK_ERROR, url + "\n" + "HTTP-" + code + "\n" + errorMsg);
+                    Log.e(Constants.SDK_ERROR, url + "\n" + "HTTP-" + code + "\n" + errorMsg);
                 }
                 return code;
             default:
                 ErrorMsgBean errorMsgBean = msg2Bean(bytes);
-                Log.e(SiterConstantsUtil.SDK_ERROR, url + "\n" + "HTTP-" + code + "\n" + new String(bytes));
+                Log.e(Constants.SDK_ERROR, url + "\n" + "HTTP-" + code + "\n" + new String(bytes));
                 return errorMsgBean.getCode();
         }
     }
@@ -371,7 +373,7 @@ public class CodeUtil {
      * @return ErrorMsgBean
      */
     public static ErrorMsgBean msg2Bean(byte[] bytes) {
-        ErrorMsgBean errorMsgBean = new ErrorMsgBean(SiterConstantsUtil.ErrorCode.UNKNOWN_ERROR, SiterConstantsUtil.UNKNOWN_ERROR, System.currentTimeMillis());
+        ErrorMsgBean errorMsgBean = new ErrorMsgBean(Constants.ErrorCode.UNKNOWN_ERROR, "UNKNOWN_ERROR", System.currentTimeMillis());
         try {
             if (bytes == null || bytes.length == 0) {
                 return errorMsgBean;
@@ -381,7 +383,7 @@ public class CodeUtil {
                 return errorMsgBean;
             }
         } catch (Exception e) {
-            return new ErrorMsgBean(SiterConstantsUtil.ErrorCode.UNKNOWN_ERROR, SiterConstantsUtil.UNKNOWN_ERROR, System.currentTimeMillis());
+            return new ErrorMsgBean(Constants.ErrorCode.UNKNOWN_ERROR, "UNKNOWN_ERROR", System.currentTimeMillis());
         }
     }
 

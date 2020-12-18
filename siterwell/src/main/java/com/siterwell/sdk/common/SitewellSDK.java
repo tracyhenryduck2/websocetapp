@@ -12,7 +12,6 @@ import com.siterwell.sdk.bean.WaterSensorBean;
 import com.siterwell.sdk.bean.WifiTimerBean;
 import com.siterwell.sdk.event.UdpShakeHandsEvent;
 import com.siterwell.sdk.http.UserAction;
-import com.siterwell.sdk.http.SiterConstantsUtil;
 import com.siterwell.sdk.protocol.ResolveSocket;
 
 import org.greenrobot.eventbus.EventBus;
@@ -417,7 +416,7 @@ public class SitewellSDK {
             }
         }
         Log.i(TAG,"jsonArray:"+jsonArray.toString());
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.QUERY_DEVICE_STATUS);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.QUERY_DEVICE_STATUS);
         UserAction.getInstance(mContext.get()).postSiterData(url.toString(),jsonArray.toString(), new UserAction.GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -497,7 +496,7 @@ public class SitewellSDK {
             }
         }
         Log.i(TAG,"jsonArray:"+jsonArray.toString());
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.QUERY_DEVICE_STATUS);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.QUERY_DEVICE_STATUS);
         UserAction.getInstance(mContext.get()).postSiterData(url.toString(),jsonArray.toString(), new UserAction.GetDataListener() {
             @Override
             public void getSuccess(Object object) {

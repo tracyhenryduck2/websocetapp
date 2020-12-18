@@ -142,7 +142,7 @@ public class HttpUtil {
 
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                Log.d(SiterConstantsUtil.SDK, "token刷新成功:" + new String(bytes));
+                Log.d(Constants.SITER_SDK, "token刷新成功:" + new String(bytes));
                 refreshTokenListener.refreshSuccess(JSONObject.parseObject(new String(bytes), JWTBean.class));
             }
 
@@ -207,12 +207,10 @@ public class HttpUtil {
 
                         @Override
                         public void refreshFail(int i, Header[] headers, byte[] bytes) {
-                            GetDataListener.getDataFail(SiterConstantsUtil.ErrorCode.TOKEN_TIME_OUT);
+                            GetDataListener.getDataFail(Constants.ErrorCode.TOKEN_TIME_OUT);
                         }
                     });
                 } else {
-                    //自定义事件
-                    HttpErrorEvent.event(getRequestURI().toString(),  Arrays.asList(getRequestHeaders()).toString(),entity, statusCode, responseBody);
                     GetDataListener.getDataFail(CodeUtil.getErrorCode(getRequestURI().toString(), statusCode, responseBody));
                 }
             }
@@ -247,8 +245,8 @@ public class HttpUtil {
      */
     private static void siter_http(int http_type, final Context context, final String url, final Header[] headers, final String JWT_TOKEN, final String ReFresh_Token, final String entity, final RequestParams params, final GetSiterDataWithTokenListener getDataListener) {
         if (TextUtils.isEmpty(JWT_TOKEN) || TextUtils.isEmpty(ReFresh_Token) || TextUtils.isEmpty(url)) {
-            getDataListener.getDataFail(SiterConstantsUtil.ErrorCode.TOKEN_TIME_OUT);
-            Log.e(SiterConstantsUtil.SDK_ERROR, "Token or url is null\n" + "token:" + JWT_TOKEN + "url\n" + url);
+            getDataListener.getDataFail(Constants.ErrorCode.TOKEN_TIME_OUT);
+            Log.e(Constants.SDK_ERROR, "Token or url is null\n" + "token:" + JWT_TOKEN + "url\n" + url);
         } else {
             if (Network.isConnected(context)) {
                 switch (http_type) {
@@ -301,12 +299,12 @@ public class HttpUtil {
                         }));
                         break;
                     default:
-                        getDataListener.getDataFail(SiterConstantsUtil.ErrorCode.UNKNOWN_ERROR);
+                        getDataListener.getDataFail(Constants.ErrorCode.UNKNOWN_ERROR);
                         break;
                 }
             } else {
-                Log.e(SiterConstantsUtil.SDK_ERROR, url + "\n" + SiterConstantsUtil.NETWORK_ERROR);
-                getDataListener.getDataFail(SiterConstantsUtil.ErrorCode.NETWORK_TIME_OUT);
+                Log.e(Constants.SDK_ERROR, url + "\n" + "Network is not available");
+                getDataListener.getDataFail(Constants.ErrorCode.NETWORK_TIME_OUT);
             }
         }
     }

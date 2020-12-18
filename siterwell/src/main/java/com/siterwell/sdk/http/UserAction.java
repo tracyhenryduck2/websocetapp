@@ -27,7 +27,6 @@ import com.siterwell.sdk.http.bean.FileBean;
 import com.siterwell.sdk.http.bean.FirmwareBean;
 import com.siterwell.sdk.http.bean.FolderBean;
 import com.siterwell.sdk.http.bean.FolderListBean;
-import com.siterwell.sdk.http.bean.Global;
 import com.siterwell.sdk.http.bean.GroupBean;
 import com.siterwell.sdk.http.bean.JWTBean;
 import com.siterwell.sdk.http.bean.NewDeviceBean;
@@ -222,7 +221,7 @@ public class UserAction {
                 registerType = "register";
                 break;
         }
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_GET_CODE_URL).toString();
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, Constants.UrlUtil.UAA_GET_CODE_URL).toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("phoneNumber", phoneNumber);
         maps.put("token", token);
@@ -269,7 +268,7 @@ public class UserAction {
                 registerType = "register";
                 break;
         }
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_GET_EMAIL_CODE_URL).toString();
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, Constants.UrlUtil.UAA_GET_EMAIL_CODE_URL).toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("email", email);
         maps.put("token", token);
@@ -302,7 +301,7 @@ public class UserAction {
      * @param checkVerifyCodeListener 验证码校验回调
      */
     public void checkVerifyCode(String phoneNumber, String code, final SiterUser.CheckVerifyCodeListener checkVerifyCodeListener) {
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_CHECK_CODE_URL, phoneNumber, "&code=", code).toString();
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, Constants.UrlUtil.UAA_CHECK_CODE_URL, phoneNumber, "&code=", code).toString();
         BaseHttpUtil.getData(mContext.get(), url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -350,7 +349,7 @@ public class UserAction {
         jsonObject.put("phoneNumber", phoneNumber);
         jsonObject.put("code", code);
         jsonObject.put("pid", SiterSDK.getPid());
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_REGISTER_URL, "phone").toString();
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, Constants.UrlUtil.UAA_REGISTER_URL, "phone").toString();
         BaseHttpUtil.postData(mContext.get(), url, jsonObject.toString(), new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -377,7 +376,7 @@ public class UserAction {
         jsonObject.put("email", email);
         jsonObject.put("code", code);
         jsonObject.put("pid", SiterSDK.getPid());
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_REGISTER_URL, "email_verify_code").toString();
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, Constants.UrlUtil.UAA_REGISTER_URL, "email_verify_code").toString();
         BaseHttpUtil.postData(mContext.get(), url, jsonObject.toString(), new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -442,7 +441,7 @@ public class UserAction {
             Log.e(TAG, "_resetPwd: 重置密码，参数错误");
             return;
         }
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_RESET_PWD_URL, type).toString();
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, Constants.UrlUtil.UAA_RESET_PWD_URL, type).toString();
         BaseHttpUtil.postData(mContext.get(), url, jsonObject.toString(), new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -473,7 +472,7 @@ public class UserAction {
             jsonObject.put("email", email);
             jsonObject.put("verifyCode", verifyCode);
             jsonObject.put("pid", SiterSDK.getPid());
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_RESET_PWD_URL, "email_verify_code").toString();
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, Constants.UrlUtil.UAA_RESET_PWD_URL, "email_verify_code").toString();
         BaseHttpUtil.postData(mContext.get(), url, jsonObject.toString(), new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -501,7 +500,7 @@ public class UserAction {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("newPassword", newPassword);
         jsonObject.put("oldPassword", oldPassword);
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_CHANGR_PWD_URL);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, Constants.UrlUtil.UAA_CHANGR_PWD_URL);
         postSiterData(url, jsonObject.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -531,7 +530,7 @@ public class UserAction {
         jsonObject.put("token", token);
         jsonObject.put("verifyCode", verifyCode);
         jsonObject.put("phoneNumber", phoneNumber);
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_CHANGE_PHONE_URL);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, Constants.UrlUtil.UAA_CHANGE_PHONE_URL);
         postSiterData(url, jsonObject.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -598,7 +597,7 @@ public class UserAction {
      * @param sendChangeEmailListener 回调接口
      */
     public void sendChangeEmailStep1Email(@NotNull String email, final SiterUser.SendChangeEmailListener sendChangeEmailListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_SEND_CHANGE_EMAIL, CommonUtil.getEmail(email));
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, Constants.UrlUtil.UAA_SEND_CHANGE_EMAIL, CommonUtil.getEmail(email));
         getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -620,7 +619,7 @@ public class UserAction {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("refresh_token", getRefreshToken());
         if (!TextUtils.isEmpty(getRefreshToken())) {
-            String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.UAA_REFRESH_TOKEN).toString();
+            String url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, Constants.UrlUtil.UAA_REFRESH_TOKEN).toString();
             BaseHttpUtil.postData(mContext.get(), url, jsonObject.toString(), new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -631,11 +630,11 @@ public class UserAction {
 
                 @Override
                 public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                    Log.e(SiterConstantsUtil.SDK_ERROR, CodeUtil.errorCode2Msg(CodeUtil.getErrorCode(i, bytes)));
+                    Log.e(Constants.SDK_ERROR, CodeUtil.errorCode2Msg(CodeUtil.getErrorCode(i, bytes)));
                 }
             });
         } else {
-            Log.e(SiterConstantsUtil.SDK_ERROR, "Token is null");
+            Log.e(Constants.SDK_ERROR, "Token is null");
         }
     }
 
@@ -726,7 +725,7 @@ public class UserAction {
         jsonObject.put("password", password);
         jsonObject.put("token", token);
         jsonObject.put("verifyCode", verifyCode);
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.ACCOUNT_UPGRADE);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, Constants.UrlUtil.ACCOUNT_UPGRADE);
         postSiterData(url, jsonObject.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -751,7 +750,7 @@ public class UserAction {
         jsonObject.put("email", email);
         jsonObject.put("password", password);
         jsonObject.put("from", "uaa");
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, SiterConstantsUtil.UrlUtil.SEND_EMAIL);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_UAA_URL, Constants.UrlUtil.SEND_EMAIL);
         postSiterData(url, jsonObject.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -851,7 +850,7 @@ public class UserAction {
      * @param bindDeviceListener 回调接口
      */
     public void bindDevice(BindDeviceBean bindDeviceBean, final SiterUser.BindDeviceListener bindDeviceListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.BIND_DEVICE);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.BIND_DEVICE);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("devTid", bindDeviceBean.getDevTid());
         jsonObject.put("bindKey", bindDeviceBean.getBindKey());
@@ -909,8 +908,8 @@ public class UserAction {
      * @param getDevicesListener 回调接口
      */
     public void getDevices(int page, int size, String devTid, final SiterUser.GetDevicesListener getDevicesListener) {
-        //CharSequence url = TextUtils.concat(SiterConstantsUtil.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.BIND_DEVICE, "?page=", String.valueOf(page), "&size=", String.valueOf(size));
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.BIND_DEVICE).toString();
+        //CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.BIND_DEVICE, "?page=", String.valueOf(page), "&size=", String.valueOf(size));
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.BIND_DEVICE).toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("devTid", devTid);
         maps.put("page", String.valueOf(page));
@@ -941,7 +940,7 @@ public class UserAction {
      * @param deleteDevices 回调接口
      */
     public void deleteDevice(@NotNull String devTid, @NotNull String bindKey, final SiterUser.DeleteDeviceListener deleteDevices) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.BIND_DEVICE, "/", devTid, "?bindKey=", bindKey);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.BIND_DEVICE, "/", devTid, "?bindKey=", bindKey);
         deleteSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -985,7 +984,7 @@ public class UserAction {
             if(deviceName.getBytes("GBK").length<=15){
 
                 if(!EmojiFilter.containsEmoji(deviceName)){
-                    CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.BIND_DEVICE, "/", devTid);
+                    CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.BIND_DEVICE, "/", devTid);
                     if (!TextUtils.isEmpty(subDevTid)) {
                         //网关下子设备
                         url = TextUtils.concat(url, "/", subDevTid);
@@ -1066,7 +1065,7 @@ public class UserAction {
      * @param getBindStatusListener 回调接口{@link SiterUser.GetBindStatusListener}
      */
     public void deviceBindStatus(JSONArray array, final SiterUser.GetBindStatusListener getBindStatusListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.DEVICE_BIND_STATUS);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.DEVICE_BIND_STATUS);
         postSiterData(url, array.toString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -1165,7 +1164,7 @@ public class UserAction {
      * 该接口用于配网时查看当前局域网内设备配网进度
      */
     public void getNewDevices(String pinCode, String ssid, final SiterUser.GetNewDevicesListener getNewDevicesListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.GET_NEW_DEVICE, pinCode, "&ssid=", ssid);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.GET_NEW_DEVICE, pinCode, "&ssid=", ssid);
         getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -1188,7 +1187,7 @@ public class UserAction {
      * @param addFolderListener 回调接口{@link SiterUser.AddFolderListener}
      */
     public void addFolder(@NotNull String folderName, final SiterUser.AddFolderListener addFolderListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.FOLDER);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.FOLDER);
         JSONObject obj = new JSONObject();
         obj.put("folderName", folderName);
         postSiterData(url, obj.toString(), new GetDataListener() {
@@ -1211,7 +1210,7 @@ public class UserAction {
      * @param page 页数
      */
     public void getFolder(int page, final SiterUser.GetFolderListsListener getFolderListsListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.FOLDER, "?page=", String.valueOf(page));
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.FOLDER, "?page=", String.valueOf(page));
         getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -1236,7 +1235,7 @@ public class UserAction {
     public void renameFolder(String newFolderName, String folderId, final SiterUser.RenameFolderListener renameFolderListener) {
         JSONObject object = new JSONObject();
         object.put("newFolderName", newFolderName);
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.FOLDER, "/", folderId);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.FOLDER, "/", folderId);
 
         putSiterData(url, object.toJSONString(), new GetDataListener() {
             @Override
@@ -1270,7 +1269,7 @@ public class UserAction {
      * @param deleteFolderListener 回调
      */
     public void deleteFolder(String folderId, final SiterUser.DeleteFolderListener deleteFolderListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.FOLDER);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.FOLDER);
         if (!TextUtils.isEmpty(folderId)) {
             url = TextUtils.concat(url, "/", folderId);
         }
@@ -1296,7 +1295,7 @@ public class UserAction {
      * @param devicePutFolderListener 回调接口
      */
     public void devicesPutFolder(String folderId, String ctrlKey, String devTid, final SiterUser.DevicePutFolderListener devicePutFolderListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.FOLDER, "/", folderId);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.FOLDER, "/", folderId);
         JSONObject obj = new JSONObject();
         obj.put("devTid", devTid);
         obj.put("ctrlKey", ctrlKey);
@@ -1322,7 +1321,7 @@ public class UserAction {
      * @param devicePutFolderListener 回调方法
      */
     public void folderToRoot(String folderId, String ctrlKey, String devTid, final SiterUser.DevicePutFolderListener devicePutFolderListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.FOLDER, "/", folderId, "/", devTid, "?", SiterConstantsUtil.UrlUtil.CTRL_KEY, ctrlKey);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.FOLDER, "/", folderId, "/", devTid, "?", Constants.UrlUtil.CTRL_KEY, ctrlKey);
         deleteSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -1345,7 +1344,7 @@ public class UserAction {
      * @param createOAuthQRCodeListener 回调接口
      */
     public void oAuthCreateCode(String ctrlKey, final SiterUser.CreateOAuthQRCodeListener createOAuthQRCodeListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.AUTHORIZATION_REVERSE_AUTH_URL);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.AUTHORIZATION_REVERSE_AUTH_URL);
         JSONObject obj = new JSONObject();
         obj.put("ctrlKey", ctrlKey);
         postSiterData(url, JSON.toJSONString(obj), new GetDataListener() {
@@ -1372,7 +1371,7 @@ public class UserAction {
      * @param registerOAuthQRCodeListener    授权id
      */
     public void registerAuth(String reverseAuthorizationTemplateId, final SiterUser.RegisterOAuthQRCodeListener registerOAuthQRCodeListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.AUTHORIZATION_REVERSE_REGISTER, SiterConstantsUtil.UrlUtil.REVERSE_TEMPLATE_ID, reverseAuthorizationTemplateId);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.AUTHORIZATION_REVERSE_REGISTER, Constants.UrlUtil.REVERSE_TEMPLATE_ID, reverseAuthorizationTemplateId);
         postSiterData(url, null, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -1401,8 +1400,8 @@ public class UserAction {
      * @param getOauthInfoListener 回调接口
      */
     public void getOAuthInfoRequest(String devTid, int page, int size, String reverseRegisterId, final SiterUser.GetOauthInfoListener getOauthInfoListener) {
-        //CharSequence url = TextUtils.concat(SiterConstantsUtil.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.AUTHORIZATION_REVERSE_REGISTER, "?page=", String.valueOf(page), "&size=", String.valueOf(size));
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.AUTHORIZATION_REVERSE_REGISTER).toString();
+        //CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.AUTHORIZATION_REVERSE_REGISTER, "?page=", String.valueOf(page), "&size=", String.valueOf(size));
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.AUTHORIZATION_REVERSE_REGISTER).toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("devTid", devTid);
         maps.put("reverseRegisterId", reverseRegisterId);
@@ -1434,7 +1433,7 @@ public class UserAction {
      * @param agreeOauthListener 回调接口
      */
     public void agreeOAuth(String devTid, String ctrlKey, String reverseRegisterId, final SiterUser.AgreeOauthListener agreeOauthListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.AUTHORIZATION_REVERSE_DEV_TID, devTid, "&", SiterConstantsUtil.UrlUtil.CTRL_KEY, ctrlKey, SiterConstantsUtil.UrlUtil.REVERSE_REGISTER_ID, reverseRegisterId);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.AUTHORIZATION_REVERSE_DEV_TID, devTid, "&", Constants.UrlUtil.CTRL_KEY, ctrlKey, Constants.UrlUtil.REVERSE_REGISTER_ID, reverseRegisterId);
         postSiterData(url, null, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -1461,8 +1460,8 @@ public class UserAction {
      * @param refuseOAuthListener 回调接口
      */
     public void refuseOAuth(@NotNull String devTid, @NotNull String ctrlKey, @NotNull String grantee, @NotNull String reverseRegisterId, final SiterUser.RefuseOAuthListener refuseOAuthListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.AUTHORIZATION_REVERSE_REGISTER, "/", reverseRegisterId, "?", SiterConstantsUtil.UrlUtil.DEV_TID,
-                devTid, "&uid=", grantee, "&", SiterConstantsUtil.UrlUtil.CTRL_KEY, ctrlKey);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.AUTHORIZATION_REVERSE_REGISTER, "/", reverseRegisterId, "?", Constants.UrlUtil.DEV_TID,
+                devTid, "&uid=", grantee, "&", Constants.UrlUtil.CTRL_KEY, ctrlKey);
         deleteSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -1483,8 +1482,8 @@ public class UserAction {
      * @param grantee 控制码
      */
     public void cancelOAuth(String ctrlKey, String grantee,final SiterUser.CancelOAuthListener cancelOAuthListener) {
-        //CharSequence url = TextUtils.concat(SiterConstantsUtil.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.AUTHORIZATION_GRANTOR, grantor, "&", SiterConstantsUtil.UrlUtil.CTRL_KEY, ctrlKey, "&", SiterConstantsUtil.UrlUtil.GRANTEE, grantee, "&", SiterConstantsUtil.UrlUtil.DEV_TID, devTid);
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL,SiterConstantsUtil.UrlUtil.AUTHORIZATION_REVERSE_CANCEL, ctrlKey).toString();
+        //CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.AUTHORIZATION_GRANTOR, grantor, "&", Constants.UrlUtil.CTRL_KEY, ctrlKey, "&", Constants.UrlUtil.GRANTEE, grantee, "&", Constants.UrlUtil.DEV_TID, devTid);
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL,Constants.UrlUtil.AUTHORIZATION_REVERSE_CANCEL, ctrlKey).toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("grantee", grantee);
         url = CommonUtil.getUrl(url, maps);
@@ -1538,7 +1537,7 @@ public class UserAction {
      * @param getOAuthListener 回调接口
      */
     private void _getOAuthList(String grantor, String ctrlKey, String devTid, String grantee, final SiterUser.GetOAuthListener getOAuthListener) {
-        //CharSequence url = TextUtils.concat(SiterConstantsUtil.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.AUTHORIZATION_GRANTOR, grantor, "&", SiterConstantsUtil.UrlUtil.CTRL_KEY, ctrlKey, "&", SiterConstantsUtil.UrlUtil.DEV_TID, devTid);
+        //CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.AUTHORIZATION_GRANTOR, grantor, "&", Constants.UrlUtil.CTRL_KEY, ctrlKey, "&", Constants.UrlUtil.DEV_TID, devTid);
         String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, "authorization").toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("grantor", grantor);
@@ -1566,7 +1565,7 @@ public class UserAction {
      * @param ruleBean 预约任务
      */
     public void creatRule(RuleBean ruleBean, final SiterUser.CreateRuleListener createRuleListener) {
-        postSiterData(TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.CREATE_RULE), JSON.toJSONString(ruleBean), new GetDataListener() {
+        postSiterData(TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.CREATE_RULE), JSON.toJSONString(ruleBean), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
                 createRuleListener.createSuccess();
@@ -1588,7 +1587,7 @@ public class UserAction {
      * @param getRulesListener 回调方法
      */
     public void getRules(String devTid, String ctrlKey, String taskId, final SiterUser.GetRulesListener getRulesListener) {
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.CREATE_RULE).toString();
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.CREATE_RULE).toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("ctrlKey", ctrlKey);
         maps.put("devTid", devTid);
@@ -1617,7 +1616,7 @@ public class UserAction {
      * @param operationRuleListener 回调方法
      */
     public void editRule(String devTid, String ctrlKey, @NotNull String taskId, RuleBean ruleBean, final SiterUser.OperationRuleListener operationRuleListener) {
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.CREATE_RULE).toString();
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.CREATE_RULE).toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("ctrlKey", ctrlKey);
         maps.put("devTid", devTid);
@@ -1644,7 +1643,7 @@ public class UserAction {
      * @param taskId  任务ID，多个逗号分隔；若不指定该参数，则会删除全部预约任务
      */
     public void deleteRules(String devTid, String ctrlKey, String taskId, final SiterUser.OperationRuleListener operationRuleListener) {
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.CREATE_RULE).toString();
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.CREATE_RULE).toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put("ctrlKey", ctrlKey);
         maps.put("devTid", devTid);
@@ -1669,7 +1668,7 @@ public class UserAction {
      * @param getProfileListener 回调接口
      */
     public void getProfile(final SiterUser.GetProfileListener getProfileListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.PROFILE);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.PROFILE);
         getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -1694,7 +1693,7 @@ public class UserAction {
      * @param setProfileListener 回调
      */
     public void setProfile(@NotNull final JSONObject jsonObject, final SiterUser.SetProfileListener setProfileListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.PROFILE);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.PROFILE);
         putSiterData(url, jsonObject.toString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -1719,7 +1718,7 @@ public class UserAction {
         File file = new File(uri);
         RequestParams params = new RequestParams();
         params.put("file", file, "image/png", System.currentTimeMillis() + ".png");
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.USER_FILE);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.USER_FILE);
         postParamsSiterData(url.toString(), params, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -1791,7 +1790,7 @@ public class UserAction {
 
 
     public void getFoldDeviceList(Context context,int page,int size,String folderid,final GetDeviceListListener getDeviceListListener){
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.BIND_DEVICE,"/",folderid);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.BIND_DEVICE,"/",folderid);
         UserAction.getInstance(context).getSiterData(url.toString()+"?page="+page+"&size="+size, new UserAction.GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -1840,7 +1839,7 @@ public class UserAction {
     public void getAlarmHistory(int page,int size, DeviceBean deviceBean,final UserAction.GetDataListener GetDataListener) {
         UserAction userAction = UserAction.getInstance(mContext.get());
         BasicHeader header = new BasicHeader("X-Siter-ProdPubKey",deviceBean.getProductPublicKey());
-        CharSequence url2 = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.QUERY_WARNINGS);
+        CharSequence url2 = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.QUERY_WARNINGS);
         String url = url2.toString() +
                 "devTid="+deviceBean.getDevTid()+"" +
                 "&startTime="+dateGetOneDay()+
@@ -1867,7 +1866,7 @@ public class UserAction {
      */
     public void getAllAlarmHistory(int page,int size,final UserAction.GetDataListener GetDataListener) {
         UserAction userAction = UserAction.getInstance(mContext.get());
-        CharSequence url2 = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.QUERY_WARNINGS);
+        CharSequence url2 = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.QUERY_WARNINGS);
         String url = url2.toString() +
                 "&startTime="+dateGetOneDay()+
                 "&size="+size+
@@ -1893,7 +1892,7 @@ public class UserAction {
      */
     public void getGS140AndGS156WCurrentStatus(@NotNull final List<DeviceBean> deviceBeanList,final SiterUser.GetGS140AndGS156WListener getGS140AndGS156WListener) {
         UserAction userAction = UserAction.getInstance(mContext.get());
-        CharSequence url2 = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.QUERY_DEVICE_STATUS);
+        CharSequence url2 = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.QUERY_DEVICE_STATUS);
         JSONArray jsonArray = new JSONArray();
 
 
@@ -2032,7 +2031,7 @@ public class UserAction {
      * @param pushTagBindListener 回调方法
      */
     public void pushTagBind(@NotNull String clientId, int type, final SiterUser.PushTagBindListener pushTagBindListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.PUSH_TAG_BIND);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.PUSH_TAG_BIND);
         String phoneType = "";
         String platform = "";
         switch (type) {
@@ -2081,7 +2080,7 @@ public class UserAction {
      * @param unPushTagBindListener 回调方法
      */
     public void unPushTagBind(@NotNull String clientId, int type, final SiterUser.UnPushTagBindListener unPushTagBindListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.UNPUSH_ALIAS_BIND);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.UNPUSH_ALIAS_BIND);
         String phoneType = "";
         String platform = "";
         switch (type) {
@@ -2151,7 +2150,7 @@ public class UserAction {
         }
 
 
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.UAA_WEATHER, location, "&sign=", ret.toString(), "&timestamp=", time, "&language=", language);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.UAA_WEATHER, location, "&sign=", ret.toString(), "&timestamp=", time, "&language=", language);
         getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -2200,7 +2199,7 @@ public class UserAction {
         }
 
 
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.UAA_AIR_QUALITY, location, "&sign=", ret.toString(), "&timestamp=", time, "&language=", language);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.UAA_AIR_QUALITY, location, "&sign=", ret.toString(), "&timestamp=", time, "&language=", language);
         getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -2249,7 +2248,7 @@ public class UserAction {
         }
 
 
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.UAA_WEATHER_ADD_QUALITY, location, "&sign=", ret.toString(), "&timestamp=", time, "&language=", language);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.UAA_WEATHER_ADD_QUALITY, location, "&sign=", ret.toString(), "&timestamp=", time, "&language=", language);
         getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -2278,7 +2277,7 @@ public class UserAction {
      * @param groupId 群组id
      */
     private void getGroup(String groupId, final SiterUser.GetGroupListener getGroupListener) {
-        String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.UAA_GROUP).toString();
+        String url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.UAA_GROUP).toString();
         HashMap<String, String> maps = new HashMap<>();
         maps.put(groupId, groupId);
         url = CommonUtil.getUrl(url, maps);
@@ -2304,7 +2303,7 @@ public class UserAction {
      * @param operationGroupListener 回调方法
      */
     private void renameGroup(@NotNull String groupId, @NotNull String newGroupName, final SiterUser.OperationGroupListener operationGroupListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.UAA_GROUP, "/", groupId);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.UAA_GROUP, "/", groupId);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("newGroupName", newGroupName);
         putSiterData(url, jsonObject.toJSONString(), new GetDataListener() {
@@ -2328,7 +2327,7 @@ public class UserAction {
      * @param operationGroupListener 回调方法
      */
     private void deleteGroup(@NotNull String groupId, final SiterUser.OperationGroupListener operationGroupListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.UAA_GROUP, "?groupId=", groupId);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.UAA_GROUP, "?groupId=", groupId);
         deleteSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -2359,7 +2358,7 @@ public class UserAction {
         jsonObject.put("binType", binType);
         jsonObject.put("binVer", binVer);
         jsonArray.add(jsonObject);
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_CONSOLE_URL, SiterConstantsUtil.UrlUtil.CHECK_FW_UPDATE);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_CONSOLE_URL, Constants.UrlUtil.CHECK_FW_UPDATE);
         postSiterData(url, jsonArray.toJSONString(), new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -2466,7 +2465,7 @@ public class UserAction {
      * 5.10 获取默认演示设备
      */
     public void getDefaultStatic(final SiterUser.GetDefaultDevicesListener getDefaultDevices) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_CONSOLE_URL, SiterConstantsUtil.UrlUtil.DEFAULT_STATIC);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_CONSOLE_URL, Constants.UrlUtil.DEFAULT_STATIC);
         getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -2486,7 +2485,7 @@ public class UserAction {
      * @param getPinCodeListener 回调接口
      */
     public void getPinCode(String ssid, final SiterUser.GetPinCodeListener getPinCodeListener) {
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, SiterConstantsUtil.UrlUtil.GET_PIN_CODE, ssid);
+        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.GET_PIN_CODE, ssid);
         getSiterData(url, new GetDataListener() {
             @Override
             public void getSuccess(Object object) {
@@ -2526,7 +2525,7 @@ public class UserAction {
         JWT_TOKEN = null;
         refresh_TOKEN = null;
         //停止webSocket
-        //EventBus.getDefault().post(new WsSwitchEvent(SiterConstantsUtil.EventCode.WS_SWITCH_EVENT_STATUS_DISCONNECT));
+        //EventBus.getDefault().post(new WsSwitchEvent(Constants.EventCode.WS_SWITCH_EVENT_STATUS_DISCONNECT));
         //清除掉缓存
         //DataCleanManager.clearAllCache(mContext.get());
         String un_name = SpCache.getString("uname", "");
@@ -2534,9 +2533,9 @@ public class UserAction {
         SpCache.putString("uname", un_name);
         //清理掉后
         SpCache.putBoolean("pushTag", false);
-        SpCache.putString(SiterConstantsUtil.PUSH_CLIENT_ID, Global.clientId);
-        SpCache.putString(SiterConstantsUtil.MI_PUSH_CLIENT_ID, Global.mRegId);
-        SpCache.putString(SiterConstantsUtil.HUA_WEI_PUSH_CLIENT_ID, Global.huaWeiToken);
+        SpCache.putString(Constants.PUSH_GETUI_ID, "");
+        SpCache.putString(Constants.MI_PUSH_CLIENT_ID, "");
+        SpCache.putString(Constants.HUA_WEI_PUSH_CLIENT_ID, "");
     }
 
     /**
@@ -2564,7 +2563,7 @@ public class UserAction {
             startWebServicesFlag = 0;
             Log.d(TAG, "ws未初始化");
             //mContext.get().startService(new Intent(mContext.get(), WebSocketService.class));
-            //EventBus.getDefault().postSticky(new WsSwitchEvent(SiterConstantsUtil.EventCode.WS_SWITCH_EVENT_STATUS_CONNECT));
+            //EventBus.getDefault().postSticky(new WsSwitchEvent(Constants.EventCode.WS_SWITCH_EVENT_STATUS_CONNECT));
         }
     }
 

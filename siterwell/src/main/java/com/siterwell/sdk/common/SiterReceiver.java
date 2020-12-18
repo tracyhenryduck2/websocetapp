@@ -9,18 +9,18 @@ import com.siterwell.sdk.bean.BatteryBean;
 import com.siterwell.sdk.bean.SocketBean;
 import com.siterwell.sdk.bean.WaterSensorBean;
 import com.siterwell.sdk.bean.WifiTimerBean;
-import com.siterwell.sdk.http.SiterConstantsUtil;
 import com.siterwell.sdk.protocol.ResolveSocket;
 import com.siterwell.sdk.protocol.ResolveTimer;
 
-import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
 
+import me.siter.sdk.Constants;
+
 /**
- * Created by ST-020111 on 2017/4/14.
+ * Created by TracyHenry on 2018/2/6.
  */
 
 public class SiterReceiver extends BroadcastReceiver {
@@ -38,7 +38,7 @@ public class SiterReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         //云端返回所有信息
-        String backData=intent.getStringExtra(SiterConstantsUtil.WS_PAYLOAD);
+        String backData=intent.getStringExtra(Constants.WS_PAYLOAD);
         Log.i(TAG,backData);
         decodeFromJSON(backData);
     }
