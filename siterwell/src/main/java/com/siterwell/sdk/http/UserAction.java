@@ -99,13 +99,8 @@ public class UserAction {
     public static final int OAUTH_FACEBOOK = 5;
     public static final int OAUTH_GOOGLE_PLUS = 6;
 
-    private static int startWebServicesFlag = 0;
-
 
     private WeakReference<Context> mContext;
-    private String JWT_TOKEN = null;
-    private String refresh_TOKEN = null;
-    private String userId = null;
     private static volatile UserAction instance = null;
 
 
@@ -123,12 +118,6 @@ public class UserAction {
     private UserAction(Context context) {
         SpCache.init(context.getApplicationContext());
         mContext = new WeakReference<>(context.getApplicationContext());
-        startWebServicesFlag = 1;
-        //初始化的时候先读取token
-        JWT_TOKEN = CacheUtil.getUserToken();
-        refresh_TOKEN = CacheUtil.getRefreshToken();
-        userId = CacheUtil.getUserId();
-        Log.i(TAG,"userId+++++++++++++++++++++++++++++++++++"+userId);
         //判断是线上还是测试环境
     }
 
@@ -891,7 +880,7 @@ public class UserAction {
             @Override
             public void getSuccess(Object object) {
                 List<DeviceBean> lists = JSON.parseArray(object.toString(), DeviceBean.class);
-                getDevicesListener.getDevicesSuccess(lists);
+//                getDevicesListener.getDevicesSuccess(lists);
             }
 
             @Override
@@ -1010,7 +999,6 @@ public class UserAction {
      * 4.1.5 获取当前局域网内所有设备绑定状态<br>
      * 只返回正确的devTid/bindKey对应的设备绑定状态，所以返回里的元素数量会少于提交里的元素数量。<br>
      * 后续操作按照4.1.1执行
-     * {@link #bindDevice(BindDeviceBean, SiterUser.BindDeviceListener)}
      *
      * @param devTid                设备ID
      * @param bindKey               绑定码
@@ -1030,7 +1018,6 @@ public class UserAction {
      * 4.1.5 获取当前局域网内所有设备绑定状态<br>
      * 只返回正确的devTid/bindKey对应的设备绑定状态，所以返回里的元素数量会少于提交里的元素数量。<br>
      * 后续操作按照4.1.1执行
-     * {@link #bindDevice(BindDeviceBean, SiterUser.BindDeviceListener)}
      *
      * @param array                 [ {"bindKey" : "xxxxx", "devTid" : "ESP_test"},... }]
      * @param getBindStatusListener 回调接口{@link SiterUser.GetBindStatusListener}
@@ -1053,7 +1040,7 @@ public class UserAction {
 
     /**
      * 4.1.5 获取当前局域网内所有设备绑定状态，
-     * 如果可以绑定直接就进行调用4.1.1接口{@link #bindDevice(BindDeviceBean, SiterUser.BindDeviceListener)}进行绑定操作;<br>
+     * 如果可以绑定直接就进行调用4.1.1接口进行绑定操作;<br>
      *
      * @param devTid                       设备ID
      * @param bindKey                      绑定码
@@ -2350,18 +2337,9 @@ public class UserAction {
      * 退出登录
      */
     public void userLogout() {
-        startWebServicesFlag = 1;
         //退出APP之后关闭所有的请求！
         BaseHttpUtil.getClient().cancelAllRequests(true);
-        JWT_TOKEN = null;
-        refresh_TOKEN = null;
-        //停止webSocket
-        //EventBus.getDefault().post(new WsSwitchEvent(Constants.EventCode.WS_SWITCH_EVENT_STATUS_DISCONNECT));
-        //清除掉缓存
-        //DataCleanManager.clearAllCache(mContext.get());
-        String un_name = SpCache.getString("uname", "");
         SpCache.clear();
-        SpCache.putString("uname", un_name);
         //清理掉后
         SpCache.putBoolean("pushTag", false);
         SpCache.putString(Constants.PUSH_GETUI_ID, "");
@@ -2373,52 +2351,23 @@ public class UserAction {
      * @return 返回用户token
      */
     public String getJWT_TOKEN() {
-        if (TextUtils.isEmpty(JWT_TOKEN)) {
-            /*if (!TextUtils.isEmpty(jwt)) {
-                connectWsServices();
-            } else {
-                startWebServicesFlag = 1;
-            }*/
             return CacheUtil.getUserToken();
-        } else {
-            //connectWsServices();
-            return JWT_TOKEN;
-        }
     }
 
-    /**
-     * 连接webSocket
-     */
-    private synchronized void connectWsServices() {
-        if (startWebServicesFlag == 1) {
-            startWebServicesFlag = 0;
-            Log.d(TAG, "ws未初始化");
-            //mContext.get().startService(new Intent(mContext.get(), WebSocketService.class));
-            //EventBus.getDefault().postSticky(new WsSwitchEvent(Constants.EventCode.WS_SWITCH_EVENT_STATUS_CONNECT));
-        }
+    public String getRefresh_Token(){
+        return CacheUtil.getRefreshToken();
     }
-
-    private String getRefreshToken() {
-        if (TextUtils.isEmpty(refresh_TOKEN)) {
-            return CacheUtil.getRefreshToken();
-        } else {
-            return refresh_TOKEN;
-        }
-    }
-
 
     /**
      * 将获取到的token保存下来
      */
     private void setTokenWIthCache(JWTBean jwtBean) {
-        this.JWT_TOKEN = jwtBean.getAccessToken();
-        this.refresh_TOKEN = jwtBean.getRefreshToken();
         //把此token保存下来
-        if (!TextUtils.isEmpty(JWT_TOKEN)) {
-            SpCache.putString(Constants.JWT_TOKEN, JWT_TOKEN);
+        if (!TextUtils.isEmpty(jwtBean.getAccessToken())) {
+            SpCache.putString(Constants.JWT_TOKEN, jwtBean.getAccessToken());
         }
-        if (!TextUtils.isEmpty(refresh_TOKEN)) {
-            SpCache.putString(Constants.REFRESH_TOKEN, refresh_TOKEN);
+        if (!TextUtils.isEmpty(jwtBean.getRefreshToken())) {
+            SpCache.putString(Constants.REFRESH_TOKEN, jwtBean.getRefreshToken());
         }
     }
 
@@ -2466,7 +2415,7 @@ public class UserAction {
      * @param GetDataListener 回调方法
      */
     public void getSiterData(String url, final GetDataListener GetDataListener) {
-        HttpUtil.getDataReFreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, null, new GetSiterData(GetDataListener));
+        HttpUtil.getDataReFreshToken(mContext.get(), getJWT_TOKEN(),  getRefresh_Token(), url, null, new GetSiterData(GetDataListener));
     }
 
 
@@ -2478,7 +2427,7 @@ public class UserAction {
      * @param GetDataListener 回调方法
      */
     public void getSiterData(String url, Header[] headers, final GetDataListener GetDataListener) {
-        HttpUtil.getDataReFreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, headers, new GetSiterData(GetDataListener));
+        HttpUtil.getDataReFreshToken(mContext.get(), getJWT_TOKEN(),  getRefresh_Token(), url, headers, new GetSiterData(GetDataListener));
     }
 
 
@@ -2514,7 +2463,7 @@ public class UserAction {
      * @param GetDataListener 回调
      */
     public void postSiterData(String url, Header[] headers, String entity, final GetDataListener GetDataListener) {
-        HttpUtil.postDataReFreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, headers, entity, new GetSiterData(GetDataListener));
+        HttpUtil.postDataReFreshToken(mContext.get(), getJWT_TOKEN(), getRefresh_Token(), url, headers, entity, new GetSiterData(GetDataListener));
     }
 
 
@@ -2549,7 +2498,7 @@ public class UserAction {
      * @param GetDataListener 回调
      */
     public void putSiterData(String url, Header[] headers, String entity, final GetDataListener GetDataListener) {
-        HttpUtil.putDataRefreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, headers, entity, new GetSiterData(GetDataListener));
+        HttpUtil.putDataRefreshToken(mContext.get(), getJWT_TOKEN(),  getRefresh_Token(), url, headers, entity, new GetSiterData(GetDataListener));
     }
 
 
@@ -2581,7 +2530,7 @@ public class UserAction {
      * @param GetDataListener 回调
      */
     public void deleteSiterData(String url, Header[] headers, final GetDataListener GetDataListener) {
-        HttpUtil.deleteDataReFreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, headers, new GetSiterData(GetDataListener));
+        HttpUtil.deleteDataReFreshToken(mContext.get(), getJWT_TOKEN(),  getRefresh_Token(), url, headers, new GetSiterData(GetDataListener));
     }
 
 
@@ -2619,7 +2568,7 @@ public class UserAction {
      * @param GetDataListener 回调
      */
     public void patchSiterData(String url, Header[] headers, String entity, final GetDataListener GetDataListener) {
-        HttpUtil.patchDataToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, headers, entity, new GetSiterData(GetDataListener));
+        HttpUtil.patchDataToken(mContext.get(), getJWT_TOKEN(),  getRefresh_Token(), url, headers, entity, new GetSiterData(GetDataListener));
     }
 
     /**
@@ -2630,7 +2579,7 @@ public class UserAction {
      * @param GetDataListener 回调
      */
     public void postParamsSiterData(String url, RequestParams params, final GetDataListener GetDataListener) {
-        HttpUtil.postFileReFreshToken(mContext.get(), JWT_TOKEN, refresh_TOKEN, url, params, new GetSiterData(GetDataListener));
+        HttpUtil.postFileReFreshToken(mContext.get(), getJWT_TOKEN(),  getRefresh_Token(), url, params, new GetSiterData(GetDataListener));
     }
 
     /**

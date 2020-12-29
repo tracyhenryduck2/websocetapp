@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         folderBeanList = new ArrayList<>();
         initGTService();
         initView();
+        getDeviceList();
     }
 
 
@@ -670,5 +671,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(mProgressDialog!=null&&mProgressDialog.isShowing()){
             mProgressDialog.dismiss();
         }
+    }
+
+    private void getDeviceList(){
+        UserAction.getInstance(this).getDevices(new SiterUser.GetDevicesListener() {
+            @Override
+            public void getDevicesSuccess(List<DeviceBean> devicesLists) {
+
+            }
+
+            @Override
+            public void getDevicesFail(int errorCode) {
+
+            }
+        });
     }
 }

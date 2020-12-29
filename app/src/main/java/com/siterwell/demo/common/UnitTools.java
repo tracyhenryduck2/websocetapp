@@ -38,27 +38,6 @@ public class UnitTools {
         this.context = context;
     }
 
-    /**
-     * get usr Login infor
-     * @param name
-     * @param key
-     */
-    public void writeUserInro(String name, String key){
-        SharedPreferences user = context.getSharedPreferences("user_info",0);
-        SharedPreferences.Editor mydata = user.edit();
-        mydata.putString("uName" ,name);
-        mydata.putString("uKey",key);
-        mydata.commit();
-    }
-    public Map readUserInfo() {
-        Map<String,Object> chosed = new HashMap<>();
-        SharedPreferences wode = context.getSharedPreferences("user_info",0);
-        String name = wode.getString("uName",null);
-        String key = wode.getString("uKey",null);
-        chosed.put("name",name);
-        chosed.put("key",key);
-        return chosed;
-    }
 
     /**
      * methodname:

@@ -27,7 +27,7 @@ public class Constants {
 
     public static class UrlUtil {
         public static String BASE_UAA_URL = "http://192.168.12.163:1418/";
-        public static String BASE_USER_URL = "https://user-openapi.siter.me/";
+        public static String BASE_USER_URL = "http://192.168.12.163:1418/";
         public static String BASE_CONSOLE_URL = "https://console-openapi.siter.me/";
         public static String APP_WEBSOCKET_REPLACE_CLOUD_URL = "ws://%s:8899";
         public static String APP_WEBSOCKET_REPLACE_TEST_CLOUD_URL = "ws://%s:8899";
@@ -53,7 +53,7 @@ public class Constants {
         /**
          * 设备管理
          */
-        public static final String BIND_DEVICE = "device";
+        public static final String BIND_DEVICE = "user/deviceList";
         public static final String FOLDER = "folder";
         public static final String PROFILE = "user/profile";
         public static final String USER_FILE = "user/file";
