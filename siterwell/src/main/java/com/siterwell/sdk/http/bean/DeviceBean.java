@@ -78,8 +78,6 @@ public class DeviceBean implements Serializable {
     private String folderId;
     private String productPublicKey;
     private String logo;
-    private String androidPageZipURL;
-    private String iosPageZipURL;
     private boolean granted;
     private boolean setSchedulerTask;
     private boolean online;
@@ -372,21 +370,6 @@ public class DeviceBean implements Serializable {
         this.logo = logo;
     }
 
-    public String getAndroidPageZipURL() {
-        return androidPageZipURL;
-    }
-
-    public void setAndroidPageZipURL(String androidPageZipURL) {
-        this.androidPageZipURL = androidPageZipURL;
-    }
-
-    public String getIosPageZipURL() {
-        return iosPageZipURL;
-    }
-
-    public void setIosPageZipURL(String iosPageZipURL) {
-        this.iosPageZipURL = iosPageZipURL;
-    }
 
     public boolean isGranted() {
         return granted;
@@ -564,8 +547,6 @@ public class DeviceBean implements Serializable {
         this.folderId = folderId;
         this.productPublicKey = productPublicKey;
         this.logo = logo;
-        this.androidPageZipURL = androidPageZipURL;
-        this.iosPageZipURL = iosPageZipURL;
         this.granted = granted;
         this.setSchedulerTask = setSchedulerTask;
         this.online = online;
@@ -624,8 +605,6 @@ public class DeviceBean implements Serializable {
         this.folderId = folderId;
         this.productPublicKey = productPublicKey;
         this.logo = logo;
-        this.androidPageZipURL = androidPageZipURL;
-        this.iosPageZipURL = iosPageZipURL;
         this.granted = granted;
         this.setSchedulerTask = setSchedulerTask;
         this.online = online;
@@ -698,8 +677,6 @@ public class DeviceBean implements Serializable {
                 ", folderId='" + folderId + '\'' +
                 ", productPublicKey='" + productPublicKey + '\'' +
                 ", logo='" + logo + '\'' +
-                ", androidPageZipURL='" + androidPageZipURL + '\'' +
-                ", iosPageZipURL='" + iosPageZipURL + '\'' +
                 ", granted=" + granted +
                 ", setSchedulerTask=" + setSchedulerTask +
                 ", online=" + online +
@@ -759,8 +736,6 @@ public class DeviceBean implements Serializable {
         if (!getFolderId().equals(that.getFolderId())) return false;
         if (!getProductPublicKey().equals(that.getProductPublicKey())) return false;
         if (!getLogo().equals(that.getLogo())) return false;
-        if (!getAndroidPageZipURL().equals(that.getAndroidPageZipURL())) return false;
-        if (!getIosPageZipURL().equals(that.getIosPageZipURL())) return false;
         if (!getGroupInfo().equals(that.getGroupInfo())) return false;
         if (!getProductBand().equals(that.getProductBand())) return false;
         if (!getModel().equals(that.getModel())) return false;
@@ -805,8 +780,6 @@ public class DeviceBean implements Serializable {
         result = 31 * result + getFolderId().hashCode();
         result = 31 * result + getProductPublicKey().hashCode();
         result = 31 * result + getLogo().hashCode();
-        result = 31 * result + getAndroidPageZipURL().hashCode();
-        result = 31 * result + getIosPageZipURL().hashCode();
         result = 31 * result + (isGranted() ? 1 : 0);
         result = 31 * result + (isSetSchedulerTask() ? 1 : 0);
         result = 31 * result + (isOnline() ? 1 : 0);
