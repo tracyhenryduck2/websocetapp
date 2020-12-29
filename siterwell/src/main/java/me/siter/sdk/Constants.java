@@ -58,8 +58,6 @@ public class Constants {
         public static final String PROFILE = "user/profile";
         public static final String USER_FILE = "user/file";
 
-        public static final String UAA_WEATHER = "weather/now?location=";
-        public static final String UAA_AIR_QUALITY = "air/now?location=";
         public static final String UAA_WEATHER_ADD_QUALITY = "external/now?location=";
 
         public static final String DEVICE_BIND_STATUS = "deviceBindStatus";

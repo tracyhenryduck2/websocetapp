@@ -33,11 +33,6 @@ import java.util.List;
  **/
 public class SiterUser {
 
-    public interface GetDataListener {
-        void getDataSuccess(Object object);
-
-        void getDataFail(int errorCode);
-    }
 
 
     /**
@@ -595,33 +590,7 @@ public class SiterUser {
 
         void unPushTagBindFail(int errorCode);
     }
-
-    /***
-     * 4.6.1 天气实况
-     */
-    public interface GetWeatherListener {
-        void getWeatherSuccess(WeatherBeanResultsNow now, String location);
-
-        void getWeatherFail(int errorCode);
-    }
-
-    /***
-     * 4.6.3 空气质量实况
-     */
-    public interface GetAirQualityListener {
-        void getAirQualitySuccess(AirQualityBean airQualityBean, String pm25);
-
-        void getAirQualityFail(int errorCode);
-    }
-
-    /***
-     * 天气+PM实况
-     */
-    public interface GetNewWeatherListener {
-        void getSuccess(WeatherAirBean weatherAirBean);
-
-        void getFail(int errorCode);
-    }
+    
 
 
     /**

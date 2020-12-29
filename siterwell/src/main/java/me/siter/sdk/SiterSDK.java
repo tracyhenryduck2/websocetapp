@@ -23,8 +23,6 @@ public class SiterSDK {
     private static boolean isSDKInited = false;
     private static Context application;
 
-    public static final String SDK_CORE_VERSION = "2.0.0";
-
     /**
      * 初始化SDK, id 必须传入json格式文件的资源id。文件格式详见SDK文档。
      *
