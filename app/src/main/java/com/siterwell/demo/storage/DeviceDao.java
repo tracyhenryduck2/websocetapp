@@ -13,7 +13,6 @@ import com.siterwell.sdk.bean.SocketBean;
 import com.siterwell.demo.device.bean.BatteryDescBean;
 import com.siterwell.demo.device.bean.WaterSensorDescBean;
 import com.siterwell.sdk.bean.WaterSensorBean;
-import com.siterwell.sdk.http.bean.DcInfo;
 import com.siterwell.sdk.http.bean.DeviceBean;
 
 import java.util.ArrayList;
@@ -82,7 +81,6 @@ public class DeviceDao {
             values.put("bindkey",deviceBean.getBindKey());
             values.put("ctrlkey",deviceBean.getCtrlKey());
             values.put("ppkey",deviceBean.getProductPublicKey());
-            values.put("connecthost",deviceBean.getDcInfo().getConnectHost());
             if (!isHasDevice(deviceBean.getDevTid())) {
                 return db.insert("device", null, values);
             }else{
@@ -228,9 +226,6 @@ public class DeviceDao {
                 folderBean.setBattPercent(cursor.getInt(cursor.getColumnIndex("percent")));
                 folderBean.setStatus(cursor.getInt(cursor.getColumnIndex("status")));
                 folderBean.setSignal(cursor.getInt(cursor.getColumnIndex("signal")));
-                DcInfo dcInfo = new DcInfo();
-                dcInfo.setConnectHost(cursor.getString(cursor.getColumnIndex("connecthost")));
-                folderBean.setDcInfo(dcInfo);
             }
             cursor.close();
         }catch (NullPointerException e){
@@ -262,9 +257,6 @@ public class DeviceDao {
                 folderBean.setBattPercent(cursor.getInt(cursor.getColumnIndex("percent")));
                 folderBean.setStatus(cursor.getInt(cursor.getColumnIndex("status")));
                 folderBean.setSignal(cursor.getInt(cursor.getColumnIndex("signal")));
-				DcInfo dcInfo = new DcInfo();
-                dcInfo.setConnectHost(cursor.getString(cursor.getColumnIndex("connecthost")));
-                folderBean.setDcInfo(dcInfo);
             }
             cursor.close();
         }catch (NullPointerException e){
@@ -296,9 +288,6 @@ public class DeviceDao {
                 folderBean.setBindKey(cursor.getString(cursor.getColumnIndex("bindkey")));
                 folderBean.setCtrlKey(cursor.getString(cursor.getColumnIndex("ctrlkey")));
                 folderBean.setProductPublicKey(cursor.getString(cursor.getColumnIndex("ppkey")));
-                DcInfo dcInfo =new DcInfo();
-                dcInfo.setConnectHost(cursor.getString(cursor.getColumnIndex("connecthost")));
-                folderBean.setDcInfo(dcInfo);
             }
             cursor.close();
         }catch (NullPointerException e){
@@ -327,9 +316,6 @@ public class DeviceDao {
                 folderBean.setBindKey(cursor.getString(cursor.getColumnIndex("bindkey")));
                 folderBean.setCtrlKey(cursor.getString(cursor.getColumnIndex("ctrlkey")));
                 folderBean.setProductPublicKey(cursor.getString(cursor.getColumnIndex("ppkey")));
-                DcInfo dcInfo =new DcInfo();
-                dcInfo.setConnectHost(cursor.getString(cursor.getColumnIndex("connecthost")));
-                folderBean.setDcInfo(dcInfo);
                 deviceBeanList.add(folderBean);
             }
             cursor.close();
@@ -358,9 +344,6 @@ public class DeviceDao {
                 folderBean.setBindKey(cursor.getString(cursor.getColumnIndex("bindkey")));
                 folderBean.setCtrlKey(cursor.getString(cursor.getColumnIndex("ctrlkey")));
                 folderBean.setProductPublicKey(cursor.getString(cursor.getColumnIndex("ppkey")));
-                DcInfo dcInfo =new DcInfo();
-                dcInfo.setConnectHost(cursor.getString(cursor.getColumnIndex("connecthost")));
-                folderBean.setDcInfo(dcInfo);
             }
             cursor.close();
         }catch (NullPointerException e){
@@ -387,9 +370,6 @@ public class DeviceDao {
                 sb.setBindKey(cursor.getString(cursor.getColumnIndex("bindkey")));
                 sb.setCtrlKey(cursor.getString(cursor.getColumnIndex("ctrlkey")));
                 sb.setProductPublicKey(cursor.getString(cursor.getColumnIndex("ppkey")));
-                DcInfo dcInfo =new DcInfo();
-                dcInfo.setConnectHost(cursor.getString(cursor.getColumnIndex("connecthost")));
-                sb.setDcInfo(dcInfo);
                 sys2.add(sb);
             }
             cursor.close();
@@ -680,9 +660,6 @@ public class DeviceDao {
                 socketDescBean.setNotice(cursor.getInt(cursor.getColumnIndex("notice")));
                 socketDescBean.setCountdownenable(cursor.getInt(cursor.getColumnIndex("countdownenable")));
                 socketDescBean.setSignal(cursor.getInt(cursor.getColumnIndex("signal")));
-               DcInfo dcInfo = new DcInfo();
-               dcInfo.setConnectHost(cursor.getString(cursor.getColumnIndex("connecthost")));
-                socketDescBean.setDcInfo(dcInfo);
             }
             cursor.close();
         }catch (NullPointerException e){

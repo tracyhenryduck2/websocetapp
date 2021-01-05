@@ -39,7 +39,6 @@ import com.siterwell.sdk.common.SitewellSDK;
 import com.siterwell.sdk.common.WIFISocketListener;
 import com.siterwell.sdk.http.SiterUser;
 import com.siterwell.sdk.http.UserAction;
-import com.siterwell.sdk.http.bean.DcInfo;
 import com.siterwell.sdk.http.bean.DeviceBean;
 
 import org.greenrobot.eventbus.EventBus;
@@ -226,9 +225,6 @@ public class DeviceListActivity extends TopbarSuperActivity implements DeviceAda
                             deviceBean.setCtrlKey(jsonArray.getJSONObject(i).getString("ctrlKey"));
                             deviceBean.setBindKey(jsonArray.getJSONObject(i).getString("bindKey"));
                             deviceBean.setProductPublicKey(jsonArray.getJSONObject(i).getString("productPublicKey"));
-                            DcInfo dcInfo = new DcInfo();
-                            dcInfo.setConnectHost(jsonArray.getJSONObject(i).getJSONObject("dcInfo").getString("connectHost"));
-                            deviceBean.setDcInfo(dcInfo);
                             datalist.add(deviceBean);
                         }
                     if(jsonArray.size()<20){
@@ -321,7 +317,7 @@ public class DeviceListActivity extends TopbarSuperActivity implements DeviceAda
                                 final String newname = text.getText().toString().trim();
 
                                 if(!TextUtils.isEmpty(newname)){
-                                    UserAction.getInstance(DeviceListActivity.this).renameDevice(deviceBean.getDevTid(), deviceBean.getCtrlKey(), newname, null, deviceBean.getDcInfo().getConnectHost(), new SiterUser.RenameDeviceListener() {
+                                    UserAction.getInstance(DeviceListActivity.this).renameDevice(deviceBean.getDevTid(), deviceBean.getCtrlKey(), newname, null, new SiterUser.RenameDeviceListener() {
                                         @Override
                                         public void renameDeviceSuccess() {
                                             alertDialog.setDismissFalse(true);

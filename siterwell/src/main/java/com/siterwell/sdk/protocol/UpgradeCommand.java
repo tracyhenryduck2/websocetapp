@@ -34,7 +34,7 @@ public class UpgradeCommand {
 
     public void sendUpgradeCommand(SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Siter.getSiterClient().sendMessage(getUpgradeInfo(),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(getUpgradeInfo(),dataReceiverListener);
         }
     }
 

@@ -10,16 +10,13 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.litesuits.android.log.Log;
-import com.litesuits.common.utils.MD5Util;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.siterwell.sdk.bean.BatteryBean;
 import com.siterwell.sdk.bean.DeviceType;
 import com.siterwell.sdk.bean.WaterSensorBean;
 import com.siterwell.sdk.common.GetDeviceListListener;
-import com.siterwell.sdk.http.bean.AirQualityBean;
 import com.siterwell.sdk.http.bean.BindDeviceBean;
-import com.siterwell.sdk.http.bean.DcInfo;
 import com.siterwell.sdk.http.bean.DefaultDeviceBean;
 import com.siterwell.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.http.bean.DeviceStatusBean;
@@ -36,8 +33,6 @@ import com.siterwell.sdk.http.bean.OAuthRequestBean;
 import com.siterwell.sdk.http.bean.ProfileBean;
 import com.siterwell.sdk.http.bean.RuleBean;
 import com.siterwell.sdk.http.bean.UserFileBean;
-import com.siterwell.sdk.http.bean.WeatherAirBean;
-import com.siterwell.sdk.http.bean.WeatherBeanResultsNow;
 import com.siterwell.sdk.protocol.SocketCommand;
 import com.siterwell.sdk.utils.CoderUtils;
 import com.siterwell.sdk.utils.EmojiFilter;
@@ -924,8 +919,8 @@ public class UserAction {
      * @param desc                 设备描述 长度[1, 128]
      * @param renameDeviceListener 回调接口
      */
-    public void renameDevice(@NotNull String devTid, @NotNull String ctrlKey, @NotNull String deviceName, String desc,String ConnectHost, final SiterUser.RenameDeviceListener renameDeviceListener) {
-        renameDevice(devTid, null, ctrlKey, deviceName, desc,ConnectHost, renameDeviceListener);
+    public void renameDevice(@NotNull String devTid, @NotNull String ctrlKey, @NotNull String deviceName, String desc, final SiterUser.RenameDeviceListener renameDeviceListener) {
+        renameDevice(devTid, null, ctrlKey, deviceName, desc, renameDeviceListener);
     }
 
     /**
@@ -938,7 +933,7 @@ public class UserAction {
      * @param desc                 设备描述 长度[1, 128]
      * @param renameDeviceListener 回调接口
      */
-    public void renameDevice(@NotNull String devTid, String subDevTid, @NotNull String ctrlKey, @NotNull String deviceName, String desc,String ConnectHost, final SiterUser.RenameDeviceListener renameDeviceListener) {
+    public void renameDevice(@NotNull String devTid, String subDevTid, @NotNull String ctrlKey, @NotNull String deviceName, String desc, final SiterUser.RenameDeviceListener renameDeviceListener) {
 
         try {
             if(deviceName.getBytes("GBK").length<=15){
@@ -970,11 +965,8 @@ public class UserAction {
 
 
                     DeviceBean deviceBean = new DeviceBean();
-                    DcInfo dcInfo =new DcInfo();
-                    dcInfo.setConnectHost(ConnectHost);
                     deviceBean.setDevTid(devTid);
                     deviceBean.setCtrlKey(ctrlKey);
-                    deviceBean.setDcInfo(dcInfo);
                     String d = CoderUtils.getAscii(deviceName);
                     SocketCommand socketCommand =new SocketCommand(deviceBean,mContext.get());
                     socketCommand.setSocketName(d,null);
@@ -1767,9 +1759,6 @@ public class UserAction {
                         deviceBean.setCtrlKey(jsonArray.getJSONObject(i).getString("ctrlKey"));
                         deviceBean.setBindKey(jsonArray.getJSONObject(i).getString("bindKey"));
                         deviceBean.setProductPublicKey(jsonArray.getJSONObject(i).getString("productPublicKey"));
-                        DcInfo dcInfo = new DcInfo();
-                        dcInfo.setConnectHost(jsonArray.getJSONObject(i).getJSONObject("dcInfo").getString("connectHost"));
-                        deviceBean.setDcInfo(dcInfo);
                         listold.add(deviceBean);
                     }
                     getDeviceListListener.succuss(listold);

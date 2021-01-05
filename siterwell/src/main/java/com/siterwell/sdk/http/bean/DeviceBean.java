@@ -91,7 +91,6 @@ public class DeviceBean implements Serializable {
     private String devType;
     private List<GateWaySubDeviceBean> subDevices;
     private GateWaySubDeviceBean gateWaySubDeviceBean;
-    private DcInfo dcInfo;
 
     /**
      * forceBind : false
@@ -508,15 +507,7 @@ public class DeviceBean implements Serializable {
         this.gateWaySubDeviceBean = gateWaySubDeviceBean;
     }
 
-    public DcInfo getDcInfo() {
-        return dcInfo;
-    }
-
-    public void setDcInfo(DcInfo dcInfo) {
-        this.dcInfo = dcInfo;
-    }
-
-    public DeviceBean(String devTid, String ctrlKey, String bindKey, Object wanIp, String cid, String workModeType, int tokenType, String binVersion, String sdkVer, String binType, Object serviceHost, int servicePort, String ssid, String mac, String finger, long currentLoginTime, long firstLoginTime, long lastLoginTime, Object lastUpdateTime, long lastReportDeviceInfoTime, long lastHeartbeat, String ownerUid, int devShareNum, Object timerMap, Object eventRuleMap, String deviceName, String desc, String folderId, String productPublicKey, String logo, String androidPageZipURL, String iosPageZipURL, boolean granted, boolean setSchedulerTask, boolean online, List<GroupInfoBean> groupInfo, String productBand, String model, String cidName, String folderName, TranslateBean categoryName, TranslateBean productName, boolean forceBind, int maxDevShareNum, String androidH5Page, String iosH5Page, DeviceAndFolderBean deviceAndFolderBean, GroupBean groupBean, DcInfo dcInfo) {
+    public DeviceBean(String devTid, String ctrlKey, String bindKey, Object wanIp, String cid, String workModeType, int tokenType, String binVersion, String sdkVer, String binType, Object serviceHost, int servicePort, String ssid, String mac, String finger, long currentLoginTime, long firstLoginTime, long lastLoginTime, Object lastUpdateTime, long lastReportDeviceInfoTime, long lastHeartbeat, String ownerUid, int devShareNum, Object timerMap, Object eventRuleMap, String deviceName, String desc, String folderId, String productPublicKey, String logo, String androidPageZipURL, String iosPageZipURL, boolean granted, boolean setSchedulerTask, boolean online, List<GroupInfoBean> groupInfo, String productBand, String model, String cidName, String folderName, TranslateBean categoryName, TranslateBean productName, boolean forceBind, int maxDevShareNum, String androidH5Page, String iosH5Page, DeviceAndFolderBean deviceAndFolderBean, GroupBean groupBean) {
         this.devTid = devTid;
         this.ctrlKey = ctrlKey;
         this.bindKey = bindKey;
@@ -563,7 +554,6 @@ public class DeviceBean implements Serializable {
         this.iosH5Page = iosH5Page;
         this.deviceAndFolderBean = deviceAndFolderBean;
         this.groupBean = groupBean;
-        this.dcInfo = dcInfo;
     }
 
     public DeviceBean(String logo, String androidH5Page, String iosH5Page, String deviceName, String desc) {
@@ -646,8 +636,7 @@ public class DeviceBean implements Serializable {
     @Override
     public String toString() {
         return "DeviceBean{" +
-                "dcInfo=" + dcInfo +
-                ", devTid='" + devTid + '\'' +
+                "devTid='" + devTid + '\'' +
                 ", ctrlKey='" + ctrlKey + '\'' +
                 ", bindKey='" + bindKey + '\'' +
                 ", wanIp=" + wanIp +

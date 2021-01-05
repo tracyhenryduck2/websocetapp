@@ -44,7 +44,7 @@ public class BatteryCommand {
 
     public void sendCommand(int cmdid , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Siter.getSiterClient().sendMessage(getCommand2(cmdid),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(getCommand2(cmdid),dataReceiverListener);
         }
     }
 

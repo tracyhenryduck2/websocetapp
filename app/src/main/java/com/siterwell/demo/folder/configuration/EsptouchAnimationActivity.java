@@ -26,9 +26,6 @@ import com.siterwell.sdk.bean.DeviceType;
 import com.siterwell.sdk.common.SitewellSDK;
 import com.siterwell.sdk.event.SetSmokeTypeEvent;
 import com.siterwell.sdk.event.UdpShakeHandsEvent;
-import com.siterwell.sdk.http.SiterUser;
-import com.siterwell.sdk.http.UserAction;
-import com.siterwell.sdk.http.SmartConfig;
 import com.siterwell.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.http.bean.NewDeviceBean;
 import com.siterwell.sdk.protocol.BatteryCommand;
@@ -68,7 +65,6 @@ public class EsptouchAnimationActivity extends TopbarSuperActivity implements Vi
     private Button btn_retry;
     private int flag = -1;  //1代表绑定成功,2代表绑定失败，3代表已绑定其他设备,4代表回调绑定失败
     private String failmsg = null;
-    private SmartConfig smartConfig;
     //示例demo逻辑跳转处理flag可自行根据逻辑修改
     private AtomicBoolean isSuccess = new AtomicBoolean(false);
     private AtomicBoolean isfailed = new AtomicBoolean(false);
@@ -90,7 +86,6 @@ public class EsptouchAnimationActivity extends TopbarSuperActivity implements Vi
     private void init(){
         EventBus.getDefault().register(this);
         deviceDao =new DeviceDao(this);
-        smartConfig = new SmartConfig(this);
         apSsid = getIntent().getStringExtra("wifi");
         apPassword = getIntent().getStringExtra("pwd");
         BatteryType = (GS140Command)getIntent().getSerializableExtra("dev");
@@ -153,8 +148,6 @@ public class EsptouchAnimationActivity extends TopbarSuperActivity implements Vi
 
                     roundProgressView.setErrStatus();
 
-                    smartConfig.stopConfig();
-                    smartConfig.stopFindDevice();
                     btn_retry.setVisibility(View.VISIBLE);
                     switch (flag){
                         case -1:
@@ -280,8 +273,6 @@ public class EsptouchAnimationActivity extends TopbarSuperActivity implements Vi
             timer.cancel();
             timer = null;
         }
-        smartConfig.stopConfig();
-        smartConfig.stopFindDevice();
        if(serviceIntent!=null) stopService(serviceIntent);
     }
 
@@ -304,118 +295,6 @@ public class EsptouchAnimationActivity extends TopbarSuperActivity implements Vi
     private void config() {
 
 
-        smartConfig.startConfig(apSsid, apPassword, 30, new SmartConfig.NewDeviceListener() {
-            //单次配网时间内查询到的所有新设备(回调每次查询到的新设备列表)
-            @Override
-            public void getDeviceList(List<NewDeviceBean> newDeviceList) {
-
-
-            }
-
-            //单次配网时间内查询到的新设备(一旦有新的设备就会触发该回调接口)
-            //只有newDeviceBean中属性bindResultCode值为0才算真正将该设备绑定到了自己账号下
-            @Override
-            public void getNewDevice(final NewDeviceBean newDeviceBean) {
-
-                if (newDeviceBean.getBindResultCode() == 0) {
-                    //绑定成功的设备信息
-                    isSuccess.set(true);
-                    newDeviceBean2 = new DeviceBean();
-                    newDeviceBean2.setDevTid(newDeviceBean.getDevTid());
-                    newDeviceBean2.setModel(Device_type);
-                    newDeviceBean2.setCtrlKey(newDeviceBean.getCtrlKey());
-                    newDeviceBean2.setBindKey(newDeviceBean.getBindKey());
-                    newDeviceBean2.setFolderId(FolderPojo.getInstance().folderId);
-                    newDeviceBean2.setOnline(newDeviceBean.isOnline());
-                    newDeviceBean2.setDeviceName(newDeviceBean.getDeviceName());
-                    newDeviceBean2.setProductPublicKey(newDeviceBean.getProductPublicKey());
-                    Log.i(TAG,"newDeviceBean2"+newDeviceBean2.toString());
-                    if(DeviceType.BATTERY.toString().equals(Device_type)){
-                        SitewellSDK.getInstance(EsptouchAnimationActivity.this).configGS140Type();
-                    }
-                    if(isfailed.get()){
-                        flag = 1;
-                        Now_speed = SPEED2;
-                    }
-                }else{
-                    newDeviceBean2 = new DeviceBean();
-                    newDeviceBean2.setDevTid(newDeviceBean.getDevTid());
-                    newDeviceBean2.setModel(Device_type);
-                    newDeviceBean2.setCtrlKey(newDeviceBean.getCtrlKey());
-                    newDeviceBean2.setBindKey(newDeviceBean.getBindKey());
-                    newDeviceBean2.setFolderId(FolderPojo.getInstance().folderId);
-                    newDeviceBean2.setOnline(newDeviceBean.isOnline());
-                    newDeviceBean2.setDeviceName(newDeviceBean.getDeviceName());
-                    newDeviceBean2.setProductPublicKey(newDeviceBean.getProductPublicKey());
-                    Log.i(TAG,"newDeviceBean2"+newDeviceBean2.toString());
-                    Log.i(TAG,"newDeviceBean.getBindResultMsg()+++++++++++++++++"+newDeviceBean.getBindResultMsg());
-
-                    if(newDeviceBean.getBindResultMsg().startsWith("E001")){
-                         try {
-                            String name = newDeviceBean.getBindResultMsg().substring(5);
-                             flag = 4;
-                             failmsg = String.format(getResources().getString(R.string.device_already_bind_to),name);
-                             Now_speed = SPEED3;
-                         }catch (Exception e){
-                             e.printStackTrace();
-                         }
-                    }else if(newDeviceBean.getBindResultMsg().startsWith("E004")){
-                        flag = 1;
-                        Now_speed = SPEED2;
-
-                        UserAction.getInstance(EsptouchAnimationActivity.this).devicesPutFolder(FolderPojo.getInstance().folderId, newDeviceBean.getCtrlKey(), newDeviceBean.getDevTid(), new SiterUser.DevicePutFolderListener() {
-                            @Override
-                            public void putSuccess() {
-                                DeviceBean deviceBean = new DeviceBean();
-                                deviceBean.setFolderId(FolderPojo.getInstance().folderId);
-                                deviceBean.setDevTid(newDeviceBean.getDevTid());
-                                deviceDao.updateDeviceFolderid(deviceBean);
-                                Toast.makeText(EsptouchAnimationActivity.this,getResources().getString(R.string.success_move_to_this_folder),Toast.LENGTH_LONG).show();
-                            }
-
-                            @Override
-                            public void putFail(int errorCode) {
-                            }
-                        });
-
-
-                    }
-
-                }
-
-                smartConfig.stopConfig();
-
-            }
-
-            //单次配网时间内查到存在新设备
-            @Override
-            public void getDeviceSuccess() {
-                if (isSuccess.get()) {
-                    Log.i(TAG,"++++++++getDeviceSuccess()");
-                    smartConfig.stopConfig();
-                    flag = 1;
-                    Now_speed = SPEED2;
-
-                }else{
-
-                    Log.i(TAG,"getDeviceSuccess()"+isSuccess.get());
-                }
-            }
-
-            //单次配网时间内未查询到任何新设备
-            @Override
-            public void getDeviceFail() {
-                isfailed.set(true);
-                Log.i(TAG,"getDeviceFail()");
-            }
-
-            @Override
-            public void getPinCodeFail() {
-                flag = 2;
-                Log.i(TAG,"getPinCodeFail()");
-                Now_speed = SPEED3;
-            }
-        });
         isSuccess.set(false);
         isfailed.set(false);
     }

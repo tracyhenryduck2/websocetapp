@@ -73,7 +73,7 @@ public class SocketCommand {
 
     public void switchMode(int mode , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Siter.getSiterClient().sendMessage(switchMode(mode),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(switchMode(mode),dataReceiverListener);
         }
     }
 
@@ -108,7 +108,7 @@ public class SocketCommand {
 
     public void setCircleInfo(String Circle , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Siter.getSiterClient().sendMessage(setCircleInfo(Circle),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(setCircleInfo(Circle),dataReceiverListener);
         }
     }
 
@@ -144,7 +144,7 @@ public class SocketCommand {
 
     public void setCountdownInfo(String Count_down , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Siter.getSiterClient().sendMessage(setCountdownInfo(Count_down),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(setCountdownInfo(Count_down),dataReceiverListener);
         }
     }
 
@@ -180,7 +180,7 @@ public class SocketCommand {
 
     public void setTimerInfo(String timer , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Siter.getSiterClient().sendMessage(setTimerInfo(timer),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(setTimerInfo(timer),dataReceiverListener);
         }
     }
 
@@ -216,7 +216,7 @@ public class SocketCommand {
 
     public void deleteTimer(int timer , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Siter.getSiterClient().sendMessage(deleteTimer(timer),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(deleteTimer(timer),dataReceiverListener);
         }
     }
 
@@ -254,7 +254,7 @@ public class SocketCommand {
 
     public void setZoneAndTime(int zone,String timer , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Siter.getSiterClient().sendMessage(setZoneAndTime(zone,timer),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(setZoneAndTime(zone,timer),dataReceiverListener);
         }
     }
 
@@ -289,7 +289,7 @@ public class SocketCommand {
 
     public void setSyncSocketStatus(SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Siter.getSiterClient().sendMessage(setSyncSocketStatusJson("0200000000"),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(setSyncSocketStatusJson("0200000000"),dataReceiverListener);
         }
     }
 
@@ -324,7 +324,7 @@ public class SocketCommand {
 
     public void setSocketControl(int On_Off , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Siter.getSiterClient().sendMessage(setSocketControl(On_Off),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(setSocketControl(On_Off),dataReceiverListener);
         }
     }
 
@@ -359,7 +359,7 @@ public class SocketCommand {
 
     public void setSocketName(String name , SiterMsgCallback dataReceiverListener){
         if(! TextUtils.isEmpty(deviceBean.getDevTid())){
-            Siter.getSiterClient().sendMessage(setSocketName(name),dataReceiverListener,deviceBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(setSocketName(name),dataReceiverListener);
         }
     }
 

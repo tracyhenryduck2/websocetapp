@@ -212,7 +212,7 @@ public class SitewellSDK {
             dataParams.put("On_Off",socketBean.getSocketstatus());
             params.put("data",dataParams);
             command.put("params",params);
-            Siter.getSiterClient().sendMessage(command,null,socketBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(command,null);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -242,7 +242,7 @@ public class SitewellSDK {
             dataParams.put("ID",socketBean.getSocketmodel());
             params.put("data",dataParams);
             command.put("params",params);
-            Siter.getSiterClient().sendMessage(command,null,socketBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(command,null);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -269,7 +269,7 @@ public class SitewellSDK {
             dataParams.put("Circle",code);
             params.put("data",dataParams);
             command.put("params",params);
-            Siter.getSiterClient().sendMessage(command,null,socketBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(command,null);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -297,7 +297,7 @@ public class SitewellSDK {
             dataParams.put("Count_down",code);
             params.put("data",dataParams);
             command.put("params",params);
-            Siter.getSiterClient().sendMessage(command,null,socketBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(command,null);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -379,7 +379,7 @@ public class SitewellSDK {
             dataParams.put("Data_Sync","0600000000");
             params.put("data",dataParams);
             command.put("params",params);
-            Siter.getSiterClient().sendMessage(command,null,socketBean.getDcInfo().getConnectHost());
+            Siter.getSiterClient().sendMessage(command,null);
         } catch (JSONException e) {
             e.printStackTrace();
         }

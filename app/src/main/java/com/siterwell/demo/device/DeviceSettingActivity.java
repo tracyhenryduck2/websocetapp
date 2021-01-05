@@ -170,7 +170,7 @@ public class DeviceSettingActivity extends TopbarSuperActivity implements View.O
                          final DeviceBean deviceBean = deviceDao.findDeviceBySid(deviceid);
                          if(!TextUtils.isEmpty(newname)){
 
-                             UserAction.getInstance(DeviceSettingActivity.this).renameDevice(deviceBean.getDevTid(), deviceBean.getCtrlKey(), newname, null, deviceBean.getDcInfo().getConnectHost(), new SiterUser.RenameDeviceListener() {
+                             UserAction.getInstance(DeviceSettingActivity.this).renameDevice(deviceBean.getDevTid(), deviceBean.getCtrlKey(), newname, null, new SiterUser.RenameDeviceListener() {
                                  @Override
                                  public void renameDeviceSuccess() {
                                      alertDialog.setDismissFalse(true);
