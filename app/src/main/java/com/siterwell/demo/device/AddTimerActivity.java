@@ -26,7 +26,7 @@ import com.siterwell.sdk.common.WIFISocketListener;
 import com.siterwell.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.protocol.ResolveTimer;
 import com.siterwell.sdk.protocol.SocketCommand;
-import com.siterwell.sdk.utils.ByteUtil;
+import com.siterwell.sdk.protocol.ByteUtil;
 
 import org.jetbrains.annotations.NotNull;
 

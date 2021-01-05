@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.siterwell.demo.R;
-import com.siterwell.sdk.utils.ByteUtil;
+import com.siterwell.sdk.protocol.ByteUtil;
 
 import java.util.HashMap;
 

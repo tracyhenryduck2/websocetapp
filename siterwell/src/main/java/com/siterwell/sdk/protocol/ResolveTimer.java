@@ -1,14 +1,8 @@
 package com.siterwell.sdk.protocol;
 
-import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
-import com.siterwell.sdk.R;
 import com.siterwell.sdk.bean.WifiTimerBean;
-import com.siterwell.sdk.utils.ByteUtil;
-
-import java.util.HashMap;
 
 
 /**

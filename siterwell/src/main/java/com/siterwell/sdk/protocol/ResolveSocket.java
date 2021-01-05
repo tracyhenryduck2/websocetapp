@@ -4,7 +4,6 @@ import android.text.TextUtils;
 
 import com.siterwell.sdk.bean.SocketBean;
 import com.siterwell.sdk.bean.WifiTimerBean;
-import com.siterwell.sdk.utils.ByteUtil;
 
 import java.util.ArrayList;
 import java.util.List;

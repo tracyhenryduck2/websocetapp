@@ -1,4 +1,4 @@
-package com.siterwell.sdk.utils;
+package com.siterwell.sdk.protocol;
 
 
 import com.litesuits.android.log.Log;
