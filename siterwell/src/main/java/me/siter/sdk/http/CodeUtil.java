@@ -17,12 +17,12 @@ import java.util.regex.Pattern;
 import me.siter.sdk.Constants;
 
 
-/*
-@class CodeUtil
-@autor TracyHenry
-@time 2020/10/16 13:49
-@email xuejunju_4595@qq.com
-*/
+
+/**
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
+ * Description:
+ */
 public class CodeUtil {
     //中文简体
     public static final int LANGUAGE_zh_Hans = 1;

@@ -22,9 +22,12 @@ import me.siter.sdk.http.bean.UserFileBean;
 import java.util.List;
 
 
+
 /**
- * Created by jin123d on 2016/4/8.
- **/
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
+ * Description:
+ */
 public class SiterUser {
 
 

@@ -13,12 +13,12 @@ import me.siter.sdk.http.bean.JWTBean;
 import cz.msebera.android.httpclient.Header;
 import me.siter.sdk.Constants;
 
-/*
-@class HttpUtil
-@autor Administrator
-@time 2017/10/16 14:16
-@email xuejunju_4595@qq.com
-*/
+
+/**
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
+ * Description:
+ */
 public class HttpUtil {
 
     //private static AtomicReference<Toastor> toastor = new AtomicReference<>();

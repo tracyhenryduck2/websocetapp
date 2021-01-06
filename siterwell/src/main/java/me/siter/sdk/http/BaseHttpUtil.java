@@ -19,12 +19,11 @@ import me.siter.sdk.utils.LanguageUtil;
 
 import static com.loopj.android.http.AsyncHttpClient.HEADER_CONTENT_TYPE;
 
-/*
-@class BaseHttpUtil
-@autor Administrator
-@time 2017/10/16 13:53
-@email xuejunju_4595@qq.com
-*/
+/**
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
+ * Description:
+ */
 public class BaseHttpUtil {
     private static final String TAG = "BaseHttpUtil";
 

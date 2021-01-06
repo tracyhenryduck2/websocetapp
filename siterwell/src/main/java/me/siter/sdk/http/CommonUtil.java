@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-/*
-@class CommonUtil
-@autor Administrator
-@time 2017/10/16 14:05
-@email xuejunju_4595@qq.com
-*/
+
+/**
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
+ * Description:
+ */
 public class CommonUtil {
 
     /**

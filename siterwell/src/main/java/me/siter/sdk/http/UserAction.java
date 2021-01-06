@@ -50,7 +50,11 @@ import me.siter.sdk.utils.CacheUtil;
 import me.siter.sdk.utils.SpCache;
 
 
-
+/**
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
+ * Description:
+ */
 public class UserAction {
     /**
      * 用户注册类型

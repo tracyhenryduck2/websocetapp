@@ -3,12 +3,12 @@ package me.siter.sdk.http;
 
 import me.siter.sdk.http.bean.JWTBean;
 
-/*
-@class GetSiterDataWithTokenListener
-@autor Administrator
-@time 2017/10/16 14:26
-@email xuejunju_4595@qq.com
-*/
+
+/**
+ * Created by TracyHenry on 2020/12/16.
+ * Author: TracyHenry
+ * Description:
+ */
 public abstract class GetSiterDataWithTokenListener {
 
     public abstract void getDataSuccess(Object object);
