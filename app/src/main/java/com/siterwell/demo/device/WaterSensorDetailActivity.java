@@ -13,15 +13,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.siterwell.demo.common.Errcode;
-import com.siterwell.sdk.bean.WaterSensorBean;
+import com.siterwell.demo.bean.WaterSensorBean;
 import com.siterwell.demo.R;
 import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.commonview.ParallaxListView;
 import com.siterwell.demo.device.bean.WarningHistoryBean;
 import com.siterwell.demo.device.bean.WaterSensorDescBean;
 import com.siterwell.demo.storage.DeviceDao;
-import com.siterwell.sdk.common.RefreshWaterSensorListener;
-import com.siterwell.sdk.common.SitewellSDK;
+import com.siterwell.demo.listener.RefreshWaterSensorListener;
+import com.siterwell.demo.listener.SitewellSDK;
 import me.siter.sdk.http.UserAction;
 
 import org.greenrobot.eventbus.EventBus;

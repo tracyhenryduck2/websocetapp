@@ -1,6 +1,6 @@
 package com.siterwell.demo.device.bean;
 
-import com.siterwell.sdk.bean.SocketBean;
+import com.siterwell.demo.bean.SocketBean;
 import com.siterwell.demo.MyApplication;
 import com.siterwell.demo.R;
 import com.siterwell.demo.common.UnitTools;

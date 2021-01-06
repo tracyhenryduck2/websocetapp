@@ -98,11 +98,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState)
     {
         EventBus.getDefault().register(this);
-        if(Controller.getInstance().flag_service==false) {
-            Controller.getInstance().flag_service = true;
-            Intent intent = new Intent(MainActivity.this, SychronizeService.class);
-            startService(intent);
-        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         folderBeanList = new ArrayList<>();
@@ -569,7 +564,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Controller.getInstance().flag_service = false;
                             resetStorage();
                             UserAction.getInstance(MainActivity.this).userLogout();
-                            stopService(new Intent(MainActivity.this, SychronizeService.class));
                             startActivity(new Intent(MainActivity.this,LoginActivity.class));
                             finish();
                         }
@@ -587,7 +581,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                Controller.getInstance().flag_service = false;
                                resetStorage();
                                UserAction.getInstance(MainActivity.this).userLogout();
-                               stopService(new Intent(MainActivity.this, SychronizeService.class));
                                startActivity(new Intent(MainActivity.this,LoginActivity.class));
                                finish();
                            }else{
@@ -650,7 +643,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (InvalidClassException e) {
             e.printStackTrace();
         }
-        stopService(new Intent(this, SychronizeService.class));
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
         finish();

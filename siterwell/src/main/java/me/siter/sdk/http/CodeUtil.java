@@ -19,8 +19,8 @@ import me.siter.sdk.Constants;
 
 /*
 @class CodeUtil
-@autor Administrator
-@time 2017/10/16 13:49
+@autor TracyHenry
+@time 2020/10/16 13:49
 @email xuejunju_4595@qq.com
 */
 public class CodeUtil {

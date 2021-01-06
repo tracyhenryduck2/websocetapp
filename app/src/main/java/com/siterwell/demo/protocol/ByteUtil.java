@@ -1,4 +1,4 @@
-package com.siterwell.sdk.protocol;
+package com.siterwell.demo.protocol;
 
 
 import com.litesuits.android.log.Log;
@@ -613,7 +613,7 @@ public class ByteUtil {
 //		test_combine2bytesToOne();
 //		test_parseBssid();
 		String abc = "01020101010100033B0521010001010100010100033BFE4318";
-		System.out.print(""+ByteUtil.CRCmakerChar(abc));
+		System.out.print(""+ ByteUtil.CRCmakerChar(abc));
 //		int[] arrayData = {1,2,4,5,6,7,5,6,7,3,8,9,10,12,11,20,30,40};
 //		Arrays.sort(arrayData);
 //		for (int a : arrayData){

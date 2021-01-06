@@ -1,8 +1,8 @@
-package com.siterwell.sdk.common;
-
-import me.siter.sdk.http.bean.DeviceBean;
+package com.siterwell.demo.listener;
 
 import java.util.List;
+
+import me.siter.sdk.http.bean.DeviceBean;
 
 
 /**

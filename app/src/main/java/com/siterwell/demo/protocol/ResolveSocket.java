@@ -1,9 +1,9 @@
-package com.siterwell.sdk.protocol;
+package com.siterwell.demo.protocol;
 
 import android.text.TextUtils;
 
-import com.siterwell.sdk.bean.SocketBean;
-import com.siterwell.sdk.bean.WifiTimerBean;
+import com.siterwell.demo.bean.SocketBean;
+import com.siterwell.demo.bean.WifiTimerBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -466,7 +466,7 @@ public class ResolveSocket {
 //		test_combine2bytesToOne();
 //		test_parseBssid();
         String abc = "";
-        System.out.print(""+ByteUtil.CRCmakerChar(abc));
+        System.out.print(""+ ByteUtil.CRCmakerChar(abc));
 //		int[] arrayData = {1,2,4,5,6,7,5,6,7,3,8,9,10,12,11,20,30,40};
 //		Arrays.sort(arrayData);
 //		for (int a : arrayData){

@@ -1,8 +1,8 @@
-package com.siterwell.sdk.protocol;
+package com.siterwell.demo.protocol;
 
 import android.text.TextUtils;
 
-import com.siterwell.sdk.bean.WifiTimerBean;
+import com.siterwell.demo.bean.WifiTimerBean;
 
 
 /**

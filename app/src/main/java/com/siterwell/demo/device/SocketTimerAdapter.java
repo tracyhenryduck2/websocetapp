@@ -13,8 +13,8 @@ import android.widget.TextView;
 import com.siterwell.demo.R;
 import com.siterwell.demo.common.DataUtils;
 import com.siterwell.demo.common.UnitTools;
-import com.siterwell.sdk.bean.WifiTimerBean;
-import com.siterwell.sdk.protocol.ResolveTimer;
+import com.siterwell.demo.bean.WifiTimerBean;
+import com.siterwell.demo.protocol.ResolveTimer;
 
 import java.util.List;
 

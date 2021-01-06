@@ -16,7 +16,7 @@ import com.siterwell.demo.device.DeviceActivitys;
 import com.siterwell.demo.device.bean.BatteryDescBean;
 import com.siterwell.demo.device.bean.WarningHistoryBean;
 import com.siterwell.demo.storage.DeviceDao;
-import com.siterwell.sdk.bean.DeviceType;
+import com.siterwell.demo.bean.DeviceType;
 import me.siter.sdk.http.bean.DeviceBean;
 
 import java.util.List;

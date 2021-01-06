@@ -1,4 +1,4 @@
-package com.siterwell.sdk.common;
+package com.siterwell.demo.listener;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,12 +6,11 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.siterwell.sdk.bean.BatteryBean;
-import com.siterwell.sdk.bean.SocketBean;
-import com.siterwell.sdk.bean.WaterSensorBean;
-import com.siterwell.sdk.bean.WifiTimerBean;
-import me.siter.sdk.http.UserAction;
-import com.siterwell.sdk.protocol.ResolveSocket;
+import com.siterwell.demo.bean.BatteryBean;
+import com.siterwell.demo.bean.SocketBean;
+import com.siterwell.demo.bean.WaterSensorBean;
+import com.siterwell.demo.bean.WifiTimerBean;
+import com.siterwell.demo.protocol.ResolveSocket;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,6 +22,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import me.siter.sdk.Constants;
 import me.siter.sdk.Siter;
+import me.siter.sdk.http.UserAction;
 
 
 /**
@@ -310,7 +310,7 @@ public class SitewellSDK {
      * 返回:
      * 发送定时任务设置命令
      */
-    public void setTimerInfoConfig(WifiTimerBean timer,String ctrlkey,String connecthost){
+    public void setTimerInfoConfig(WifiTimerBean timer, String ctrlkey, String connecthost){
         try {
             JSONObject command = new JSONObject();
             JSONObject params = new JSONObject();
@@ -340,7 +340,7 @@ public class SitewellSDK {
      * 返回:
      * 发送删除定时任务
      */
-    public void deleteTimer(WifiTimerBean wifiTimerBean,String ctrlkey,String connecthost){
+    public void deleteTimer(WifiTimerBean wifiTimerBean, String ctrlkey, String connecthost){
         try {
             JSONObject command = new JSONObject();
             JSONObject params = new JSONObject();
@@ -393,7 +393,7 @@ public class SitewellSDK {
     @email xuejunju_4595@qq.com
     批量查询智能电池状态
     */
-    public void queryBaterriesStatus(List<BatteryBean> batteryBeans,final SycBatteryStatusListener sycBatteryStatusListener){
+    public void queryBaterriesStatus(List<BatteryBean> batteryBeans, final SycBatteryStatusListener sycBatteryStatusListener){
 
         org.json.JSONArray jsonArray = new org.json.JSONArray();
 
@@ -473,7 +473,7 @@ public class SitewellSDK {
     @email xuejunju_4595@qq.com
     批量查询水感状态
     */
-    public void queryWaterSensorsStatus(List<WaterSensorBean> waterSensorBeans,final SycWaterSensorStatusListener sycWaterSensorStatusListener){
+    public void queryWaterSensorsStatus(List<WaterSensorBean> waterSensorBeans, final SycWaterSensorStatusListener sycWaterSensorStatusListener){
 
         org.json.JSONArray jsonArray = new org.json.JSONArray();
 

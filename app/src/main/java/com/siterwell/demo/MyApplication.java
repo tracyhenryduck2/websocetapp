@@ -10,7 +10,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.siterwell.demo.common.CrashHandler;
-import com.siterwell.sdk.common.SitewellSDK;
+import com.siterwell.demo.listener.SitewellSDK;
 
 import me.siter.sdk.SiterSDK;
 

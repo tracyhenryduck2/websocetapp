@@ -33,8 +33,8 @@ import com.siterwell.demo.commonview.ECAlertDialog;
 import com.siterwell.demo.folder.guide.GuideBattery2Activty;
 import com.siterwell.demo.folder.guide.SocketGuide1Activity;
 import com.siterwell.demo.folder.guide.WaterSensor1Activity;
-import com.siterwell.sdk.bean.DeviceType;
-import com.siterwell.sdk.protocol.GS140Command;
+import com.siterwell.demo.bean.DeviceType;
+import com.siterwell.demo.protocol.GS140Command;
 
 import java.io.InvalidClassException;
 

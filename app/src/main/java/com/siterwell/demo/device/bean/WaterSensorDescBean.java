@@ -1,6 +1,6 @@
 package com.siterwell.demo.device.bean;
 
-import com.siterwell.sdk.bean.WaterSensorBean;
+import com.siterwell.demo.bean.WaterSensorBean;
 import com.siterwell.demo.MyApplication;
 import com.siterwell.demo.R;
 

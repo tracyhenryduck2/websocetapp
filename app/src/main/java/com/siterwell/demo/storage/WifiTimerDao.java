@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
 import com.litesuits.android.log.Log;
-import com.siterwell.sdk.bean.WifiTimerBean;
+import com.siterwell.demo.bean.WifiTimerBean;
 
 import java.util.ArrayList;
 import java.util.List;

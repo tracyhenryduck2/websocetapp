@@ -1,16 +1,16 @@
-package com.siterwell.sdk.common;
+package com.siterwell.demo.listener;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.siterwell.sdk.bean.BatteryBean;
-import com.siterwell.sdk.bean.SocketBean;
-import com.siterwell.sdk.bean.WaterSensorBean;
-import com.siterwell.sdk.bean.WifiTimerBean;
-import com.siterwell.sdk.protocol.ResolveSocket;
-import com.siterwell.sdk.protocol.ResolveTimer;
+import com.siterwell.demo.bean.BatteryBean;
+import com.siterwell.demo.bean.SocketBean;
+import com.siterwell.demo.bean.WaterSensorBean;
+import com.siterwell.demo.bean.WifiTimerBean;
+import com.siterwell.demo.protocol.ResolveSocket;
+import com.siterwell.demo.protocol.ResolveTimer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -63,7 +63,7 @@ public class SiterReceiver extends BroadcastReceiver {
                             batteryDescBean1.setBattPercent(jsonObject2.getInt("battPercent"));
                             batteryDescBean1.setSignal(jsonObject2.getInt("signal"));
                             if(SitewellSDK.getInstance(context).getRefreshBatteryListeners()!=null){
-                                for(RefreshBatteryListener refreshBatteryListener:SitewellSDK.getInstance(context).getRefreshBatteryListeners())
+                                for(RefreshBatteryListener refreshBatteryListener: SitewellSDK.getInstance(context).getRefreshBatteryListeners())
                                 {
                                     refreshBatteryListener.RefreshBattery(batteryDescBean1);
                                 }
@@ -109,7 +109,7 @@ public class SiterReceiver extends BroadcastReceiver {
                                     switch (typea){
                                         case 0:
                                             if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null){
-                                                for(WIFISocketListener refreshBatteryListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                                for(WIFISocketListener refreshBatteryListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                                 {
                                                     refreshBatteryListener.refreshSocketStatus(socketDescBean);
                                                 }
@@ -117,7 +117,7 @@ public class SiterReceiver extends BroadcastReceiver {
                                             break;
                                         case 1:
                                             if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null){
-                                                for(WIFISocketListener refreshBatteryListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                                for(WIFISocketListener refreshBatteryListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                                 {
                                                     refreshBatteryListener.circleFinish(socketDescBean);
                                                 }
@@ -125,7 +125,7 @@ public class SiterReceiver extends BroadcastReceiver {
                                             break;
                                         case 2:
                                             if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null){
-                                                for(WIFISocketListener refreshBatteryListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                                for(WIFISocketListener refreshBatteryListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                                 {
                                                     refreshBatteryListener.countdownFinish(socketDescBean);
                                                 }
@@ -133,7 +133,7 @@ public class SiterReceiver extends BroadcastReceiver {
                                             break;
                                         case 3:
                                             if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null){
-                                                for(WIFISocketListener refreshBatteryListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                                for(WIFISocketListener refreshBatteryListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                                 {
                                                     refreshBatteryListener.timerFinish(socketDescBean,String.valueOf(timerid));
                                                 }
@@ -149,7 +149,7 @@ public class SiterReceiver extends BroadcastReceiver {
 
                             }else{
                                 if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null){
-                                    for(WIFISocketListener refreshBatteryListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                    for(WIFISocketListener refreshBatteryListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                     {
                                         refreshBatteryListener.unknowError();
                                     }
@@ -187,7 +187,7 @@ public class SiterReceiver extends BroadcastReceiver {
                                     socketDescBean.setSignal(wifisignals);
                                     socketDescBean.setSocketstatus(statuss);
                                     if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null){
-                                        for(WIFISocketListener refreshBatteryListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                        for(WIFISocketListener refreshBatteryListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                         {
                                             refreshBatteryListener.refreshSocketStatus(socketDescBean);
                                         }
@@ -198,7 +198,7 @@ public class SiterReceiver extends BroadcastReceiver {
 
                             }else{
                                 if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null){
-                                    for(WIFISocketListener refreshBatteryListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                    for(WIFISocketListener refreshBatteryListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                     {
                                         refreshBatteryListener.unknowError();
                                     }
@@ -215,7 +215,7 @@ public class SiterReceiver extends BroadcastReceiver {
                                 Log.i(TAG,"同步解析得出的SocketBean："+ socketBean.toString());
                                 Log.i(TAG,"同步解析得出的wifiTimerBeanList："+wifiTimerBeanList.toString());
                                     if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null){
-                                        for(WIFISocketListener refreshBatteryListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                        for(WIFISocketListener refreshBatteryListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                         {
                                             refreshBatteryListener.sycSocketStatusSuccess(socketBean);
                                         }
@@ -224,7 +224,7 @@ public class SiterReceiver extends BroadcastReceiver {
 
                             }else{
                                 if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null){
-                                    for(WIFISocketListener refreshBatteryListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                    for(WIFISocketListener refreshBatteryListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                     {
                                         refreshBatteryListener.unknowError();
                                     }
@@ -239,7 +239,7 @@ public class SiterReceiver extends BroadcastReceiver {
                             waterSensorBean.setSignal(jsonObject2.getInt("signal"));
 
                             if(SitewellSDK.getInstance(context).getRefreshWaterSensorListeners()!=null){
-                                for(RefreshWaterSensorListener refreshWaterSensorListener:SitewellSDK.getInstance(context).getRefreshWaterSensorListeners())
+                                for(RefreshWaterSensorListener refreshWaterSensorListener: SitewellSDK.getInstance(context).getRefreshWaterSensorListeners())
                                 {
                                     refreshWaterSensorListener.RefreshWaterSensor(waterSensorBean);
                                 }
@@ -254,14 +254,14 @@ public class SiterReceiver extends BroadcastReceiver {
                     int upgradeProgress = jsonObject2.getInt("upgradeProgress");
                     if(upgradeState == 0){
                         if(SitewellSDK.getInstance(context).getUpgradeListeners()!=null){
-                            for(UpgradeListener upgradeListener:SitewellSDK.getInstance(context).getUpgradeListeners())
+                            for(UpgradeListener upgradeListener: SitewellSDK.getInstance(context).getUpgradeListeners())
                             {
                                 upgradeListener.progressComplete(devid);
                             }
                         }
                     }else {
                         if(SitewellSDK.getInstance(context).getUpgradeListeners()!=null){
-                            for(UpgradeListener upgradeListener:SitewellSDK.getInstance(context).getUpgradeListeners())
+                            for(UpgradeListener upgradeListener: SitewellSDK.getInstance(context).getUpgradeListeners())
                             {
                                 upgradeListener.progressIng(devid,upgradeProgress);
                             }
@@ -287,7 +287,7 @@ public class SiterReceiver extends BroadcastReceiver {
                             socketDescBean2.setDevTid(devid);
                             socketDescBean2.setSocketmodel(mode);
                             if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null){
-                                for (WIFISocketListener wifiSocketListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                for (WIFISocketListener wifiSocketListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                     wifiSocketListener.switchModeSuccess(socketDescBean2);
                             }
                             break;
@@ -297,7 +297,7 @@ public class SiterReceiver extends BroadcastReceiver {
                             socketDescBean.setDevTid(devid);
                             socketDescBean.setSocketstatus(status);
                             if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null){
-                                for (WIFISocketListener wifiSocketListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                for (WIFISocketListener wifiSocketListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                     wifiSocketListener.switchSocketSuccess(socketDescBean);
                             }
                             break;
@@ -305,7 +305,7 @@ public class SiterReceiver extends BroadcastReceiver {
                             String circle = jsonObject2.getString("Circle");
                             SocketBean socketDescBean3 = ResolveSocket.getSocketCicleInfo(circle,devid);
                             if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null){
-                                for (WIFISocketListener wifiSocketListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                for (WIFISocketListener wifiSocketListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                     wifiSocketListener.setCircleConfigSuccess(socketDescBean3);
                             }
                             break;
@@ -313,7 +313,7 @@ public class SiterReceiver extends BroadcastReceiver {
                             String countdown = jsonObject2.getString("Count_down");
                             SocketBean socketDescBean4 = ResolveSocket.getSocketCountdownInfo(countdown,devid);
                             if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null ){
-                                for (WIFISocketListener wifiSocketListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                for (WIFISocketListener wifiSocketListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                     wifiSocketListener.setCountDownConfigSuccess(socketDescBean4);
                             }
                             break;
@@ -324,18 +324,18 @@ public class SiterReceiver extends BroadcastReceiver {
                                 ResolveTimer resolveTimer =new ResolveTimer(timing,devid);
                                 if(resolveTimer.isTarget()){
                                     if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null ){
-                                        for (WIFISocketListener wifiSocketListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                        for (WIFISocketListener wifiSocketListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                             wifiSocketListener.setTimerConfigSuccess(resolveTimer.getWifiTimerBean());
                                     }
                                 }else{
                                     if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null ){
-                                        for (WIFISocketListener wifiSocketListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                        for (WIFISocketListener wifiSocketListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                             wifiSocketListener.unknowError();
                                     }
                                 }
                             }else{
                                 if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null ){
-                                    for (WIFISocketListener wifiSocketListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                    for (WIFISocketListener wifiSocketListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                         wifiSocketListener.unknowError();
                                 }
                             }
@@ -345,14 +345,14 @@ public class SiterReceiver extends BroadcastReceiver {
                             int ID = jsonObject2.getInt("ID");
                             String oo = String.valueOf(ID);
                             if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null ){
-                                for (WIFISocketListener wifiSocketListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                                for (WIFISocketListener wifiSocketListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                                     wifiSocketListener.deleteTimerSuccess(oo);
                             }
                             break;
                     }
                 }else if(code == 1400018){
                     if(SitewellSDK.getInstance(context).getWifiSocketListeners()!=null ){
-                        for (WIFISocketListener wifiSocketListener:SitewellSDK.getInstance(context).getWifiSocketListeners())
+                        for (WIFISocketListener wifiSocketListener: SitewellSDK.getInstance(context).getWifiSocketListeners())
                             wifiSocketListener.deviceOffLineError();
                     }
                 }
@@ -363,7 +363,7 @@ public class SiterReceiver extends BroadcastReceiver {
                 if(code == 1400002){
 
                     if(SitewellSDK.getInstance(context).getTokenTimeoutListeners()!=null ){
-                        for (TokenTimeoutListener tokenTimeoutListener:SitewellSDK.getInstance(context).getTokenTimeoutListeners())
+                        for (TokenTimeoutListener tokenTimeoutListener: SitewellSDK.getInstance(context).getTokenTimeoutListeners())
                             tokenTimeoutListener.tokentimeout();
                     }
                 }

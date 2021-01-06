@@ -1,4 +1,4 @@
-package com.siterwell.sdk.bean;
+package com.siterwell.demo.bean;
 
 /**
  * Created by gc-0001 on 2017/4/26.

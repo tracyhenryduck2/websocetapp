@@ -1,6 +1,6 @@
 package com.siterwell.demo.device.bean;
 
-import com.siterwell.sdk.bean.BatteryBean;
+import com.siterwell.demo.bean.BatteryBean;
 import com.siterwell.demo.MyApplication;
 import com.siterwell.demo.R;
 

@@ -184,20 +184,10 @@
             android:screenOrientation="portrait" />
 
         <!-- Sychronize data service -->
-        <service android:name=".SychronizeService"
-            android:enabled="true"
-            android:label="siterwell服务"
-            android:exported="true"/>
 
         <service android:name=".BatteryNotificationService"/>
         <service android:name=".SilenceOverNotificationService" />
         <receiver android:name=".BroadCastForNotification"/>
-
-
-        <service
-            android:name=".updateapp.UpdateService"
-            android:exported="true"
-            android:label="UpdateService"></service>
 
 
         <!-- [START firebase_service] -->
@@ -223,16 +213,10 @@
             </intent-filter>
         </service>
 
-        <service android:name="com.siterwell.sdk.common.SiterCoreService"
+        <service android:name="com.siterwell.demo.listener.SiterCoreService"
             android:exported="true"
             android:label="SiterCoreService"
             />
-        <receiver
-            android:name="com.siterwell.sdk.common.SiterReceiver">
-            <intent-filter>
-                <action android:name="me.action.ws.data" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

@@ -16,14 +16,14 @@ import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.commonview.ECAlertDialog;
 import com.siterwell.demo.commonview.SettingItem;
 import com.siterwell.demo.storage.DeviceDao;
-import com.siterwell.sdk.common.SitewellSDK;
-import com.siterwell.sdk.common.TimeOutListener;
-import com.siterwell.sdk.common.UpgradeListener;
+import com.siterwell.demo.listener.SitewellSDK;
+import com.siterwell.demo.listener.TimeOutListener;
+import com.siterwell.demo.listener.UpgradeListener;
 import me.siter.sdk.http.SiterUser;
 import me.siter.sdk.http.UserAction;
 import me.siter.sdk.http.bean.DeviceBean;
 import me.siter.sdk.http.bean.FirmwareBean;
-import com.siterwell.sdk.protocol.UpgradeCommand;
+import com.siterwell.demo.protocol.UpgradeCommand;
 import com.zbar.lib.UIFactory;
 
 import java.util.List;

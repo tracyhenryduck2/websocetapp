@@ -9,7 +9,7 @@ import android.content.Intent;
 
 import com.siterwell.demo.MyApplication;
 import com.siterwell.demo.R;
-import com.siterwell.sdk.bean.DeviceType;
+import com.siterwell.demo.bean.DeviceType;
 import me.siter.sdk.http.bean.DeviceBean;
 
 

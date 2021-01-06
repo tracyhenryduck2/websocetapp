@@ -2,9 +2,6 @@ package me.siter.sdk.http;
 
 import android.graphics.Bitmap;
 
-import com.siterwell.sdk.bean.BatteryBean;
-import com.siterwell.sdk.bean.WaterSensorBean;
-
 import me.siter.sdk.http.bean.DefaultDeviceBean;
 import me.siter.sdk.http.bean.DeviceBean;
 import me.siter.sdk.http.bean.DeviceStatusBean;
@@ -673,13 +670,5 @@ public class SiterUser {
         void getFail(int errorCode);
     }
 
-    /**
-     * 获取智能电池和WI-FI水感
-     */
-    public interface GetGS140AndGS156WListener {
-        void getSuccess(List<BatteryBean> batteryBeanList, List<WaterSensorBean> WaterSensorBeanList);
-
-        void getFail(int errorCode);
-    }
 
 }

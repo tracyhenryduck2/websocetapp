@@ -1,7 +1,7 @@
-package com.siterwell.sdk.common;
+package com.siterwell.demo.listener;
 
-import com.siterwell.sdk.bean.SocketBean;
-import com.siterwell.sdk.bean.WifiTimerBean;
+import com.siterwell.demo.bean.SocketBean;
+import com.siterwell.demo.bean.WifiTimerBean;
 
 /**
  * Created by TracyHenry on 2018/2/8.
@@ -31,7 +31,7 @@ public interface WIFISocketListener {
 
     void countdownFinish(SocketBean socketBean);          //倒计时模式完成
 
-    void timerFinish(SocketBean socketBean,String timerid); //某条定时任务执行完成
+    void timerFinish(SocketBean socketBean, String timerid); //某条定时任务执行完成
 
     void unknowError();    //解析错误
 }

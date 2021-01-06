@@ -1,6 +1,6 @@
-package com.siterwell.sdk.common;
+package com.siterwell.demo.listener;
 
-import com.siterwell.sdk.bean.BatteryBean;
+import com.siterwell.demo.bean.BatteryBean;
 
 /**
  * Created by TracyHenry on 2018/2/6.

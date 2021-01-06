@@ -135,7 +135,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 int code = d.getInteger("code");
                                 toastor.showSingleLongToast(Errcode.errorCode2Msg(LoginActivity.this,code));
                             }catch (Exception e){
-                                e.printStackTrace();
                                 toastor.showSingleLongToast(Errcode.errorCode2Msg(LoginActivity.this,errorCode));
                             }finally {
                                 if(progressDialog!=null&progressDialog.isShowing()){

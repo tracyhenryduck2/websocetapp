@@ -20,11 +20,11 @@ import com.siterwell.demo.R;
 import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.commonview.RoundProgressView;
 import com.siterwell.demo.storage.DeviceDao;
-import com.siterwell.sdk.bean.DeviceType;
+import com.siterwell.demo.bean.DeviceType;
 
 import me.siter.sdk.http.bean.DeviceBean;
 
-import com.siterwell.sdk.protocol.GS140Command;
+import com.siterwell.demo.protocol.GS140Command;
 
 import org.greenrobot.eventbus.EventBus;
 

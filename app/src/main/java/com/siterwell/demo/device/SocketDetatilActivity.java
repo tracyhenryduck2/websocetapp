@@ -19,7 +19,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.litesuits.android.log.Log;
-import com.siterwell.sdk.bean.DeviceType;
+import com.siterwell.demo.bean.DeviceType;
 import com.siterwell.demo.R;
 import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.common.UnitTools;
@@ -29,13 +29,13 @@ import com.siterwell.demo.commonview.RefreshableView;
 import com.siterwell.demo.device.bean.SocketDescBean;
 import com.siterwell.demo.storage.DeviceDao;
 import com.siterwell.demo.wheelwidget.helper.Common;
-import com.siterwell.sdk.bean.SocketBean;
-import com.siterwell.sdk.bean.WifiTimerBean;
-import com.siterwell.sdk.common.SitewellSDK;
-import com.siterwell.sdk.common.TimeOutListener;
-import com.siterwell.sdk.common.WIFISocketListener;
+import com.siterwell.demo.bean.SocketBean;
+import com.siterwell.demo.bean.WifiTimerBean;
+import com.siterwell.demo.listener.SitewellSDK;
+import com.siterwell.demo.listener.TimeOutListener;
+import com.siterwell.demo.listener.WIFISocketListener;
 import me.siter.sdk.http.bean.DeviceBean;
-import com.siterwell.sdk.protocol.SocketCommand;
+import com.siterwell.demo.protocol.SocketCommand;
 
 
 import java.util.ArrayList;

@@ -15,15 +15,15 @@ import androidx.fragment.app.Fragment;
 import com.siterwell.demo.R;
 import com.siterwell.demo.commonview.ECAlertDialog;
 import com.siterwell.demo.commonview.SlideListView;
-import com.siterwell.sdk.bean.SocketBean;
-import com.siterwell.sdk.bean.WifiTimerBean;
+import com.siterwell.demo.bean.SocketBean;
+import com.siterwell.demo.bean.WifiTimerBean;
 import com.siterwell.demo.storage.DeviceDao;
 import com.siterwell.demo.storage.WifiTimerDao;
-import com.siterwell.sdk.common.SitewellSDK;
-import com.siterwell.sdk.common.WIFISocketListener;
+import com.siterwell.demo.listener.SitewellSDK;
+import com.siterwell.demo.listener.WIFISocketListener;
 import me.siter.sdk.http.bean.DeviceBean;
-import com.siterwell.sdk.protocol.ResolveTimer;
-import com.siterwell.sdk.protocol.SocketCommand;
+import com.siterwell.demo.protocol.ResolveTimer;
+import com.siterwell.demo.protocol.SocketCommand;
 
 
 import java.util.ArrayList;

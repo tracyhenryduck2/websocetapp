@@ -14,19 +14,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.siterwell.demo.common.DataUtils;
-import com.siterwell.sdk.bean.SocketBean;
-import com.siterwell.sdk.bean.WifiTimerBean;
+import com.siterwell.demo.bean.SocketBean;
+import com.siterwell.demo.bean.WifiTimerBean;
 import com.siterwell.demo.R;
 import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.storage.DeviceDao;
 import com.siterwell.demo.storage.WifiTimerDao;
 import com.siterwell.demo.wheelwidget.view.WheelView;
-import com.siterwell.sdk.common.SitewellSDK;
-import com.siterwell.sdk.common.WIFISocketListener;
+import com.siterwell.demo.listener.SitewellSDK;
+import com.siterwell.demo.listener.WIFISocketListener;
 import me.siter.sdk.http.bean.DeviceBean;
-import com.siterwell.sdk.protocol.ResolveTimer;
-import com.siterwell.sdk.protocol.SocketCommand;
-import com.siterwell.sdk.protocol.ByteUtil;
+import com.siterwell.demo.protocol.ResolveTimer;
+import com.siterwell.demo.protocol.SocketCommand;
+import com.siterwell.demo.protocol.ByteUtil;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -12,10 +12,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.litesuits.android.log.Log;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.siterwell.sdk.bean.BatteryBean;
-import com.siterwell.sdk.bean.DeviceType;
-import com.siterwell.sdk.bean.WaterSensorBean;
-import com.siterwell.sdk.common.GetDeviceListListener;
 import me.siter.sdk.http.bean.BindDeviceBean;
 import me.siter.sdk.http.bean.DefaultDeviceBean;
 import me.siter.sdk.http.bean.DeviceBean;
@@ -33,7 +29,6 @@ import me.siter.sdk.http.bean.OAuthRequestBean;
 import me.siter.sdk.http.bean.ProfileBean;
 import me.siter.sdk.http.bean.RuleBean;
 import me.siter.sdk.http.bean.UserFileBean;
-import com.siterwell.sdk.protocol.SocketCommand;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -42,7 +37,6 @@ import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -55,9 +49,7 @@ import me.siter.sdk.SiterSDK;
 import me.siter.sdk.utils.CacheUtil;
 import me.siter.sdk.utils.SpCache;
 
-/**
- * Created by Administrator on 2017/10/16.
- */
+
 
 public class UserAction {
     /**
@@ -962,11 +954,6 @@ public class UserAction {
                     });
 
 
-                    DeviceBean deviceBean = new DeviceBean();
-                    deviceBean.setDevTid(devTid);
-                    deviceBean.setCtrlKey(ctrlKey);
-                    SocketCommand socketCommand =new SocketCommand(deviceBean,mContext.get());
-                    socketCommand.setSocketName(deviceName,null);
                 }else {
                     renameDeviceListener.NameContainEmojiErr();
                 }
@@ -1736,44 +1723,6 @@ public class UserAction {
     }
 
 
-    public void getFoldDeviceList(Context context,int page,int size,String folderid,final GetDeviceListListener getDeviceListListener){
-        CharSequence url = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.BIND_DEVICE,"/",folderid);
-        UserAction.getInstance(context).getSiterData(url.toString()+"?page="+page+"&size="+size, new UserAction.GetDataListener() {
-            @Override
-            public void getSuccess(Object object) {
-                try {
-                    List<DeviceBean> listold = new ArrayList<DeviceBean>();
-
-                    JSONArray jsonArray = JSON.parseArray(object.toString());
-                    for(int i=0;i<jsonArray.size();i++){
-                        DeviceBean deviceBean = new DeviceBean();
-                        deviceBean.setFolderId(jsonArray.getJSONObject(i).getString("folderId"));
-                        deviceBean.setDevTid(jsonArray.getJSONObject(i).getString("devTid"));
-                        deviceBean.setModel(jsonArray.getJSONObject(i).getString("model"));
-
-                        deviceBean.setDeviceName(jsonArray.getJSONObject(i).getString("deviceName"));
-                        deviceBean.setOnline(jsonArray.getJSONObject(i).getBoolean("online")?true:false);
-                        deviceBean.setCtrlKey(jsonArray.getJSONObject(i).getString("ctrlKey"));
-                        deviceBean.setBindKey(jsonArray.getJSONObject(i).getString("bindKey"));
-                        deviceBean.setProductPublicKey(jsonArray.getJSONObject(i).getString("productPublicKey"));
-                        listold.add(deviceBean);
-                    }
-                    getDeviceListListener.succuss(listold);
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                    getDeviceListListener.error(2);
-                }
-            }
-
-            @Override
-            public void getFail(int errorCode) {
-                getDeviceListListener.error(errorCode);
-            }
-        });
-
-
-    }
 
     /**
      * 获取某个设备的报警信息，所有的
@@ -1829,110 +1778,6 @@ public class UserAction {
         });
     }
 
-    /**
-     * 批量获取GS156W水感以及GS140当前状态接口
-     * @param deviceBeanList
-     *
-     */
-    public void getGS140AndGS156WCurrentStatus(@NotNull final List<DeviceBean> deviceBeanList,final SiterUser.GetGS140AndGS156WListener getGS140AndGS156WListener) {
-        UserAction userAction = UserAction.getInstance(mContext.get());
-        CharSequence url2 = TextUtils.concat(Constants.UrlUtil.BASE_USER_URL, Constants.UrlUtil.QUERY_DEVICE_STATUS);
-        JSONArray jsonArray = new JSONArray();
-
-
-        for(int i=0;i<deviceBeanList.size();i++){
-            JSONObject J2 = new JSONObject();
-            J2.put("devTid",deviceBeanList.get(i).getDevTid());
-            J2.put("ctrlKey",deviceBeanList.get(i).getCtrlKey());
-            jsonArray.add(i,J2);
-        }
-        userAction.postSiterData(url2,jsonArray.toString(), new UserAction.GetDataListener() {
-            @Override
-            public void getSuccess(Object object) {
-                try {
-                    JSONArray jsonArray = JSONArray.parseArray(object.toString());
-                    List<BatteryBean> batteryBeanList = new ArrayList<BatteryBean>();
-                    List<WaterSensorBean> waterSensorBeanList = new ArrayList<WaterSensorBean>();
-                    for(int i=0;i<jsonArray.size();i++){
-                        JSONObject obj = jsonArray.getJSONObject(i);
-                        String deviceid = obj.getString("devTid");
-
-                        if(i<=(deviceBeanList.size()-1)){
-                            DeviceBean deviceBean =  deviceBeanList.get(i);
-                            if(DeviceType.BATTERY.toString().equals(deviceBean.getModel()) ){
-                                int status_current = 0;
-                                int per_current = -1;
-                                int signal = -1;
-
-                                JSONObject status = obj.getJSONObject("status");
-
-                                if(status.containsKey("status")){
-                                    JSONObject s = status.getJSONObject("status");
-                                    status_current = s.containsKey("currentValue")?s.getIntValue("currentValue"):0;
-                                }
-
-                                if(status.containsKey("battPercent")){
-                                    JSONObject p = status.getJSONObject("battPercent");
-                                    per_current = p.containsKey("currentValue")?p.getIntValue("currentValue"):-1;
-                                }
-                                if(status.containsKey("signal")) {
-                                    JSONObject sig = status.getJSONObject("signal");
-                                    signal = sig.containsKey("currentValue")?sig.getIntValue("currentValue"):-1;
-                                }
-
-                                BatteryBean batteryDescBean = new BatteryBean();
-                                batteryDescBean.setDevTid(deviceid);
-                                batteryDescBean.setSignal(signal);
-                                batteryDescBean.setStatus(status_current);
-                                batteryDescBean.setBattPercent(per_current);
-                                batteryBeanList.add(batteryDescBean);
-                            }else if(DeviceType.WATERSENEOR.toString().equals(deviceBean.getModel())){
-                                int status_current = 0;
-                                int per_current = -1;
-                                int signal = -1;
-
-                                JSONObject status = obj.getJSONObject("status");
-
-                                if(status.containsKey("status")){
-                                    JSONObject s = status.getJSONObject("status");
-                                    status_current = s.containsKey("currentValue")?s.getIntValue("currentValue"):0;
-                                }
-
-                                if(status.containsKey("battPercent")){
-                                    JSONObject p = status.getJSONObject("battPercent");
-                                    per_current = p.containsKey("currentValue")?p.getIntValue("currentValue"):-1;
-                                }
-                                if(status.containsKey("signal")) {
-                                    JSONObject sig = status.getJSONObject("signal");
-                                    signal = sig.containsKey("currentValue")?sig.getIntValue("currentValue"):-1;
-                                }
-
-                                WaterSensorBean waterSensorBean = new WaterSensorBean();
-                                waterSensorBean.setDevTid(deviceid);
-                                waterSensorBean.setSignal(signal);
-                                waterSensorBean.setStatus(status_current);
-                                waterSensorBean.setBattPercent(per_current);
-                                waterSensorBeanList.add(waterSensorBean);
-                            }
-                        }
-                        }
-
-
-                    getGS140AndGS156WListener.getSuccess(batteryBeanList,waterSensorBeanList);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-
-                }
-
-            }
-
-            @Override
-            public void getFail(int errorCode) {
-                android.util.Log.i(TAG,"errorCode:"+errorCode);
-                getGS140AndGS156WListener.getFail(errorCode);
-            }
-        });
-    }
 
 
     /**

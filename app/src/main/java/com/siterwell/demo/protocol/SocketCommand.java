@@ -1,15 +1,14 @@
-package com.siterwell.sdk.protocol;
+package com.siterwell.demo.protocol;
 
 import android.content.Context;
 import android.provider.Settings;
-
-import me.siter.sdk.http.bean.DeviceBean;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.util.TextUtils;
 import me.siter.sdk.Siter;
+import me.siter.sdk.http.bean.DeviceBean;
 import me.siter.sdk.inter.SiterMsgCallback;
 
 

@@ -23,11 +23,11 @@ import com.siterwell.demo.commonview.ECListDialog;
 import com.siterwell.demo.commonview.ProgressDialog;
 import com.siterwell.demo.folder.configuration.ConfigurationActivity;
 import com.siterwell.demo.storage.DeviceDao;
-import com.siterwell.sdk.bean.DeviceType;
+import com.siterwell.demo.bean.DeviceType;
 import me.siter.sdk.http.SiterUser;
 import me.siter.sdk.http.UserAction;
 import me.siter.sdk.http.bean.DeviceBean;
-import com.siterwell.sdk.protocol.GS140Command;
+import com.siterwell.demo.protocol.GS140Command;
 import com.zbar.lib.ScanCaptureAct;
 
 /**

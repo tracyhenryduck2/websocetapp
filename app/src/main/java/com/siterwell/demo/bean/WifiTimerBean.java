@@ -1,4 +1,4 @@
-package com.siterwell.sdk.bean;
+package com.siterwell.demo.bean;
 
 import java.io.Serializable;
 

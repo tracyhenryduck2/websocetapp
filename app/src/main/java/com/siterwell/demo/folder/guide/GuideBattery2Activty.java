@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import com.siterwell.demo.R;
 import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.folder.configuration.EsptouchAnimationActivity;
-import com.siterwell.sdk.bean.DeviceType;
-import com.siterwell.sdk.protocol.GS140Command;
+import com.siterwell.demo.bean.DeviceType;
+import com.siterwell.demo.protocol.GS140Command;
 
 /**
  * Created by ST-020111 on 2017/4/14.

@@ -11,7 +11,7 @@ import com.siterwell.demo.R;
 import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.folder.configuration.ConfigurationActivity;
 import com.siterwell.demo.folder.configuration.EsptouchAnimationActivity;
-import com.siterwell.sdk.bean.DeviceType;
+import com.siterwell.demo.bean.DeviceType;
 
 /**
  * Created by ST-020111 on 2017/7/21.

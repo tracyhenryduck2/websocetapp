@@ -4,15 +4,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.siterwell.sdk.bean.BatteryBean;
-import com.siterwell.sdk.bean.SocketBean;
-import com.siterwell.sdk.bean.WaterSensorBean;
-import com.siterwell.sdk.bean.WifiTimerBean;
-import com.siterwell.sdk.common.RefreshWaterSensorListener;
-import com.siterwell.sdk.common.SitewellSDK;
-import com.siterwell.sdk.common.WIFISocketListener;
+import com.siterwell.demo.bean.BatteryBean;
+import com.siterwell.demo.bean.SocketBean;
+import com.siterwell.demo.bean.WaterSensorBean;
+import com.siterwell.demo.bean.WifiTimerBean;
+import com.siterwell.demo.listener.RefreshWaterSensorListener;
+import com.siterwell.demo.listener.SitewellSDK;
+import com.siterwell.demo.listener.WIFISocketListener;
 import com.siterwell.demo.common.TopbarSuperActivity;
-import com.siterwell.sdk.common.RefreshBatteryListener;
+import com.siterwell.demo.listener.RefreshBatteryListener;
 
 /**
  * Created by TracyHenry on 2018/2/7.

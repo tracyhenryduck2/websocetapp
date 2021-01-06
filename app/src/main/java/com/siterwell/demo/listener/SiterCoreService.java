@@ -1,4 +1,4 @@
-package com.siterwell.sdk.common;
+package com.siterwell.demo.listener;
 
 import android.app.Service;
 import android.content.Intent;
@@ -31,7 +31,6 @@ public class SiterCoreService extends Service {
 
     @Override
     public void onCreate() {
-        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -44,7 +43,6 @@ public class SiterCoreService extends Service {
 
     @Override
     public void onDestroy() {
-        EventBus.getDefault().unregister(this);
         super.onDestroy();
         unregisterReceiver(siterReceiver);
     }
@@ -74,7 +72,7 @@ public class SiterCoreService extends Service {
                 public void onTimeout() {
                     // 主动接受不会有这个回调
                     if(SitewellSDK.getInstance(SiterCoreService.this).getTimeoutListeners()!=null){
-                        for(TimeOutListener timeOutListener:SitewellSDK.getInstance(SiterCoreService.this).getTimeoutListeners()){
+                        for(TimeOutListener timeOutListener: SitewellSDK.getInstance(SiterCoreService.this).getTimeoutListeners()){
                             timeOutListener.timeout();
                         }
                     }

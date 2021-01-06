@@ -8,11 +8,11 @@ import android.text.TextUtils;
 
 import com.litesuits.android.log.Log;
 import com.siterwell.demo.device.bean.SocketDescBean;
-import com.siterwell.sdk.bean.BatteryBean;
-import com.siterwell.sdk.bean.SocketBean;
+import com.siterwell.demo.bean.BatteryBean;
+import com.siterwell.demo.bean.SocketBean;
 import com.siterwell.demo.device.bean.BatteryDescBean;
 import com.siterwell.demo.device.bean.WaterSensorDescBean;
-import com.siterwell.sdk.bean.WaterSensorBean;
+import com.siterwell.demo.bean.WaterSensorBean;
 import me.siter.sdk.http.bean.DeviceBean;
 
 import java.util.ArrayList;

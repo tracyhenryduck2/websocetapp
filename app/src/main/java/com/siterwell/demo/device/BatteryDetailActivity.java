@@ -21,7 +21,7 @@ import com.siterwell.demo.common.Errcode;
 import com.siterwell.demo.commonview.ECAlertDialog;
 import com.siterwell.demo.commonview.ProgressDialog;
 import com.siterwell.demo.folder.bean.LocalFolderBean;
-import com.siterwell.sdk.bean.BatteryBean;
+import com.siterwell.demo.bean.BatteryBean;
 import com.siterwell.demo.R;
 import com.siterwell.demo.common.DateUtil;
 import com.siterwell.demo.common.TopbarSuperActivity;
@@ -39,11 +39,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import com.siterwell.sdk.common.RefreshBatteryListener;
-import com.siterwell.sdk.common.SitewellSDK;
+import com.siterwell.demo.listener.RefreshBatteryListener;
+import com.siterwell.demo.listener.SitewellSDK;
 import me.siter.sdk.http.UserAction;
 import me.siter.sdk.http.bean.DeviceBean;
-import com.siterwell.sdk.protocol.BatteryCommand;
+import com.siterwell.demo.protocol.BatteryCommand;
 
 /**
  * Created by ST-020111 on 2017/4/14.

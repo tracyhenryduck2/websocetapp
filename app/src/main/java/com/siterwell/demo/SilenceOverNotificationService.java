@@ -14,7 +14,7 @@ import android.os.Bundle;
 import com.siterwell.demo.device.bean.BatteryDescBean;
 import com.siterwell.demo.folder.bean.LocalFolderBean;
 import com.siterwell.demo.storage.DeviceDao;
-import com.siterwell.sdk.bean.BatteryBean;
+import com.siterwell.demo.bean.BatteryBean;
 import me.siter.sdk.http.bean.DeviceBean;
 
 public class SilenceOverNotificationService extends IntentService {

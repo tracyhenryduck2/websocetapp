@@ -1,7 +1,6 @@
-package com.siterwell.sdk.bean;
+package com.siterwell.demo.bean;
 
 import java.util.List;
-
 
 import me.siter.sdk.http.bean.DeviceBean;
 

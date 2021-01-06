@@ -1,8 +1,6 @@
-package com.siterwell.sdk.common;
+package com.siterwell.demo.listener;
 
-import com.siterwell.sdk.bean.BatteryBean;
-import com.siterwell.sdk.bean.SocketBean;
-import com.siterwell.sdk.bean.WaterSensorBean;
+import com.siterwell.demo.bean.BatteryBean;
 
 import java.util.List;
 
