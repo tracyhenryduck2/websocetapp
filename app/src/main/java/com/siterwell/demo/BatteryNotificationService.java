@@ -1,12 +1,10 @@
 package com.siterwell.demo;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.AlarmManager;
-import android.app.IntentService;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
@@ -15,17 +13,11 @@ import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 
-import com.siterwell.demo.BroadCastForNotification;
-import com.siterwell.demo.NotificationConstant;
-import com.siterwell.demo.ServiceConstant;
 import com.siterwell.demo.device.bean.BatteryDescBean;
 import com.siterwell.demo.folder.bean.LocalFolderBean;
 import com.siterwell.demo.storage.DeviceDao;
-import com.siterwell.demo.storage.FolderDao;
-import com.siterwell.sdk.bean.BatteryBean;
-import com.siterwell.sdk.common.SitewellSDK;
-import com.siterwell.sdk.common.SycBatteryStatusListener;
-import com.siterwell.sdk.http.bean.DeviceBean;
+
+import me.siter.sdk.http.bean.DeviceBean;
 
 public class BatteryNotificationService extends Service {
 

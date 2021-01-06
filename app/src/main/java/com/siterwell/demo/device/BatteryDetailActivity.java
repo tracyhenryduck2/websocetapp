@@ -1,7 +1,6 @@
 package com.siterwell.demo.device;
 
 import android.animation.ValueAnimator;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Handler;
@@ -32,8 +31,6 @@ import com.siterwell.demo.device.bean.WarningHistoryBean;
 import com.siterwell.demo.storage.DeviceDao;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,8 +41,8 @@ import java.util.List;
 
 import com.siterwell.sdk.common.RefreshBatteryListener;
 import com.siterwell.sdk.common.SitewellSDK;
-import com.siterwell.sdk.http.UserAction;
-import com.siterwell.sdk.http.bean.DeviceBean;
+import me.siter.sdk.http.UserAction;
+import me.siter.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.protocol.BatteryCommand;
 
 /**

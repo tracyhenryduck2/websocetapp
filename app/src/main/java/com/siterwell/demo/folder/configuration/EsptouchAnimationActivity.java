@@ -14,27 +14,21 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.siterwell.demo.QuestionActivity;
 import com.siterwell.demo.R;
 import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.commonview.RoundProgressView;
-import com.siterwell.demo.folder.FolderPojo;
 import com.siterwell.demo.storage.DeviceDao;
 import com.siterwell.sdk.bean.DeviceType;
-import com.siterwell.sdk.common.SitewellSDK;
-import com.siterwell.sdk.http.bean.DeviceBean;
-import com.siterwell.sdk.http.bean.NewDeviceBean;
-import com.siterwell.sdk.protocol.BatteryCommand;
+
+import me.siter.sdk.http.bean.DeviceBean;
+
 import com.siterwell.sdk.protocol.GS140Command;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;

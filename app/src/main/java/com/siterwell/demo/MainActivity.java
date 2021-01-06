@@ -51,10 +51,10 @@ import com.siterwell.demo.storage.DeviceDao;
 import com.siterwell.demo.storage.FolderDao;
 import com.siterwell.demo.storage.WifiTimerDao;
 import com.siterwell.demo.user.PersonalActivity;
-import com.siterwell.sdk.http.SiterUser;
-import com.siterwell.sdk.http.UserAction;
-import com.siterwell.sdk.http.bean.DeviceBean;
-import com.siterwell.sdk.http.bean.FolderListBean;
+import me.siter.sdk.http.SiterUser;
+import me.siter.sdk.http.UserAction;
+import me.siter.sdk.http.bean.DeviceBean;
+import me.siter.sdk.http.bean.FolderListBean;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

@@ -1,6 +1,6 @@
 package me.siter.sdk;
 
-import me.siter.sdk.http.SiterRawCallback;
+import me.siter.sdk.httpCore.SiterRawCallback;
 import me.siter.sdk.inter.SiterCallback;
 
 /**

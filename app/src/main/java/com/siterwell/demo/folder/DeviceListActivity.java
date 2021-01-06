@@ -37,9 +37,9 @@ import com.siterwell.sdk.common.RefreshBatteryListener;
 import com.siterwell.sdk.common.RefreshWaterSensorListener;
 import com.siterwell.sdk.common.SitewellSDK;
 import com.siterwell.sdk.common.WIFISocketListener;
-import com.siterwell.sdk.http.SiterUser;
-import com.siterwell.sdk.http.UserAction;
-import com.siterwell.sdk.http.bean.DeviceBean;
+import me.siter.sdk.http.SiterUser;
+import me.siter.sdk.http.UserAction;
+import me.siter.sdk.http.bean.DeviceBean;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

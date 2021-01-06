@@ -9,10 +9,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import me.siter.sdk.http.SiterRawCallback;
-import me.siter.sdk.http.HttpResponse;
-import me.siter.sdk.http.IHttpClient;
-import me.siter.sdk.http.PostRequest;
+import me.siter.sdk.httpCore.SiterRawCallback;
+import me.siter.sdk.httpCore.HttpResponse;
+import me.siter.sdk.httpCore.IHttpClient;
+import me.siter.sdk.httpCore.PostRequest;
 import me.siter.sdk.inter.SiterCallback;
 import me.siter.sdk.utils.CacheUtil;
 import me.siter.sdk.utils.LogUtil;

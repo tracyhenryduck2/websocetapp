@@ -20,7 +20,7 @@ import com.siterwell.demo.wheelwidget.view.WheelView;
 import com.siterwell.sdk.bean.WifiTimerBean;
 import com.siterwell.sdk.common.SitewellSDK;
 import com.siterwell.sdk.common.WIFISocketListener;
-import com.siterwell.sdk.http.bean.DeviceBean;
+import me.siter.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.protocol.ResolveSocket;
 import com.siterwell.sdk.protocol.SocketCommand;
 

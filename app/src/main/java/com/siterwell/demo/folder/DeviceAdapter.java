@@ -17,7 +17,7 @@ import com.siterwell.demo.device.bean.BatteryDescBean;
 import com.siterwell.demo.device.bean.WaterSensorDescBean;
 import com.siterwell.demo.storage.DeviceDao;
 import com.siterwell.sdk.bean.DeviceType;
-import com.siterwell.sdk.http.bean.DeviceBean;
+import me.siter.sdk.http.bean.DeviceBean;
 
 import java.util.List;
 

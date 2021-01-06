@@ -1,7 +1,7 @@
 package com.siterwell.sdk.bean;
 
 
-import com.siterwell.sdk.http.bean.DeviceBean;
+import me.siter.sdk.http.bean.DeviceBean;
 
 /**
  * Created by TracyHenry on 2018/2/6.

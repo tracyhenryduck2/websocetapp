@@ -3,8 +3,8 @@ package com.siterwell.sdk.protocol;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.siterwell.sdk.http.bean.DeviceBean;
-import com.siterwell.sdk.http.bean.FirmwareBean;
+import me.siter.sdk.http.bean.DeviceBean;
+import me.siter.sdk.http.bean.FirmwareBean;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -24,11 +24,6 @@
             android:label="SiterCoreService"
             />
 
-        <receiver android:name="com.siterwell.sdk.common.UDPreceiver">
-            <intent-filter>
-                <action android:name="com.siterwell.sdk.UDPMessage"/>
-            </intent-filter>
-        </receiver>
         <!-- websocket control service -->
         <service android:name="me.siter.sdk.service.SiterConnectionService"
             android:exported="true"

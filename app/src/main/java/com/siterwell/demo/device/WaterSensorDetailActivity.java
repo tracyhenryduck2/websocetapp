@@ -22,7 +22,7 @@ import com.siterwell.demo.device.bean.WaterSensorDescBean;
 import com.siterwell.demo.storage.DeviceDao;
 import com.siterwell.sdk.common.RefreshWaterSensorListener;
 import com.siterwell.sdk.common.SitewellSDK;
-import com.siterwell.sdk.http.UserAction;
+import me.siter.sdk.http.UserAction;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONArray;

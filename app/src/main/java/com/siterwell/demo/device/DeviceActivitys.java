@@ -10,7 +10,7 @@ import android.content.Intent;
 import com.siterwell.demo.MyApplication;
 import com.siterwell.demo.R;
 import com.siterwell.sdk.bean.DeviceType;
-import com.siterwell.sdk.http.bean.DeviceBean;
+import me.siter.sdk.http.bean.DeviceBean;
 
 
 public class DeviceActivitys {

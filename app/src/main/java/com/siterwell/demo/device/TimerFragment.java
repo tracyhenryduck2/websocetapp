@@ -21,7 +21,7 @@ import com.siterwell.demo.storage.DeviceDao;
 import com.siterwell.demo.storage.WifiTimerDao;
 import com.siterwell.sdk.common.SitewellSDK;
 import com.siterwell.sdk.common.WIFISocketListener;
-import com.siterwell.sdk.http.bean.DeviceBean;
+import me.siter.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.protocol.ResolveTimer;
 import com.siterwell.sdk.protocol.SocketCommand;
 

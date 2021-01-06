@@ -233,11 +233,6 @@
                 <action android:name="me.action.ws.data" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.siterwell.sdk.common.UDPreceiver">
-            <intent-filter>
-                <action android:name="com.siterwell.sdk.UDPMessage"/>
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

@@ -15,7 +15,7 @@ import com.siterwell.demo.R;
 import com.siterwell.demo.common.Config;
 import com.siterwell.demo.commonview.ECAlertDialog;
 import com.siterwell.demo.commonview.SettingItem;
-import com.siterwell.sdk.http.SiterUser;
+import me.siter.sdk.http.SiterUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;

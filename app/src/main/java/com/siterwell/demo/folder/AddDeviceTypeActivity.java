@@ -24,9 +24,9 @@ import com.siterwell.demo.commonview.ProgressDialog;
 import com.siterwell.demo.folder.configuration.ConfigurationActivity;
 import com.siterwell.demo.storage.DeviceDao;
 import com.siterwell.sdk.bean.DeviceType;
-import com.siterwell.sdk.http.SiterUser;
-import com.siterwell.sdk.http.UserAction;
-import com.siterwell.sdk.http.bean.DeviceBean;
+import me.siter.sdk.http.SiterUser;
+import me.siter.sdk.http.UserAction;
+import me.siter.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.protocol.GS140Command;
 import com.zbar.lib.ScanCaptureAct;
 

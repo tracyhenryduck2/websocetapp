@@ -14,8 +14,8 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.litesuits.common.assist.Toastor;
 import com.siterwell.demo.common.Errcode;
-import com.siterwell.sdk.http.SiterUser;
-import com.siterwell.sdk.http.UserAction;
+import me.siter.sdk.http.SiterUser;
+import me.siter.sdk.http.UserAction;
 
 import java.lang.reflect.Field;
 import java.util.Random;

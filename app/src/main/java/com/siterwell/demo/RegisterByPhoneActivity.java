@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.litesuits.common.assist.Toastor;
 import com.siterwell.demo.common.Errcode;
-import com.siterwell.sdk.http.SiterUser;
-import com.siterwell.sdk.http.UserAction;
+import me.siter.sdk.http.SiterUser;
+import me.siter.sdk.http.UserAction;
 
 public class RegisterByPhoneActivity extends AppCompatActivity implements View.OnClickListener, VerfyDialog.VerifyCodeSuccess {
     private EditText et_phone, et_code, et_pwd;

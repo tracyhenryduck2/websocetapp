@@ -17,7 +17,7 @@ import com.siterwell.demo.common.ECPreferenceSettings;
 import com.siterwell.demo.common.ECPreferences;
 import com.siterwell.demo.commonview.loadingView.ZLoadingView;
 import com.siterwell.demo.commonview.loadingView.Z_TYPE;
-import com.siterwell.sdk.http.UserAction;
+import me.siter.sdk.http.UserAction;
 
 import java.io.InvalidClassException;
 

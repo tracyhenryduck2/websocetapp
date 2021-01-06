@@ -10,10 +10,9 @@ import com.siterwell.sdk.bean.BatteryBean;
 import com.siterwell.sdk.bean.SocketBean;
 import com.siterwell.sdk.bean.WaterSensorBean;
 import com.siterwell.sdk.bean.WifiTimerBean;
-import com.siterwell.sdk.http.UserAction;
+import me.siter.sdk.http.UserAction;
 import com.siterwell.sdk.protocol.ResolveSocket;
 
-import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 

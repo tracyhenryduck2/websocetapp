@@ -27,7 +27,7 @@ import com.siterwell.demo.commonview.CodeEdit;
 import com.siterwell.demo.commonview.ECAlertDialog;
 import com.siterwell.demo.commonview.ProgressDialog;
 import com.siterwell.demo.user.ClientUser;
-import com.siterwell.sdk.http.UserAction;
+import me.siter.sdk.http.UserAction;
 
 import java.io.InvalidClassException;
 

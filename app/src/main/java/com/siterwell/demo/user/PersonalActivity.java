@@ -15,8 +15,8 @@ import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.common.UnitTools;
 import com.siterwell.demo.commonview.ECAlertDialog;
 import com.siterwell.demo.commonview.SettingItem;
-import com.siterwell.sdk.http.SiterUser;
-import com.siterwell.sdk.http.UserAction;
+import me.siter.sdk.http.SiterUser;
+import me.siter.sdk.http.UserAction;
 
 
 /**

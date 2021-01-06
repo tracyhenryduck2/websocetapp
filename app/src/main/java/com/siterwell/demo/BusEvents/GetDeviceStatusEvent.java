@@ -1,6 +1,6 @@
 package com.siterwell.demo.BusEvents;
 
-import com.siterwell.sdk.http.bean.DeviceBean;
+import me.siter.sdk.http.bean.DeviceBean;
 
 import java.util.List;
 

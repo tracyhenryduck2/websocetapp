@@ -19,9 +19,9 @@ import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.common.UnitTools;
 import com.siterwell.demo.folder.bean.LocalFolderBean;
 import com.siterwell.demo.storage.FolderDao;
-import com.siterwell.sdk.http.SiterUser;
-import com.siterwell.sdk.http.UserAction;
-import com.siterwell.sdk.http.bean.FolderBean;
+import me.siter.sdk.http.SiterUser;
+import me.siter.sdk.http.UserAction;
+import me.siter.sdk.http.bean.FolderBean;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -3,8 +3,7 @@ package com.siterwell.sdk.protocol;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.siterwell.sdk.http.bean.DeviceBean;
-import com.siterwell.sdk.udp.SiterwellUtil;
+import me.siter.sdk.http.bean.DeviceBean;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -92,9 +91,6 @@ public class BatteryCommand {
 
 
 
-    public void setSmokeType(GS140Command gs140Command){
-        new SiterwellUtil(this.context).sendData(getCommand2(gs140Command.getnCode()).toString());
-    }
 
     public void resetTimer(){
         timer_count = 0;

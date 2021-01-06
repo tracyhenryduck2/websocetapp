@@ -7,9 +7,9 @@ import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.siterwell.demo.R;
-import com.siterwell.sdk.http.BaseHttpUtil;
-import com.siterwell.sdk.http.CodeUtil;
-import com.siterwell.sdk.http.SiterUser;
+import me.siter.sdk.http.BaseHttpUtil;
+import me.siter.sdk.http.CodeUtil;
+import me.siter.sdk.http.SiterUser;
 
 import cz.msebera.android.httpclient.Header;
 

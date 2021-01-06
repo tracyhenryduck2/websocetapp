@@ -3,9 +3,9 @@ package me.siter.sdk;
 import android.text.TextUtils;
 
 import me.siter.sdk.dispatcher.Dispatcher;
-import me.siter.sdk.http.SiterDefautHttpClient;
-import me.siter.sdk.http.SiterHttpClient;
-import me.siter.sdk.http.IHttpClient;
+import me.siter.sdk.httpCore.SiterDefautHttpClient;
+import me.siter.sdk.httpCore.SiterHttpClient;
+import me.siter.sdk.httpCore.IHttpClient;
 import me.siter.sdk.monitor.AppStatusMonitor;
 import me.siter.sdk.monitor.NetworkMonitor;
 import me.siter.sdk.service.ServiceBinder;

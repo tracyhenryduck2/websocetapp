@@ -13,7 +13,7 @@ import com.siterwell.sdk.bean.SocketBean;
 import com.siterwell.demo.device.bean.BatteryDescBean;
 import com.siterwell.demo.device.bean.WaterSensorDescBean;
 import com.siterwell.sdk.bean.WaterSensorBean;
-import com.siterwell.sdk.http.bean.DeviceBean;
+import me.siter.sdk.http.bean.DeviceBean;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -11,7 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.siterwell.demo.common.Errcode;
 import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.device.bean.WarningHistoryBean;
-import com.siterwell.sdk.http.UserAction;
+import me.siter.sdk.http.UserAction;
 
 import org.json.JSONArray;
 import org.json.JSONException;

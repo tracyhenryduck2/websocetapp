@@ -1,6 +1,6 @@
 package com.siterwell.demo.folder.bean;
 
-import com.siterwell.sdk.http.bean.FolderListBean;
+import me.siter.sdk.http.bean.FolderListBean;
 
 import java.io.Serializable;
 

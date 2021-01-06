@@ -10,8 +10,8 @@ import com.siterwell.demo.R;
 import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.commonview.ProgressWheel;
 import com.siterwell.demo.device.Controller;
-import com.siterwell.demo.storage.DeviceDao;
-import com.siterwell.sdk.http.bean.DeviceBean;
+
+import me.siter.sdk.http.bean.DeviceBean;
 
 import java.util.Timer;
 import java.util.TimerTask;

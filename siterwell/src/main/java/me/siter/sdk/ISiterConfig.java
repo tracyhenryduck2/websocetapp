@@ -1,7 +1,7 @@
 package me.siter.sdk;
 
 
-import me.siter.sdk.http.IHttpClient;
+import me.siter.sdk.httpCore.IHttpClient;
 
 /**
  * Created by TracyHenry on 2020/12/16.

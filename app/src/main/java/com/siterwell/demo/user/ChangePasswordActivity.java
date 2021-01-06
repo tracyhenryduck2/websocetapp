@@ -9,8 +9,8 @@ import android.widget.Toast;
 import com.siterwell.demo.R;
 import com.siterwell.demo.common.Errcode;
 import com.siterwell.demo.common.TopbarSuperActivity;
-import com.siterwell.sdk.http.SiterUser;
-import com.siterwell.sdk.http.UserAction;
+import me.siter.sdk.http.SiterUser;
+import me.siter.sdk.http.UserAction;
 
 
 /**

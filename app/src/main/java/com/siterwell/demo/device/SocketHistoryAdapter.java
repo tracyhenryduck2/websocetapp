@@ -16,7 +16,7 @@ import com.siterwell.demo.common.DateUtil;
 import com.siterwell.demo.device.bean.SocketDescBean;
 import com.siterwell.demo.device.bean.SocketHistoryBean;
 import com.siterwell.demo.storage.DeviceDao;
-import com.siterwell.sdk.http.bean.DeviceBean;
+import me.siter.sdk.http.bean.DeviceBean;
 
 import java.util.List;
 
