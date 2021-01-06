@@ -102,8 +102,4 @@ public class Siter {
         return Dispatcher.getInstance();
     }
 
-    public static ISiterDeviceScanner createSiterLANScanner() {
-        return new SiterDeviceScanner();
-    }
-
 }
