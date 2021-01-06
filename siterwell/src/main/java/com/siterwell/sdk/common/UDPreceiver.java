@@ -5,11 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.siterwell.sdk.event.SetSmokeTypeEvent;
-import com.siterwell.sdk.event.SilenceEvent;
 import com.siterwell.sdk.udp.UDPRecData;
-
-import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,22 +35,6 @@ public class UDPreceiver extends BroadcastReceiver {
                 String devid = jsonObject1.getString("devTid");
                 int cmid = jsonObject2.getInt("cmdId");
                 int command = jsonObject2.getInt("command");
-                switch (cmid){
-                    case 2:
-                        if(command==2||command==3){
-                            SetSmokeTypeEvent setSmokeTypeEvent = new SetSmokeTypeEvent();
-                            setSmokeTypeEvent.setDevTid(devid);
-                            EventBus.getDefault().post(setSmokeTypeEvent);
-                        }
-                        else if(command==1){
-                            SilenceEvent silenceEvent = new SilenceEvent();
-                            silenceEvent.setDevTid(devid);
-                            silenceEvent.setSuccess(1);
-                            EventBus.getDefault().post(silenceEvent);
-                        }
-
-                        break;
-                }
 
             }
         } catch (JSONException e) {

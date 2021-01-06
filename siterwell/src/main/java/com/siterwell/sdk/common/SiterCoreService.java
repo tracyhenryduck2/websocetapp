@@ -6,7 +6,6 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.siterwell.sdk.event.UdpShakeHandsEvent;
 import com.siterwell.sdk.udp.ConnectB;
 import com.siterwell.sdk.udp.NetWorkUtils;
 import com.siterwell.sdk.udp.SeartchWifiData;
@@ -61,9 +60,6 @@ public class SiterCoreService extends Service {
             public void operationFailed() {
                 Log.i(TAG, "+++++++++++++++++++++++++++++++++++++++++++++++ failed");
                 udpRecData.close();
-                UdpShakeHandsEvent udpShakeHandsEvent = new UdpShakeHandsEvent();
-                udpShakeHandsEvent.setType(3);
-                EventBus.getDefault().post(udpShakeHandsEvent);
                 seartchWifiData = null;
             }
 
@@ -71,9 +67,6 @@ public class SiterCoreService extends Service {
             public void operationSuccess() {
                 Log.i(TAG, "+++++++++++++++++++++++++++++++++++++++++++++++ success");
                 initreceiveUdp();
-                UdpShakeHandsEvent udpShakeHandsEvent = new UdpShakeHandsEvent();
-                udpShakeHandsEvent.setType(2);
-                EventBus.getDefault().post(udpShakeHandsEvent);
                 seartchWifiData = null;
             }
 
@@ -237,17 +230,5 @@ public class SiterCoreService extends Service {
     }
 
 
-    @Subscribe(threadMode = ThreadMode.MAIN)         //订阅内网握手事件
-    public  void onEventMainThread(UdpShakeHandsEvent event){
-        //1代表发起请求
-        if(event.getType()==1 && seartchWifiData==null){
-            initBroadcastreceiveUdp();
-
-            seartchWifiData = new SeartchWifiData(taskCallback);
-            seartchWifiData.startReSend();
-        }
-
-
-    }
 
 }

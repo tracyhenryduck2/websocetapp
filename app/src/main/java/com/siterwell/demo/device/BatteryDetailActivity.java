@@ -44,8 +44,6 @@ import java.util.List;
 
 import com.siterwell.sdk.common.RefreshBatteryListener;
 import com.siterwell.sdk.common.SitewellSDK;
-import com.siterwell.sdk.event.SilenceEvent;
-import com.siterwell.sdk.event.UdpShakeHandsEvent;
 import com.siterwell.sdk.http.UserAction;
 import com.siterwell.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.protocol.BatteryCommand;
@@ -147,40 +145,6 @@ public class BatteryDetailActivity extends TopbarSuperActivity implements View.O
     }
 
 
-    @Subscribe(threadMode = ThreadMode.MAIN)         //订阅内网握手事件
-    public  void onEventMainThread(UdpShakeHandsEvent event){
-          if(event.getType()==3){
-              Toast.makeText(BatteryDetailActivity.this, getResources().getString(R.string.local_udp_search_failed),Toast.LENGTH_LONG).show();
-          }else if(event.getType()==2){
-              progressDialog = new ProgressDialog(this,getResources().getText(R.string.wait));
-              progressDialog.show();
-              batteryCommand = new BatteryCommand(batteryDescBean,BatteryDetailActivity.this);
-              batteryCommand.sendLocalSilence();
-          }
-
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)         //订阅内网握手事件
-    public  void onEventMainThread(SilenceEvent event){
-        batteryCommand.resetTimer();
-        if(progressDialog!=null && progressDialog.isShowing()){
-            progressDialog.dismiss();
-            if(!TextUtils.isEmpty(event.getDevTid()) && event.getDevTid().equals(deviceId) && event.getSuccess()==1){
-                ecAlertDialogSilent = ECAlertDialog.buildPositiveAlert(this, R.string.silence_success, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                ecAlertDialogSilent.setCancelable(false);
-                ecAlertDialogSilent.show();
-            }else {
-                Toast.makeText(BatteryDetailActivity.this, getResources().getString(R.string.timeout),Toast.LENGTH_LONG).show();
-        }
-        }
-
-
-    }
 
     @Override
     protected void onDestroy() {
@@ -262,9 +226,6 @@ public class BatteryDetailActivity extends TopbarSuperActivity implements View.O
                  break;
              case R.id.btnConfirm:
                  //batteryCommand.sendCommand(1,dataReceiverListener);
-                 UdpShakeHandsEvent udpShakeHandsEvent = new UdpShakeHandsEvent();
-                 udpShakeHandsEvent.setType(1);
-                 EventBus.getDefault().post(udpShakeHandsEvent);
                  break;
          }
     }

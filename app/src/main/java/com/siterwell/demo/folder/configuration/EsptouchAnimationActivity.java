@@ -24,8 +24,6 @@ import com.siterwell.demo.folder.FolderPojo;
 import com.siterwell.demo.storage.DeviceDao;
 import com.siterwell.sdk.bean.DeviceType;
 import com.siterwell.sdk.common.SitewellSDK;
-import com.siterwell.sdk.event.SetSmokeTypeEvent;
-import com.siterwell.sdk.event.UdpShakeHandsEvent;
 import com.siterwell.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.http.bean.NewDeviceBean;
 import com.siterwell.sdk.protocol.BatteryCommand;
@@ -314,30 +312,6 @@ public class EsptouchAnimationActivity extends TopbarSuperActivity implements Vi
     }
 
 
-    @Subscribe(threadMode = ThreadMode.MAIN)         //订阅事件AlertEvent
-    public  void onEventMainThread(SetSmokeTypeEvent event){
-        if(event.getDevTid().equals(newDeviceBean2.getDevTid())){
-            //Toast.makeText(this,getResources().getString(R.string.type_setting_success),Toast.LENGTH_LONG).show();
-            flag = 1;
-            Now_speed = SPEED2;
-        }
-
-
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)         //订阅事件AlertEvent
-    public  void onEventMainThread(UdpShakeHandsEvent event){
-        if(event.getType()==3){
-            Toast.makeText(this,"shake hands fail ",Toast.LENGTH_LONG).show();
-
-        }else if(event.getType()==2){
-            BatteryCommand batteryCommand = new BatteryCommand(newDeviceBean2,EsptouchAnimationActivity.this);
-             batteryCommand.setSmokeType(BatteryType);
-        }
-        flag = 1;
-        Now_speed = SPEED2;
-
-    }
 
 
     private SpannableString getClickableSpan(int start) {

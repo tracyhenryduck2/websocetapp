@@ -10,7 +10,6 @@ import com.siterwell.sdk.bean.BatteryBean;
 import com.siterwell.sdk.bean.SocketBean;
 import com.siterwell.sdk.bean.WaterSensorBean;
 import com.siterwell.sdk.bean.WifiTimerBean;
-import com.siterwell.sdk.event.UdpShakeHandsEvent;
 import com.siterwell.sdk.http.UserAction;
 import com.siterwell.sdk.protocol.ResolveSocket;
 
@@ -387,11 +386,6 @@ public class SitewellSDK {
 
     }
 
-    public void configGS140Type(){
-        UdpShakeHandsEvent udpShakeHandsEvent = new UdpShakeHandsEvent();
-        udpShakeHandsEvent.setType(1);
-        EventBus.getDefault().post(udpShakeHandsEvent);
-    }
 
     /*
     @method queryBaterriesStatus(List<BatteryBean> batteryBeans)

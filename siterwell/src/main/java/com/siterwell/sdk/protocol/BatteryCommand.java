@@ -3,11 +3,9 @@ package com.siterwell.sdk.protocol;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.siterwell.sdk.event.SilenceEvent;
 import com.siterwell.sdk.http.bean.DeviceBean;
 import com.siterwell.sdk.udp.SiterwellUtil;
 
-import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -92,27 +90,6 @@ public class BatteryCommand {
         }
     }
 
-    public void sendLocalSilence(){
-        timer = new Timer();
-        timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                if(timer_count<3){
-                    timer_count++;
-                    new SiterwellUtil(context).sendData(getCommand2(GS140Command.SILENCE.getnCode()).toString());
-                }else {
-                    timer_count = 0;
-                    SilenceEvent silenceEvent = new SilenceEvent();
-                    silenceEvent.setDevTid(deviceBean.getDevTid());
-                    silenceEvent.setSuccess(0);
-                    EventBus.getDefault().post(silenceEvent);
-                }
-
-            }
-        };
-        timer.schedule(timerTask,0,1000);
-
-    }
 
 
     public void setSmokeType(GS140Command gs140Command){
