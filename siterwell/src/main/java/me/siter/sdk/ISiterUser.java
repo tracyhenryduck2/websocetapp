@@ -61,15 +61,6 @@ public interface ISiterUser {
    */
   void login(String username, String password, final SiterCallback callback);
 
-  /**
-   * 使用用户名密码登录。
-   *
-   * @param username 用户名
-   * @param password 密码
-   * @param callback 回调，提供登录后的返回内容，以byte[] 方式返回
-   * @see SiterRawCallback
-   */
-  void login(String username, String password, final SiterRawCallback callback);
 
   /**
    * 登出。

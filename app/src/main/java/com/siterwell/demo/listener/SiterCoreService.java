@@ -36,8 +36,11 @@ public class SiterCoreService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         receiveAllMessage();
-        siterReceiver = new SiterReceiver();
-        registerReceiver(siterReceiver, new IntentFilter(Constants.ActionStrUtil.ACTION_WS_DATA_RECEIVE));
+        if(siterReceiver==null){
+            siterReceiver = new SiterReceiver();
+            registerReceiver(siterReceiver, new IntentFilter(Constants.ActionStrUtil.ACTION_WS_DATA_RECEIVE));
+        }
+
         return super.onStartCommand(intent, flags, startId);
     }
 
