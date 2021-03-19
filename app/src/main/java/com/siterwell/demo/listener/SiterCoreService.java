@@ -20,7 +20,6 @@ import me.siter.sdk.inter.SiterMsgCallback;
 public class SiterCoreService extends Service {
     private final static String TAG = "SiterCoreService";
     private IMessageFilter filter;
-    private static final int PORT = 10000;
     private SiterReceiver siterReceiver;
     @Nullable
     @Override
