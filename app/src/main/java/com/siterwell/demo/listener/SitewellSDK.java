@@ -2,6 +2,7 @@ package com.siterwell.demo.listener;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -74,8 +75,11 @@ public class SitewellSDK {
         if(TextUtils.isEmpty(appTid)){
             appTid = Settings.Secure.getString(mContext.get().getContentResolver(), Settings.Secure.ANDROID_ID);
         }
-
-        context.startService(new Intent(mContext.get(), SiterCoreService.class));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(new Intent(mContext.get(), SiterCoreService.class));
+        } else {
+            context.startService(new Intent(mContext.get(), SiterCoreService.class));
+        }
     };
     public static SitewellSDK getInstance(Context context) {
         synchronized (SitewellSDK.class) {

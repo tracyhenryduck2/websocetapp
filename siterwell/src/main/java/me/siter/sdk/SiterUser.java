@@ -59,31 +59,31 @@ public class SiterUser implements ISiterUser {
             jsonObject.put("username", username);
             jsonObject.put("password", password);
             jsonObject.put("pid", SiterSDK.getPid());
-            //jsonObject.put("login_type", 0);
-           jsonObject.put("clientType", "ANDROID");
+            jsonObject.put("login_type", 0);
+           //jsonObject.put("clientType", "ANDROID");
             PostRequest request = new PostRequest(url, jsonObject, new HttpResponse() {
                 @Override
                 public void onSuccess(int code, Map<String, String> headers, byte[] bytes) {
-//                    try {
-//                        JSONObject jsonObject = new JSONObject(new String(bytes));
-//                        int errCode = jsonObject.getInt("code");
-//                        JSONObject data = jsonObject.getJSONObject("data");
-//                        if(errCode==200){
-//                            refreshUserInfo(data.toString());
-//                            Siter.getSiterClient().disconnect();
-//                            Siter.getSiterClient().connect();
-//                            callback.onSuccess();
-//                        }else{
-//                            callback.onError(errCode,new String(bytes));
-//                        }
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                        callback.onError(2, new String(bytes));
-//                    }
-                    refreshUserInfo(new String(bytes));
-                    Siter.getSiterClient().disconnect();
-                    Siter.getSiterClient().connect();
-                    callback.onSuccess();
+                    try {
+                        JSONObject jsonObject = new JSONObject(new String(bytes));
+                        int errCode = jsonObject.getInt("code");
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        if(errCode==200){
+                            refreshUserInfo(data.toString());
+                            Siter.getSiterClient().disconnect();
+                            Siter.getSiterClient().connect();
+                            callback.onSuccess();
+                        }else{
+                            callback.onError(errCode,new String(bytes));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        callback.onError(2, new String(bytes));
+                    }
+//                    refreshUserInfo(new String(bytes));
+//                    Siter.getSiterClient().disconnect();
+//                    Siter.getSiterClient().connect();
+//                    callback.onSuccess();
                 }
 
                 @Override
@@ -176,8 +176,8 @@ public class SiterUser implements ISiterUser {
             LogUtil.d(TAG, "Refresh user info :" + jsonObject.toString());
             mToken = jsonObject.getString("access_token");
             mRefreshToken = jsonObject.getString("refresh_token");
-            //mUserId = jsonObject.getString("user_id");
-            mUserId = jsonObject.getString("user");
+            mUserId = jsonObject.getString("user_id");
+            //mUserId = jsonObject.getString("user");
             CacheUtil.setUserToken(mToken, mRefreshToken,mUserId);
         } catch (JSONException e) {
             e.printStackTrace();

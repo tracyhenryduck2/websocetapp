@@ -1,8 +1,10 @@
 package com.siterwell.demo.listener;
 
+import android.app.Notification;
 import android.app.Service;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.IBinder;
 
 import org.greenrobot.eventbus.EventBus;
@@ -30,6 +32,9 @@ public class SiterCoreService extends Service {
 
     @Override
     public void onCreate() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForeground(1,new Notification());
+        }
     }
 
     @Override

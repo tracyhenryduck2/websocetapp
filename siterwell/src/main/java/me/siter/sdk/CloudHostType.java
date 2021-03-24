@@ -12,8 +12,8 @@ import java.util.Map;
 
 public enum CloudHostType {
 
-    //HOST_DEFAULT("192.168.12.163"),
-    HOST_DEFAULT("hub.hekr.me"),
+    HOST_DEFAULT("192.168.12.163"),
+    //HOST_DEFAULT("hub.hekr.me"),
     HOST_TEST_DEFAULT("test-hub.siter.me");
 
     private static final Map<String, CloudHostType> lookup = new HashMap<>();
