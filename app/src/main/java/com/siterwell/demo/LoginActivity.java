@@ -223,11 +223,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     finish();
                 }
             } else {
-
+                initView();
                 ECAlertDialog ecAlertDialog = ECAlertDialog.buildPositiveAlert(this, R.string.you_must_grant_permission, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
+//                        finish();
                     }
                 });
                 ecAlertDialog.setCanceledOnTouchOutside(false);
