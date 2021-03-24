@@ -1,11 +1,23 @@
 package com.siterwell.demo.listener;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.IBinder;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
+
+import com.siterwell.demo.MainActivity;
+import com.siterwell.demo.MyApplication;
+import com.siterwell.demo.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.Nullable;
@@ -21,6 +33,9 @@ import me.siter.sdk.inter.SiterMsgCallback;
 
 public class SiterCoreService extends Service {
     private final static String TAG = "SiterCoreService";
+    private static final String CHANNEL_ID = "SiterCoreService";
+    private static final String CHANNEL_NAME = "My Background Service";
+    private static final int NOTIFICATION_ID = 101;
     private IMessageFilter filter;
     private SiterReceiver siterReceiver;
     @Nullable
@@ -32,9 +47,41 @@ public class SiterCoreService extends Service {
 
     @Override
     public void onCreate() {
+        startForeground();
+    }
+
+    private void startForeground() {
+        String channelId = "";
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForeground(1,new Notification());
+            channelId = createNotificationChannel();
         }
+
+        Intent intent = new Intent(this, MyApplication.class);
+        PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), channelId);
+        Notification notification = builder.setOngoing(true)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                .setContentIntent(pi)
+                .setContentTitle(getString(R.string.app_name))
+                .build();
+
+        startForeground(NOTIFICATION_ID, notification);
+    }
+
+    private NotificationManager getNotificationManager() {
+        return (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private String createNotificationChannel() {
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_DEFAULT);
+
+        getNotificationManager().createNotificationChannel(channel);
+        return CHANNEL_ID;
     }
 
     @Override
