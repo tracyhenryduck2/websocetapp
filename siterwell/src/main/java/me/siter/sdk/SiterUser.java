@@ -14,6 +14,7 @@ import me.siter.sdk.httpCore.HttpResponse;
 import me.siter.sdk.httpCore.IHttpClient;
 import me.siter.sdk.httpCore.PostRequest;
 import me.siter.sdk.inter.SiterCallback;
+import me.siter.sdk.utils.AppIdUtil;
 import me.siter.sdk.utils.CacheUtil;
 import me.siter.sdk.utils.LogUtil;
 
@@ -60,6 +61,7 @@ public class SiterUser implements ISiterUser {
             jsonObject.put("password", password);
             jsonObject.put("pid", SiterSDK.getPid());
             jsonObject.put("login_type", 0);
+            jsonObject.put("app_tid", AppIdUtil.getAppId(SiterSDK.getContext()));
            //jsonObject.put("clientType", "ANDROID");
             PostRequest request = new PostRequest(url, jsonObject, new HttpResponse() {
                 @Override

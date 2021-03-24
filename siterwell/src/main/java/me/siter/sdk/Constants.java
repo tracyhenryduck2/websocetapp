@@ -26,8 +26,8 @@ public class Constants {
     public static final String HUA_WEI_PUSH_CLIENT_ID = "huaWeiToken";
 
     public static class UrlUtil {
-        public static String BASE_UAA_URL = "http://192.168.12.163:1418/";
-        public static String BASE_USER_URL = "http://192.168.12.163:1418/";
+        public static String BASE_UAA_URL = "http://192.168.22.233:1418/";
+        public static String BASE_USER_URL = "http://192.168.22.233:1418/";
 //        public static String BASE_UAA_URL = "https://uaa-openapi.hekr.me/";
 //        public static String BASE_USER_URL = "https://user-openapi.hekr.me/";
         public static String BASE_CONSOLE_URL = "https://console-openapi.siter.me/";
