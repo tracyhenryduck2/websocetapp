@@ -16,6 +16,8 @@ public class Constants {
     public static final String JWT_TOKEN = "JWT_TOKEN";
     public static final String REFRESH_TOKEN = "REFRESH_TOKEN";
     public static final String USER_ID = "USER_ID";
+    public static final String USER_NAME = "USER_NAME";
+    public static final String USER_PASSWORD = "USER_PASSWORD";
     public static final String CLOUD_CHANNELS = "CLOUD_CHANNELS";
     public static final String SDK_ERROR = "SDK_ERROR";
     private static boolean IS_DEBUG_SITE = false;

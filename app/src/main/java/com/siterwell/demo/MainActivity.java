@@ -34,8 +34,6 @@ import com.siterwell.demo.BusEvents.BindPushEvent;
 import com.siterwell.demo.BusEvents.SychronizeEvent;
 import com.siterwell.demo.common.CCPAppManager;
 import com.siterwell.demo.common.Config;
-import com.siterwell.demo.common.ECPreferenceSettings;
-import com.siterwell.demo.common.ECPreferences;
 import com.siterwell.demo.common.Errcode;
 import com.siterwell.demo.common.UnitTools;
 import com.siterwell.demo.commonview.ECAlertDialog;
@@ -60,7 +58,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.IOException;
-import java.io.InvalidClassException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -554,13 +551,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void onSuccess() {
                             hideProgressDialog();
-                            try {
-
-
-                                ECPreferences.savePreference(ECPreferenceSettings.SETTINGS_HUAWEI_TOKEN, "", true);
-                            } catch (InvalidClassException e) {
-                                e.printStackTrace();
-                            }
                             Controller.getInstance().flag_service = false;
                             resetStorage();
                             UserAction.getInstance(MainActivity.this).userLogout();
@@ -572,11 +562,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         public void onError(int errorCode, String message) {
                             hideProgressDialog();
                            if(errorCode == 1){
-                               try {
-                                   ECPreferences.savePreference(ECPreferenceSettings.SETTINGS_HUAWEI_TOKEN, "", true);
-                               } catch (InvalidClassException e) {
-                                   e.printStackTrace();
-                               }
                                ErrorCodeUtil.getErrorDesc(errorCode);
                                Controller.getInstance().flag_service = false;
                                resetStorage();
@@ -637,12 +622,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         UserAction.getInstance(this).userLogout();
         CCPAppManager.setClientUser(null);
-
-        try {
-            ECPreferences.savePreference(ECPreferenceSettings.SETTINGS_HUAWEI_TOKEN, "", true);
-        } catch (InvalidClassException e) {
-            e.printStackTrace();
-        }
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
         finish();

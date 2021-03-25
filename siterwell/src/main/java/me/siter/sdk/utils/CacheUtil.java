@@ -27,6 +27,11 @@ public class CacheUtil {
         SpCache.putString(Constants.USER_ID, user_id);
     }
 
+    public static void setUserLoginInfo(String username,String password){
+        SpCache.putString(Constants.USER_NAME, username);
+        SpCache.putString(Constants.USER_PASSWORD, password);
+    }
+
     public static String getUserToken() {
         return SpCache.getString(Constants.JWT_TOKEN, "");
     }
@@ -35,9 +40,9 @@ public class CacheUtil {
         return SpCache.getString(Constants.REFRESH_TOKEN,"");
     }
 
-    public static String getUserId(){
-        return SpCache.getString(Constants.USER_ID,"");
-    }
+    public static String getUserName(){ return SpCache.getString(Constants.USER_NAME,""); }
+
+    public static String getUserPassword(){ return SpCache.getString(Constants.USER_PASSWORD,""); }
 
     public static void setCloudUrls(Set<String> urls) {
         if (urls == null || urls.size() == 0) {

@@ -19,8 +19,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.litesuits.common.assist.Toastor;
 
 import com.siterwell.demo.common.CCPAppManager;
-import com.siterwell.demo.common.ECPreferenceSettings;
-import com.siterwell.demo.common.ECPreferences;
 import com.siterwell.demo.common.Errcode;
 import com.siterwell.demo.common.UnitTools;
 import com.siterwell.demo.commonview.CodeEdit;
@@ -33,6 +31,7 @@ import java.io.InvalidClassException;
 
 import me.siter.sdk.Siter;
 import me.siter.sdk.inter.SiterCallback;
+import me.siter.sdk.utils.CacheUtil;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -41,7 +40,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private CodeEdit et_pwd;
     private Toastor toastor;
     private ProgressDialog progressDialog;
-    private boolean flagauto = false;
     private Button chooseLanguage;
 
     @Override
@@ -54,39 +52,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    private String getUsername(){
-
-        SharedPreferences sharedPreferences = ECPreferences.getSharedPreferences();
-        ECPreferenceSettings flag = ECPreferenceSettings.SETTINGS_USERNAME;
-        String autoflag = sharedPreferences.getString(flag.getId(), (String) flag.getDefaultValue());
-        return autoflag;
-    }
-
-    private boolean getAutoLogin(){
-
-        SharedPreferences sharedPreferences = ECPreferences.getSharedPreferences();
-        ECPreferenceSettings flag = ECPreferenceSettings.SETTINGS_REMEMBER_PASSWORD;
-        boolean autoflag = sharedPreferences.getBoolean(flag.getId(), (boolean) flag.getDefaultValue());
-        return autoflag;
-    }
-
-    private String getPassword(){
-
-        SharedPreferences sharedPreferences = ECPreferences.getSharedPreferences();
-        ECPreferenceSettings flag = ECPreferenceSettings.SETTINGS_PASSWORD;
-        String autoflag = sharedPreferences.getString(flag.getId(), (String) flag.getDefaultValue());
-        return autoflag;
-    }
 
     private void initView() {
         toastor = new Toastor(this);
-        flagauto = getAutoLogin();
         chooseLanguage = (Button)findViewById(R.id.language_c);
         chooseLanguage.setOnClickListener(this);
         et_username = (EditText) findViewById(R.id.et_phone);
-        et_username.setText(getUsername());
+        et_username.setText(CacheUtil.getUserName());
         et_pwd = (CodeEdit) findViewById(R.id.codeedit);
-        et_pwd.getCodeEdit().setText(getPassword());
+        et_pwd.getCodeEdit().setText(CacheUtil.getUserPassword());
         Button btn_login = (Button) findViewById(R.id.btn_login);
         if (btn_login != null) {
             btn_login.setOnClickListener(this);
@@ -113,13 +87,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             ClientUser user = new ClientUser();
                             user.setId(id);
                             CCPAppManager.setClientUser(user);
-                            try {
-                                ECPreferences.savePreference(ECPreferenceSettings.SETTINGS_REMEMBER_PASSWORD, flagauto, true);
-                                ECPreferences.savePreference(ECPreferenceSettings.SETTINGS_USERNAME,username,true);
-                                ECPreferences.savePreference(ECPreferenceSettings.SETTINGS_PASSWORD,pwd,true);
-                            } catch (InvalidClassException e) {
-                                e.printStackTrace();
-                            }
+                            CacheUtil.setUserLoginInfo(username,pwd);
                             if(progressDialog!=null&progressDialog.isShowing()){
                                 progressDialog.dismiss();
                             }

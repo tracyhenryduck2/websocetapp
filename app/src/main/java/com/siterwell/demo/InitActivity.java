@@ -13,16 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.siterwell.demo.common.CCPAppManager;
-import com.siterwell.demo.common.ECPreferenceSettings;
-import com.siterwell.demo.common.ECPreferences;
 import com.siterwell.demo.commonview.loadingView.ZLoadingView;
 import com.siterwell.demo.commonview.loadingView.Z_TYPE;
 import me.siter.sdk.http.UserAction;
 
-import java.io.InvalidClassException;
-
 import me.siter.sdk.Siter;
 import me.siter.sdk.inter.SiterCallback;
+import me.siter.sdk.utils.CacheUtil;
 
 
 /**
@@ -45,18 +42,13 @@ private ZLoadingView zLoadingView;
 
     private String getUsername(){
 
-        SharedPreferences sharedPreferences = ECPreferences.getSharedPreferences();
-        ECPreferenceSettings flag = ECPreferenceSettings.SETTINGS_USERNAME;
-        String autoflag = sharedPreferences.getString(flag.getId(), (String) flag.getDefaultValue());
-        return autoflag;
+
+        return CacheUtil.getUserName();
     }
 
     private String getPassword(){
 
-        SharedPreferences sharedPreferences = ECPreferences.getSharedPreferences();
-        ECPreferenceSettings flag = ECPreferenceSettings.SETTINGS_PASSWORD;
-        String autoflag = sharedPreferences.getString(flag.getId(), (String) flag.getDefaultValue());
-        return autoflag;
+        return CacheUtil.getUserPassword();
     }
 
     private void login(){
@@ -77,11 +69,6 @@ private ZLoadingView zLoadingView;
                     int code = d.getInteger("code");
                     //密码错误
                     if(code == 3400010){
-                        try {
-                            ECPreferences.savePreference(ECPreferenceSettings.SETTINGS_HUAWEI_TOKEN, "", true);
-                        } catch (InvalidClassException e) {
-                            e.printStackTrace();
-                        }
                         UserAction.getInstance(InitActivity.this).userLogout();
                         CCPAppManager.setClientUser(null);
                         handler.sendEmptyMessage(2);

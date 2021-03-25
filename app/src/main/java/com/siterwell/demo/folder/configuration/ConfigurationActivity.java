@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -16,15 +15,12 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.siterwell.demo.R;
-import com.siterwell.demo.common.ECPreferenceSettings;
-import com.siterwell.demo.common.ECPreferences;
 import com.siterwell.demo.common.PermissionUtils;
 import com.siterwell.demo.common.TopbarSuperActivity;
 import com.siterwell.demo.common.UnitTools;
@@ -36,8 +32,6 @@ import com.siterwell.demo.folder.guide.WaterSensor1Activity;
 import com.siterwell.demo.bean.DeviceType;
 import com.siterwell.demo.protocol.GS140Command;
 
-import java.io.InvalidClassException;
-
 /**
  * Created by ST-020111 on 2017/4/14.
  */
@@ -48,7 +42,6 @@ public class ConfigurationActivity extends TopbarSuperActivity implements View.O
     private TextView wifi;
     private CodeEdit psw;
     private Button btn_con;
-    private CheckBox checkBox;
     private GS140Command BatteryType;
     private String Device_type;
     private EspWifiAdminSimple mWifiAdmin;
@@ -120,7 +113,6 @@ public class ConfigurationActivity extends TopbarSuperActivity implements View.O
         wifi = (TextView)findViewById(R.id.tvApSssidConnected);
         psw = (CodeEdit)findViewById(R.id.edtApPassword);
         btn_con = (Button)findViewById(R.id.btnConfirm);
-        checkBox = (CheckBox)findViewById(R.id.is_remember);
         btn_con.setOnClickListener(this);
 
     }
@@ -129,8 +121,6 @@ public class ConfigurationActivity extends TopbarSuperActivity implements View.O
     protected void onResume() {
         super.onResume();
 
-        boolean flag = getIsRememberPassword();
-        checkBox.setChecked(flag);
 
 
 
@@ -235,20 +225,6 @@ public class ConfigurationActivity extends TopbarSuperActivity implements View.O
                 }else{
                     UnitTools unitTools = new UnitTools(this);
                     unitTools.writeSSidcode(apSsid,apPassword);
-                    if(checkBox.isChecked()){
-
-                        try {
-                            ECPreferences.savePreference(ECPreferenceSettings.SETTINGS_CONFIG_REMEMBER_PASSWORD,true, true);
-                        } catch (InvalidClassException e) {
-                            e.printStackTrace();
-                        }
-                    }else{
-                        try {
-                            ECPreferences.savePreference(ECPreferenceSettings.SETTINGS_CONFIG_REMEMBER_PASSWORD,false, true);
-                        } catch (InvalidClassException e) {
-                            e.printStackTrace();
-                        }
-                    }
 
 
                     if(DeviceType.BATTERY.toString().equals(Device_type)){
@@ -289,13 +265,6 @@ public class ConfigurationActivity extends TopbarSuperActivity implements View.O
 
     }
 
-    private boolean getIsRememberPassword(){
-
-        SharedPreferences sharedPreferences = ECPreferences.getSharedPreferences();
-        ECPreferenceSettings flag = ECPreferenceSettings.SETTINGS_CONFIG_REMEMBER_PASSWORD;
-        boolean autoflag = sharedPreferences.getBoolean(flag.getId(), (boolean) flag.getDefaultValue());
-        return autoflag;
-    }
 
     /**
      * 监听网络变化
